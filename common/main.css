@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@400;700&family=Kumbh+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
 
 /*
  * Making things default and variables
@@ -68,9 +68,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	padding-top: 0.25em;
+	padding-bottom: 0.25em;
 	color: var(--base-colour-red);
-	border-bottom: 0.125em solid var(--base-colour);
+	border-bottom: 0.1em solid var(--base-colour);
 }
 
 h2, h3, h4, h5, h6 {
@@ -83,14 +83,12 @@ p, li, figcaption {
 	line-height: 1.85;
 }
 
-h1 { font-size: 40pt; }
-h2 { font-size: 34pt; }
-h3 { font-size: 26pt; }
-h4 { font-size: 20pt; }
-h5 { font-size: 16pt; }
-h6 { font-size: 12pt; }
+h1 { font-size: 36pt; font-weight: 600; }
+h2 { font-size: 30pt; font-weight: 600; }
+h3 { font-size: 24pt; }
+h4 { font-size: 18pt; }
 
-p, li, figcaption { font-size: 12.5pt; }
+p, li, figcaption { font-size: 13pt; }
 li { margin-left: 2em; }
 
 a {
@@ -202,8 +200,9 @@ figcaption {
 }
 
 .card-section h3 {
-	padding-top: 0;
 	border: none;
+	font-weight: 700;
+	padding-top: 0;
 }
 
 /*
