@@ -19,7 +19,23 @@
 			</nav>
 			<div id="main" class="main-section content-section">
 				<h1 id="games-and-modding">Trestle</h1>
-				<p>!!! TODO: Write this page !!!</p>
+				<img src="./res/trestle.png" align="right" height="150px"></img>
+				<p><b>Trestle</b> is a simulation and games engine that &mdash; from a content developer's perspective &mdash; is mainly focused on procedureal content.</p>
+				<p>From the engine developer's perspective, it also focuses on having a simple architecture and also letting the programmer gain more control over the graphics pipeline (by bypassing it entirely).<p>
+				<p>Needless to say, this has some intresting properties and requires more developer work, but is an intresting educational exprience.</p>
+				
+				<h2>Procedureal content</h2>
+				<p>Note that "procedureal content" in this definition does not have to be randomly generated; it can be fixed form, it just needs to be generated procedureally. For example, if you want to place trees in a row evenly to make a level:</p>
+				<pre class="code"><b>void</b> trees() {
+	<b>for</b> (float i = 0.0; i &lt; 10.0; i += 1.0) {
+		GenerateTree(vec3(-5.0, -1.0, i * 8.0));
+	}
+}</pre>
+				<p>That counts as procedureal generation despite that it is completely deterministic and not pseudorandom.</p>
+				
+				<h2>Graphics</h2>
+				<p>The traditional programmable graphics pipline is nice, but of course, it would be nice to be able to implement graphics completely programmably and to know what everything does. This is why we are trying to do graphics on compute (or GPGPU; think OpenCL or Vulkan Compute).</p>
+				<p>While we are aware that the fixed-function hardware used in the current modern pipeline is much faster and probably much better maintained than anything we could produce, we still think it is valuable to do this from an educational and flexibility persepctive.</p>
 			</div>
 			<div id="main" class="main-section disclaimer-section">
 				<p>This website is Copyright &#169; 2021 &mdash; 2022 Knot126</p>
