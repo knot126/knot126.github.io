@@ -205,6 +205,10 @@ figcaption {
 	padding-top: 0;
 }
 
+.full-width {
+	width: 90%;
+}
+
 /*
  * Classes that apply to things like navigation
  */
