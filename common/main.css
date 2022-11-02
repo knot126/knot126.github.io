@@ -15,7 +15,7 @@
 	padding: 0;
 	border: none;
 	
-	--base-colour: #02b0d3;
+	--base-colour: #019ab9;
 	--base-colour-transluscent: #02b0d330;
 	--base-colour-red: #e2551d;
 	--base-colour-red-transluscent: #e2551d30;
@@ -47,7 +47,9 @@
  */
 
 ::selection {
-	background: var(--base-colour-transluscent);
+/* 	background: var(--base-colour-transluscent); */
+	color: #fff;
+	background: var(--base-colour);
 }
 
 .mid-icon {
@@ -79,8 +81,8 @@ h2, h3, h4, h5, h6 {
 
 p, li, figcaption {
 	font-family: "Inter", sans-serif;
-	margin-bottom: 0.5em;
-	line-height: 1.85;
+	margin-bottom: 0.75em;
+	line-height: 1.65;
 }
 
 h1 { font-size: 36pt; font-weight: 600; }
