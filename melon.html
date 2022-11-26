@@ -25,8 +25,18 @@
 					<a href="./res/engine1.png"><img src="./res/engine1.png" style="max-width: 19em; border-radius: 0.325em;"/></a>
 					<figcaption>Example of a basic OpenGL-based 3D application made with the framework.</figcaption>
 				</div>
-				<p><b>Melon Core Library</b> is a software framework (or core library) specifically focused on being simple and well designed. It's a collection of helpful functions and data structures that are simple and easy to use.</p>
+				<p><b>Melon Core Library</b> is a software framework (or core library) specifically focused on being simple and as well designed as possible.</p>
+				<p>This includes generic APIs for storage with basic access controls, graphical windowing (WIP) and multithreading (WIP); type generic variable containers, bitmaps (and soon vector graphics and 3D scenes), logging, random number generation, time utilities, strings, basic mathematics and 2D and 3D rendering (WIP) with even more coming soon.</p>
 				<p>Currently, melon is being used in the <a href="./trestle.html">Trestle simulation and games engine</a>.</p>
+				<h2>What are we planning?</h2>
+				<p>A large part of the core library is that it should implement most things without being invasive. The best way we can put it into words is that it should provide the <a href="https://upload.wikimedia.org/wikipedia/commons/3/32/Lego_Color_Bricks.jpg">building blocks</a> so that someone who knows what everything means can simpily put them together at a very high level.</p>
+				<p>To help with this, we want to support things that make C programming "like the web" where there are readily-available, mostly easy to use APIs for everything.</p>
+				<p>Right now, we are planning modules for <a href="https://en.wikipedia.org/wiki/Computer_algebra_system">computer algebra systems</a>, access to <a href="https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units">GPU compute</a>, advanced geometry and 3D scene access, (mathematical) <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>, a resource manager, a main loop handler, cryptography things (cryptographic primitives; encryption and signing), networking (sockets) support with HTTP helpers, <a href="https://en.wikipedia.org/wiki/Vector_graphics">vector graphics</a> and compression algorithms, with everything essentially written from scratch.</p>
+				<p>That is already quite a lot, and since it is meant to be a proper educational exprience, it may take a long time or be flaky in some areas, but that is okay!</p>
+				<h4>But doesn't building blocks just encourage people to not understand what lies underneath the abstraction and make programmers clash blocks until they work?</h4>
+				<p>Well, sometimes yes. For everyone <i>except for us</i>. And we're writing this library for us, and not anyone else. :)</p>
+				<p>Of course, you are still welcome to use it anywhere you like.</p>
+				<h2>Source code</h2>
 				<div class="card-section">
 					<h3><a href="https://github.com/knot126/Melon">View on Github</a></h3>
 					<p>View the Melon source code on Github!</p>

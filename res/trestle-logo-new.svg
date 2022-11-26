@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   sodipodi:docname="trestle-logo-new.svg"
+   inkscape:export-filename="trestle-logo-new.png"
+   inkscape:export-xdpi="192"
+   inkscape:export-ydpi="192"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.5664062"
+     inkscape:cx="256.95761"
+     inkscape:cy="256.63841"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke-width:0.264583"
+       id="rect139"
+       width="135.46666"
+       height="135.46666"
+       x="0"
+       y="0"
+       ry="20" />
+    <g
+       id="g1380"
+       transform="matrix(0.79369278,0,0,0.79369278,13.973873,28.503514)">
+      <path
+         id="rect1133"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.264583"
+         d="m 18.443315,23.043035 v 24.645007 l 24.645007,7.723043 v 24.644491 24.645004 l 24.645008,7.72304 24.645007,-7.72304 V 80.055576 55.411085 L 117.02334,47.688042 V 23.043035 L 92.378337,30.766078 67.73333,38.489121 43.088322,30.766078 Z" />
+      <path
+         id="path1373"
+         style="fill:#ffffff;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 67.733333,-13.569714 18.443319,1.8763706 67.733333,17.322456 117.02335,1.8763706 Z" />
+    </g>
+  </g>
+</svg>

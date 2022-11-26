@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Inter+Tight:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Lato:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
 
 /*
  * Making things default and variables
@@ -28,6 +28,8 @@
 	--base-colour-gradient-top: #f0f0f09f;
 	--base-colour-gradient-bottom: #f2f2f2f0;
 	--background-location: url("../common/light.jpeg");
+	--title-font: "Kumbh Sans", "Kumbh Sans", sans-serif;
+	--body-font: "Kumbh Sans", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,7 +67,7 @@
  */
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Kumbh Sans", "Inter Tight", sans-serif;
+	font-family: var(--title-font);
 	margin-bottom: 0.5em;
 }
 
@@ -80,7 +82,7 @@ h2, h3, h4, h5, h6 {
 }
 
 p, li, figcaption {
-	font-family: "Inter Tight", sans-serif;
+	font-family: var(--body-font);
 	margin-bottom: 0.75em;
 	line-height: 1.65;
 }
@@ -108,19 +110,20 @@ a:hover {
  */
 
 code {
-	background: #eee;
-	border-radius: 0.325em;
-	font-family: "Inconsolata", sans-serif;
-	font-size: 12pt;
-}
-
-.code {
-	background: #eee;
+	background: #8882;
 	border-radius: 0.325em;
 	font-family: "Inconsolata", sans-serif;
 	font-size: 14pt;
-	margin: 0.75em;
-	padding: 0.75em;
+	padding: 0.2em;
+}
+
+.code {
+	background: #8882;
+	border-radius: 0.325em;
+	font-family: "Inconsolata", sans-serif;
+	font-size: 12pt;
+	margin: 1em;
+	padding: 1em;
 	white-space: pre;
 }
 
