@@ -250,6 +250,6 @@ figcaption {
 
 body {
 	background-image: linear-gradient(var(--base-colour-gradient-top), var(--base-colour-gradient-bottom)), var(--background-location);
-	background-size: 100%;
+	background-size: contain;
 	background-attachment: fixed;
 }
