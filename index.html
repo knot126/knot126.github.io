@@ -7,28 +7,14 @@
 		<title>Knot126</title>
 		<link rel="icon" type="image/png" href="./favicon.png"/>
 		<link rel="stylesheet" href="./common/main.css"/>
-		<script>
-			function decodeEmail(email_address) {
-				let result = atob(atob(email_address));
-				let place = document.getElementById("email-" + email_address);
-				
-				place.innerHTML = "<h3><a href=\"mailto:" + result + "\">" + result + "</a></h3>";
-			}
-		</script>
+		<script src="./common/main.js"></script>
 	</head>
 	<body>
 		<div id="container" class="page-container">
 			<nav id="navbar" class="main-section navigation-section">
-				<div id="logo" class="nav-logotype">Knot126</div>
-				<div class="nav-link"><b href="./index.html">Home</b></div>
-				<div class="nav-link"><a href="./about.html">About</a></div>
-				<div class="nav-link"><a href="./melon.html">Melon</a></div>
-				<div class="nav-link"><a href="./trestle.html">Trestle</a></div>
-				<div class="nav-link"><a href="./yube.html">Yube</a></div>
-				<div class="nav-link"><a href="./lab.html">Lab Site</a></div>
-				<div class="nav-link"><a href="./games.html">Modding</a></div>
-				<div class="nav-link"><a href="./quickrun.html">Quick Run</a></div>
+				<noscript><i>You need to enable JavaScript to load the navbar.</i></noscript>
 			</nav>
+			<script>main();</script>
 			<div id="main" class="main-section content-section">
 				<h1>Hello!</h1>
 				<p>Unforunately, I am a person. Forunately, I do enjoy learning about things.</p>
