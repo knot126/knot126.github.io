@@ -49,7 +49,6 @@
  */
 
 ::selection {
-/* 	background: var(--base-colour-transluscent); */
 	color: #fff;
 	background: var(--base-colour);
 }
@@ -126,6 +125,10 @@ code {
 	padding: 1em;
 	white-space: pre;
 }
+
+code-string { color: #eb4c46; }
+code-number { color: #f67400; }
+code-keyword { color: #26acac; font-weight: bold; }
 
 /*
  * Elements like images

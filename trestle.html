@@ -8,11 +8,6 @@
 		<link rel="icon" type="image/png" href="./favicon.png"/>
 		<link rel="stylesheet" href="./common/main.css"/>
 		<script src="./common/main.js"></script>
-		<style>
-			red { color: #ff557f; }
-			gre { color: #00aa00; }
-			blue { color: #5555ff; }
-		</style>
 	</head>
 	<body>
 		<div id="container" class="page-container">
@@ -33,11 +28,11 @@
 				
 				<h2>Procedureal content</h2>
 				<p>Note that "procedureal content" in this definition does not have to be randomly generated; it can be fixed form, it just needs to be generated procedureally. For example, if you want to place trees in a row evenly to make a level:</p>
-				<pre class="code"><b>function</b> <blue>trees</blue>() {
+				<pre id="code0" class="code"><b>function</b> <blue>trees</blue>() {
 	<b>for</b> (i = <gre>0.0</gre>; i &lt; <gre>10.0</gre>; i += <gre>1.0</gre>) {
 		<blue>GenerateTree</blue>(<red>vec3</red>(-<gre>5.0</gre>, -<gre>1.0</gre>, <gre>8.0</gre> * i));
 	}
-}</pre>
+}</pre><script>format_section("code0");</script>
 				<p>That counts as procedureal generation despite that it is completely deterministic and not pseudorandom.</p>
 				
 				<h2>Graphics</h2>
