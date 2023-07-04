@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-/* @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Lato:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap'); */
+@import url(nimbus-sans.css);
 
 /*
  * Making things default and variables
@@ -31,8 +31,8 @@
 	--base-colour-gradient-top: #0000;
 	--base-colour-gradient-bottom: #0000;
 	--background-location: url("../common/bluerays.jpg");
-	--title-font: "NimbusSanL", sans-serif;
-	--body-font: "NimbusSanL", sans-serif;
+	--title-font: "Nimbus Sans", sans-serif;
+	--body-font: "Nimbus Sans", sans-serif;
 }
 
 /*@media (prefers-color-scheme: dark) {
