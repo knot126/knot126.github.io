@@ -17,29 +17,31 @@
 			<script>main();</script>
 			<div id="main" class="main-section content-section">
 				<h1 id="games-and-modding">Smash Hit Lab Website</h1>
-				<a href="./res/lab-art.png"><img src="./res/lab-art.png" align="right" width="400px" style="border-radius: 0.325em; margin-left: 1em;"></img></a>
-				<p>The <b>Smash Hit Lab Website</b> &mdash; which is powered by Labbyware, a custom CMS and wiki &mdash; is a mod database, news site and community centre for fans of the mobile game Smash Hit. This is probably the first widely usable project I have made moreso from scratch.</p>
+				<a href="./res/labv3.png"><img src="./res/labv3.png" align="right" width="400px" style="border-radius: 0.325em; margin-left: 1em;"></img></a>
+				<p>The <b>Smash Hit Lab Website</b> &mdash; which is powered by Labbyware, a custom content system &mdash; is a mod database, forum, news site and community centre for fans of the mobile game Smash Hit. This is probably the first widely usable project I have made moreso from scratch.</p>
 				<div class="card-section">
 					<h3><a href="https://smashhitlab.000webhostapp.com">Visit the Smash Hit Lab</a></h3>
 					<p>This is the website as it is currently running.</p>
 				</div>
+				
 				<h2>Features</h2>
 				<p>It features the abilities to:</p>
 				<ul>
-					<li>create accounts (and automatically generate passwords for them)</li>
-					<li>edit mod database pages (for users of the site)</li>
-					<li>make comments and mention users in comments</li>
-					<li>delete (hide) individual comments (I would like to point out that Google Chat doesn't have this as a feature.)</li>
-					<li>recieve notifications when mentioned or a message is left on your userpage</li>
-					<li>edit private or public articles for people with staff or admin priveleges</li>
-					<li>moderate the site (banning users and their IPs, hiding comments)</li>
-					<li>other various admin tools</li>
-					<li>allow users to block each other</li>
-					<li>do various maintanance tasks (backups)</li>
+					<li>Accounts: create accounts, log in, authentication, password resets</li>
+					<li>User pages: freeform user info, message wall, various actions and info, user blocking</li>
+					<li>Mod database: various CRUD actions, WIP inline editor</li>
+					<li>Comments and reviews on mod pages and articles, including moderation actions</li>
+					<li>Basic forum section</li>
+					<li>Notifications system: comments and mentions, staff custom announcements</li>
+					<li>News articles: staff-only editing, standard CRUD actions, privacy settings</li>
+					<li>General moderation: list, ban and delete users, update permissions and roles</li>
+					<li>Admin tools: settings, backup, site style editing, send notifications</li>
 				</ul>
+				
+				<h2>Tour de Code</h2>
 				<p>The backend was written in PHP, with no frameworks and not using a real database. I don't really like PHP as a language &mdash; I know that few actually do &mdash; but it's what most free webhosts seem to only provide, and it's still one of the fastest "make something from scratch" languages despite having so many quirks.</p>
-				<p>As for the database, it's a thin wrapper around the filesystem and JSON encoding, mainly because I don't really enjoy the way SQL is used in practise. For any large site, just having JSON and some folders wouldn't work, but I think for a small site this isn't an issue.</p>
-				<p>My favourite part of the codebase is probably either the generic discussions system that handles reviews, comments and message walls or how sending a notification can be done by calling <code>notify($name, $title, $url)</code> (or <code>notify_many</code> or <code>notify_scan</code>). It should probably be behind some kind of event or message system (and I've noted that), but ATM just calling it directly is fine. :)</p>
+				<p>As for the database, it's a thin wrapper around the filesystem and JSON that functions like a document store database, mainly because I don't really enjoy SQL. For any large site, using JSON and plain files wouldn't work, but I think for a small site this isn't an issue.</p>
+				<p>My favourite part of the codebase is probably either the generic discussions system that handles reviews, comments and message walls or how sending a notification can be done by calling <code>notify($name, $title, $url)</code> (or <code>notify_many</code> or <code>notify_scan</code>). It should probably be behind some kind of event or message system (one is implemented and used elsewhere!), but ATM just calling it directly is fine. :)</p>
 				<p>I think I could have taken a bit more time at the start to improve code quality, however. The implementation of database was first and I think it's pretty nice because you can just do things like:</p>
 				<pre id="code0" class="code">$db = new Database("some_table_name");
 
@@ -50,8 +52,13 @@ else {
 	$db->save("my_object", array("1" => "2", "3" => "4"));
 	$obj = $db->load("my_object");
 }</pre><script>format_section("code0");</script>
-				<p>But other places sometimes work with primitives where functions should probably exist for doing those things. For a long time, for example, there wasn't a nice function to echo out a form to the screen &mdash; which is another issue. I really should not have made the mistake of using <code>echo</code> directly and instead creating a <code>Page</code> class that has methods like <code>append($content)</code>, <code>set_title($title)</code>, etc. I'm working to fix this and the codebase is under 10K lines right now, so I think it might not be too hard to do.</p>
+				<p>But other places sometimes work with primitives where functions should probably exist for doing those things. For a long time, for example, there wasn't a nice function to echo out a form to the screen &mdash; which is another issue. I really should not have made the mistake of using <code>echo</code> directly and instead creating a <code>Page</code> class that has methods like <code>append($content)</code>, <code>set_title($title)</code>, etc. I'm working to fix this &mdash; the newer endpoints now use this system &mdash; and the codebase is under 10K lines right now, so I think it might not be too hard to do.</p>
 				<p>Security was something I have tried to consider when creating the site, though I know some things I didn't initially think about that would need some work.</p>
+				
+				<h2>Future plans</h2>
+				<p>The current situation is a bit akward: I'm not a staff member for the Smash Hit Lab anymore, but I am still hosting the site and still developing it from time to time. It's not the most comfortable thing and might interfere with things.</p>
+				<p>Aside from that, I hope to make the source code to the site open source soon. I find it unlikely that anyone would want to add to the site, but I feel a community site like this should be open source.</p>
+				<p>More generally, I would like to expand on the idea of making "community creation software." This kind of thing doesn't really exist today. Think of an exprience similar to <a href="https://fandom.com/">Fandom</a>, but better integrated becuase it isn't community platform slapped on top of MediaWiki. It has tools needed to form a community, like a place for discussions, a wiki for keeping information, a blog or news section for staff, messages and maybe more in one place.</p>
 			</div>
 			<div id="main" class="main-section disclaimer-section">
 				<p>This website is Copyright &#169; 2020 &mdash; 2023 Knot126</p>
