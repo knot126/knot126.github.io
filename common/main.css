@@ -248,6 +248,18 @@ figcaption {
 }
 
 /*
+ * A very basic box
+ */
+
+.box-section {
+	background: var(--base-colour-panel-background);
+	border-radius: 0.25em;
+	box-shadow: 0em 0.25em 0.5em #00000055;
+	padding: 1.5%;
+	margin: 1.5%;
+}
+
+/*
  * The main page body
  */
 
