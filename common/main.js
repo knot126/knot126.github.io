@@ -19,8 +19,11 @@ function download_sidebar() {
 function setup_sidebar() {
 	if (this.readyState == 4 && this.status == 200) {
 		let navbar = document.getElementById("navbar");
-		
 		navbar.innerHTML = this.responseText;
+	}
+	else if (this.readyState == 4) {
+		let navbar = document.getElementById("navbar");
+		navbar.innerHTML = "<i>Failed to load navbar.</i>";
 	}
 }
 
@@ -40,6 +43,12 @@ function format_string(str) {
 	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array"];
 	let output = "";
 	
+	// The identifier hack will not use number formatting for a number if a
+	// valid symbol character ($, _, A-Z, a-z) precedes it. It only works for
+	// one number in and id, but it should be good enough for anything on this
+	// site.
+	let identifier_hack = false;
+	
 	while (str.length > 0) {
 		current = str[0];
 		
@@ -55,7 +64,12 @@ function format_string(str) {
 			case "7":
 			case "8":
 			case "9":
-				output += "<code-number>" + current + "</code-number>";
+				if (identifier_hack) {
+					output += current;
+				}
+				else {
+					output += "<code-number>" + current + "</code-number>";
+				}
 				str = str.slice(1);
 				break;
 			
@@ -109,6 +123,12 @@ function format_string(str) {
 				
 				break;
 		}
+		
+		// bad code :thumbsup:
+		identifier_hack = 
+			((current.charCodeAt(0) >= 'a'.charCodeAt(0)) && (current.charCodeAt(0) <= 'z'.charCodeAt(0)))
+			|| ((current.charCodeAt(0) >= 'A'.charCodeAt(0)) && (current.charCodeAt(0) <= 'Z'.charCodeAt(0)))
+			|| current == '_' || current == '$';
 	}
 	
 	return output;

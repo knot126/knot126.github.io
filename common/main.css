@@ -259,6 +259,18 @@ figcaption {
 	margin: 1.5%;
 }
 
+.box-section p:last-of-type {
+	margin: 0;
+}
+
+.box-section.notice {
+	background: #e2551d60;
+}
+
+.box-section.info {
+	background: #019ab960;
+}
+
 /*
  * The main page body
  */
