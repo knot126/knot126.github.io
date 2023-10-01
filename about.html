@@ -17,46 +17,23 @@
 			<script>main();</script>
 			<div id="main" class="main-section content-section">
 				<h1>About me</h1>
-				<p>I am a software developer or an engineer ... or a mathematican. I can't decide which, though.</p>
-				<div class="box-section notice">
-					<p><b>A Note from August 2023</b>: The past year has been an <i>absolute fucking bitch</i> to me, and things are not getting better. I have lost some of my enthusasim about things &mdash; in general, maybe with some lasting effect &mdash; and so I might not be as open to talking about things as I was a few months ago.</p>
-				</div>
-				<h2>Things that look intresting</h2>
-				<p>I think one good way to learn about me is by what I find to be intresting or worth research. It shows what I think about often. I don't necessarily know a lot about these things.</p>
-				<p>In no order ...</p>
-				<div class="card-section full-width">
-					<h3>The graphics pipeline in GPU compute</h3>
-					<p>A completely programmable graphics pipeline is a very, very intresting idea. Even if having RT cores or the traditional rasterisation pipeline is basically guaranteed to be more efficient, I think the programmability will make up for itself.</p>
-				</div>
-				<div class="card-section full-width">
-					<h3>High level graphics primitives</h3>
-					<p>Instead of just rendering triangles, why not render smooth surfaces, like Bezier patches? NURBS surfaces? Entire implicit equations?</p>
-				</div>
-				<div class="card-section full-width">
-					<h3>Procedural content generation</h3>
-					<p>Using code as the method of input to an asset, like a texture, model, music, level layout, font or anything else, is a really good idea. It essentially removes the need for a separate preview process as things that be seen directly in engine.</p>
-				</div>
-				<div class="card-section full-width">
-					<h3>Encryption</h3>
-					<p>It's unusually fun to turn garbage data into something meaningful by just knowing One Weird Trick.</p>
-				</div>
-				<div class="card-section full-width">
-					<h3>Mathematics</h3>
-					<p>As long as I can properly understand it, if it is mathematics, I will probably like it. (Not like rote learning though &mdash; no times tables bullshit &mdash; I <i>need</i> to understand things.)</p>
-				</div>
-				<div class="card-section full-width">
-					<h3>Reverse engineering</h3>
-					<p>Taking things apart and putting them back together in intresting ways is very fun. :)</p>
-				</div>
-				<div class="card-section full-width">
-					<h3>Processor design</h3>
-					<p>Because yes.</p>
-				</div>
-				<div class="card-section full-width">
-					<h3>Porting old software to new platforms</h3>
-					<p>Also because yes.</p>
-				</div>
-				<h3></h3>
+				<p>I'm Knot (usually appended with the number 126)! I am some mix of a programmer, engineer, mathematican, artist and idiot and I can't describe myself in any way other than that.</p>
+				<h2>The story</h2>
+				<p>I believe I first started programming in Python when I was 13 by reading the introduction to programming that comes with the python documentation. I started programming in C shortly after, since I liked it's simplicity.</p>
+				<p>I made a few dumb things that didn't do anything and later imagined <i>Quick Run</i>, an endless running game. I planned to write it in Python, but of course that's a terrible idea, so I started using C++.</p>
+				<p>20 pretty meaningless git commits later, I decided that C++ is actually a really terrible language, and starting writing in C instead in 2021. Using that, I made the first version of the Trestle engine &mdash; which I have now dubbed the Quick Run engine &mdash; which actually did manage to do something. It had basic physics and graphics and a Lua based scripting system and could be identified as being a game.</p>
+				<p>Of course, I was a bit hyperfocused on performance, and forgot to actually make the game, and so the entire project stopped any major development in late 2021 and completely died in September 2022.</p>
+				<p>But wait! It turns out I was doing a lot of other crap too. <i>Shatter</i> &mdash; at the time called Smash Hit Blender Tools or some variant of that &mdash; was first released in September 2020 as an extension for Blender to create parts of levels called segments for the mobile game <i>Smash Hit</i>.</p>
+				<p>On 17 Feburary 2021, I did what I still consider to be one of the Top Ten Things I Was Happiest With Myself Doing which was figuring out the pre-baked lighting/mesh file format for Smash Hit.</p>
+				<p>In April 2021, I tried to kill Shatter with Carambola, an editor made in Godot that, importantly, showed the textures of boxes as they appeared in the scene. As it turns out Shatter had the weapon of being easy to develop and easy to polish and so Carambola also died in 2021.</p>
+				<p>Also sometime in 2021, I saw the game <i>Croc: Legend of the Gobbos</i> &mdash; which you probably know as the Scrimblo Bimblo game &mdash; and felt the main character was so cute that I started reverse engineering the custom scripting language (or as they called it a "strategy language") that the game uses as the Stratigise project. I'm still working on that project occasionally and recently (in 2023) made more progress in modding the game.</p>
+				<p>In 2022, I mostly worked on Shatter. I fixed the mesh baker (which was really buggy and slow at the time) and made various tweaks and quality of life improvements.</p>
+				<p>I didn't do much during 2022 (or at least I cannot remember anything), though I did really start to think about a <i>Teardown</i>-like Tails the Fox fangame I wanted to make. I still think about it today, admittedly. I'll write about my dreams for it soon...</p>
+				<p>At the start of 2023, I worked on the Smash Hit Lab community website constantly for about four months. I really did enjoy working on it, though using PHP was a bit of a pain and the website was still very much Web 2.0 1.0. It was of course shut down in 2023, but more because I left the Smash Hit Lab staff team after some disagreement.</p>
+				<p>Then soon after the SHL website shutdown, I was trying to dump some beta versions of Smash Hit &mdash; because I fucked it up the first time and also I'm now a game preservationist I guess &mdash; and I noticed <i>Touch Pets: Cats</i> on an old iPhone, a game from 2010 that had it's servers shut down in 2013 and was online only and therefore unplayable ... of course, I had to fix that and so went into the insanity of reverse engineering Objective C. I don't think I've recovered from that, but I got the game to boot at least.</p>
+				<p>Starting in August 2023, I started work on Autogen for Shatter &mdash; a set of in-editor procedureal generation tools I had wanted to work on for a long time. This allowed significantly speeding up the creation of detailed stages while still allowing creators to tweak the results.</p>
+				<p>I mention that specifically because now I'm thinking that some previous dreams of a procedureal content-driven engine could not only be possible but also actually viable, if done well.</p>
+				<p>And so as an extercise to actually start seriously programming again, I have been developing the Mot 2D engine for a game I'm calling Knock. It's basically just a physics game, but the engine will be a "0.1 proof of concept" for a PCG engine. I'm not sure if Mot will actually last, since I might just start to work on Trestle again, but I can at least try not to kill it. :)</p>
 			</div>
 			<div id="main" class="main-section disclaimer-section">
 				<p>This website is Copyright &#169; 2020 &mdash; 2023 Knot126</p>
