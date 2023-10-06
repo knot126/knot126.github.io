@@ -278,7 +278,9 @@ figcaption {
 }
 
 .box-section.info {
-	background: #019ab960;
+	background: #019ab920;
+	box-shadow: 0em 0.16em 0.32em #00000035;
+	border: 1px solid #019ab9;
 }
 
 /*
