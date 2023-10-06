@@ -128,6 +128,7 @@ code {
 	margin: 1em;
 	padding: 1em;
 	white-space: pre;
+	overflow: scroll;
 }
 
 code-string { color: #eb4c46; }
@@ -291,4 +292,59 @@ body {
 	background-image: linear-gradient(var(--base-colour-gradient-top), var(--base-colour-gradient-bottom)), var(--background-location);
 	background-size: cover;
 	background-attachment: fixed;
+}
+
+/**
+ * Various interactive widgets
+ */
+
+/* Buttons */
+.button {
+	background: var(--base-colour);
+	border-radius: 0.25em;
+	color: #fff;
+	cursor: pointer;
+	font-family: var(--body-font);
+	font-size: 13pt;
+	padding: 0.4em 1.5em;
+}
+
+.button:hover {
+	filter: brightness(0.8);
+}
+
+.button.secondary {
+	background: transparent;
+	color: var(--base-colour);
+}
+
+.button.secondary:hover {
+	filter: brightness(1);
+	background: var(--base-colour-transluscent);
+}
+
+/* Text boxes */
+.textbox-outer {
+	border: 1px solid #8888;
+	border-radius: 0.25em;
+	outline: none;
+	overflow: hidden;
+}
+
+.textbox {
+	background: transparent;
+	border-bottom: 3px solid #8884;
+	color: var(--base-colour-text);
+	font-family: var(--body-font);
+	font-size: 13pt;
+	padding: 0.4em 0.7em;
+	width: 100%;
+}
+
+.textbox:focus {
+	border-bottom: 3px solid var(--base-colour);
+}
+
+.textbox-width-restrict {
+	width: 30em;
 }

@@ -40,7 +40,7 @@ function is_number(s) {
 }
 
 function format_string(str) {
-	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array"];
+	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array", "then", "end", "do", "return", "true", "false"];
 	let output = "";
 	
 	// The identifier hack will not use number formatting for a number if a
@@ -106,6 +106,10 @@ function format_string(str) {
 			case "}":
 			case "(":
 			case ")":
+			case ",":
+			case "=":
+			case "~":
+			case "|":
 			// case ";":
 				output += "<code-special>" + current + "</code-special>";
 				str = str.slice(1);
@@ -147,4 +151,24 @@ function format_string(str) {
 function format_section(id) {
 	let e = document.getElementById(id);
 	e.innerHTML = format_string(e.innerHTML);
+}
+
+function format_codes() {
+	/**
+	 * Format code0, code1, code2, etc.
+	 */
+	
+	let i = 0;
+	
+	while (true) {
+		let e = document.getElementById("code" + i);
+		
+		if (!e) {
+			break;
+		}
+		
+		format_section("code" + i);
+		
+		i += 1;
+	}
 }

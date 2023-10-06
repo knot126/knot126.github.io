@@ -17,6 +17,28 @@
 			<script>main();</script>
 			<div id="main" class="main-section content-section">
 				<h1>Quick Run</h1>
+				<div id="quickrunvideo">
+					<script>
+					function showVideo() {
+						let e = document.getElementById("quickrunvideo");
+						e.innerHTML = '<iframe width="100%" height="100%" style="border-radius: 0.325em;" src="https://www.youtube-nocookie.com/embed/SE2lMkymR3M?si=DjAPZWIaQ6_b09uL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+						e.style.height = "420px";
+					}
+					function showTos() {
+						window.open("https://youtube.com/t/terms");
+					}
+					function showPrivacy() {
+						window.open("https://youtube.com/t/privacy");
+					}
+					</script>
+					<div class="box-section info">
+						<p>Loading videos from YouTube might harm your privacy. Please make sure you agree to YouTube's terms of service and privacy policy first.</p>
+						<div style="height: 15px"></div>
+						<button class="button" onclick="showVideo()">Load YouTube video</button>
+						<button class="button secondary" onclick="showTos()">Terms for YouTube</button>
+						<button class="button secondary" onclick="showPrivacy()">Privacy for YouTube</button>
+					</div>
+				</div>
 				<div style="max-width: 19em; float: right; padding: 0.75em; border-radius: 0.25em; background: transparent;">
 					<a href="./res/engine1.png"><img src="./res/engine1.png" style="max-width: 19em; border-radius: 0.325em;"/></a>
 					<figcaption>An early version of the Quick Run engine, which drew various cubes.</figcaption>
@@ -30,7 +52,7 @@
 				<p>After a while, I started drawing more interactive things, such as a rotating cube with a camera that slowly moved along. Though, I think my engine became a "real" game engine when I added Lua scripting support.</p>
 				<p>The initial scripting API looked a lot like Smash Hit's, even using the same <code>mg</code> prefix for function names and essentially one-for-one copying the naming scheme for UI functions. The engine had also become based on a fairly pure Entity-Component-System architecture, which do various things to make the best use of CPU cache.</p>
 				<p>Here are a few small pieces of some original scripts:</p>
-				<pre class="code">function initHud()
+				<pre id="code0" class="code">function initHud()
 	ui.Statistics = mgUIElement(QR_ELEMUI_TEXT)
 	mgUIText(ui.Statistics, "[text about in-game statistics will appear here shortly...]")
 	mgUITextPos(ui.Statistics, -1.0, -0.9)
@@ -44,7 +66,7 @@
 	-- There was more here..
 end</pre>
 				<p>... <code>ui</code> was a table in Lua ...</p>
-				<pre class="code">function init()
+				<pre id="code1" class="code">function init()
 	-- player init
 	local player = new_cube(0.0, 1.5, 0.0, 0.9, 0.9, 0.9, true, QR_PHYS_ENABLE_RESPONSE, "assets://mesh/player.obj")
 	mgActivePlayer(player)
@@ -57,7 +79,7 @@ end</pre>
 	first = mgEntity(0)
 end</pre>
 				<p>... <code>new_cube</code> isn't a provided function, instead, there was an <code>include.lua</code> script that was included in every other script which defined functions like it:</p>
-				<pre class="code">function new_cube(x, y, z, sx, sy, sz, phys, pflags, model)
+				<pre id="code2" class="code">function new_cube(x, y, z, sx, sy, sz, phys, pflags, model)
 	local flags = QR_COMPONENT_TRANSFORM | QR_COMPONENT_MESH
 	if phys then
 		flags = flags | QR_COMPONENT_PHYSICS
@@ -80,7 +102,7 @@ end</pre>
 				<p>Eventually, I started to write some other systems. There was a basic bitmap (pre-rendered) font system. You could draw UI rectangles to create basic HUDs. And at some point you could load basic Wavefront OBJ format models.</p>
 				<p>After a bit more time, I decided that just copying the Smash Hit Lua API wasn't the best thing to do, and I decided to rewrite the scripting interface so that it moved to <code>snake_case</code> names and refactor the Entity-Component-System so that the components and the systems were now assocaited together, making some operations more nicely organised but making subsystem interoperability a bit more complex.</p>
 				<p>After the rewrite, my scripts started to look more like this:</p>
-				<pre class="code">function init()
+				<pre id="code3" class="code">function init()
 	-- Create camera
 	cam = create_entity(ENT_TRANSFORM)
 	push_transform(cam, 0.0, 5.0, 5.65, 0.0375, 0.0, 0.0)
@@ -119,6 +141,7 @@ end</pre>
 				<p>There are probably more things I took away from this. For one, I like simple, easy to use but hard to master programming languages over complex though "easy" to use ones. But that's getting a bit long.</p>
 				<p>The biggest takeaway is that, yes, I failed to make a game and it's engine, but I did learn a lot. I think I've done everything I should with this failure - that is, to learn from it - and I can safely and cleanly pepare for what comes next. Trestle is going to be my largest project ever - and I'm going to make sure I prepare for it well, and stop myself when I need to prepare more. □</p>
 				<p style="font-size: 24pt; font-weight: bold; text-align: center; margin: 1.5em;">RIP <span style="color: var(--base-colour-green);">Quick Run Engine</span> 2021 &mdash; 2021</p>
+				<script>format_codes();</script>
 			</div>
 			<div id="main" class="main-section disclaimer-section">
 				<p>This website is Copyright &#169; 2020 &mdash; 2023 Knot126</p>
