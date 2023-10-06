@@ -102,6 +102,16 @@ function format_string(str) {
 				
 				break;
 			
+			case "{":
+			case "}":
+			case "(":
+			case ")":
+			// case ";":
+				output += "<code-special>" + current + "</code-special>";
+				str = str.slice(1);
+				
+				break;
+			
 			// Anything else is normal
 			default:
 				let found = false;
