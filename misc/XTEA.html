@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>XTEA encryption algorithm description</title>
+	<meta name="generator" content="LibreOffice 7.5.4.2 (Windows)"/>
+	<meta name="created" content="2023-10-19T13:56:10.182000000"/>
+	<meta name="changed" content="2023-10-19T15:43:17.982000000"/>
+	<meta name="classification" content="XTEA encryption"/>
+	<meta name="description" content="My attempt to explain XTEA block cipher."/>
+	<meta name="keywords" content="XTEA, encryption, cipher, description, algorithm, block cipher"/>
+	<style type="text/css">
+		h1.western { font-family: "Verdana", sans-serif }
+		p.western { font-family: "Verdana", sans-serif }
+	</style>
+</head>
+<body lang="en-GB" dir="ltr"><h1 class="western">XTEA encryption</h1>
+<p class="western">My attempt to explain XTEA encryption. Yes this
+webpage is made in libreoffice so it looks like crap, deal with it.</p>
+<p class="western">Firstly, note that XTEA is a fistel cipher that
+uses addition instead of XOR for combining the mixing function with
+the left block.</p>
+<p class="western">So, a very abstract look at the cipher is:</p>
+<p class="western"><font face="MS Gothic, monospace">R<sub>i</sub> =
+L<sub>i-1</sub> + f(R<sub>i-1</sub>, K<sub>i</sub>)</font></p>
+<p class="western"><font face="MS Gothic, monospace">L<sub>i</sub> =
+R<sub>i-1</sub></font></p>
+<p class="western">Where L is the left side of each round, R is the
+right side of each round and K is the round key for each round.</p>
+<hr/>
+
+<p class="western">Of course, this is not very helpful as the mixing
+(hash) function isn’t defined. So, let’s look at it:</p>
+<p class="western"><font face="MS Gothic, monospace">f(x, k) = k ^
+g(x)</font></p>
+<p class="western">Basically, all that happens is the round key is
+XORed with the “real” mixing function, g(x), defined below.
+(Technically I should put them in the same function, but it is more
+clear what is happening this way.)</p>
+<p class="western"><font face="MS Gothic, monospace">g(x) = ( (x &lt;&lt;
+4) ^ (x &gt;&gt; 5) ) + x</font></p>
+<p class="western">Here, we find x shifted left by 4 and XOR it with
+x shifted right by 5, and finally add x to the two XORed values.</p>
+<p class="western">Here is an example of what that looks like with
+the value 10101010 10101010 10101010 10101010 (note that each of the
+sides of XTEA is a 32-bit unsigned integer, to make a 64-bit wide
+block cipher):</p>
+<p class="western"><font face="MS Gothic, monospace">10101010
+10101010 10101010 10101010</font></p>
+<p class="western"><font face="MS Gothic, monospace">10101010
+10101010 10101010 10100000</font> Shift x left four</p>
+<p class="western"><font face="MS Gothic, monospace">00000101
+01010101 01010101 01010101</font> Shift x right five</p>
+<p class="western"><font face="MS Gothic, monospace">10101111
+11111111 11111111 11110101</font> Xor</p>
+<p class="western"><font face="MS Gothic, monospace">01011010
+10101010 10101010 10011111</font> Add x</p>
+<p class="western">As you can see, this does mix the bits. And keep
+in mind that this is just an example – it only helps to visualise
+what’s really happening.</p>
+<hr/>
+
+<p class="western">For the last part of the cipher, we should look at
+the key schedule.</p>
+<p class="western">I will describe it mathematically, since that’s
+more interesting and not really done anywhere else, but you can also
+have a much faster and somewhat more clear implementation that’s
+describe elsewhere online (e.g. Wikipedia and the original paper).</p>
+<p class="western">The key schedule essentially work by multiplying a
+constant value (the floor of 2<sup>32</sup> divided by the golden
+ratio which is 0x9E3779B9) by a simple function of the current round
+number to get S<sub>i</sub>, and then using this value to compute the
+final Ki using a even/odd round-dependent function h<sub>i</sub>(x).</p>
+<p class="western">The multiplied constant value and the function
+that multiplies it is:</p>
+<p class="western"><font face="MS Gothic, monospace">S<sub>i</sub> =
+m(i) * floor(2<sup>32</sup> / Φ)</font></p>
+<p class="western"><font face="MS Gothic, monospace">m(x) = floor((x
++ 1) / 2)</font></p>
+<p class="western">The constant number (floor(2<sup>32</sup> / Φ) =
+0x9E3779B9) was chosen as a nothing up my sleeve number and doesn’t
+have much significance.</p>
+<p class="western">The m(i) essentially causes S<sub>i</sub> to
+increment by the constant number every two rounds, before each odd
+round. (Note that I assume the first round is i = 0. Also, see that
+this could also be implemented by incrementing some variable before
+every odd round to get the same result.)</p>
+<p class="western">As an example, the first values of S<sub>i</sub>
+are:</p>
+<p class="western"><font face="MS Gothic, monospace">S<sub>0</sub> =
+0, S<sub>1</sub> = 0x9E3779B9, S<sub>2</sub> = 0x9E3779B9, S<sub>3</sub>
+= 0x3C6EF372, S<sub>4</sub> = 0x3C6EF372, S<sub>5</sub> = 0xDAA66D2B,
+…</font></p>
+<p class="western">Written in one line, each Si is:</p>
+<p class="western"><font face="MS Gothic, monospace">S<sub>i</sub> =
+0x9E3779B9 * floor((x + 1) / 2)</font></p>
+<p class="western">The S<sub>i</sub> is then passed into a function
+h<sub>i</sub>(x), which is then added to S<sub>i</sub> to get K<sub>i</sub>.
+The purpose of h<sub>i</sub>(x) is to index one of the four 32-bit
+words in the user-supplied key for this entire block, which I call T
+for the “true key”, using the S<sub>i</sub> value.</p>
+<p class="western">To put it in symbols:</p>
+<p class="western"><font face="MS Gothic, monospace">K<sub>i</sub> =
+S<sub>i</sub> + h<sub>i</sub>(S<sub>i</sub>)</font></p>
+<p class="western"><font face="MS Gothic, monospace">h</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">(x)
+= T</font><sub><font face="MS Gothic, monospace">[x % 4]</font></sub>
+for even rounds (i mod 2 = 0)</p>
+<p class="western"><font face="MS Gothic, monospace">h</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">(x)
+= T</font><sub><font face="MS Gothic, monospace">[(x &gt;&gt; 11) %
+4]</font></sub> for odd rounds (i mod 2 = 1)</p>
+<p class="western">Note that h(x) is defined differently for odd and
+even rounds. In the even round, we use the last two bits of Si to
+index T, but in the odd round, we use the 12<sup>th</sup> and 13<sup>th</sup>
+bits from the end.</p>
+<hr/>
+
+<p class="western">Finally, we can combine these into one large
+function for f(r, k) 
+</p>
+<hr/>
+
+<p style="margin-top: 0.42cm; page-break-after: avoid"><font size="4" style="font-size: 14pt">Sources</font></p>
+<p class="western">Wikipedia: <a href="https://en.wikipedia.org/wiki/XTEA">https://en.wikipedia.org/wiki/XTEA</a></p>
+<p class="western">Paper: <a href="https://www.cix.co.uk/~klockstone/xtea.pdf">https://www.cix.co.uk/~klockstone/xtea.pdf</a></p>
+<p class="western"><br/>
+<br/>
+
+</p>
+</body>
+</html>

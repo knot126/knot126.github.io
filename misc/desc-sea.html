@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Stupid Encryption Algorithms</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+		<style>
+			body {
+				font-family: "CMU Serif", sans-serif;
+			}
+			
+			p, li {
+				font-size: 14pt;
+			}
+			
+			li {
+				margin-bottom: 0.3em;
+			}
+			
+			h1 {
+				text-align: center;
+			}
+			
+			pre, code {
+				font-family: "Cascadia Mono", monospace;
+				overflow-x: scroll;
+			}
+			
+			pre, code {
+				background: #eee;
+				border-radius: 3px;
+				padding: 3px;
+			}
+			
+			.body {
+				margin: auto;
+				max-width: 50em;
+				padding-top: 1em;
+			}
+			
+			::selection {
+				background: #0087a2;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="body">
+			<h1>Stupid Encryption Algorithms</h1>
+			<p>These are some of the Stupid Encryption Algorithms (SEA). They are algorithms I designed specially for learning purposes: both for me and for other people. They should be in the middle of needing no background to cryptanalyse and needing mathematical knowledge to exploit.</p>
+			<h2>1. Quick explainations</h2>
+			<p>I have used some other algorithms for some of these ciphers:</p>
+			<ul>
+				<li><b>XORShift</b> is featured in the SEA1 and SEA2 algorithms. It is a non-cryptographically secure pseudo random number generator. It's pretty nice since it has a period of \(2^{32} - 1\) for a 32-bit unsigned integer.</li>
+			</ul>
+			<p>Some terms used in this document:</p>
+			<ul>
+				<li><b>Pseudo-random number generators</b> (<b>PRNG</b>) are predictable algorithms that produce a sequence of random-looking values starting from one small truly random value.</li>
+				<ul>
+					<li>Any given PRNG can only produce a subset of all possible sequences of bits, so they can't be truly distinguished from random because you can notice that some sequences never occur &mdash; and of course, it will eventually repeat itself becuase that's what a PRNG is.</li>
+				</ul>
+				<li><b>Cryptographically secure pseudo-random number generators</b> (<b>CSPRNG</b>) are random number generators with two special properties:</li>
+				<ul>
+					<li>There isn't any fast algorithm that, knowing the random number algorithm, you could predict the next bit in a stream of bits with any high level of confidence.</li>
+					<li>Given some state of the RNG, you should not be able to find the previous state.</li>
+				</ul>
+				<li><b>Stream ciphers</b>, by some description, are any cipher that tries to directly emulate the one time pad. They are effectively a (CS)PRNG with some different mechanics on the side.</li>
+				<li><b>Block ciphers</b>, again in simple terms, are any cipher that is a really, <i>really</i> large substitution cipher. Without any additions, they operate on only fixed-sized blocks of data.</li>
+			</ul>
+			<h2>2. The Stupid Encryption Algorithms</h2>
+			<p>The Stupid Encryption Algorithms are not designed to be secure. In fact, some of them are not even designed at all &mdash; meaning that I put no thought into them. They could work for very simple data obfuscation &mdash; like for games &mdash; but they should absolutely not be used for security.</p>
+			<h3>2.1. SEA1</h3>
+			<p>SEA1 is a stream cipher based on the 32-bit XORShift PRNG. It takes any <code>NUL</code>-terminated, L length key and uses a mildly permuted sliding window to use this key as the initial states for an array of XORShift states which is as long as the key.</p>
+			<p>The initialisation can be described as:</p>
+			<pre>for (size_t i = 0; i &lt; key_size; i++) {
+	random_states[i] =
+		  (key[(i + 3) % key_length] &lt;&lt; 24)
+		| (key[(i + 0) % key_length] &lt;&lt; 16)
+		| (key[(i + 2) % key_length] &lt;&lt; 8)
+		| (key[(i + 1) % key_length]);
+}</pre>
+			<p>The choice to permute the key bytes and the way in which they were permuted were arbitrary.</p>
+			<p>While encrypting, the state corresponding to <code>message_length</code> mod L is first run though a single use of XORShift. After this, the resulting state is truncated to the lower 8 bits and is XOR'ed with the plaintext to form the ciphertext.</p>
+			<p>Here is an example of the encryption routine:</p>
+			<pre>for (size_t i = 0; i &lt; message_length; i++) {
+	random_states[i % key_length] = xorshift32(random_states[i % key_length]);
+	data[i] ^= (uint8_t) random_states[i % key_length];
+}</pre>
+			<p>After this, the data has been encrypted. It can be decrypted by simpily using the same algorithm on the encrypted data.</p>
+			<h4>2.1.1. Possible attacks</h4>
+			<p>There are a few possible attacks:</p>
+			<ul>
+				<li><b>Brute force attack</b>: Since the key length is variable, it is harder to give an exact number for the amount of time this attack would take. There are 255<sup><i>k</i></sup> keys of length <i>k</i>. Assuming that you can compute about 250000 plaintexts per second (my Snapdragon 850 laptop could compute about 30000 for a 775 byte plaintext for about 22 MB/sec), it would take 255<sup><i>k</i></sup>/(2*250000) seconds to find the correct password on averege. Solving for <i>k</i> at 300 years (when a brute force attack clearly becomes impossible), we get:
+					$$9460800000 = \frac{255^k}{500000}$$
+					$$500000 \cdot 9460800000 = 255^k$$
+					$$\log_{255}(500000 \cdot 9460800000) = k$$
+					$$k = 6.153$$
+				Which gives us... 49 bits of key needed for 300 years of security? Well, keep in mind that this isn't an optimised version of the algorithm, it's a really low rate of testing and that this is a very small amount of years to aim for. If we wanted to compare to AES-128 at about 2<sup>40</sup> seconds for all keys in 2017 and be able to resist up to 2<sup>80</sup> guesses per second (assuming our alogirhtm can have a similar encryption rate), we find that our <i>k</i> needs to be:
+					$$T_{\text{(sec)}} = \frac{255^{k}_{\text{(possible guesses)}}}{2G_{\text{(guesses/sec)}}}$$
+					$$2^{40} = \frac{255^{k}}{2(2^{80})}$$
+					$$2^{40} \cdot 2^{81} = 255^{k}$$
+					$$\log_{255}(2^{40} \cdot 2^{81}) = k$$
+					$$k = 15.135$$
+				Which is 121 bits of security &mdash; much more inline with AES-128 and what we might expect. Also, consider that since there is no key expansion and people only really select from 60 to 80 characters, so we might more accurately say that:
+					$$2^{40} = \frac{70^{k}}{(2^{81})}$$
+					$$2^{40}2^{81} = 70^{k}$$
+					$$\log_{70}(2^{121}) = k$$
+					$$k = 19.741$$
+				</li>
+				<li><b>Known-plaintext attack</b>: If the attacker knows the plaintext and ciphertext of a message, then they know the keystream for that key up to the length of the message. There is no nonce value that prevents a reused key's keystream from being applied to decrypt another message. I find it unlikely that the key could be gotten from the keystream, but it is possible that you could find it given enough keystream.</li>
+				<li><b>Chosen-plaintext attack</b>: As with the known plaintext attack, it is possible to get the keystream from a plaintext and ciphertext pair. This makes the cipher vulnerable to a chosen plaintext attack as well.</li>
+			</ul>
+			<h3>2.2. SEA2</h3>
+			<p>The 2nd Stupid Encryption Algoithm is essentially the same as the first, but the length of the message is added to the random states for each increment of the random states. The intent is for this to function sort of like a nonce and to make different keys results in different key streams for different messages while still not having to use a nonce or add any extra data.</p>
+			<p>The actual encryption routine replaces the one from SEA1:</p>
+			<pre>for (size_t i = 0; i &lt; message_length; i++) {
+	random_states[i % key_length] = xorshift32(random_states[i % key_length]) + (length + i);
+	data[i] ^= (uint8_t) random_states[i % key_length];
+}</pre>
+			<p>Everything else is the same.</p>
+		</div>
+	</body>
+</html>
