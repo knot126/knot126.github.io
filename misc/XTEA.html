@@ -5,7 +5,7 @@
 	<title>XTEA encryption algorithm description</title>
 	<meta name="generator" content="LibreOffice 7.5.4.2 (Windows)"/>
 	<meta name="created" content="2023-10-19T13:56:10.182000000"/>
-	<meta name="changed" content="2023-10-19T15:43:17.982000000"/>
+	<meta name="changed" content="2023-10-19T20:57:53.713000000"/>
 	<meta name="classification" content="XTEA encryption"/>
 	<meta name="description" content="My attempt to explain XTEA block cipher."/>
 	<meta name="keywords" content="XTEA, encryption, cipher, description, algorithm, block cipher"/>
@@ -15,8 +15,25 @@
 	</style>
 </head>
 <body lang="en-GB" dir="ltr"><h1 class="western">XTEA encryption</h1>
-<p class="western">My attempt to explain XTEA encryption. Yes this
-webpage is made in libreoffice so it looks like crap, deal with it.</p>
+<p class="western">My attempt to explain the XTEA block cipher. Yes
+this webpage is made in LibreOffice so it looks like crap, deal with
+it.</p>
+<hr/>
+
+<p class="western" style="margin-left: 2cm"><b>Important note about
+this</b></p>
+<ol>
+	<li><p class="western">This isn’t meant to be something big and
+	serious and it hasn’t been properly reviewed.</p>
+	<li><p class="western">This is a very nonstandard way of describing
+	this cipher.</p>
+	<li><p class="western">All math operations are assumed to be (mod
+	2<sup>32</sup>) unless otherwise noted</p>
+	<li><p class="western"><font color="#c9211e"><b>It seems like there
+	is currently an error somewhere, but I have not found it yet.</b></font></p>
+</ol>
+<hr/>
+
 <p class="western">Firstly, note that XTEA is a fistel cipher that
 uses addition instead of XOR for combining the mixing function with
 the left block.</p>
@@ -26,11 +43,15 @@ L<sub>i-1</sub> + f(R<sub>i-1</sub>, K<sub>i</sub>)</font></p>
 <p class="western"><font face="MS Gothic, monospace">L<sub>i</sub> =
 R<sub>i-1</sub></font></p>
 <p class="western">Where L is the left side of each round, R is the
-right side of each round and K is the round key for each round.</p>
-<hr/>
-
-<p class="western">Of course, this is not very helpful as the mixing
-(hash) function isn’t defined. So, let’s look at it:</p>
+right side of each round and K is the round key for each round. (L<sub>0</sub>
+and R<sub>0</sub> are defined as the initial data block to encrypt.)</p>
+<p class="western">Each block is 64-bits and the key is 128-bits.
+They are treated as unsigned 32-bit words: 2 words for the block and
+4 for the key. The use of little or big endian is not specified in
+the original document, but can assumed to be little.</p>
+<p class="western">Of course, the basic overview is not very helpful
+as the mixing (hash) function isn’t defined. So, let’s look at
+it:</p>
 <p class="western"><font face="MS Gothic, monospace">f(x, k) = k ^
 g(x)</font></p>
 <p class="western">Basically, all that happens is the round key is
@@ -58,23 +79,30 @@ block cipher):</p>
 <p class="western">As you can see, this does mix the bits. And keep
 in mind that this is just an example – it only helps to visualise
 what’s really happening.</p>
-<hr/>
+<p class="western">Of course, this isn’t all we need to understand
+the cipher. We also need to know key schedule.</p>
+<table width="100%" cellpadding="0" cellspacing="0" style="background: transparent">
+	<col width="256*"/>
 
-<p class="western">For the last part of the cipher, we should look at
-the key schedule.</p>
-<p class="western">I will describe it mathematically, since that’s
-more interesting and not really done anywhere else, but you can also
-have a much faster and somewhat more clear implementation that’s
-describe elsewhere online (e.g. Wikipedia and the original paper).</p>
+	<tr style="background: transparent">
+		<td width="100%" valign="top" bgcolor="#dddddd" style="background: #dddddd; border: none; padding: 0cm"><p class="western">
+			<b>Note</b>: I will describe the key schedule mathematically,
+			since that’s more interesting and not really done anywhere else,
+			but you can also have a much faster and somewhat more clear
+			implementation that’s describe elsewhere online (e.g. Wikipedia
+			and the original paper).</p>
+		</td>
+	</tr>
+</table>
 <p class="western">The key schedule essentially work by multiplying a
-constant value (the floor of 2<sup>32</sup> divided by the golden
-ratio which is 0x9E3779B9) by a simple function of the current round
-number to get S<sub>i</sub>, and then using this value to compute the
-final Ki using a even/odd round-dependent function h<sub>i</sub>(x).</p>
+constant value by a simple function of the current round number to
+get an intermediate value S<sub>i</sub>, and then using this value to
+compute the final Ki using a even/odd round-dependent function h<sub>i</sub>(x).</p>
 <p class="western">The multiplied constant value and the function
 that multiplies it is:</p>
-<p class="western"><font face="MS Gothic, monospace">S<sub>i</sub> =
-m(i) * floor(2<sup>32</sup> / Φ)</font></p>
+<p class="western"><font face="MS Gothic, monospace">S</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">
+= m(i) * floor(2</font><sup><font face="MS Gothic, monospace">32</font></sup><font face="MS Gothic, monospace">
+/ Φ)</font> (where Φ is the golden ratio)</p>
 <p class="western"><font face="MS Gothic, monospace">m(x) = floor((x
 + 1) / 2)</font></p>
 <p class="western">The constant number (floor(2<sup>32</sup> / Φ) =
@@ -91,35 +119,92 @@ are:</p>
 0, S<sub>1</sub> = 0x9E3779B9, S<sub>2</sub> = 0x9E3779B9, S<sub>3</sub>
 = 0x3C6EF372, S<sub>4</sub> = 0x3C6EF372, S<sub>5</sub> = 0xDAA66D2B,
 …</font></p>
-<p class="western">Written in one line, each Si is:</p>
+<p class="western">Written in one line, S<sub>i</sub> is:</p>
 <p class="western"><font face="MS Gothic, monospace">S<sub>i</sub> =
-0x9E3779B9 * floor((x + 1) / 2)</font></p>
+0x9E3779B9 * floor((i + 1) / 2)</font></p>
 <p class="western">The S<sub>i</sub> is then passed into a function
-h<sub>i</sub>(x), which is then added to S<sub>i</sub> to get K<sub>i</sub>.
-The purpose of h<sub>i</sub>(x) is to index one of the four 32-bit
-words in the user-supplied key for this entire block, which I call T
-for the “true key”, using the S<sub>i</sub> value.</p>
+h<sub>i</sub>(x), which is then added to the original S<sub>i</sub>
+to get K<sub>i</sub>. The purpose of h<sub>i</sub>(x) is to index one
+of the four 32-bit words in the user-supplied key for this entire
+block, which I call T for the “true key”, using the S<sub>i</sub>
+value.</p>
 <p class="western">To put it in symbols:</p>
 <p class="western"><font face="MS Gothic, monospace">K<sub>i</sub> =
 S<sub>i</sub> + h<sub>i</sub>(S<sub>i</sub>)</font></p>
 <p class="western"><font face="MS Gothic, monospace">h</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">(x)
-= T</font><sub><font face="MS Gothic, monospace">[x % 4]</font></sub>
-for even rounds (i mod 2 = 0)</p>
+= T</font><sub><font face="MS Gothic, monospace">[x </font></sub><sub><font face="MS Gothic, monospace">mod</font></sub><sub><font face="MS Gothic, monospace">
+4]</font></sub> for even rounds (i mod 2 = 0)</p>
 <p class="western"><font face="MS Gothic, monospace">h</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">(x)
-= T</font><sub><font face="MS Gothic, monospace">[(x &gt;&gt; 11) %
+= T</font><sub><font face="MS Gothic, monospace">[(x &gt;&gt; 11) </font></sub><sub><font face="MS Gothic, monospace">mod</font></sub><sub><font face="MS Gothic, monospace">
 4]</font></sub> for odd rounds (i mod 2 = 1)</p>
 <p class="western">Note that h(x) is defined differently for odd and
-even rounds. In the even round, we use the last two bits of Si to
-index T, but in the odd round, we use the 12<sup>th</sup> and 13<sup>th</sup>
+even rounds.</p>
+<p class="western">In the even round, we use the last two bits of Si
+to index T, but in the odd round, we use the 12<sup>th</sup> and 13<sup>th</sup>
 bits from the end.</p>
+<p class="western">An example of K at i = 3 and S<sub>i</sub> =
+0x3C6EF372 with a key of 11223344 55667788 99AABBCC DDEEFF00 (hex):</p>
+<p class="western"><font face="MS Gothic, monospace">K<sub>3</sub> =
+0x3C6EF372 + h<sub>3</sub>(0x3C6EF372)</font></p>
+<p class="western"><font face="MS Gothic, monospace">h<sub>3</sub>(0x3C6EF372)
+= T<sub>[(0x3C6EF372 &gt;&gt; 11) % 4]</sub> = T<sub>[0x78DDE % 4]</sub>
+= T<sub>2</sub> = 0x99AABBCC</font></p>
+<p class="western"><font face="MS Gothic, monospace">K<sub>3</sub> =
+0x3C6EF372 + 0x99AABBCC</font></p>
+<p class="western"><font face="MS Gothic, monospace">K<sub>3</sub> =
+0xD619AF3E</font></p>
+<p class="western">At this point, we have basically described the
+entire cipher top down. The key schedule is probably the most complex
+and confusing part of the cipher, while the g(x) mixing function is
+pretty simple, and the rest is a normal fistel cipher.</p>
+<p class="western">From here, the final encryption is R<sub>63</sub>
+|| L<sub>63</sub>. (Note: I’m not sure if you need to swap L and R
+in this cipher, assuming that’s needed.)</p>
 <hr/>
 
-<p class="western">Finally, we can combine these into one large
-function for f(r, k) 
-</p>
+<p class="western">For fun, we can combine these into one large
+function for f(x, k). (I will switch to using python notation for
+this.)</p>
+<p class="western"><font face="MS Gothic, monospace">S<sub>i</sub> =
+((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff)</font></p>
+<p class="western"><font face="MS Gothic, monospace">K<sub>i</sub> =
+((S + h(S)) &amp; 0xffffffff)</font></p>
+<p class="western"><font face="MS Gothic, monospace">h<sub>i</sub>(x)
+= ((((T[x % 4]) * ((i + 1) % 2)) + ((T[(x &gt;&gt; 11) % 4]) * (i %
+2))) &amp; 0xffffffff)</font></p>
+<p class="western"><font face="MS Gothic, monospace">K<sub>i</sub> =
+((((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) +
+((((T[((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) % 4]) * ((i +
+1) % 2)) + ((T[(((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) &gt;&gt;
+11) % 4]) * (i % 2))) &amp; 0xffffffff)) &amp; 0xffffffff)</font></p>
+<p class="western"><font face="MS Gothic, monospace">f(x, k) = k ^
+(((((x &lt;&lt; 4) &amp; 0xffffffff) ^ (x &gt;&gt; 5)) + x) &amp;
+0xffffffff)</font></p>
+<p class="western"><font face="MS Gothic, monospace">f(R, T) =
+((((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) +
+((((T[((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) % 4]) * ((i +
+1) % 2)) + ((T[(((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) &gt;&gt;
+11) % 4]) * (i % 2))) &amp; 0xffffffff)) &amp; 0xffffffff) ^ (((((R
+&lt;&lt; 4) &amp; 0xffffffff) ^ (R &gt;&gt; 5)) + R) &amp;
+0xffffffff)</font></p>
+<p class="western"><font face="MS Gothic, monospace">R = ((L + f(R,
+K<sub>i</sub>)) &amp; 0xffffffff) ; L = R</font></p>
+<p class="western"><font face="MS Gothic, monospace">R = ((L +
+((((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) +
+((((T[((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) % 4]) * ((i +
+1) % 2)) + ((T[(((0x9E3779B9 * ((i + 1) // 2)) &amp; 0xffffffff) &gt;&gt;
+11) % 4]) * (i % 2))) &amp; 0xffffffff)) &amp; 0xffffffff) ^ (((((R
+&lt;&lt; 4) &amp; 0xffffffff) ^ (R &gt;&gt; 5)) + R) &amp;
+0xffffffff)) &amp; 0xffffffff)</font></p>
+<p class="western">To make it not use any conditionals, we use some
+tricks:</p>
+<p class="western">(ab)using mod 2 and multiplication: h<sub>i</sub>(x)
+= h<sub>even</sub>(x) * ((i + 1) mod 2) + h<sub>odd</sub>(x) * (i mod
+2)</p>
 <hr/>
 
-<p style="margin-top: 0.42cm; page-break-after: avoid"><font size="4" style="font-size: 14pt">Sources</font></p>
+<p class="western" style="margin-top: 0.42cm; page-break-after: avoid">
+<font size="4" style="font-size: 14pt">Sources</font></p>
 <p class="western">Wikipedia: <a href="https://en.wikipedia.org/wiki/XTEA">https://en.wikipedia.org/wiki/XTEA</a></p>
 <p class="western">Paper: <a href="https://www.cix.co.uk/~klockstone/xtea.pdf">https://www.cix.co.uk/~klockstone/xtea.pdf</a></p>
 <p class="western"><br/>
