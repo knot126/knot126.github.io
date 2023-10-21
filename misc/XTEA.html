@@ -5,11 +5,12 @@
 	<title>XTEA encryption algorithm description</title>
 	<meta name="generator" content="LibreOffice 7.5.4.2 (Windows)"/>
 	<meta name="created" content="2023-10-19T13:56:10.182000000"/>
-	<meta name="changed" content="2023-10-19T20:57:53.713000000"/>
+	<meta name="changed" content="2023-10-20T21:35:50.496000000"/>
 	<meta name="classification" content="XTEA encryption"/>
 	<meta name="description" content="My attempt to explain XTEA block cipher."/>
 	<meta name="keywords" content="XTEA, encryption, cipher, description, algorithm, block cipher"/>
 	<style type="text/css">
+		td p.western { font-family: "Verdana", sans-serif }
 		h1.western { font-family: "Verdana", sans-serif }
 		p.western { font-family: "Verdana", sans-serif }
 	</style>
@@ -20,21 +21,22 @@ this webpage is made in LibreOffice so it looks like crap, deal with
 it.</p>
 <hr/>
 
-<p class="western" style="margin-left: 2cm"><b>Important note about
-this</b></p>
+<p style="margin-top: 0.42cm; page-break-after: avoid"><font face="Verdana, sans-serif"><font size="4" style="font-size: 14pt">Some
+helpful context</font></font></p>
 <ol>
-	<li><p class="western">This isn’t meant to be something big and
-	serious and it hasn’t been properly reviewed.</p>
 	<li><p class="western">This is a very nonstandard way of describing
 	this cipher.</p>
 	<li><p class="western">All math operations are assumed to be (mod
-	2<sup>32</sup>) unless otherwise noted</p>
-	<li><p class="western"><font color="#c9211e"><b>It seems like there
-	is currently an error somewhere, but I have not found it yet.</b></font></p>
+	2<sup>32</sup>) – that is, unsigned 32-bit integers – unless
+	otherwise noted. Additionally, the byte order is not specified but
+	is usually little endian.</p>
+	<li><p class="western">This article was not fully reviewed, there
+	may be issues or inaccuracies.</p>
 </ol>
 <hr/>
 
-<p class="western">Firstly, note that XTEA is a fistel cipher that
+<p style="margin-top: 0.42cm; page-break-after: avoid"><font face="Verdana, sans-serif"><font size="4" style="font-size: 14pt">Description</font></font></p>
+<p class="western">Firstly, note that XTEA is a feistel cipher that
 uses addition instead of XOR for combining the mixing function with
 the left block.</p>
 <p class="western">So, a very abstract look at the cipher is:</p>
@@ -47,8 +49,7 @@ right side of each round and K is the round key for each round. (L<sub>0</sub>
 and R<sub>0</sub> are defined as the initial data block to encrypt.)</p>
 <p class="western">Each block is 64-bits and the key is 128-bits.
 They are treated as unsigned 32-bit words: 2 words for the block and
-4 for the key. The use of little or big endian is not specified in
-the original document, but can assumed to be little.</p>
+4 for the key.</p>
 <p class="western">Of course, the basic overview is not very helpful
 as the mixing (hash) function isn’t defined. So, let’s look at
 it:</p>
@@ -79,18 +80,33 @@ block cipher):</p>
 <p class="western">As you can see, this does mix the bits. And keep
 in mind that this is just an example – it only helps to visualise
 what’s really happening.</p>
-<p class="western">Of course, this isn’t all we need to understand
-the cipher. We also need to know key schedule.</p>
-<table width="100%" cellpadding="0" cellspacing="0" style="background: transparent">
-	<col width="256*"/>
+<p class="western">Now, we can look at the key schedule for XTEA. It
+is actually simple relative to key schedules in most other block
+ciphers, but .</p>
+<table width="100%" cellpadding="8" cellspacing="0" style="background: transparent">
+	<col width="2*"/>
 
-	<tr style="background: transparent">
-		<td width="100%" valign="top" bgcolor="#dddddd" style="background: #dddddd; border: none; padding: 0cm"><p class="western">
+	<col width="253*"/>
+
+	<col width="1*"/>
+
+	<tr style="background: transparent" valign="top">
+		<td width="1%" bgcolor="#dddddd" style="background: #dddddd; border: none; padding: 0cm"><p class="western">
+			<br/>
+
+			</p>
+		</td>
+		<td width="99%" bgcolor="#dddddd" style="background: #dddddd; border: none; padding: 0cm"><p class="western">
 			<b>Note</b>: I will describe the key schedule mathematically,
 			since that’s more interesting and not really done anywhere else,
 			but you can also have a much faster and somewhat more clear
 			implementation that’s describe elsewhere online (e.g. Wikipedia
 			and the original paper).</p>
+		</td>
+		<td width="0%" bgcolor="#dddddd" style="background: #dddddd; border: none; padding: 0cm"><p class="western">
+			<br/>
+
+			</p>
 		</td>
 	</tr>
 </table>
@@ -100,9 +116,10 @@ get an intermediate value S<sub>i</sub>, and then using this value to
 compute the final Ki using a even/odd round-dependent function h<sub>i</sub>(x).</p>
 <p class="western">The multiplied constant value and the function
 that multiplies it is:</p>
-<p class="western"><font face="MS Gothic, monospace">S</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">
-= m(i) * floor(2</font><sup><font face="MS Gothic, monospace">32</font></sup><font face="MS Gothic, monospace">
-/ Φ)</font> (where Φ is the golden ratio)</p>
+<p class="western"><font face="MS Gothic, monospace">S</font><sub><font face="MS Gothic, monospace">i</font></sub>
+<font face="MS Gothic, monospace">= m(i) * floor(2</font><sup><font face="MS Gothic, monospace">32</font></sup>
+<font face="MS Gothic, monospace">/ Φ)</font> (where Φ is the
+golden ratio)</p>
 <p class="western"><font face="MS Gothic, monospace">m(x) = floor((x
 + 1) / 2)</font></p>
 <p class="western">The constant number (floor(2<sup>32</sup> / Φ) =
@@ -132,11 +149,13 @@ value.</p>
 <p class="western"><font face="MS Gothic, monospace">K<sub>i</sub> =
 S<sub>i</sub> + h<sub>i</sub>(S<sub>i</sub>)</font></p>
 <p class="western"><font face="MS Gothic, monospace">h</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">(x)
-= T</font><sub><font face="MS Gothic, monospace">[x </font></sub><sub><font face="MS Gothic, monospace">mod</font></sub><sub><font face="MS Gothic, monospace">
-4]</font></sub> for even rounds (i mod 2 = 0)</p>
+= T</font><sub><font face="MS Gothic, monospace">[x mod</font></sub><sub>
+</sub><sub><font face="MS Gothic, monospace">4]</font></sub> for even
+rounds (i mod 2 = 0)</p>
 <p class="western"><font face="MS Gothic, monospace">h</font><sub><font face="MS Gothic, monospace">i</font></sub><font face="MS Gothic, monospace">(x)
-= T</font><sub><font face="MS Gothic, monospace">[(x &gt;&gt; 11) </font></sub><sub><font face="MS Gothic, monospace">mod</font></sub><sub><font face="MS Gothic, monospace">
-4]</font></sub> for odd rounds (i mod 2 = 1)</p>
+= T</font><sub><font face="MS Gothic, monospace">[(x &gt;&gt; 11) mod</font></sub><sub>
+</sub><sub><font face="MS Gothic, monospace">4]</font></sub> for odd
+rounds (i mod 2 = 1)</p>
 <p class="western">Note that h(x) is defined differently for odd and
 even rounds.</p>
 <p class="western">In the even round, we use the last two bits of Si
@@ -156,12 +175,20 @@ bits from the end.</p>
 <p class="western">At this point, we have basically described the
 entire cipher top down. The key schedule is probably the most complex
 and confusing part of the cipher, while the g(x) mixing function is
-pretty simple, and the rest is a normal fistel cipher.</p>
-<p class="western">From here, the final encryption is R<sub>63</sub>
-|| L<sub>63</sub>. (Note: I’m not sure if you need to swap L and R
-in this cipher, assuming that’s needed.)</p>
+pretty simple, and the rest is a normal feistel cipher.</p>
+<p class="western">From here, the final encryption is L<sub>63</sub>
+|| R<sub>63</sub> – making for 64 rounds. The purpose of having 64
+rounds is that XTEA uses a few really simple operations many times
+instead of many operations a few times. Also note that, unlike most
+feistel ciphers, L and R are usually swapped at decryption time in
+XTEA.</p>
+<p class="western">The authors feel it may be safe to do only 32
+rounds, but the recommended amount is 64 for a higher security
+margin.</p>
 <hr/>
 
+<p style="margin-top: 0.42cm; page-break-after: avoid"><font face="Verdana, sans-serif"><font size="4" style="font-size: 14pt">Fun
+in hell with maths</font></font></p>
 <p class="western">For fun, we can combine these into one large
 function for f(x, k). (I will switch to using python notation for
 this.)</p>
@@ -207,9 +234,7 @@ tricks:</p>
 <font size="4" style="font-size: 14pt">Sources</font></p>
 <p class="western">Wikipedia: <a href="https://en.wikipedia.org/wiki/XTEA">https://en.wikipedia.org/wiki/XTEA</a></p>
 <p class="western">Paper: <a href="https://www.cix.co.uk/~klockstone/xtea.pdf">https://www.cix.co.uk/~klockstone/xtea.pdf</a></p>
-<p class="western"><br/>
-<br/>
-
-</p>
+<p class="western">Anti-thanks to IronClad, which has test cases for
+Block TEA labelled as XTEA</p>
 </body>
 </html>
