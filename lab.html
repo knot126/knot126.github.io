@@ -18,46 +18,10 @@
 			<div id="main" class="main-section content-section">
 				<h1 id="games-and-modding">Smash Hit Lab Website</h1>
 				<a href="./res/labv3.png"><img src="./res/labv3.png" align="right" width="400px" style="border-radius: 0.325em; margin-left: 1em;"></img></a>
-				<p>The <b>Smash Hit Lab Website</b> &mdash; which is powered by Labbyware, a custom content system &mdash; <s>is</s> was a mod database, forum, news site and community centre for fans of the mobile game Smash Hit. This was probably the first widely usable project I have made moreso from scratch.</p>
-				<div class="card-section">
-					<h3><a href="https://smashhitlab.000webhostapp.com">Visit the Smash Hit Lab</a></h3>
-					<p>This is the website as it is currently running.</p>
-				</div>
-				
-				<h2>Features</h2>
-				<p>It had abilities to:</p>
-				<ul>
-					<li>Accounts: create accounts, log in, authentication, password resets</li>
-					<li>User pages: freeform user info, message wall, various actions and info, user blocking</li>
-					<li>Mod database: various CRUD actions, WIP inline editor</li>
-					<li>Comments and reviews on mod pages and articles, including moderation actions</li>
-					<li>Basic forum section</li>
-					<li>Notifications system: comments and mentions, staff custom announcements</li>
-					<li>News articles: staff-only editing, standard CRUD actions, privacy settings</li>
-					<li>General moderation: list, ban and delete users, update permissions and roles</li>
-					<li>Admin tools: settings, backup, site style editing, send notifications</li>
-				</ul>
-				
-				<h2>Code tour</h2>
-				<p>The backend was written in PHP, with no frameworks and not using a real database. I don't really like PHP as a language &mdash; I know that few actually do &mdash; but it's what most free webhosts seem to only provide, and it's still one of the fastest "make something from scratch" languages despite having so many quirks.</p>
-				<p>As for the database, it's a thin wrapper around the filesystem and JSON that functions like a document store database, mainly because I don't really enjoy SQL. For any large site, using JSON and plain files wouldn't work, but I think for a small site this isn't an issue.</p>
-				<p>My favourite part of the codebase is probably either the generic discussions system that handles reviews, comments and message walls or how sending a notification can be done by calling <code>notify($name, $title, $url)</code> (or <code>notify_many</code> or <code>notify_scan</code>). It should probably be behind some kind of event or message system (one is implemented and used elsewhere!), but ATM just calling it directly is fine. :)</p>
-				<p>I think I could have taken a bit more time at the start to improve code quality, however. The implementation of database was first and I think it's pretty nice because you can just do things like:</p>
-				<pre id="code0" class="code">$db = new Database("some_table_name");
-
-if ($db->has("my_object")) {
-	$obj = $db->load("my_object");
-}
-else {
-	$db->save("my_object", array("1" => "2", "3" => "4"));
-	$obj = $db->load("my_object");
-}</pre><script>format_section("code0");</script>
-				<p>But other places sometimes work with primitives where functions should probably exist for doing those things. For a long time, for example, there wasn't a nice function to echo out a form to the screen &mdash; which is another issue. I really should not have made the mistake of using <code>echo</code> directly and instead creating a <code>Page</code> class that has methods like <code>append($content)</code>, <code>set_title($title)</code>, etc. I'm working to fix this &mdash; the newer endpoints now use this system &mdash; and the codebase is under 10K lines right now, so I think it might not be too hard to do.</p>
-				<p>Security was something I have tried to consider when creating the site, though I know some things I didn't initially think about that would need some work.</p>
+				<p>The <b>Smash Hit Lab Website</b> &mdash; which is powered by Labbyware, a custom content system &mdash; is a combined news, forum, wiki and mods database website for the game <i>Smash Hit</i>, a game which I have been very involved with.</p>
+				<p><a href="https://smashhitlab.000webhostapp.com/lab/"><button class="button">Visit the Smash Hit Lab</button></a><a href="https://github.com/Smashing-Tech/Smash-Hit-Lab-Site"><button class="button secondary">Source code</button></a></p>
 				
 				<h2>Future plans</h2>
-				<p>On 31 July 2023, the Smash Hit Lab was taken offline for a few different reasons. Firstly, it wasn't very active anyways, only having about 15 registered users when it was taken offline. Second, I'm not a staff member for the Smash Hit Lab anymore and I did not want to host the site. And third, it's just not the best project to be doing.</p>
-				<p>I made the site source code <a href="https://github.com/Smashing-Tech/Smash-Hit-Lab-Site">available on github</a> after the site was shut down. While I find it unlikely that anyone would want to add to the site, I feel a community site like this should be open source.</p>
 				<p>In the future, I would like to expand on the idea of making "community creation software." This kind of thing doesn't really exist today. Think of an exprience similar to <a href="https://fandom.com/">Fandom</a>, but better integrated becuase it isn't community platform slapped on top of MediaWiki. It has tools needed to form a community, like a place for discussions, a wiki for keeping information, a blog or news section for staff, messages and maybe more in one place.</p>
 			</div>
 			<div id="main" class="main-section disclaimer-section">

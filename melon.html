@@ -17,10 +17,11 @@
 			<script>main();</script>
 			<div id="main" class="main-section content-section">
 				<h1>Melon</h1>
-				<p><b>Melon Core Library</b> is a software framework (or core library) specifically focused on being simple and as well designed as possible.</p>
-				<p>This includes generic APIs for storage with basic access controls, graphical windowing (WIP) and multithreading (WIP); type generic variable containers, bitmaps (and soon vector graphics and 3D scenes), logging, random number generation, time utilities, strings, basic mathematics and 2D and 3D rendering (WIP) with even more coming soon.</p>
-				<p>Currently, melon is being used in the <a href="./trestle.html">Trestle simulation and games engine</a>.</p>
+				<p><b>Melon Core Library</b> is a core library or software framework that tries to balance being simple, well designed and easy to use. It's intended to be a replacement for the C standard library that respects programmers more.</p>
+				<p>It also has some bias to games programming, though I'm not completely focused on that since I think games are often an excuse to make a buggy mess.</p>
+				<p><a href="https://github.com/knot126/Melon"><button class="button">View source code on GitHub</button></a></p>
 				
+				<!--
 				<h2>Style and design</h2>
 				<p>I don't really like to commit to a single paradigm or philosiphy becuase it's mostly a bad idea. Why should you commit to "agile" and "worse is better" at the start when you barely have an idea of the project and your team? The best design will vary by project, purpose, people and many other factors.</p>
 				
@@ -40,13 +41,33 @@
 				</ul>
 				<p>Of course, this is just how I feel about the software that I design. It's attached to the kinds of projects I've done and it has a "feeling" assocaited with my projects. If you have something different and it works well for you, then that's okay! Diversity is good and might even lead to improvements for everyone.</p>
 				<p>I should also note: this isn't absolute and I don't hold myself to it. You shouldn't either! I can change and you can be different. Design software the way you like.</p>
+				-->
 				
-				<h2>What are we planning?</h2>
-				<p>A large part of the core library is that it should implement most things without being invasive. The best way we can put it into words is that it should provide the <a href="https://upload.wikimedia.org/wikipedia/commons/3/32/Lego_Color_Bricks.jpg">building blocks</a> so that someone who knows what everything means can simpily put them together at a very high level.</p>
-				<p>To help with this, we want to support things that make C programming "like the web" where there are readily-available, mostly easy to use APIs for everything.</p>
-				<p>Right now, we are planning modules for <a href="https://en.wikipedia.org/wiki/Computer_algebra_system">computer algebra systems</a>, access to <a href="https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units">GPU compute</a>, advanced geometry and 3D scene access, (mathematical) <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graphs</a>, a resource manager, a main loop handler, cryptography things (cryptographic primitives; encryption and signing), networking (sockets) support with HTTP helpers, <a href="https://en.wikipedia.org/wiki/Vector_graphics">vector graphics</a> and compression algorithms, with everything essentially written from scratch.</p>
-				<p>That is already quite a lot, and since it is meant to be a proper educational exprience, it may take a long time or be flaky in some areas, but that is okay!</p>
+				<h2>What is the scope?</h2>
+				<p>I want Melon to be like the Web APIs for programming in C. For me, this includes things like:</p>
+				<ul>
+					<li>Logging</li>
+					<li>Sandboxed file and storage API ^</li>
+					<li>Tables (aka dictionaries or assocative array) ^</li>
+					<li>Time utilities (e.g. hiresTimeInSec())</li>
+					<li>Windowing support</li>
+					<li>Threading helper functions ^</li>
+					<li>Pseudorandom number generation</li>
+					<li>2D and 3D graphics drawing *</li>
+					<li><a href="https://en.wikipedia.org/wiki/Vector_graphics">Vector graphics</a> *</li>
+					<li>Compression algorithms *</li>
+					<li><a href="https://en.wikipedia.org/wiki/General-purpose_computing_on_graphics_processing_units">GPU compute</a> *</li>
+					<li>Geometry, shape and scene APIs *</li>
+					<li><a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">Graphs</a></li>
+					<li>Cryptography wraper (delegated to libsodium or similar) ^</li>
+					<li>Networking support with HTTP helpers ^</li>
+					<li><a href="https://en.wikipedia.org/wiki/Computer_algebra_system">Computer algebra system</a> *</li>
+				</ul>
+				<p>* = There is currently no module to handle this.</p>
+				<p>^ = The module for this isn't complete.</p>
+				<p>That is, of course, quite a lot, and since it is meant to be a proper educational exprience, it may take a long time or be flaky in some areas, but that is okay!</p>
 				
+				<!--
 				<h4>But doesn't building blocks just encourage people to not understand what lies underneath the abstraction and make programmers clash blocks until they work?</h4>
 				<p>Well, sometimes yes. For everyone <i>except for us</i>. And we're writing this library for us, and not anyone else. :)</p>
 				<p>Of course, you are still welcome to use it anywhere you like.</p>
@@ -56,6 +77,7 @@
 					<h3><a href="https://github.com/knot126/Melon">View on Github</a></h3>
 					<p>View the Melon source code on Github!</p>
 				</div>
+				-->
 			</div>
 			<div id="main" class="main-section disclaimer-section">
 				<p>This website is Copyright &#169; 2020 &mdash; 2023 Knot126</p>

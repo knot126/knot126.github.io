@@ -14,6 +14,7 @@
 	margin: 0;
 	padding: 0;
 	border: none;
+	text-rendering: optimizeLegibility;
 	
 	--base-colour: #019ab9;
 	--base-colour-transluscent: #02b0d330;
