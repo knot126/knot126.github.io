@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url(nimbus-sans.css);
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /*
  * Making things default and variables
@@ -14,13 +14,16 @@
 	margin: 0;
 	padding: 0;
 	border: none;
+	text-rendering: optimizeLegibility;
 	
 /* 	--base-colour: #0057b3; */
 	--base-colour: #00aad4;
 	--base-colour-transluscent: #00aad430;
 	--base-colour-red: #e2551d;
 	--base-colour-red-transluscent: #e2551d30;
-	--base-colour-green: #34b58a;
+/* 	--base-colour-green: #34b58a; */
+	--base-colour-green: #71c837;
+	--base-colour-green-dark: #529127;
 	--base-colour-green-transluscent: #34b58a30;
 	--base-colour-text: #222;
 	--base-colour-text-ontop: #fff;
@@ -30,9 +33,11 @@
 	--base-colour-panel-background-hover: #fff;
 	--base-colour-gradient-top: #0000;
 	--base-colour-gradient-bottom: #0000;
-	--background-location: url("../common/bluerays.jpg");
-	--title-font: "Nimbus Sans", sans-serif;
-	--body-font: "Nimbus Sans", sans-serif;
+	--trestle-colour: #aa5e2f;
+	--dragonfruit-colour: #e8171e;
+	--background-location: url("../common/bluerays.svg");
+	--title-font: "Barlow", sans-serif;
+	--body-font: "Barlow", sans-serif;
 }
 
 /*@media (prefers-color-scheme: dark) {
@@ -89,12 +94,12 @@ p, li, figcaption {
 	line-height: 1.65;
 }
 
-h1 { font-size: 32pt; font-weight: 700; }
-h2 { font-size: 26pt; font-weight: 700; text-transform: uppercase; }
+h1 { font-size: 36pt; font-weight: 700; }
+h2 { font-size: 36pt; font-weight: 700; text-transform: uppercase; }
 h3 { font-size: 22pt; }
 h4 { font-size: 16pt; }
 
-p, li, figcaption { font-size: 12pt; }
+p, li, figcaption { font-size: 14pt; }
 li { margin-left: 2em; }
 
 a {
@@ -146,7 +151,7 @@ figcaption {
  */
 
 .page-container {
-	max-width: 57.5em;
+	max-width: 62.5em;
 	margin: auto;
 }
 
@@ -159,7 +164,7 @@ figcaption {
 
 .content-section {
 	background: var(--base-colour-background);
-	border: 1px solid var(--base-colour-background-border);
+	border-radius: 0.25em;
 }
 
 .content-section-inner {
@@ -167,7 +172,8 @@ figcaption {
 }
 
 .navigation-section {
-	background: var(--base-colour);
+/* 	background: var(--base-colour); */
+	background-image: linear-gradient(to right, var(--base-colour), var(--base-colour-green));
 	padding: 1em 1.75em;
 	margin-top: 0;
 	margin-bottom: 0;
@@ -232,17 +238,21 @@ figcaption {
 }
 
 .learn-more-button {
-	background: transparent;
+	background: var(--base-colour-green);
 	border: none;
-	padding: 0.75em;
-	color: var(--base-colour);
+	border-radius: 0.25em;
+	padding: 0.75em 1.25em;
+	color: var(--base-colour-text-ontop);
+	box-shadow: 0 2px 1px #0004;
 	font-family: var(--body-font);
 	font-size: 12pt;
 	text-transform: uppercase;
+	cursor: pointer;
+	transition: filter 0.2s;
 }
 
 .learn-more-button:hover {
-	background: var(--base-colour-transluscent);
+	filter: brightness(90%);
 }
 
 /*
@@ -255,3 +265,10 @@ body {
 	background-attachment: fixed;
 	background-position: bottom;
 }
+
+/**
+ * Simple colour text
+ */
+
+dg-blue { color: var(--base-colour) }
+dg-green { color: var(--base-colour-green); }
