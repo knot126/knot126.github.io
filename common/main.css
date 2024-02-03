@@ -46,7 +46,7 @@
 		--base-colour-panel-background-hover: #333;
 		--base-colour-panel-border-top: #666;
 		--base-colour-panel-border-bottom: #000;
-		--background-location: url("../common/dark.jpeg");
+		--background-location: url("../common/sunset_subtle_dark.jpg");
 	}
 }
 
@@ -379,4 +379,9 @@ body {
 
 .me-quote {
 	font-size: 16pt;
+}
+
+.me-subtle-link {
+	text-decoration-line: underline;
+	color: var(--base-colour-text);
 }

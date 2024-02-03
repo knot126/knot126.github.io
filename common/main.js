@@ -173,6 +173,10 @@ function format_codes() {
 	}
 }
 
+function setup_copyright() {
+	document.getElementById("copyright").innerHTML = "This website is Copyright © 2020 — 2024 Knot126";
+}
+
 var gQuotes = [
 	"I really like Tails.",
 	"best foxxo ever :3",
@@ -185,7 +189,7 @@ var gQuotes = [
 	"You've been rickrolled B)",
 	"Web development is not my passion",
 	"TAILS!",
-	"That flag is really nice :)",
+	"The flag is really nice :)",
 	"MISSING STRING",
 	"var foxxo = good;",
 	"100% Money Back True",
@@ -200,6 +204,8 @@ var gQuotes = [
 	"Miles &quot;Tails&quot; Prower",
 	"Recently used tags: #tails",
 	"It's magic, Joel, it's magic",
+	"There are foxes, and then there are everything else.",
+	"its someone with a tails the fox pfp",
 ];
 
 function randint(max) {
