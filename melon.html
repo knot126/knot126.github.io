@@ -20,29 +20,6 @@
 				<p><b>Melon Core Library</b> is a core library or software framework that tries to balance being simple, well designed and easy to use. It's intended to be a replacement for the C standard library that respects programmers more.</p>
 				<p>It also has some bias to games programming, though I'm not completely focused on that since I think games are often an excuse to make a buggy mess.</p>
 				<p><a href="https://github.com/knot126/Melon"><button class="button">View source code on GitHub</button></a></p>
-				
-				<!--
-				<h2>Style and design</h2>
-				<p>I don't really like to commit to a single paradigm or philosiphy becuase it's mostly a bad idea. Why should you commit to "agile" and "worse is better" at the start when you barely have an idea of the project and your team? The best design will vary by project, purpose, people and many other factors.</p>
-				
-				<div class="box-section info">
-					<p><b>Should a video game and nuclear power plant control software should use the same design principles?</b> I think they should not. With video games, it won't matter if you have a bug and it's not safety critical. In the other situation you might kill some people.</p>
-					<p>Of course nuclear power plants (probably) have failsafes, but still, I imagine making swiss cheese with less holes is more important for safety crtitcal things than for video games.</p>
-					<p>And at that I do think they can borrow some things from each other. While they are not the same situation, making abstract statements and observations can be helpful as long as you clearly know their constraints &mdash; which most people fail to realise.</p>
-					<p>So overall I don't think there is one design that works well for everything. If there was Linux would be the only operating system ever used and we would only ever have one hashing function for everything.</p>
-				</div>
-				
-				<p>That being said I think the <a href="https://en.wikipedia.org/wiki/Worse_is_better#Characteristics">MIT vs Worse is Better argument</a> is important for melon as a library, and I have commentary on it:</p>
-				<ul>
-					<li><b>Simplicity</b>: I really disagree with both. I think it's important to make the interface <i>intuitive</i>. It should feel natrual to use &mdash; after all, the point of an interface is for people to use it! This generally involves striking a balance between making a simple interface and a simple implementation.</li>
-					<li><b>Correctness</b>: I personally prefer projects that favour the MIT approach, but this depends on the situation and what you're doing. Correctness is nice, but not always needed and is sometimes not possible within a given time frame. Additionally, keep in mind that I use "correctness" to mean "correct for my given constraints and what I want"; there is no "correct" without being relative to something. Whatever you do, clearly documenting and communicating the level of correctness and percision is going to be the most helpful thing you can do.</li>
-					<li><b>Consistency</b>: Consistency is not something I feel qualified to speak about much. It's nice to make things more consistent, but a design that favours overall consistency over intuition will feel bland and unnatrual. At the same time, don't be like PHP and swap the haystack and needle between array and string functions. It can be fun in a way, but that's just largely annoying when you try to use it.</li>
-					<li><b>Completeness</b>: I think it's sometimes okay to say "we won't handle an edge case" if you really don't need to, but don't underestimate the usefullness of quality of life features. The lack of something complete might lead to harder to understand code just to implement something that would be more intuitive if things were more complete earlier.</li>
-				</ul>
-				<p>Of course, this is just how I feel about the software that I design. It's attached to the kinds of projects I've done and it has a "feeling" assocaited with my projects. If you have something different and it works well for you, then that's okay! Diversity is good and might even lead to improvements for everyone.</p>
-				<p>I should also note: this isn't absolute and I don't hold myself to it. You shouldn't either! I can change and you can be different. Design software the way you like.</p>
-				-->
-				
 				<h2>What is the scope?</h2>
 				<p>I want Melon to be like the Web APIs for programming in C. For me, this includes things like:</p>
 				<ul>
@@ -66,21 +43,10 @@
 				<p>* = There is currently no module to handle this.</p>
 				<p>^ = The module for this isn't complete.</p>
 				<p>That is, of course, quite a lot, and since it is meant to be a proper educational exprience, it may take a long time or be flaky in some areas, but that is okay!</p>
-				
-				<!--
-				<h4>But doesn't building blocks just encourage people to not understand what lies underneath the abstraction and make programmers clash blocks until they work?</h4>
-				<p>Well, sometimes yes. For everyone <i>except for us</i>. And we're writing this library for us, and not anyone else. :)</p>
-				<p>Of course, you are still welcome to use it anywhere you like.</p>
-				
-				<h2>Source code</h2>
-				<div class="card-section">
-					<h3><a href="https://github.com/knot126/Melon">View on Github</a></h3>
-					<p>View the Melon source code on Github!</p>
-				</div>
-				-->
 			</div>
 			<div id="main" class="main-section disclaimer-section">
-				<p>This website is Copyright &#169; 2020 &mdash; 2023 Knot126</p>
+				<p id="copyright">This website is Copyright &#169; Knot126</p>
+				<script>setup_copyright();</script>
 			</div>
 		</div>
 	</body>
