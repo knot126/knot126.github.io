@@ -194,11 +194,13 @@ var gQuotes = [
 	"var foxxo = good;",
 	"100% Money Back True",
 	"exists (somehow)",
-	"Aim to hit (but no really ???)",
+	"Smash Hit (2014)",
+	"Aim to hit",
 	"I do not work for shit stain studios.",
 	"Hold gently, like hamburger.",
 	"AWOOO!",
 	"FIRE IN THE HOLE!",
+	"Tails Adventure (1995)",
 	"Earth is like Hell: it exists.",
 	"Tails",
 	"Miles &quot;Tails&quot; Prower",
@@ -206,6 +208,12 @@ var gQuotes = [
 	"It's magic, Joel, it's magic",
 	"There are foxes, and then there are everything else.",
 	"its someone with a tails the fox pfp",
+	"With the power of the prism, there is nothing I can't do.",
+	"it's the grim",
+	"Used to be a dragon",
+	"Not a dragon anymore",
+	"Too much for little time",
+	"University my arse",
 ];
 
 function randint(max) {
