@@ -172,3 +172,41 @@ function format_codes() {
 		i += 1;
 	}
 }
+
+var gQuotes = [
+	"I really like Tails.",
+	"best foxxo ever :3",
+	"The answer is maybe...",
+	"Hello, world!",
+	"I am PRO GAMER (0% true)",
+	"These quotes are random!",
+	"Put something embarassing here.",
+	"Random Song 09 - RobTop",
+	"You've been rickrolled B)",
+	"Web development is not my passion",
+	"TAILS!",
+	"That flag is really nice :)",
+	"MISSING STRING",
+	"var foxxo = good;",
+	"100% Money Back True",
+	"exists (somehow)",
+	"Aim to hit (but no really ???)",
+	"I do not work for shit stain studios.",
+	"Hold gently, like hamburger.",
+	"AWOOO!",
+	"FIRE IN THE HOLE!",
+	"Earth is like Hell: it exists.",
+	"Tails",
+	"Miles &quot;Tails&quot; Prower",
+	"Recently used tags: #tails",
+	"It's magic, Joel, it's magic",
+];
+
+function randint(max) {
+	return Math.floor(Math.random() * max);
+}
+
+function me_randomise_quote() {
+	let e = document.getElementById("me-random-quote");
+	e.innerHTML = gQuotes[randint(gQuotes.length)];
+}
