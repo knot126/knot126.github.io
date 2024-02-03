@@ -25,7 +25,7 @@ function setup_sidebar() {
 }
 
 function main() {
-	download_sidebar();
+	//download_sidebar();
 }
 
 function chr(s) {
