@@ -185,35 +185,33 @@ var gQuotes = [
 	"I am PRO GAMER (0% true)",
 	"These quotes are random!",
 	"Put something embarassing here.",
-	"Random Song 09 - RobTop",
 	"You've been rickrolled B)",
-	"Web development is not my passion",
 	"TAILS!",
-	"The flag is really nice :)",
+	"The aroace flag is really nice :)",
+	"🖤🩶🤍💜",
 	"MISSING STRING",
-	"var foxxo = good;",
 	"100% Money Back True",
-	"exists (somehow)",
-	"Smash Hit (2014)",
-	"Aim to hit",
+	"exists (impossible)",
 	"I do not work for shit stain studios.",
 	"Hold gently, like hamburger.",
 	"AWOOO!",
 	"FIRE IN THE HOLE!",
-	"Tails Adventure (1995)",
 	"Earth is like Hell: it exists.",
-	"Tails",
+	"I really like Tails",
 	"Miles &quot;Tails&quot; Prower",
 	"Recently used tags: #tails",
 	"It's magic, Joel, it's magic",
-	"There are foxes, and then there are everything else.",
-	"its someone with a tails the fox pfp",
-	"With the power of the prism, there is nothing I can't do.",
-	"it's the grim",
+	"There are foxes, and then there is everything else.",
+	"its someone with a tails the fox pfp ahh",
+	"I think Nine was cool :D",
 	"Used to be a dragon",
 	"Not a dragon anymore",
 	"Too much for little time",
-	"University my arse",
+	"Has tried to learn Lisp at least once",
+	"University? my arse!",
+	"<code>var foxxo = good;</code>",
+	"<code>messageNotUnderstood:</code>",
+	"<code>(defun age () (* 4 2 0))</code>",
 ];
 
 function randint(max) {
@@ -222,5 +220,6 @@ function randint(max) {
 
 function me_randomise_quote() {
 	let e = document.getElementById("me-random-quote");
-	e.innerHTML = gQuotes[randint(gQuotes.length)];
+	e.innerHTML = `<img src="common/refresh.svg" style="position: absolute;" onclick="me_randomise_quote()" /><span style="padding-right: calc(32px + 0.5em);"></span>`;
+	e.innerHTML += gQuotes[randint(gQuotes.length)];
 }

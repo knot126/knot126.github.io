@@ -379,6 +379,7 @@ body {
 
 .me-quote {
 	font-size: 16pt;
+	cursor: pointer;
 }
 
 .me-subtle-link {
