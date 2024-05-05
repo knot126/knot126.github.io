@@ -1,92 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-	<head>
-		<meta charset="utf-8">
-		<title>Generate a waggy licence</title>
-	</head>
-	<body>
-		<h1>Generate a waggy licence</h1>
-		<div>Beeg name: <input id="BEEG" type="text" placeholder="big name" oninput="update()" /></div>
-		<div>Smol name: <input id="SMOL" type="text" placeholder="smol name" oninput="update()" /></div>
-		<div>ID number: <input id="ID" type="text" placeholder="id number" oninput="update()" /></div>
-		<div>Issue date: <input id="FIRST" type="text" placeholder="issue date" oninput="update()" /></div>
-		<div>Expire date: <input id="EXPIRE" type="text" placeholder="expire date" oninput="update()" /></div>
-		<div>Profile image: <input id="IMG" type="file" oninput="update()" /></div>
-<!-- 		<img id="testout"/> -->
-		<script>
-		var BASE_DATA = "";
-		
-		function encodeSvg(d) {
-			return "data:image/svg+xml;base64," + btoa(d);
-		}
-		
-		async function loadImageData() {
-			let response = await (await fetch("./ToWag.svg")).text();
-			BASE_DATA = response;
-			update();
-		}
-		loadImageData();
-		
-		// https://thecompetentdev.com/weeklyjstips/tips/65_promisify_filereader/
-		const loadFileAsDataURL = (blob) => new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.onload = (event) => resolve(event.target.result);
-			reader.onerror = reject;
-			reader.readAsDataURL(blob);
-		});
-		
-		async function loadPicture() {
-			let files = document.getElementById("IMG").files;
-			
-			if (files.length > 0) {
-				return await loadFileAsDataURL(files[0]);
-			}
-			else {
-				return "";
-			}
-		}
-		
-		async function generateSvg() {
-			let ld = BASE_DATA;
-			
-			for (f of ["BEEG", "SMOL", "ID", "FIRST", "EXPIRE"]) {
-				ld = ld.replaceAll(`\$\$${f}\$\$`, document.getElementById(f).value.replaceAll("&", "&amp;"));
-			}
-			
-			ld = ld.replaceAll("$$IMG$$", await loadPicture());
-			
-			return ld;
-		}
-		
-		async function update() {
-			document.getElementById("preview-img").src = encodeSvg(await generateSvg());
-		}
-		
-		function renderSvg(img) {
-			let canvas = document.createElement("canvas");
-			canvas.width = img.width;
-			canvas.height = img.height;
-			canvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
-			return canvas.toDataURL("image/png", 1.0);
-		}
-		
-		function downloadDataURL(content, filename) {
-			let link = document.createElement("a");
-			link.href = content;
-			link.download = filename;
-			link.click();
-		}
-		
-		function downloadPng() {
-			let data = renderSvg(document.getElementById("preview-img"));
-			downloadDataURL(data, `${document.getElementById("BEEG").value}'s waggy licence.png`);
-		}
-		</script>
-		<div id="preview">
-			<img id="preview-img" height="500px" src="" />
-		</div>
-		<div>
-			<button onclick="downloadPng()">Download as PNG</button>
-		</div>
-	</body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=./wag/index.html" />
+    <title>Redirect!</title>
+  </head>
+  <body>
+    <p>Redirecting to the new waggy generator...</p>
+  </body>
 </html>

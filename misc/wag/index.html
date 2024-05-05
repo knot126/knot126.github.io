@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8">
+		<title>Generate a waggy licence</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&amp;display=swap" rel="stylesheet">
+		<style>
+			:root {
+				--font: "Sen", sans-serif;
+				--p-size: 12pt;
+			}
+			
+			p, li, h1, h2, h3, h4 {
+				font-family: var(--font);
+				margin: 0;
+				margin-bottom: 10px;
+			}
+			
+			p {
+				font-size: var(--p-size);
+			}
+			
+			input[type=text], select {
+				border: none;
+				border-radius: 4px;
+				font-family: var(--font);
+				font-size: var(--p-size);
+				padding: 8px 12px;
+				background: #eee;
+				width: 90%;
+			}
+			
+			input[type=text]:focus, select:focus {
+				background: #ddd;
+			}
+			
+			.button {
+				border: none;
+				border-radius: 4px;
+				font-family: var(--font);
+				font-size: var(--p-size);
+				padding: 8px 12px;
+				color: #fff;
+				background-image: linear-gradient(0.125turn, #ffb50a, #ff6d0c);
+				cursor: pointer;
+			}
+			
+			::selection {
+				background: #0055ff40;
+			}
+			
+			@media (min-width: 1000px) {
+				.main-grid {
+					display: grid;
+					grid-template-columns: 500px auto;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main-grid">
+			<div style="grid-column: 1;">
+				<h1>Generate a waggy licence</h1>
+				<div><p>Type:<br/>
+					<select id="TYPE" oninput="update()">
+						<option value="Classic.svg">Classic</option>
+						<option value="ClassicR.svg">Classic (right)</option>
+						<option value="Mangey.svg">Mangey</option>
+					</select>
+				</p></div>
+				<div><p>Beeg name:<br/><input id="BEEG" type="text" placeholder="big name" oninput="update()" /></p></div>
+				<div><p>Smol name:<br/><input id="SMOL" type="text" placeholder="smol name" oninput="update()" /></p></div>
+				<div><p>ID number:<br/><input id="ID" type="text" placeholder="id number" oninput="update()" /></p></div>
+				<div><p>Issue date:<br/><input id="FIRST" type="text" placeholder="issue date" oninput="update()" /></p></div>
+				<div><p>Expire date:<br/><input id="EXPIRE" type="text" placeholder="expire date" oninput="update()" /></p></div>
+				<div><p>Profile image:<br/><input id="IMG" type="file" oninput="update()" /></p></div>
+				<div>
+					<button class="button" onclick="downloadPng()">Download as PNG</button>
+				</div>
+			</div>
+			<div style="grid-column: 2;">
+				<div id="preview">
+					<img id="preview-img" style="width: 500px" src="" />
+				</div>
+			</div>
+		</div>
+		
+		<script>
+		var BASE_DATA = "";
+		var CURRENT_BASE_DATA = "Classic.svg";
+		
+		function encodeSvg(d) {
+			return "data:image/svg+xml;base64," + btoa(d);
+		}
+		
+		async function loadImageData(name) {
+			let response = await (await fetch(`./${name}`)).text();
+			BASE_DATA = response;
+			update();
+		}
+		loadImageData(CURRENT_BASE_DATA);
+		
+		// https://thecompetentdev.com/weeklyjstips/tips/65_promisify_filereader/
+		const loadFileAsDataURL = (blob) => new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onload = (event) => resolve(event.target.result);
+			reader.onerror = reject;
+			reader.readAsDataURL(blob);
+		});
+		
+		async function loadPicture() {
+			let files = document.getElementById("IMG").files;
+			
+			if (files.length > 0) {
+				return await loadFileAsDataURL(files[0]);
+			}
+			else {
+				return "";
+			}
+		}
+		
+		async function generateSvg() {
+			if (CURRENT_BASE_DATA != document.getElementById("TYPE").value) {
+				CURRENT_BASE_DATA = document.getElementById("TYPE").value;
+				loadImageData(CURRENT_BASE_DATA);
+			}
+			
+			let ld = BASE_DATA;
+			
+			for (f of ["BEEG", "SMOL", "ID", "FIRST", "EXPIRE"]) {
+				ld = ld.replaceAll(`\$\$${f}\$\$`, document.getElementById(f).value.replaceAll("&", "&amp;"));
+			}
+			
+			ld = ld.replaceAll("$$IMG$$", await loadPicture());
+			
+			return ld;
+		}
+		
+		async function update() {
+			document.getElementById("preview-img").src = encodeSvg(await generateSvg());
+		}
+		
+		function renderSvg(img) {
+			let canvas = document.createElement("canvas");
+			canvas.width = img.width;
+			canvas.height = img.height;
+			canvas.getContext("2d").drawImage(img, 0, 0, img.width, img.height);
+			return canvas.toDataURL("image/png", 1.0);
+		}
+		
+		function downloadDataURL(content, filename) {
+			let link = document.createElement("a");
+			link.href = content;
+			link.download = filename;
+			link.click();
+		}
+		
+		function downloadPng() {
+			let data = renderSvg(document.getElementById("preview-img"));
+			downloadDataURL(data, `${document.getElementById("BEEG").value}'s waggy licence.png`);
+		}
+		</script>
+	</body>
+</html>
