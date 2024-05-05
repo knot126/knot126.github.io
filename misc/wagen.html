@@ -2,15 +2,16 @@
 <html lang="en-GB">
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>Generate a waggy licence</title>
 	</head>
 	<body>
-		<div><input id="BEEG" type="text" placeholder="big name" oninput="update()" /></div>
-		<div><input id="SMOL" type="text" placeholder="smol name" oninput="update()" /></div>
-		<div><input id="ID" type="text" placeholder="id number" oninput="update()" /></div>
-		<div><input id="FIRST" type="text" placeholder="issue date" oninput="update()" /></div>
-		<div><input id="EXPIRE" type="text" placeholder="expire date" oninput="update()" /></div>
-		<div><input id="IMG" type="file" oninput="update()" /></div>
+		<h1>Generate a waggy licence</h1>
+		<div>Beeg name: <input id="BEEG" type="text" placeholder="big name" oninput="update()" /></div>
+		<div>Smol name: <input id="SMOL" type="text" placeholder="smol name" oninput="update()" /></div>
+		<div>ID number: <input id="ID" type="text" placeholder="id number" oninput="update()" /></div>
+		<div>Issue date: <input id="FIRST" type="text" placeholder="issue date" oninput="update()" /></div>
+		<div>Expire date: <input id="EXPIRE" type="text" placeholder="expire date" oninput="update()" /></div>
+		<div>Profile image: <input id="IMG" type="file" oninput="update()" /></div>
 <!-- 		<img id="testout"/> -->
 		<script>
 		var BASE_DATA = "";
@@ -78,7 +79,7 @@
 		
 		function downloadPng() {
 			let data = renderSvg(document.getElementById("preview-img"));
-			downloadDataURL(data, "'s waggy id.png");
+			downloadDataURL(data, `${document.getElementById("BEEG").value}'s waggy licence.png`);
 		}
 		</script>
 		<div id="preview">
