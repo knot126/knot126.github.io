@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Lato:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Sen:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
 
 /*
  * Making things default and variables
@@ -24,29 +24,29 @@
 	--base-colour-green: #34b58a;
 	--base-colour-green-transluscent: #34b58a30;
 	--base-colour-text: #000;
-	--base-colour-background: #fff;
+	--base-colour-background: #fffa;
 	--base-colour-panel-background: #fff4;
 	--base-colour-panel-background-hover: #fff;
 	--base-colour-panel-border-top: #fffa;
 	--base-colour-panel-border-bottom: #ccca;
 	--base-colour-gradient-top: #f0f0f070;
 	--base-colour-gradient-bottom: #f2f2f2c0;
-	--background-location: url("../common/sunset_subtle.svg");
+	--background-location: url("../common/light.jpeg");
 	--title-font: "Kumbh Sans", "Kumbh Sans", sans-serif;
-	--body-font: "Kumbh Sans", sans-serif;
+	--body-font: "Sen", "Kumbh Sans", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
 	* {
 		--base-colour-text: #fff;
-		--base-colour-background: #222;
+		--base-colour-background: #222a;
 		--base-colour-gradient-top: #2f2f2f70;
 		--base-colour-gradient-bottom: #0f0f0fc0;
 		--base-colour-panel-background: #2224;
 		--base-colour-panel-background-hover: #333;
 		--base-colour-panel-border-top: #666;
 		--base-colour-panel-border-bottom: #000;
-		--background-location: url("../common/sunset_subtle_dark.jpg");
+		--background-location: url("../common/light.jpeg");
 	}
 }
 
@@ -71,7 +71,7 @@
  * Headers and other text related things
  */
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, summary, h4, h5, h6 {
 	font-family: var(--title-font);
 	margin-bottom: 0.5em;
 }
@@ -80,7 +80,7 @@ h1 {
 	padding-bottom: 0.25em;
 }
 
-h2, h3, h4, h5, h6 {
+h2, h3, summary, h4, h5, h6 {
 	padding-top: 0.75em;
 }
 
@@ -93,7 +93,7 @@ p, li, figcaption {
 h1 { font-size: 36pt; font-weight: 600; }
 h2 { font-size: 30pt; font-weight: 600; }
 h3 { font-size: 24pt; }
-h4 { font-size: 18pt; }
+h4, summary { font-size: 18pt; }
 
 p, li, figcaption { font-size: 13pt; }
 li { margin-left: 2em; }
@@ -167,7 +167,7 @@ figcaption {
 }
 
 .content-section {
-/* 	backdrop-filter: blur(1.5em); */
+/* 	backdrop-filter: blur(0.5em); */
 	background: var(--base-colour-background);
 	box-shadow: 0em 0.5em 2em #00000055;
 }
