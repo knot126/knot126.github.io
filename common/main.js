@@ -12,6 +12,14 @@ function request(method, url, body, handler) {
 	xhr.send(body);
 }
 
+function getParam(named) {
+	return (new URLSearchParams(document.location.search)).get(named);
+}
+
+function hasParam(named) {
+	return (new URLSearchParams(document.location.search)).has(named);
+}
+
 function download_sidebar() {
 	request("GET", "./navbar.html", "", setup_sidebar);
 }
@@ -23,7 +31,62 @@ function setup_sidebar() {
 	}
 	else if (this.readyState == 4) {
 		let navbar = document.getElementById("navbar");
-		navbar.innerHTML = "<i>Failed to load navbar.</i>";
+		navbar.innerHTML = "<p><i>Failed to load navbar.</i></p>";
+	}
+}
+
+/** BLOG INDEX **/
+function download_blog_index() {
+	request("GET", "./blog.json", "", setup_blog_index);
+}
+
+function setup_blog_index() {
+	let index = document.getElementById("blog-index");
+	
+	if (this.readyState == 4 && this.status == 200) {
+		let entries = JSON.parse(this.responseText);
+		
+		index.innerHTML = "<h1>Blog</h1>";
+		
+		for (let entry of entries) {
+			index.innerHTML += `<div class="card-section">
+				<h3><a href="${entry.url}">${entry.title}</a></h3>
+				<p>${entry.date}</p>
+				<p>${entry.desc}</p>
+			</div>`;
+		}
+	}
+	else if (this.readyState == 4) {
+		index.innerHTML = "<p><i>Failed to load blog posts!</i></p>";
+	}
+}
+
+/** BLOG PAGE **/
+function download_blog_page() {
+	request("GET", "./blog/" + getParam("page"), "", setup_blog_page);
+}
+
+function setup_blog_page() {
+	let sect = document.getElementById("main");
+	
+	if (this.readyState == 4 && this.status == 200) {
+		sect.innerHTML = this.responseText;
+	}
+	else if (this.readyState == 4 && this.status == 404) {
+		sect.innerHTML = "<h1>404 Not found!</h1><p><i>This blog page does not exist.</i></p>";
+	}
+	else if (this.readyState == 4) {
+		sect.innerHTML = "<p><i>Failed to load blog page.</i></p>";
+	}
+}
+
+/** load function to call from html **/
+function blog_load() {
+	if (hasParam("page")) {
+		download_blog_page();
+	}
+	else {
+		download_blog_index();
 	}
 }
 
