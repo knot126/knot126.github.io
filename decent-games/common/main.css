@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /*
  * Making things default and variables
@@ -27,7 +27,7 @@
 	--base-colour-green-transluscent: #34b58a30;
 	--base-colour-text: #222;
 	--base-colour-text-ontop: #fff;
-	--base-colour-background: #fff;
+	--base-colour-background: #fffc;
 	--base-colour-background-border: #ccc;
 	--base-colour-panel-background: #fff4;
 	--base-colour-panel-background-hover: #fff;
@@ -36,8 +36,8 @@
 	--trestle-colour: #aa5e2f;
 	--dragonfruit-colour: #e8171e;
 	--background-location: url("../common/bluerays.svg");
-	--title-font: "Barlow", sans-serif;
-	--body-font: "Barlow", sans-serif;
+	--title-font: "Kumbh Sans", sans-serif;
+	--body-font: "Kumbh Sans", sans-serif;
 }
 
 /*@media (prefers-color-scheme: dark) {
@@ -94,12 +94,12 @@ p, li, figcaption {
 	line-height: 1.65;
 }
 
-h1 { font-size: 36pt; font-weight: 700; }
-h2 { font-size: 36pt; font-weight: 700; text-transform: uppercase; }
-h3 { font-size: 22pt; }
+h1 { font-size: 32pt; font-weight: 700; }
+h2 { font-size: 26pt; font-weight: 700; /*text-transform: uppercase;*/ }
+h3 { font-size: 20pt; }
 h4 { font-size: 16pt; }
 
-p, li, figcaption { font-size: 14pt; }
+p, li, figcaption { font-size: 13pt; }
 li { margin-left: 2em; }
 
 a {
@@ -151,7 +151,7 @@ figcaption {
  */
 
 .page-container {
-	max-width: 62.5em;
+	max-width: min(60em, 90%);
 	margin: auto;
 }
 
@@ -163,8 +163,10 @@ figcaption {
 }
 
 .content-section {
+	backdrop-filter: blur(10px);
 	background: var(--base-colour-background);
-	border-radius: 0.25em;
+	border-radius: 0.5em;
+	box-shadow: 0 6px 12px #0004;
 }
 
 .content-section-inner {
@@ -209,7 +211,7 @@ figcaption {
 	font-size: 14pt;
 	margin-right: 1em;
 	vertical-align: middle;
-	text-transform: uppercase;
+/* 	text-transform: uppercase; */
 }
 
 .nav-link {
@@ -240,13 +242,13 @@ figcaption {
 .learn-more-button {
 	background: var(--base-colour-green);
 	border: none;
-	border-radius: 0.25em;
+	border-radius: 0.325em;
 	padding: 0.75em 1.25em;
 	color: var(--base-colour-text-ontop);
 	box-shadow: 0 2px 1px #0004;
 	font-family: var(--body-font);
-	font-size: 12pt;
-	text-transform: uppercase;
+	font-size: 13pt;
+/* 	text-transform: uppercase; */
 	cursor: pointer;
 	transition: filter 0.2s;
 }
