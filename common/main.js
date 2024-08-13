@@ -37,7 +37,7 @@ function setup_sidebar() {
 
 /** BLOG INDEX **/
 function download_blog_index() {
-	request("GET", "./blog.json", "", setup_blog_index);
+	request("GET", "./blog/blog.json", "", setup_blog_index);
 }
 
 function setup_blog_index() {
@@ -70,7 +70,7 @@ function setup_blog_page() {
 	let sect = document.getElementById("main");
 	
 	if (this.readyState == 4 && this.status == 200) {
-		sect.innerHTML = this.responseText;
+		sect.innerHTML = marked.parse(this.responseText);
 	}
 	else if (this.readyState == 4 && this.status == 404) {
 		sect.innerHTML = "<h1>404 Not found!</h1><p><i>This blog page does not exist.</i></p>";
