@@ -386,3 +386,24 @@ body {
 	text-decoration-line: underline;
 	color: var(--base-colour-text);
 }
+
+.dialogue-background {
+	background: #0006;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(8px);
+}
+
+.dialogue-box {
+	background: var(--base-colour-panel-background-hover);
+	margin: 0;
+	width: 50vw;
+	height: 50vh;
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+}

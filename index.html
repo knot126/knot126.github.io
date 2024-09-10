@@ -28,19 +28,33 @@
 				</div>
 				<script>me_randomise_quote();</script>
 				<div class="card-section">
-					<h3><a href="https://cohost.org/knot126">Cohost</a></h3>
-					<p>My primary social account where I post about projects.</p>
+					<span style="cursor: pointer">
+						<h3><a onclick="openEmail('WTJSa1pYQndjSEF5TlRaQWNISnZkRzl1TG0xbA')">Email</a></h3>
+					</span>
+					<p>I do not check it daily, but you might get a response.</p>
 				</div><div class="card-section">
-					<h3><a href="https://youtube.com/@knot126">YouTube</a></h3>
-					<p>My current YouTube channel, more of a video dump.</p>
+					<script>function showChatInfo() {
+						showDialogue(`<div style="position: relative; top: -1em;"><h3>Chat platforms</h3>
+						<p>I am on:</p>
+						<ul>
+							<li><a href="https://discord.com/">Discord</a> as <b>@knot126</b></li>
+							<li><a href="https://revolt.chat/">Revolt</a> as <b>Knot126#0675</b></li>
+						</ul></div>
+						<button class="button" onclick="hideDialgoue()" style="position: absolute; bottom: 20px; left: 20px;">Close</button>`);
+					}</script>
+					<span style="cursor: pointer">
+						<h3><a onclick="showChatInfo()">Chat</a></h3>
+					</span>
+					<p>I am available on a few different chat platforms.</p>
 				</div><div class="card-section">
 					<h3><a href="https://github.com/knot126">Github</a></h3>
 					<p>Most of my programming related projects now live here since I enjoy using GitHub.</p>
 				</div><div class="card-section">
-					<span id="email-WTJSa1pYQndjSEF5TlRaQVoyMWhhV3d1WTI5dA" style="cursor: pointer">
-						<h3><a onclick="decodeEmail('WTJSa1pYQndjSEF5TlRaQVoyMWhhV3d1WTI5dA')">Email</a></h3>
-					</span>
-					<p>I do not check it daily, but you might get a response.</p>
+					<h3><a href="https://codeberg.org/knot126">Codeberg</a></h3>
+					<p>A few of the projects I contribute to are on Codeberg, but I don't use it primarily.</p>
+				</div><div class="card-section">
+					<h3><a href="https://cohost.org/knot126">Cohost (RIP)</a></h3>
+					<p>Effectively my blog before my blog existed.</p>
 				</div>
 			</div>
 			<div id="main" class="main-section disclaimer-section">

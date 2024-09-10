@@ -5,6 +5,21 @@ function decodeEmail(email_address) {
 	place.innerHTML = "<h3><a href=\"mailto:" + result + "\">" + result + "</a></h3>";
 }
 
+function openEmail(email_address) {
+	window.open("mailto:" + atob(atob(email_address)));
+}
+
+function showDialogue(content) {
+	let body = document.getElementById("main");
+	body.innerHTML += `<div id="dialogue" class="dialogue-background">
+	<div class="main-section content-section dialogue-box">${content}</div>
+</div>`;
+}
+
+function hideDialgoue() {
+	let dialogue = document.getElementById("dialogue").remove();
+}
+
 function request(method, url, body, handler) {
 	let xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = handler;
