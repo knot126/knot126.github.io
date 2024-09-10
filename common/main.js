@@ -63,12 +63,19 @@ function setup_blog_index() {
 		
 		index.innerHTML = "<h1>Blog</h1>";
 		
-		for (let entry of entries) {
-			index.innerHTML += `<div class="card-section">
-				<h3><a href="${entry.url}">${entry.title}</a></h3>
-				<p>${entry.date}</p>
-				<p>${entry.desc}</p>
+		// for (let entry of entries) {
+		for (let i = 0; i < entries.length; i++) {
+			let entry = entries[i];
+			
+			index.innerHTML += `<div style="padding: 1em; background: #8882; border-radius: 0.25em;">
+				<h3 style="padding-top: 0;"><a href="${entry.url}">${entry.title}</a></h3>
+				<p style="opacity: 0.6;">${entry.date}</p>
+				<p style="margin-bottom: 0;">${entry.desc}</p>
 			</div>`;
+			
+			if (i != entries.length - 1) {
+				index.innerHTML += `<div style="height: 1em;"></div>`;
+			}
 		}
 	}
 	else if (this.readyState == 4) {
@@ -256,40 +263,27 @@ function setup_copyright() {
 }
 
 var gQuotes = [
-	"I really like Tails.",
-	"best foxxo ever :3",
-	"The answer is maybe...",
+	"The best fox ever :3",
+	"The answer is yes",
+	"The answer is maybe",
+	"The answer is no",
 	"Hello, world!",
-	"I am PRO GAMER (0% true)",
-	"These quotes are random!",
-	"Put something embarassing here.",
-	"You've been rickrolled B)",
-	"TAILS!",
-	"The aroace flag is really nice :)",
+	"I am (not) PRO GAMER <sup>TM</sup>",
+	"These quotes are randomised!",
+	"Put something embarassing here",
 	"🖤🩶🤍💜",
 	"MISSING STRING",
 	"100% Money Back True",
-	"exists (impossible)",
-	"I do not work for shit stain studios.",
-	"Hold gently, like hamburger.",
+	"Hold gently, like hamburger",
 	"AWOOO!",
-	"FIRE IN THE HOLE!",
-	"Earth is like Hell: it exists.",
+	"Earth is hell",
 	"I really like Tails",
 	"Miles &quot;Tails&quot; Prower",
-	"Recently used tags: #tails",
-	"It's magic, Joel, it's magic",
-	"There are foxes, and then there is everything else.",
-	"its someone with a tails the fox pfp ahh",
-	"I think Nine was cool :D",
-	"Used to be a dragon",
-	"Not a dragon anymore",
-	"Too much for little time",
-	"Has tried to learn Lisp at least once",
-	"University? my arse!",
-	"<code>var foxxo = good;</code>",
-	"<code>messageNotUnderstood:</code>",
-	"<code>(defun age () (* 4 2 0))</code>",
+	"It's magic",
+	"...thinks Nine deserved a better ending",
+	"It feels like nuclear winter today",
+	"<code>(set 'foxes :good)</code>",
+	"<code>(defparameter *approx-age* 0)</code>",
 ];
 
 function randint(max) {
