@@ -1,3 +1,5 @@
+var knwbEnableEditor = false;
+
 function decodeEmail(email_address) {
 	let result = atob(atob(email_address));
 	let place = document.getElementById("email-" + email_address);
@@ -91,15 +93,45 @@ function download_blog_page() {
 function setup_blog_page() {
 	let sect = document.getElementById("main");
 	
-	if (this.readyState == 4 && this.status == 200) {
-		sect.innerHTML = marked.parse(this.responseText);
+	if (!hasParam("edit")) {
+		if (this.readyState == 4 && this.status == 200) {
+			sect.innerHTML = marked.parse(this.responseText);
+		}
+		else if (this.readyState == 4 && this.status == 404) {
+			sect.innerHTML = "<h1>404 Not found!</h1><p><i>This blog page does not exist.</i></p>";
+		}
+		else if (this.readyState == 4) {
+			sect.innerHTML = "<p><i>Failed to load blog page.</i></p>";
+		}
+	} else {
+		if (this.readyState == 4 && this.status == 200) {
+			setupEditor(sect, this.responseText);
+		}
+		else if (this.readyState == 4) {
+			setupEditor(sect, "");
+		}
 	}
-	else if (this.readyState == 4 && this.status == 404) {
-		sect.innerHTML = "<h1>404 Not found!</h1><p><i>This blog page does not exist.</i></p>";
-	}
-	else if (this.readyState == 4) {
-		sect.innerHTML = "<p><i>Failed to load blog page.</i></p>";
-	}
+}
+
+/** Editor **/
+function setupEditor(sect, mdContent) {
+	sect.innerHTML = `
+	<h1>Edit page</h1>
+	<div style="display: grid; grid-template-columns: 48% 4% auto;">
+		<div style="grid-column: 1;">
+			<p><textarea id="editor-data" style="width: 100%; height: 50vh; overflow: default; background: #0000; font-size: 12pt; resize: none; outline: none;" oninput="updateEditorPreview()">${mdContent}</textarea></p>
+		</div>
+		<div style="grid-column: 2;"></div>
+		<div id="editor-preview" style="grid-column: 3; overflow-y: scroll; height: 50vh;">
+		</div>
+	</div>
+	<p><button class="button" onclick="savePage()">Save page</button></p>`;
+}
+
+function updateEditorPreview() {
+	let preview = document.getElementById("editor-preview");
+	let data = document.getElementById("editor-data").value;
+	preview.innerHTML = marked.parse(data);
 }
 
 /** load function to call from html **/
