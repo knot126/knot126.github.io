@@ -61,8 +61,11 @@ class BlogIndex:
 		data["desc"] = desc
 		
 		# Save page and index
-		Path(f"{self.path}/{filename}").write_text(content)
+		self.write_page(filename, content)
 		self.save()
+	
+	def write_page(self, filename, content):
+		Path(f"{self.path}/{filename}").write_text(content)
 	
 	def save(self):
 		"""
@@ -90,7 +93,6 @@ class RequestHandler(SimpleHTTPRequestHandler):
 			info = json.loads(self.rfile.read(int(self.headers["Content-Length"])).decode("utf-8"))
 			# print(f"save file: {info['page']} with contents: {info['content']}")
 			index.update_page(info['page'], info['content'])
-			index.save()
 			
 			self.send_response(200)
 			self.send_header("Content-Length", "0")

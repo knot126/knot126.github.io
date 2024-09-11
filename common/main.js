@@ -37,6 +37,11 @@ function hasParam(named) {
 	return (new URLSearchParams(document.location.search)).has(named);
 }
 
+function formatDate(t) {
+	return (new Date(t * 1000)).toISOString().substring(0, 10);
+}
+
+/** Navbar **/
 function download_sidebar() {
 	request("GET", "./navbar.html", "", setup_sidebar);
 }
@@ -61,7 +66,7 @@ function setup_blog_index() {
 	let index = document.getElementById("blog-index");
 	
 	if (this.readyState == 4 && this.status == 200) {
-		let entries = JSON.parse(this.responseText);
+		let entries = JSON.parse(this.responseText).reverse();
 		
 		index.innerHTML = "<h1>Blog</h1>";
 		
@@ -71,7 +76,7 @@ function setup_blog_index() {
 			
 			index.innerHTML += `<div style="padding: 1em; background: #8882; border-radius: 0.25em;">
 				<h3 style="padding-top: 0;"><a href="./blog.html?page=${entry.file}">${entry.title}</a></h3>
-				<p style="opacity: 0.6;">${entry.time}</p>
+				<p style="opacity: 0.6;">${formatDate(entry.time)}</p>
 				<p style="margin-bottom: 0;">${entry.desc}</p>
 			</div>`;
 			
