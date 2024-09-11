@@ -70,8 +70,8 @@ function setup_blog_index() {
 			let entry = entries[i];
 			
 			index.innerHTML += `<div style="padding: 1em; background: #8882; border-radius: 0.25em;">
-				<h3 style="padding-top: 0;"><a href="${entry.url}">${entry.title}</a></h3>
-				<p style="opacity: 0.6;">${entry.date}</p>
+				<h3 style="padding-top: 0;"><a href="./blog.html?page=${entry.file}">${entry.title}</a></h3>
+				<p style="opacity: 0.6;">${entry.time}</p>
 				<p style="margin-bottom: 0;">${entry.desc}</p>
 			</div>`;
 			
