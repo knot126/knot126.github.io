@@ -35,7 +35,7 @@ class BlogIndex:
 		return None
 	
 	def get_entry(self, filename):
-		index = self.get_index(data["file"])
+		index = self.get_index(filename)
 		
 		if index == None:
 			self.items.append({}.copy())
@@ -59,6 +59,10 @@ class BlogIndex:
 		
 		data["title"] = title
 		data["desc"] = desc
+		
+		# Save page and index
+		Path(f"{self.path}/{filename}").write_text(content)
+		self.save()
 	
 	def save(self):
 		"""
@@ -84,7 +88,9 @@ class RequestHandler(SimpleHTTPRequestHandler):
 	def do_POST(self):
 		if self.path == "/api/save":
 			info = json.loads(self.rfile.read(int(self.headers["Content-Length"])).decode("utf-8"))
-			print(f"save file: {info['page']} with contents: {info['content']}")
+			# print(f"save file: {info['page']} with contents: {info['content']}")
+			index.update_page(info['page'], info['content'])
+			index.save()
 			
 			self.send_response(200)
 			self.send_header("Content-Length", "0")
