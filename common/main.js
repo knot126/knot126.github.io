@@ -70,13 +70,25 @@ function setup_blog_index() {
 		
 		index.innerHTML = "<h1>Blog</h1>";
 		
+		if (knwbEnableEditor) {
+			index.innerHTML += `<div style="display: grid; grid-template-columns: auto 180px;">
+				<div style="grid-column: 1;">
+					<div class="textbox-outer"><input id="create-page-input" class="textbox" type="text" placeholder="Page name"/></div>
+				</div>
+				<div style="grid-column: 2; padding-left: 20px;">
+					<button class="button" onclick="openCreatePage()" style="width: 100%; height: 100%;">Create page</button>
+				</div>
+			</div>`;
+			index.innerHTML += `<div style="height: 1em;"></div>`;
+		}
+		
 		// for (let entry of entries) {
 		for (let i = 0; i < entries.length; i++) {
 			let entry = entries[i];
 			
 			index.innerHTML += `<div style="padding: 1em; background: #8882; border-radius: 0.25em;">
 				<h3 style="padding-top: 0;"><a href="./blog.html?page=${entry.file}">${entry.title}</a></h3>
-				<p style="opacity: 0.6;">${formatDate(entry.time)}</p>
+				<p style="opacity: 0.6;">${(entry.time == 0) ? entry.date : formatDate(entry.time)}</p>
 				<p style="margin-bottom: 0;">${entry.desc}</p>
 			</div>`;
 			
@@ -88,6 +100,11 @@ function setup_blog_index() {
 	else if (this.readyState == 4) {
 		index.innerHTML = "<p><i>Failed to load blog posts!</i></p>";
 	}
+}
+
+function openCreatePage() {
+	let cpi = document.getElementById("create-page-input");
+	window.open("./blog.html?page=" + cpi.value + "&edit=1");
 }
 
 /** BLOG PAGE **/
