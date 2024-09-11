@@ -125,13 +125,33 @@ function setupEditor(sect, mdContent) {
 		<div id="editor-preview" style="grid-column: 3; overflow-y: scroll; height: 50vh;">
 		</div>
 	</div>
-	<p><button class="button" onclick="savePage()">Save page</button></p>`;
+	<p><button class="button" onclick="savePage()">Save page</button><span id="editor-error"></span></p>`;
 }
 
 function updateEditorPreview() {
 	let preview = document.getElementById("editor-preview");
 	let data = document.getElementById("editor-data").value;
 	preview.innerHTML = marked.parse(data);
+}
+
+function savePage() {
+	let data = {
+		"page": getParam("page"),
+		"content": document.getElementById("editor-data").value,
+	};
+	
+	request("POST", "/api/save", JSON.stringify(data), savePageOnFinish);
+}
+
+function savePageOnFinish() {
+	let err = document.getElementById("editor-error");
+	
+	if (this.readyState == 4 && this.status == 200) {
+		err.innerHTML = "Saved!";
+	}
+	else if (this.readyState == 4) {
+		err.innerHTML = "Error while saving";
+	}
 }
 
 /** load function to call from html **/
