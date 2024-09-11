@@ -103,6 +103,10 @@ function setup_blog_page() {
 		else if (this.readyState == 4) {
 			sect.innerHTML = "<p><i>Failed to load blog page.</i></p>";
 		}
+		
+		if (this.readyState == 4 && knwbEnableEditor) {
+			sect.innerHTML += `<p><button class="button" onclick="editPage()" style="position: absolute; top: 20px; right: 20px;">Edit page</button></p>`;
+		}
 	} else {
 		if (this.readyState == 4 && this.status == 200) {
 			setupEditor(sect, this.responseText);
@@ -114,21 +118,27 @@ function setup_blog_page() {
 }
 
 /** Editor **/
+function editPage() {
+	window.location = window.location + "&edit=1";
+}
+
 function setupEditor(sect, mdContent) {
 	sect.innerHTML = `
 	<h1>Edit page</h1>
 	<div style="display: grid; grid-template-columns: 48% 4% auto;">
 		<div style="grid-column: 1;">
-			<p><textarea id="editor-data" style="width: 100%; height: 50vh; overflow: default; background: #0000; font-size: 12pt; resize: none; outline: none;" oninput="updateEditorPreview()">${mdContent}</textarea></p>
+			<p><textarea id="editor-data" style="width: 100%; height: 50vh; overflow: default; background: #0000; font-size: 12pt; resize: none; outline: none;" oninput="updateEditorPreview()"></textarea></p>
 		</div>
 		<div style="grid-column: 2;"></div>
 		<div id="editor-preview" style="grid-column: 3; overflow-y: scroll; height: 50vh;">
 		</div>
 	</div>
 	<p><button class="button" onclick="savePage()">Save page</button><span id="editor-error"></span></p>`;
+	document.getElementById("editor-data").value = mdContent;
+	updateEditorPreview();
 }
 
-function updateEditorPreview() {
+async function updateEditorPreview() {
 	let preview = document.getElementById("editor-preview");
 	let data = document.getElementById("editor-data").value;
 	preview.innerHTML = marked.parse(data);
