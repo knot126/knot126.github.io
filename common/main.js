@@ -149,7 +149,7 @@ function setupEditor(sect, mdContent) {
 	<h1>Edit page</h1>
 	<div style="display: grid; grid-template-columns: 48% 4% auto;">
 		<div style="grid-column: 1;">
-			<p><textarea id="editor-data" style="width: 100%; height: 50vh; overflow: default; background: #0000; font-size: 12pt; resize: none; outline: none;" oninput="updateEditorPreview()"></textarea></p>
+			<p><textarea id="editor-data" class="blog-editor-code" oninput="updateEditorPreview()"></textarea></p>
 		</div>
 		<div style="grid-column: 2;"></div>
 		<div id="editor-preview" style="grid-column: 3; overflow-y: scroll; height: 50vh;">

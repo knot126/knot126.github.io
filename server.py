@@ -14,7 +14,7 @@ def parse_title_and_desc(md):
 		if not title and l.startswith("# "):
 			title = l[2:]
 		
-		if not desc and l and not l.startswith(("<!--", "# ")):
+		if not desc and l and not l.startswith(("<", "# ")):
 			desc = l
 		
 		if title and desc:
