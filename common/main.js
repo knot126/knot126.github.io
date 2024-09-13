@@ -155,7 +155,11 @@ function setupEditor(sect, mdContent) {
 		<div id="editor-preview" style="grid-column: 3; overflow-y: scroll; height: 50vh;">
 		</div>
 	</div>
-	<p><button class="button" onclick="savePage()">Save page</button><span id="editor-error"></span></p>`;
+	<p>
+		<button class="button" onclick="savePage()">Save page</button>
+		<button class="button secondary" onclick="pushChanges()">Push changes</button>
+		<span id="editor-error"></span>
+	</p>`;
 	document.getElementById("editor-data").value = mdContent;
 	updateEditorPreview();
 }
@@ -183,6 +187,21 @@ function savePageOnFinish() {
 	}
 	else if (this.readyState == 4) {
 		err.innerHTML = "Error while saving";
+	}
+}
+
+function pushChanges() {
+	request("POST", "/api/push", "", pushChangesOnFinish);
+}
+
+function pushChangesOnFinish() {
+	let err = document.getElementById("editor-error");
+	
+	if (this.readyState == 4 && this.status == 200) {
+		err.innerHTML = "Pushed changes!";
+	}
+	else if (this.readyState == 4) {
+		err.innerHTML = "Error while pushing";
 	}
 }
 

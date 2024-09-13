@@ -97,7 +97,6 @@ class RequestHandler(SimpleHTTPRequestHandler):
 	def do_POST(self):
 		if self.path == "/api/save":
 			info = json.loads(self.rfile.read(int(self.headers["Content-Length"])).decode("utf-8"))
-			# print(f"save file: {info['page']} with contents: {info['content']}")
 			index.update_page(info['page'], info['content'])
 			
 			self.send_response(200)
