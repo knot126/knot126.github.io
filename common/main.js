@@ -147,7 +147,7 @@ function editPage() {
 function setupEditor(sect, mdContent) {
 	sect.innerHTML = `
 	<h1>Edit page</h1>
-	<div style="display: grid; grid-template-columns: 48% 4% auto;">
+	<div style="display: grid; grid-template-columns: 49% 2% auto;">
 		<div style="grid-column: 1;">
 			<p><textarea id="editor-data" class="blog-editor-code" oninput="updateEditorPreview()"></textarea></p>
 		</div>
