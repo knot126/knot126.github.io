@@ -146,13 +146,12 @@ function editPage() {
 
 function setupEditor(sect, mdContent) {
 	sect.innerHTML = `
-	<h1>Edit page</h1>
 	<div style="display: grid; grid-template-columns: 49% 2% auto;">
 		<div style="grid-column: 1;">
 			<p><textarea id="editor-data" class="blog-editor-code" oninput="updateEditorPreview()"></textarea></p>
 		</div>
 		<div style="grid-column: 2;"></div>
-		<div id="editor-preview" style="grid-column: 3; overflow-y: scroll; height: 50vh;">
+		<div id="editor-preview" style="grid-column: 3; overflow-y: scroll; height: calc(100vh - 250px);">
 		</div>
 	</div>
 	<p>
@@ -161,6 +160,7 @@ function setupEditor(sect, mdContent) {
 		<span id="editor-error"></span>
 	</p>`;
 	document.getElementById("editor-data").value = mdContent;
+	document.getElementsByTagName("body")[0].style.overflow = "hidden";
 	updateEditorPreview();
 }
 
