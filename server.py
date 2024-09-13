@@ -3,6 +3,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 import json
 import time
+from subprocess import run
 
 BLOG_PATH = "blog"
 
@@ -75,6 +76,11 @@ class BlogIndex:
 		Path(f"{self.path}/blog.json").write_text(json.dumps(self.items))
 
 index = BlogIndex(BLOG_PATH)
+
+def add_commit_push():
+	run(["git", "add", "."])
+	run(["git", "commit", "--no-gpg-sign", "-m", "Automatic blog update"])
+	run(["git", "push", f"https://{Path('access.conf').read_text().strip()}@github.com/knot126/Website.git"])
 
 class RequestHandler(SimpleHTTPRequestHandler):
 	def do_GET(self):
