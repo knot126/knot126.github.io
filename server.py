@@ -80,7 +80,7 @@ index = BlogIndex(BLOG_PATH)
 def add_commit_push():
 	run(["git", "add", "."])
 	run(["git", "commit", "--no-gpg-sign", "-m", "Automatic blog update"])
-	run(["git", "push", f"https://{Path('access.conf').read_text().strip()}@github.com/knot126/Website.git"])
+	run(["git", "push", f"https://{Path('access.conf').read_text().strip()}@github.com/knot126/knot126.github.io.git"])
 
 class RequestHandler(SimpleHTTPRequestHandler):
 	def do_GET(self):
@@ -99,6 +99,13 @@ class RequestHandler(SimpleHTTPRequestHandler):
 			info = json.loads(self.rfile.read(int(self.headers["Content-Length"])).decode("utf-8"))
 			# print(f"save file: {info['page']} with contents: {info['content']}")
 			index.update_page(info['page'], info['content'])
+			
+			self.send_response(200)
+			self.send_header("Content-Length", "0")
+			self.send_header("Content-Type", "text/plain")
+			self.end_headers()
+		elif self.path == "/api/push":
+			add_commit_push()
 			
 			self.send_response(200)
 			self.send_header("Content-Length", "0")
