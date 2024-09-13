@@ -170,7 +170,13 @@ async function updateEditorPreview() {
 	preview.innerHTML = marked.parse(data);
 }
 
+function setWaiting() {
+	document.getElementById("editor-error").innerHTML = `<object data="./common/spinner2.svg" width="64" height="64"></object>`;
+}
+
 function savePage() {
+	setWaiting();
+	
 	let data = {
 		"page": getParam("page"),
 		"content": document.getElementById("editor-data").value,
@@ -191,6 +197,7 @@ function savePageOnFinish() {
 }
 
 function pushChanges() {
+	setWaiting();
 	request("POST", "/api/push", "", pushChangesOnFinish);
 }
 
