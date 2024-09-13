@@ -171,7 +171,7 @@ async function updateEditorPreview() {
 }
 
 function setWaiting() {
-	document.getElementById("editor-error").innerHTML = `<object data="./common/spinner2.svg" width="64" height="64"></object>`;
+	document.getElementById("editor-error").innerHTML = `<object data="./common/spinner2.svg" width="16" height="16"></object>`;
 }
 
 function savePage() {
