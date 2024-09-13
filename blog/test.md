@@ -1,5 +1,9 @@
 # Spooky test page
 
+<div class="main-section content-section">
+<p>Woah, look at this xD</p>
+</div>
+
 <img src="https://google.com/favicon.ico" width="100%" style="border-radius: 10000px"/>
 
 This is a test with some content. This is updated content :D
