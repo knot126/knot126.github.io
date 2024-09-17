@@ -354,11 +354,25 @@ function format_string(str) {
 						
 						output += `<${sym_type}>` + match[0] + `</${sym_type}>`;
 					}
+					
+					break;
 				}
-				else {
+				
+				// Comment in Lua or a single-line C-style comment, must be
+				// preceeded by whitespace as a HACK to avoid some false
+				// detections
+				match = str.match(/\s(?:--|\/\/).*/);
+				
+				if (match !== null && match.index === 0) {
+					str = str.slice(match[0].length);
+					output += `<code-comment>${match[0]}</code-comment>`;
+					break;
+				}
+				
+				// {
 					output += current;
 					str = str.slice(1);
-				}
+				// }
 				
 				break;
 		}
