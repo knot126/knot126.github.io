@@ -235,7 +235,7 @@ function is_number(s) {
 }
 
 function format_string(str) {
-	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array", "then", "end", "do", "return", "true", "false"];
+	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array", "then", "end", "do", "return", "true", "false", "local", "global", "auto", "static", "struct", "class"];
 	let output = "";
 	
 	// The identifier hack will not use number formatting for a number if a
@@ -315,17 +315,29 @@ function format_string(str) {
 			default:
 				let found = false;
 				
-				for (let k = 0; k < keywords.length; k++) {
-					if (str.startsWith(keywords[k])) {
-						str = str.slice(keywords[k].length);
-						output += "<code-keyword>" + keywords[k] + "</code-keyword>";
-						
-						found = true;
-						break;
+// 				for (let k = 0; k < keywords.length; k++) {
+// 					if (str.startsWith(keywords[k])) {
+// 						str = str.slice(keywords[k].length);
+// 						output += "<code-keyword>" + keywords[k] + "</code-keyword>";
+// 						
+// 						found = true;
+// 						break;
+// 					}
+// 				}
+				
+				let match = str.match(/[A-Za-z_][A-Za-z0-9_]*/);
+				
+				if (match !== null && match.index === 0) {
+					str = str.slice(match[0].length);
+					
+					if (keywords.includes(match[0])) {
+						output += "<code-keyword>" + match[0] + "</code-keyword>";
+					}
+					else {
+						output += "<code-symbol>" + match[0] + "</code-symbol>";
 					}
 				}
-				
-				if (!found) {
+				else {
 					output += current;
 					str = str.slice(1);
 				}

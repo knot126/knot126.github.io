@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Sen:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Sen:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
 
 /*
  * Making things default and variables
@@ -114,15 +114,15 @@ a:hover {
 code {
 	background: #8882;
 	border-radius: 0.325em;
-	font-family: "Inconsolata", sans-serif;
+	font-family: "Fira Code", sans-serif;
 	font-size: 14pt;
 	padding: 0.2em;
 }
 
-.code {
+pre, .code {
 	background: #8882;
 	border-radius: 0.325em;
-	font-family: "Inconsolata", sans-serif;
+	font-family: "Fira Code", sans-serif;
 	font-size: 12pt;
 	margin: 1em;
 	padding: 1em;
