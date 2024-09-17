@@ -235,7 +235,7 @@ function is_number(s) {
 }
 
 function format_string(str) {
-	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array", "then", "end", "do", "return", "true", "false", "local", "global", "auto", "static", "struct", "class"];
+	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array", "then", "end", "do", "return", "true", "false", "local", "global", "auto", "static", "struct", "class", "nil", "null"];
 	let output = "";
 	
 	// The identifier hack will not use number formatting for a number if a
@@ -334,7 +334,25 @@ function format_string(str) {
 						output += "<code-keyword>" + match[0] + "</code-keyword>";
 					}
 					else {
-						output += "<code-symbol>" + match[0] + "</code-symbol>";
+						let sym_type = "code-symbol";
+						
+						// For ease of reading any symbol followed immediately
+						// by an ( is considered to be a function
+						if (str.length > 0 && str[0] === "(") {
+							sym_type = "code-function";
+						}
+						else {
+							// Enums are one or more capitial letters, followed
+							// by an underscore, followed by any number of under
+							// scores or capital letters.
+							let submatch = match[0].match(/^[A-Z]+_[A-Z_]+$/);
+							
+							if (submatch !== null) {
+								sym_type = "code-enum";
+							}
+						}
+						
+						output += `<${sym_type}>` + match[0] + `</${sym_type}>`;
 					}
 				}
 				else {

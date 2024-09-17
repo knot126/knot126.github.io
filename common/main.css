@@ -130,10 +130,13 @@ pre, .code {
 	overflow: scroll;
 }
 
-code-string { color: #eb4c46; }
-code-number { color: #f67400; }
-code-keyword { color: #26acac; font-weight: bold; }
-code-special { color: #777; }
+code-string { color: #be0202; }
+code-number { color: #af7f00; }
+code-keyword { font-weight: bold; }
+code-function { color: #644a9b; }
+code-special { color: #ca63ca; }
+code-enum { color: #aa5500; }
+code-symbol { color: #0057ae; }
 
 /*
  * Elements like images
