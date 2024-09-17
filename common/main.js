@@ -118,9 +118,10 @@ function setup_blog_page() {
 	if (!hasParam("edit")) {
 		if (this.readyState == 4 && this.status == 200) {
 			sect.innerHTML = marked.parse(this.responseText);
+			format_codes();
 		}
 		else if (this.readyState == 4 && this.status == 404) {
-			sect.innerHTML = "<h1>404 Not found!</h1><p><i>This blog page does not exist.</i></p>";
+			sect.innerHTML = "<h1>Not found!</h1><p><i>This blog page does not exist.</i></p>";
 		}
 		else if (this.readyState == 4) {
 			sect.innerHTML = "<p><i>Failed to load blog page.</i></p>";
@@ -168,6 +169,7 @@ async function updateEditorPreview() {
 	let preview = document.getElementById("editor-preview");
 	let data = document.getElementById("editor-data").value;
 	preview.innerHTML = marked.parse(data);
+	format_codes();
 }
 
 function setWaiting() {
@@ -397,6 +399,7 @@ function format_codes() {
 	 * Format code0, code1, code2, etc.
 	 */
 	
+	// Legacy code bullshit
 	let i = 0;
 	
 	while (true) {
@@ -409,6 +412,13 @@ function format_codes() {
 		format_section("code" + i);
 		
 		i += 1;
+	}
+	
+	// Something nicer
+	let codes = document.querySelectorAll("[highlight='1']");
+	
+	for (let i = 0; i < codes.length; i++) {
+		codes[i].innerHTML = format_string(codes[i].innerHTML);
 	}
 }
 

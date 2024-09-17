@@ -15,3 +15,10 @@ This is actually very, very cool IMO.
 Testing 256
 
 This is a test to see that my workflow is really nice :3
+
+<pre highlight="1">
+if (user.isValidLogin(login_details) and user.admin != true) {
+    let token = user.createSessionToken();
+    return {"success": true, "token": token}
+}
+</pre>
