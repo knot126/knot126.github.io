@@ -1,0 +1,32 @@
+<article id="post-41" class="post-41 post type-post status-private format-standard hentry category-uncategorized tag-game-engine tag-programming">
+		<header class="entry-header">
+		<div class="entry-meta"><span class="posted-on"><span class="screen-reader-text">Posted on</span> <a href="https://knot126.wordpress.com/2021/02/17/current-engine-status-2021-02-17/" rel="bookmark"><time class="entry-date published" datetime="2021-02-17T20:28:57-06:00">February 17, 2021</time><time class="updated" datetime="2021-12-04T15:49:04-06:00">December 4, 2021</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://knot126.wordpress.com/author/knot126/">knot126</a></span></span></div><!-- .entry-meta --><h1 class="entry-title">Private: Current Engine Status:&nbsp;2021-02-17</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		
+<p>This is going to be the first time I write about my game engine publicly. At this point, it has only been in development for a few weeks, but I am able to draw 2D things. Since I’ve never really developed any real software before – especially not anything that needs to have structure or maintainability – this has been an interesting experience for me, already.</p>
+
+
+
+<p>Currently, I have a few little nice things set up: a custom memory allocator that is really buggy (my first <a href="https://github.com/mtrebi/memory-allocators#free-list-allocator">free-list allocator</a>; I’m rewriting before I get too far, it’s already caused me a lot of pain), a very basic event system (called “flags” in the codebase), a file system wrapper (the only thing I’m not going to complain about today), a <a href="https://blog.tuxedolabs.com/2013/03/08/mediocre-properties.html">Dennis Gustafasson-style</a> property bag system (which segfaults thanks to the buggy allocator) and some other smaller utilities.</p>
+
+
+
+<p>The primary part of the engine (currently just the drawing) uses OpenGL, GLFW and GLEW. You may ask “why not Vulkan?” And I asked that too. There are really two reasons for not going with Vulkan primarily: it is still not very tutorial-rich for the way I learn and none of the games I play, really like and want to do modding with actually use it, so it is rather awkward because outside of my engine, there isn’t much use for it. I would <em>really</em> love to make my engine Vulkan-only, but I can’t even bring myself to learn Vulkan at the moment because it’s just not relevant for me. Perhaps I will add support in the future, but I think there will need to be something like <a href="https://learnopengl.com">learnopengl.com</a> for Vulkan. (This is actually not to mention that I have no hardware with Vulkan support on Windows, which I need to port to eventually.)</p>
+
+
+
+<p>The eventual goal with the engine is to make it a 3D engine for a game I am trying to work on. Nothing really large or groundbreaking, but something that can be expanded upon. So far, I think I have done a good job at being flexible. I will focus on being fast later.</p>
+
+
+
+<p>I can’t really say much more than that. One thing: I’m not using C++; instead, I am using C. I don’t really hate C++; I just think it’s a bit much for someone who just wants to write an engine and do it well. C++, to me, is more for the people that are (a) on a time and cost budget, (b) would rather not have things look really ugly when you go to add something to a list and (c) really like object-oriented programming. I don’t hate OOP, but I don’t really like it much either.</p>
+
+
+
+<p></p>
+	</div><!-- .entry-content -->
+
+	<footer class="entry-footer"><span class="cat-tags-links"><span class="cat-links"><svg class="icon icon-folder-open" aria-hidden="true" role="img"> <use href="#icon-folder-open" xlink:href="#icon-folder-open"></use> </svg><span class="screen-reader-text">Categories</span><a href="https://knot126.wordpress.com/category/uncategorized/" rel="category tag">Uncategorized</a></span><span class="tags-links"><svg class="icon icon-hashtag" aria-hidden="true" role="img"> <use href="#icon-hashtag" xlink:href="#icon-hashtag"></use> </svg><span class="screen-reader-text">Tags</span><a href="https://knot126.wordpress.com/tag/game-engine/" rel="tag">game engine</a>, <a href="https://knot126.wordpress.com/tag/programming/" rel="tag">programming</a></span></span><span class="edit-link"><a class="post-edit-link" href="https://wordpress.com/post/knot126.wordpress.com/41">Edit<span class="screen-reader-text"> "Private: Current Engine Status:&nbsp;2021-02-17"</span></a></span></footer> <!-- .entry-footer -->
+</article>
