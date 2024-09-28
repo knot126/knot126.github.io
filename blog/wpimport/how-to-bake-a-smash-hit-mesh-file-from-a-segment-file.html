@@ -1,0 +1,145 @@
+<article id="post-62" class="post-62 post type-post status-publish format-standard hentry category-uncategorized tag-baking-assets tag-mesh-files tag-segments tag-smash-hit">
+		<header class="entry-header">
+		<div class="entry-meta"><span class="posted-on"><span class="screen-reader-text">Posted on</span> <a href="https://knot126.wordpress.com/2021/02/18/how-to-bake-a-smash-hit-mesh-file-from-a-segment-file/" rel="bookmark"><time class="entry-date published" datetime="2021-02-18T20:27:07-06:00">February 18, 2021</time><time class="updated" datetime="2023-04-11T02:42:35-05:00">April 11, 2023</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://knot126.wordpress.com/author/knot126/">knot126</a></span></span></div><!-- .entry-meta --><h1 class="entry-title">How to Bake a Smash Hit Mesh File from a Segment&nbsp;File</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		
+<p><em>Note: I am aware of how full of it this post is now. I will leave it up for reference and as an example of why I shouldn’t make posts just because I can…</em></p>
+
+
+
+<p>It’s only been a day since it has been possible to easily export mesh files, and there are already many people who want to take advantage of it. So, let’s see how to make a mesh file from a segment’s XML file!</p>
+
+
+
+<h2 class="wp-block-heading" id="blender-tools">Blender Tools</h2>
+
+
+
+<p>Firstly, if you use Smash Hit Blender Tools, download the newest version and install it. It will have support for exporting meshes alongside your segment XML files, so you don’t have to manually do it every time. It’s based on the same exporter function from MeshBake, so it is the same quality of export and much more convenient. All you need to do is make sure that <em>Box Export Mode</em> is set to <em>Mesh Bake</em>, which it will be by default on all files. Then, you can export your segments with mesh files alongside them.</p>
+
+
+
+<h2 class="wp-block-heading" id="meshbake">MeshBake</h2>
+
+
+
+<p>However, if you use an editor that doesn’t support baking mesh files, or you edit your mesh files by hand, you will need to use a small utility called MeshBake. Download the latest version of <a href="https://smashingmods.fandom.com/wiki/Knot126/Mediocre_Tools_Pack">Mediocre Tools pack</a> and unzip it, then install <a href="https://www.python.org/downloads">python</a>.</p>
+
+
+
+<p>Next, open the folder where you extracted Mediocre Tools pack and go into the folder called “meshbake.” On Windows, hold SHIFT and right click, and click “Open in Command Prompt/Powershell.” On a Linux based system, use the normal method for opening a terminal emulator in the current directory.</p>
+
+
+
+<p>When you are at this window, type the following:</p>
+
+
+
+<pre class="wp-block-code"><code>python ./meshbake.py PathToXMLFile PathWhereMeshFileShouldGo</code></pre>
+
+
+
+<p>If its says something about python not being found, try this:</p>
+
+
+
+<pre class="wp-block-code"><code>python3 ./meshbake.py PathToXMLFile PathWhereMeshFileShouldGo</code></pre>
+
+
+
+<p>Make sure to replace <em>PathToXMLFile</em> with the path to your segment’s XML file. You should just be able to drag and drop the XML file into the window. Also, make sure to set <em>PathWhereMeshFileShouldGo</em> to the name of the file you want your mesh to be exported to. After you have typed all of this, run it by pressing enter.</p>
+
+
+
+<p>Here are a few examples if you are confused:</p>
+
+
+
+<pre class="wp-block-code"><code># On windows:
+&gt; python ./meshbake.py "C:\Users\SomeName\Documents\Smash Hit Segments\somesegment.xml.mp3" "C:\Users\SomeName\Documents\Smash Hit Segments\somesegment.mesh.mp3"
+
+# On Linux:
+$ python ./meshbake.py /home/somename/Documents/SmashHitSegments/somesegment.xml.mp3 /home/somename/Doucments/SmashHitSegments/somesegment.mesh.mp3</code></pre>
+
+
+
+<p>Please note that MeshBake does not support mesh files that have been compressed (that is, the ones that end in <em>.xml.gz.mp3</em>).</p>
+
+
+
+<p>If everything went well, you should now have a mesh file alongside your XML file. You should be able to copy these files into the APK, load them and then play though them and see that you have real meshes instead of the stonehack obstacles.</p>
+
+
+
+<h2 class="wp-block-heading" id="notes">Notes</h2>
+
+
+
+<ul class="wp-block-list">
+<li>You may notice that the textures don’t tile correctly. This is a fault with the exporter, but it is still better than using stonehack obstacles. (This also means that the tile size properties will be ignored.)</li>
+
+
+
+<li>If you were using stonehack obstacles and have switched to using baked meshes, make sure that all of your visibility properties are set correctly. If they are not, the boxes may fail to show up correctly and use fallback values. Only boxes which have their visible property set to “1” (or checked in blender tools) will be exported to the mesh.</li>
+
+
+
+<li>Note that is is not possible to use templates at the moment, and it will probably never be possible to use templates with Blender Tools.</li>
+
+
+
+<li>The exported mesh will likely be somewhat inefficient because it does not take advantage of Index/Element Buffer Objects, which the mesh files often use to improve performance in the game.</li>
+</ul>
+<div id="atatags-370373-66f7cfe53c67f">
+		<script type="text/javascript">
+			__ATA.cmd.push(function() {
+				__ATA.initVideoSlot('atatags-370373-66f7cfe53c67f', {
+					sectionId: '370373',
+					format: 'inread'
+				});
+			});
+		</script>
+	</div><span id="wordads-inline-marker" style="display: none;"></span>		<div id="wordads-preview-parent" class="wpcnt">
+			<div class="wpa">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<div class="wpa-notice">
+						<p>Occasionally, some of your visitors may see an advertisement here, <br>as well as a <a href="https://en.support.wordpress.com/cookie-widget/" target="_blank">Privacy &amp; Cookies banner</a> at the bottom of the page.<br>You can hide ads completely by upgrading to one of our paid plans.</p>
+						<p class="wpa-buttons">
+							<a class="wpa-button is-primary" id="wordads-preview-more" href="https://wordpress.com/plans/183392693/?feature=no-adverts&amp;utm_campaign=removeadsnotive" rel="nofollow" target="_blank">Upgrade now</a>
+							<a class="wpa-button" id="wordads-preview-dismiss" href="#">Dismiss message</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>			<div id="atatags-26942-66f7cfe53c70a"></div>
+			
+			<script>
+				__ATA.cmd.push(function() {
+					__ATA.initDynamicSlot({
+						id: 'atatags-26942-66f7cfe53c70a',
+						location: 120,
+						formFactor: '001',
+						label: {
+							text: 'Advertisements',
+						},
+						creative: {
+							reportAd: {
+								text: 'Report this ad',
+							},
+							privacySettings: {
+								text: 'Privacy',
+								
+							}
+						}
+					});
+				});
+			</script><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-press-this"><a rel="nofollow noopener noreferrer" data-shared="" class="share-press-this sd-button share-icon" href="https://knot126.wordpress.com/2021/02/18/how-to-bake-a-smash-hit-mesh-file-from-a-segment-file/?share=press-this" target="_blank" title="Click to Press This!"><span>Press This</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-62" class="share-twitter sd-button share-icon" href="https://knot126.wordpress.com/2021/02/18/how-to-bake-a-smash-hit-mesh-file-from-a-segment-file/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-62" class="share-facebook sd-button share-icon" href="https://knot126.wordpress.com/2021/02/18/how-to-bake-a-smash-hit-mesh-file-from-a-segment-file/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-end"></li></ul><p class="share-customize-link"><a href="https://jetpack.com/redirect/?source=calypso-marketing-sharing-buttons&amp;site=knot126.wordpress.com" target="_blank" rel="noopener noreferrer">Customize buttons</a></p></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-183392693-62-66f7cfe53cce6" data-src="//widgets.wp.com/likes/index.html?ver=20240928#blog_id=183392693&amp;post_id=62&amp;origin=knot126.wordpress.com&amp;obj_id=183392693-62-66f7cfe53cce6" data-name="like-post-frame-183392693-62-66f7cfe53cce6" data-title="Like or Reblog"><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>	</div><!-- .entry-content -->
+
+	<footer class="entry-footer"><span class="cat-tags-links"><span class="tags-links"><svg class="icon icon-hashtag" aria-hidden="true" role="img"> <use href="#icon-hashtag" xlink:href="#icon-hashtag"></use> </svg><span class="screen-reader-text">Tags</span><a href="https://knot126.wordpress.com/tag/baking-assets/" rel="tag">baking assets</a>, <a href="https://knot126.wordpress.com/tag/mesh-files/" rel="tag">mesh files</a>, <a href="https://knot126.wordpress.com/tag/segments/" rel="tag">segments</a>, <a href="https://knot126.wordpress.com/tag/smash-hit/" rel="tag">smash hit</a></span></span><span class="edit-link"><a class="post-edit-link" href="https://wordpress.com/post/knot126.wordpress.com/62">Edit<span class="screen-reader-text"> "How to Bake a Smash Hit Mesh File from a Segment&nbsp;File"</span></a></span></footer> <!-- .entry-footer -->
+</article>

@@ -1,0 +1,159 @@
+<article id="post-143" class="post-143 post type-post status-publish format-standard hentry category-uncategorized">
+		<header class="entry-header">
+		<div class="entry-meta"><span class="posted-on"><span class="screen-reader-text">Posted on</span> <a href="https://knot126.wordpress.com/2021/08/28/an-overview-of-how-to-install-lineageos-18-1-on-an-lg-v20-vs995/" rel="bookmark"><time class="entry-date published" datetime="2021-08-28T17:23:12-05:00">August 28, 2021</time><time class="updated" datetime="2022-08-07T11:24:46-05:00">August 7, 2022</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://knot126.wordpress.com/author/knot126/">knot126</a></span></span></div><!-- .entry-meta --><h1 class="entry-title">An overview of how to install LineageOS 18.1 on an LG V20&nbsp;VS995</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		
+<p>I recently just spent a long time getting an LG V20 model VS995 (the Verizon variant) to flash TWRP and boot LineageOS 18.1. Here are some post-install remarks; it’s actually very simple compared to what it first looks like.</p>
+
+
+
+<p><strong><span style="color:red;">THIS IS NOT A TUTORIAL. </span></strong>This only adds some extra notes for my personal experience. Hopefully they will be helpful.</p>
+
+
+
+<h2 class="wp-block-heading" id="prerequisites">Prerequisites</h2>
+
+
+
+<p>Software, hardware and downloads:</p>
+
+
+
+<ul class="wp-block-list"><li>An LG V20 VS995</li><li>A micro SD card, at least 8 GB but you might get away with less</li><li>A stock 12A firmware if the device has been updated (download from <a href="https://downloads.lg-firmwares.com/get/5aa57a55f17834fc736c0e1a6c28f851/VS99512A_06_1114_ARB00.kdz">gl-firmwares.com</a>)</li><li>A set of scripts to unlock bootloader and flash recovery (download from <a href="https://forum.xda-developers.com/t/ls997-vs995-h910-f800l-dirtysanta-bootloader-unlock-and-root-guide.3519410/">the xda thread</a>)</li><li>The LineageOS 18 ZIP (download from the official site at <a href="https://download.lineageos.org/vs995">download.lineageos.org</a>)</li><li>The TWRP img file (download from the official site at <a href="https://twrp.me/lg/lgv20vs995.html">twrp.me</a>)</li><li>Windows computer with driver and LGUP 1.14 (download from <a href="https://lg-firmwares.com/how-to-flash/">gl-firmwares.com</a>)</li><li>(Optional) The Google Play ZIP file (download from <a href="https://opengapps.org/">opengapps.org</a>)</li></ul>
+
+
+
+<p>Educational material and recommendations:</p>
+
+
+
+<ul class="wp-block-list"><li>Having read <a href="https://forum.xda-developers.com/t/ls997-vs995-h910-f800l-dirtysanta-bootloader-unlock-and-root-guide.3519410/">the xda thread referenced here</a></li><li>Being somewhat computer literate</li><li>Knowing how to problem solve</li><li>Knowing how to use your favourite search engine</li></ul>
+
+
+
+<h2 class="wp-block-heading" id="part-1-install-drivers-lgup-and-flash-12a-firmware">Part 1: Install Drivers, LGUP and flash 12A firmware</h2>
+
+
+
+<p>First, the firmware needs to be downgraded to a version with the dirty cow exploit.</p>
+
+
+
+<p><strong>Important</strong>: This will wipe the device and remove all personal data, and the device will be downgraded to a lower firmware version.</p>
+
+
+
+<ol class="wp-block-list"><li>Install the Drivers and LGUP 1.14. This should be all that is needed, but some are saying you may need to run Uppercut first to get the phone to detect in LGUP, though I did not seem to need to do this.</li><li>Open GLUP, plug in your device while holding volume down and select it. Then, select the 12A stock firmware file that you downloaded by clicking the three dots in the bottom panel.</li><li>Under the flash mode, make sure that UPGRADE is the radio box that is selected. The other modes do not seem to work.</li><li>Being certain that you have a backup, flash the firmware.</li><li>Wait for the phone to boot to a screen saying that “Encryption failed” and you need to reset the device, and agree to do so.</li><li>Set up the phone as minimally as possible. Don’t connect to a wireless network just in case it would try to update.</li></ol>
+
+
+
+<h2 class="wp-block-heading" id="part-2-install-terminal-emulator">Part 2: Install Terminal Emulator</h2>
+
+
+
+<p>You will need some kind of terminal emulator for the XDA thread portion.</p>
+
+
+
+<p>Either:</p>
+
+
+
+<ol class="wp-block-list"><li>(Not recommended by me) Connect to a network and sign in with a Google Account.</li><li>Install <a href="https://play.google.com/store/apps/details?id=jackpal.androidterm&amp;hl=en_US&amp;gl=US">Terminal Emulator</a> from Google Play.</li></ol>
+
+
+
+<p>Or, better yet:</p>
+
+
+
+<ol class="wp-block-list"><li>Download a <a href="https://apkpure.com/terminal-emulator-for-android/jackpal.androidterm">terminal emulator APK</a>.</li><li>Install it using <code>adb install &lt;apk name&gt;</code>.</li></ol>
+
+
+
+<h2 class="wp-block-heading" id="part-3-follow-the-xda-flow">Part 3: Follow the (Xda) Flow</h2>
+
+
+
+<p>This part is largely following the XDA thread, but I am taking a shortcut since we can discard the stock ROM as we’re installing LineageOS.</p>
+
+
+
+<ol class="wp-block-list"><li>Follow the steps at this forum thread up until the part where you run <code>step3.sh</code>. <ul><li><strong>Important</strong>: Note that <code>RUNMEFIRST.sh</code> won’t output any messages due to adb changes when using recent version of adb, so you’ll just have to wait for the Terminal Emulator to drop you back out to the prompt and then a few minutes more, and then you’re fine to move on without getting the success message.</li></ul></li><li>Edit <code>step3.sh</code> to replace “<code>boott.img</code>” with “<code>boot1.img</code>” on line 16.</li><li>Run <code>step3.sh</code>, making sure to give permissions if it does not have them.</li><li>After the phone has rebooted and is vibrating, wait for the verizon logo to appear with the four colourful dots at the bottom to indicate that it is loading and for it to appear in <code>adb devices</code>. Once it appears, issue the command <code>adb reboot recovery</code>.</li><li>Wait for the device to enter recovery. It will probably show the LG logo followed by the corrupt screen and then again followed by the LG logo and then finally enter recovery after a minute or so.</li><li>Ignore the data password screen and slide to allow modifying system storage.</li></ol>
+
+
+
+<h2 class="wp-block-heading" id="part-4-flashing-the-lineageos-using-twrp">Part 4: Flashing the LineageOS using TWRP</h2>
+
+
+
+<p>Finally, LineageOS and maybe Google Play need to be flashed.</p>
+
+
+
+<p><strong>Note</strong>: From here, a moderately advanced or experienced user can probably stop reading this guide and figure out how to wipe and flash things.</p>
+
+
+
+<ol class="wp-block-list"><li>To to Wipe -&gt; Format Data and format the data. Don’t reboot.</li><li>Again go to Wipe -&gt; Advanced and wipe all of the storage on the device (tick everything), except for the micro SD if you’ve already put it in and the Internal Storage if you don’t want to.</li><li>If you have not put in the micro SD card yet, do it now.</li><li>Go to Flash and choose the ZIP file for LineageOS.</li><li>Flash the ZIP file.</li><li>If you chose to download Google Apps, flash that ZIP too.</li><li>Reboot into LineageOS.</li></ol>
+
+
+
+<h2 class="wp-block-heading" id="tips">Tips</h2>
+
+
+
+<ul class="wp-block-list"><li>To make the vibrator stop vibrating, do an action that would use the vibrator, like typing on the keyboard. If that doesn’t work, just wait a few minutes and it should stop.</li><li>In settings, search for and enable advanced power options when restarting. This will make it easier to enter recovery since the normal startup combination is a pain to do.</li></ul>
+<div id="atatags-370373-66f7cf869d144">
+		<script type="text/javascript">
+			__ATA.cmd.push(function() {
+				__ATA.initVideoSlot('atatags-370373-66f7cf869d144', {
+					sectionId: '370373',
+					format: 'inread'
+				});
+			});
+		</script>
+	</div><span id="wordads-inline-marker" style="display: none;"></span>		<div id="wordads-preview-parent" class="wpcnt">
+			<div class="wpa">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+					<div class="wpa-notice">
+						<p>Occasionally, some of your visitors may see an advertisement here, <br>as well as a <a href="https://en.support.wordpress.com/cookie-widget/" target="_blank">Privacy &amp; Cookies banner</a> at the bottom of the page.<br>You can hide ads completely by upgrading to one of our paid plans.</p>
+						<p class="wpa-buttons">
+							<a class="wpa-button is-primary" id="wordads-preview-more" href="https://wordpress.com/plans/183392693/?feature=no-adverts&amp;utm_campaign=removeadsnotive" rel="nofollow" target="_blank">Upgrade now</a>
+							<a class="wpa-button" id="wordads-preview-dismiss" href="#">Dismiss message</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>			<div id="atatags-26942-66f7cf869d1f3"></div>
+			
+			<script>
+				__ATA.cmd.push(function() {
+					__ATA.initDynamicSlot({
+						id: 'atatags-26942-66f7cf869d1f3',
+						location: 120,
+						formFactor: '001',
+						label: {
+							text: 'Advertisements',
+						},
+						creative: {
+							reportAd: {
+								text: 'Report this ad',
+							},
+							privacySettings: {
+								text: 'Privacy',
+								
+							}
+						}
+					});
+				});
+			</script><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-press-this"><a rel="nofollow noopener noreferrer" data-shared="" class="share-press-this sd-button share-icon" href="https://knot126.wordpress.com/2021/08/28/an-overview-of-how-to-install-lineageos-18-1-on-an-lg-v20-vs995/?share=press-this" target="_blank" title="Click to Press This!"><span>Press This</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-143" class="share-twitter sd-button share-icon" href="https://knot126.wordpress.com/2021/08/28/an-overview-of-how-to-install-lineageos-18-1-on-an-lg-v20-vs995/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-143" class="share-facebook sd-button share-icon" href="https://knot126.wordpress.com/2021/08/28/an-overview-of-how-to-install-lineageos-18-1-on-an-lg-v20-vs995/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-end"></li></ul><p class="share-customize-link"><a href="https://jetpack.com/redirect/?source=calypso-marketing-sharing-buttons&amp;site=knot126.wordpress.com" target="_blank" rel="noopener noreferrer">Customize buttons</a></p></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-183392693-143-66f7cf869d943" data-src="//widgets.wp.com/likes/index.html?ver=20240928#blog_id=183392693&amp;post_id=143&amp;origin=knot126.wordpress.com&amp;obj_id=183392693-143-66f7cf869d943" data-name="like-post-frame-183392693-143-66f7cf869d943" data-title="Like or Reblog"><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>	</div><!-- .entry-content -->
+
+	<footer class="entry-footer"><span class="edit-link"><a class="post-edit-link" href="https://wordpress.com/post/knot126.wordpress.com/143">Edit<span class="screen-reader-text"> "An overview of how to install LineageOS 18.1 on an LG V20&nbsp;VS995"</span></a></span></footer> <!-- .entry-footer -->
+</article>
