@@ -73,7 +73,7 @@ class BlogIndex:
 		Save the blog index file
 		"""
 		
-		Path(f"{self.path}/blog.json").write_text(json.dumps(self.items))
+		Path(f"{self.path}/blog.json").write_text(json.dumps(self.items, indent="\t"))
 
 index = BlogIndex(BLOG_PATH)
 
