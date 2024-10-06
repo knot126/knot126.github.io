@@ -163,6 +163,71 @@ function setupEditor(sect, mdContent) {
 	document.getElementById("editor-data").value = mdContent;
 	document.getElementsByTagName("body")[0].style.overflow = "hidden";
 	updateEditorPreview();
+	setupMediaDragAndDrop();
+}
+
+function setupMediaDragAndDrop() {
+	let body = document.getElementById("editor-data");
+	
+	// Prevent opening file
+	body.addEventListener("dragover", function (e) {
+		// console.log("preventDefault");
+		e.preventDefault();
+		// alert("ondragover triggered");
+	});
+	
+	body.addEventListener("drop", async function (e) {
+		if (e.dataTransfer.files) {
+			// console.log("preventDefault");
+			e.preventDefault();
+			// console.log("doDragAndDrop");
+			await doDragAndDrop(e);
+		}
+		else {
+			console.log("not a file drop");
+		}
+	});
+}
+
+function bytesToBase64(data) {
+	// i dont like this
+	let asStr = "";
+	
+	for (let c of data) {
+		asStr += String.fromCharCode(c);
+	}
+	
+	return btoa(asStr);
+}
+
+async function doDragAndDrop(e) {
+	let itemData = [];
+	let files = e.dataTransfer.files;
+	
+	for (let i = 0; i < files.length; i++) {
+		console.log(`Want to upload: ${files[i].name}`);
+		itemData.push({
+			name: files[i].name,
+			data: bytesToBase64(await files[i].bytes()),
+		});
+	}
+	
+	let data = {
+		files: itemData,
+	};
+	
+	request("POST", "/api/upload", JSON.stringify(data), onUploadFinish);
+}
+
+function onUploadFinish() {
+	if (this.readyState == 4 && this.status == 200) {
+		let md = document.getElementById("editor-data");
+		let data = JSON.parse(this.responseText);
+		
+		for (let n of data.names) {
+			md.value += `\n\n<img src="./media/${n}"/>`;
+		}
+	}
 }
 
 async function updateEditorPreview() {
