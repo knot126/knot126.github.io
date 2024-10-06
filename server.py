@@ -3,6 +3,9 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 import json
 import time
+import base64
+import hashlib
+from os import makedirs
 from subprocess import run
 
 BLOG_PATH = "blog"
@@ -82,6 +85,47 @@ def add_commit_push():
 	run(["git", "commit", "--no-gpg-sign", "-m", "Automatic blog update"])
 	run(["git", "push", f"https://{Path('access.conf').read_text().strip()}@github.com/knot126/knot126.github.io.git"])
 
+def process_uploads(file_list):
+	makedirs("media", exist_ok=True)
+	
+	names = []
+	
+	for f in file_list:
+		# Decode file data
+		data = base64.b64decode(f["data"])
+		
+		# Filename
+		ext = "".join(Path(f["name"]).suffixes)
+		hash = hashlib.sha256(data).hexdigest()
+		filename = hash + ext
+		
+		# Write data
+		Path("media/" + filename).write_bytes(data)
+		
+		# Add to list of filenames
+		names.append(filename)
+	
+	return names
+
+
+def read_json(self):
+	"""Read JSON from client"""
+	return json.loads(self.rfile.read(int(self.headers["Content-Length"])).decode("utf-8"))
+
+def respond(self, status=None, data=None, content_type=None):
+	"""Respond to client"""
+	self.send_response(status or 200)
+	self.send_header("Content-Length", "0" if not data else str(len(data)))
+	self.send_header("Content-Type", content_type or "text/plain")
+	self.end_headers()
+	
+	if data:
+		self.wfile.write(data)
+
+def respond_json(self, data):
+	"""Respond to client with JSON data"""
+	respond(self, 200, json.dumps(data).encode('utf-8'), "application/json")
+
 class RequestHandler(SimpleHTTPRequestHandler):
 	def do_GET(self):
 		if self.path == "/common/main.js":
@@ -96,7 +140,7 @@ class RequestHandler(SimpleHTTPRequestHandler):
 	
 	def do_POST(self):
 		if self.path == "/api/save":
-			info = json.loads(self.rfile.read(int(self.headers["Content-Length"])).decode("utf-8"))
+			info = read_json(self)
 			index.update_page(info['page'], info['content'])
 			
 			self.send_response(200)
@@ -110,6 +154,10 @@ class RequestHandler(SimpleHTTPRequestHandler):
 			self.send_header("Content-Length", "0")
 			self.send_header("Content-Type", "text/plain")
 			self.end_headers()
+		elif self.path == "/api/upload":
+			info = read_json(self)
+			result = process_uploads(info["files"])
+			respond_json(self, {"names": result})
 		else:
 			self.send_response(404)
 			self.send_header("Content-Length", "0")
