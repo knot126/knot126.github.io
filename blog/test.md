@@ -22,3 +22,5 @@ if (user.isValidLogin(login_details) and user.admin != true) {
     return {"success": true, "token": token}
 }
 </pre>
+
+<img src="./media/b88bb542fe26a3c8431ac4c1ac0cf7979269787a57d0607ab17f8016751f461a.png"/>

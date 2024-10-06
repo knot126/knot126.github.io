@@ -166,6 +166,55 @@ function setupEditor(sect, mdContent) {
 	setupMediaDragAndDrop();
 }
 
+async function updateEditorPreview() {
+	let preview = document.getElementById("editor-preview");
+	let data = document.getElementById("editor-data").value;
+	preview.innerHTML = marked.parse(data);
+	format_codes();
+}
+
+function setWaiting() {
+	document.getElementById("editor-error").innerHTML = `<object data="./common/spinner2.svg" width="20" height="20"></object>`;
+}
+
+function savePage() {
+	setWaiting();
+	
+	let data = {
+		"page": getParam("page"),
+		"content": document.getElementById("editor-data").value,
+	};
+	
+	request("POST", "/api/save", JSON.stringify(data), savePageOnFinish);
+}
+
+function savePageOnFinish() {
+	let err = document.getElementById("editor-error");
+	
+	if (this.readyState == 4 && this.status == 200) {
+		err.innerHTML = "Saved!";
+	}
+	else if (this.readyState == 4) {
+		err.innerHTML = "Error while saving";
+	}
+}
+
+function pushChanges() {
+	setWaiting();
+	request("POST", "/api/push", "", pushChangesOnFinish);
+}
+
+function pushChangesOnFinish() {
+	let err = document.getElementById("editor-error");
+	
+	if (this.readyState == 4 && this.status == 200) {
+		err.innerHTML = "Pushed changes!";
+	}
+	else if (this.readyState == 4) {
+		err.innerHTML = "Error while pushing";
+	}
+}
+
 function setupMediaDragAndDrop() {
 	let body = document.getElementById("editor-data");
 	
@@ -228,55 +277,8 @@ function onUploadFinish() {
 			md.value += `\n\n<img src="./media/${n}"/>`;
 		}
 	}
-}
-
-async function updateEditorPreview() {
-	let preview = document.getElementById("editor-preview");
-	let data = document.getElementById("editor-data").value;
-	preview.innerHTML = marked.parse(data);
-	format_codes();
-}
-
-function setWaiting() {
-	document.getElementById("editor-error").innerHTML = `<object data="./common/spinner2.svg" width="20" height="20"></object>`;
-}
-
-function savePage() {
-	setWaiting();
 	
-	let data = {
-		"page": getParam("page"),
-		"content": document.getElementById("editor-data").value,
-	};
-	
-	request("POST", "/api/save", JSON.stringify(data), savePageOnFinish);
-}
-
-function savePageOnFinish() {
-	let err = document.getElementById("editor-error");
-	
-	if (this.readyState == 4 && this.status == 200) {
-		err.innerHTML = "Saved!";
-	}
-	else if (this.readyState == 4) {
-		err.innerHTML = "Error while saving";
-	}
-}
-
-function pushChanges() {
-	setWaiting();
-	request("POST", "/api/push", "", pushChangesOnFinish);
-}
-
-function pushChangesOnFinish() {
-	let err = document.getElementById("editor-error");
-	
-	if (this.readyState == 4 && this.status == 200) {
-		err.innerHTML = "Pushed changes!";
-	}
-	else if (this.readyState == 4) {
-		err.innerHTML = "Error while pushing";
-	}
+	updateEditorPreview();
 }
 
 /** load function to call from html **/
