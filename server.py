@@ -24,6 +24,9 @@ def parse_title_and_desc(md):
 		if title and desc:
 			break
 	
+	if not title:
+		title = " ".join(desc.split()[:6]) + "..."
+	
 	return (title, desc)
 
 class BlogIndex:

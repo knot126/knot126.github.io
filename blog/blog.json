@@ -38,5 +38,11 @@
 		"time": 1727800873,
 		"title": "Goodbye Cohost",
 		"desc": "Goodbye cohost! This was probably the best exprience I've ever had on social media and was the only one where I really felt like I could post anything I actually wanted to."
+	},
+	{
+		"file": "deobfuscation-part-1.md",
+		"time": 1729807402,
+		"title": "Deobfuscation Part 1 of N: Oh god I'm going to have to write so much shit aren't I?",
+		"desc": "I've been working to learn more about automatic deobfuscation of binaries as I'm currently trying to reverse an obfuscated binary (seemingly obfuscated with OLLVM), and strangely it seems like there's relatively very little written about automated deobfuscation of software, and basically no actual working deobfuscation tools exist."
 	}
 ]
