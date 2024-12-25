@@ -51,5 +51,12 @@
 		"title": "Data Structure Hell",
 		"desc": "Arrays and hash tables are things you often need when programming. When you're language is at least somewhat dynamic (C++) there's usually an obvious way to implement them that's also nice to write, but in C I don't think there's any nice way to write them.",
 		"unlisted": true
+	},
+	{
+		"file": "more-site-updates.md",
+		"time": 1735085952,
+		"title": "More site updates",
+		"desc": "I really should update this site more often, since it's my \"main\" website at the moment, but alas static sites are still too much of a pain in the ass for me to justify updating often.",
+		"unlisted": false
 	}
 ]
