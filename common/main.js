@@ -42,14 +42,25 @@ function formatDate(t) {
 }
 
 /** Navbar **/
+function occurances(string, char) {
+	return (string.split("/")).length;
+}
+
 function download_sidebar() {
-	request("GET", "./navbar.html", "", setup_sidebar);
+	let url = "../".repeat(occurances(window.location.pathname) - 1) + "navbar.html";
+	
+	request("GET", url, "", setup_sidebar);
+}
+
+function fixupNavbar(data) {
+	let replacement = `href="` + ("../".repeat(occurances(window.location.pathname) - 1));
+	return data.replaceAll(`href="`, replacement);
 }
 
 function setup_sidebar() {
 	if (this.readyState == 4 && this.status == 200) {
 		let navbar = document.getElementById("navbar");
-		navbar.innerHTML = this.responseText;
+		navbar.innerHTML = fixupNavbar(this.responseText);
 	}
 	else if (this.readyState == 4) {
 		let navbar = document.getElementById("navbar");
@@ -86,14 +97,16 @@ function setup_blog_index() {
 		for (let i = 0; i < entries.length; i++) {
 			let entry = entries[i];
 			
-			index.innerHTML += `<div style="padding: 1em; background: #8882; border-radius: 0.25em;">
+			if (!entry.unlisted || getParam("showhidden") == "1") {
+				index.innerHTML += `<div style="padding: 1em; background: #8882; border-radius: 0.25em;">
 				<h3 style="padding-top: 0;"><a href="./blog.html?page=${entry.file}">${entry.title}</a></h3>
 				<p style="opacity: 0.6;">${(entry.time == 0) ? entry.date : formatDate(entry.time)}</p>
 				<p style="margin-bottom: 0;">${entry.desc}</p>
-			</div>`;
-			
-			if (i != entries.length - 1) {
-				index.innerHTML += `<div style="height: 1em;"></div>`;
+				</div>`;
+				
+				if (i != entries.length - 1) {
+					index.innerHTML += `<div style="height: 1em;"></div>`;
+				}
 			}
 		}
 	}
@@ -156,7 +169,8 @@ function setupEditor(sect, mdContent) {
 		</div>
 	</div>
 	<p>
-		<button class="button" onclick="savePage()">Save page</button>
+		<button class="button" onclick="savePage()">Save listed page</button>
+		<button class="button secondary" onclick="savePage(true)">Save unlisted page</button>
 		<button class="button secondary" onclick="pushChanges()">Push changes</button>
 		<span id="editor-error"></span>
 	</p>`;
@@ -177,11 +191,12 @@ function setWaiting() {
 	document.getElementById("editor-error").innerHTML = `<object data="./common/spinner2.svg" width="20" height="20"></object>`;
 }
 
-function savePage() {
+function savePage(unlisted = false) {
 	setWaiting();
 	
 	let data = {
 		"page": getParam("page"),
+		"unlisted": unlisted,
 		"content": document.getElementById("editor-data").value,
 	};
 	

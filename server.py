@@ -50,7 +50,7 @@ class BlogIndex:
 		else:
 			return self.items[index]
 	
-	def update_page(self, filename, content):
+	def update_page(self, filename, content, unlisted):
 		"""
 		Update a page entry
 		"""
@@ -66,6 +66,7 @@ class BlogIndex:
 		
 		data["title"] = title
 		data["desc"] = desc
+		data["unlisted"] = unlisted
 		
 		# Save page and index
 		self.write_page(filename, content)
@@ -144,7 +145,7 @@ class RequestHandler(SimpleHTTPRequestHandler):
 	def do_POST(self):
 		if self.path == "/api/save":
 			info = read_json(self)
-			index.update_page(info['page'], info['content'])
+			index.update_page(info['page'], info['content'], info['unlisted'])
 			
 			self.send_response(200)
 			self.send_header("Content-Length", "0")

@@ -44,5 +44,12 @@
 		"time": 1729807402,
 		"title": "Deobfuscation Part 1 of N: Oh god I'm going to have to write so much shit aren't I?",
 		"desc": "I've been working to learn more about automatic deobfuscation of binaries as I'm currently trying to reverse an obfuscated binary (seemingly obfuscated with OLLVM), and strangely it seems like there's relatively very little written about automated deobfuscation of software, and basically no actual working deobfuscation tools exist."
+	},
+	{
+		"file": "data-structure-hell.md",
+		"time": 1732829744,
+		"title": "Data Structure Hell",
+		"desc": "Arrays and hash tables are things you often need when programming. When you're language is at least somewhat dynamic (C++) there's usually an obvious way to implement them that's also nice to write, but in C I don't think there's any nice way to write them.",
+		"unlisted": true
 	}
 ]
