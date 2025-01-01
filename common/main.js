@@ -98,7 +98,7 @@ function setup_blog_index() {
 			let entry = entries[i];
 			
 			if (!entry.unlisted || getParam("showhidden") == "1") {
-				index.innerHTML += `<div style="padding: 1em; background: #8882; border-radius: 0.25em;">
+				index.innerHTML += `<div style="padding: 1em; background: #8881; border-radius: 0.25em;">
 				<h3 style="padding-top: 0;"><a href="./blog.html?page=${entry.file}">${entry.title}</a></h3>
 				<p style="opacity: 0.6;">${(entry.time == 0) ? entry.date : formatDate(entry.time)}</p>
 				<p style="margin-bottom: 0;">${entry.desc}</p>

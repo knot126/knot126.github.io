@@ -24,7 +24,7 @@
 	--base-colour-green: #34b58a;
 	--base-colour-green-transluscent: #34b58a30;
 	--base-colour-text: #000;
-	--base-colour-background: #fffa;
+	--base-colour-background: #fffb;
 	--base-colour-panel-background: #fff4;
 	--base-colour-panel-background-hover: #fff;
 	--base-colour-panel-border-top: #fffa;
@@ -32,21 +32,22 @@
 	--base-colour-gradient-top: #f0f0f070;
 	--base-colour-gradient-bottom: #f2f2f2c0;
 	--background-location: url("../common/light.jpeg");
-	--title-font: "Kumbh Sans", "Kumbh Sans", sans-serif;
+	--title-font: "Sen", "Kumbh Sans", sans-serif;
 	--body-font: "Sen", "Kumbh Sans", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
 	* {
+		--base-colour: #01b9de;
 		--base-colour-text: #fff;
-		--base-colour-background: #222a;
-		--base-colour-gradient-top: #2f2f2f70;
-		--base-colour-gradient-bottom: #0f0f0fc0;
+		--base-colour-background: #222b;
+		--base-colour-gradient-top: #2f2f2fb0;
+		--base-colour-gradient-bottom: #0f0f0fe0;
 		--base-colour-panel-background: #2224;
 		--base-colour-panel-background-hover: #333;
 		--base-colour-panel-border-top: #666;
 		--base-colour-panel-border-bottom: #000;
-		--background-location: url("../common/light.jpeg");
+		--background-location: url("../common/dark.jpeg");
 	}
 }
 
@@ -161,7 +162,8 @@ figcaption {
 }
 
 .main-section {
-	border-radius: 0.25em;
+/* 	border-radius: 0.25em; */
+	border-radius: 0.5em;
 	color: var(--base-colour-text);
 	overflow: auto;
 	padding: 1.25em;
@@ -234,7 +236,7 @@ figcaption {
 .nav-logotype {
 	display: inline-block;
 	color: var(--base-colour-text);
-	font-family: "Kumbh Sans", sans-serif;
+	font-family: var(--title-font);
 	font-size: 22pt;
 	font-weight: 700;
 	margin-right: 1em;
@@ -243,7 +245,7 @@ figcaption {
 
 .nav-link {
 	display: inline-block;
-	font-family: "Kumbh Sans", sans-serif;
+	font-family: var(--title-font);
 	font-size: 14pt;
 	margin-right: 1em;
 	vertical-align: middle;
