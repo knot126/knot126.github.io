@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Sen:wght@400;700&family=Kumbh+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Sen:wght@400;700&display=swap');
 
 /*
  * Making things default and variables
@@ -34,6 +34,7 @@
 	--background-location: url("../common/light.jpeg");
 	--title-font: "Sen", "Kumbh Sans", sans-serif;
 	--body-font: "Sen", "Kumbh Sans", sans-serif;
+	--mono-font: "DejaVu Sans Mono", "Menlo", "Consolas", "Monaco", "Droid Sans Mono", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -113,20 +114,23 @@ a:hover {
  */
 
 code {
-	background: #8882;
+	background: #8881;
+	border: 1px solid #8883;
 	border-radius: 0.325em;
-	font-family: "Fira Code", sans-serif;
+	font-family: var(--mono-font);
 	font-size: 14pt;
 	padding: 0.2em;
 }
 
 pre, .code {
-	background: #8882;
+	background: #8881;
+	border: 1px solid #8883;
 	border-radius: 0.325em;
-	font-family: "Fira Code", sans-serif;
+	font-family: var(--mono-font);
 	font-size: 12pt;
-	margin: 1em;
-	padding: 1em;
+/* 	margin: 1em; */
+	margin-bottom: 1em;
+	padding: 0.75em;
 	white-space: pre;
 	overflow: scroll;
 }

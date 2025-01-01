@@ -319,7 +319,7 @@ function is_number(s) {
 }
 
 function format_string(str) {
-	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array", "then", "end", "do", "return", "true", "false", "local", "global", "auto", "static", "struct", "class", "nil", "null"];
+	let keywords = ["function", "if", "else", "while", "for", "switch", "case", "new", "array", "then", "end", "do", "return", "true", "false", "local", "global", "auto", "static", "struct", "class", "nil", "null", "const", "let", "or", "and"];
 	let output = "";
 	
 	// The identifier hack will not use number formatting for a number if a
@@ -385,10 +385,10 @@ function format_string(str) {
 			case "}":
 			case "(":
 			case ")":
-			case ",":
-			case "=":
-			case "~":
-			case "|":
+			// case ",":
+			// case "=":
+			// case "~":
+			// case "|":
 			// case ";":
 				output += "<code-special>" + current + "</code-special>";
 				str = str.slice(1);
