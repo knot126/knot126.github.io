@@ -505,7 +505,7 @@ function format_codes() {
 }
 
 function setup_copyright() {
-	document.getElementById("copyright").innerHTML = "This website is Copyright © 2020 — 2024 Knot126";
+	document.getElementById("copyright").innerHTML = `This website is Copyright © 2020 — ${new Date().getUTCFullYear()} Knot126`;
 }
 
 var gQuotes = [
