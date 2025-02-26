@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Sen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Kumbh+Sans:wght@400;500;700&display=swap');
 
 /*
  * Making things default and variables
@@ -32,8 +32,10 @@
 	--base-colour-gradient-top: #f0f0f070;
 	--base-colour-gradient-bottom: #f2f2f2c0;
 	--background-location: url("../common/light.jpeg");
-	--title-font: "Sen", "Kumbh Sans", sans-serif;
-	--body-font: "Sen", "Kumbh Sans", sans-serif;
+/* 	--title-font: "Sen", "Kumbh Sans", sans-serif; */
+/* 	--body-font: "Sen", "Kumbh Sans", sans-serif; */
+ 	--title-font: "Kumbh Sans", sans-serif;
+	--body-font: "Open Sans", sans-serif; 
 	--mono-font: "DejaVu Sans Mono", "Menlo", "Consolas", "Monaco", "Droid Sans Mono", sans-serif;
 }
 
@@ -92,12 +94,12 @@ p, li, figcaption {
 	line-height: 1.65;
 }
 
-h1 { font-size: 36pt; font-weight: 600; }
-h2 { font-size: 30pt; font-weight: 600; }
-h3 { font-size: 24pt; }
-h4, summary { font-size: 18pt; }
+h1 { font-size: 32pt; font-weight: 600; }
+h2 { font-size: 26pt; font-weight: 600; }
+h3 { font-size: 20pt; font-weight: 600; }
+h4, summary { font-size: 16pt; font-weight: 600; }
 
-p, li, figcaption { font-size: 13pt; }
+p, li, figcaption { font-size: 12pt; font-weight: 400; }
 li { margin-left: 2em; }
 
 a {
@@ -118,7 +120,7 @@ code {
 	border: 1px solid #8883;
 	border-radius: 0.325em;
 	font-family: var(--mono-font);
-	font-size: 14pt;
+	font-size: 12pt;
 	padding: 0.2em;
 }
 
@@ -128,7 +130,6 @@ pre, .code {
 	border-radius: 0.325em;
 	font-family: var(--mono-font);
 	font-size: 12pt;
-/* 	margin: 1em; */
 	margin-bottom: 1em;
 	padding: 0.75em;
 	white-space: pre;
@@ -429,4 +430,5 @@ body {
 	border-radius: 0.325em;
 	color: var(--base-colour-text);
 	padding: 0.5em;
+	font-family: var(--mono-font);
 }

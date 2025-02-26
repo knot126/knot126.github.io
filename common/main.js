@@ -41,6 +41,10 @@ function formatDate(t) {
 	return (new Date(t * 1000)).toISOString().substring(0, 10);
 }
 
+function renderMarkdown(md) {
+	return marked.parse(md, {breaks: true});
+}
+
 /** Navbar **/
 function occurances(string, char) {
 	return (string.split("/")).length;
@@ -98,7 +102,7 @@ function setup_blog_index() {
 			let entry = entries[i];
 			
 			if (!entry.unlisted || getParam("showhidden") == "1") {
-				index.innerHTML += `<div style="padding: 1em; background: #8881; border-radius: 0.25em;">
+				index.innerHTML += `<div style="padding: 1em; background: #8881; border-radius: 0.25em; border: 1px solid #8882;">
 				<h3 style="padding-top: 0;"><a href="./blog.html?page=${entry.file}">${entry.title}</a></h3>
 				<p style="opacity: 0.6;">${(entry.time == 0) ? entry.date : formatDate(entry.time)}</p>
 				<p style="margin-bottom: 0;">${entry.desc}</p>
@@ -130,7 +134,7 @@ function setup_blog_page() {
 	
 	if (!hasParam("edit")) {
 		if (this.readyState == 4 && this.status == 200) {
-			sect.innerHTML = marked.parse(this.responseText);
+			sect.innerHTML = renderMarkdown(this.responseText);
 			format_codes();
 		}
 		else if (this.readyState == 4 && this.status == 404) {
@@ -183,7 +187,7 @@ function setupEditor(sect, mdContent) {
 async function updateEditorPreview() {
 	let preview = document.getElementById("editor-preview");
 	let data = document.getElementById("editor-data").value;
-	preview.innerHTML = marked.parse(data);
+	preview.innerHTML = renderMarkdown(data);
 	format_codes();
 }
 
