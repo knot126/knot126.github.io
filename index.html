@@ -15,25 +15,21 @@
 				<noscript><i>You need to enable JavaScript to load the navbar.</i></noscript>
 			</nav>
 			<script>main();</script>
+			
 			<div id="main" class="main-section content-section">
 				<div class="me-container">
 					<div class="me-left">
 						<img class="me-img" src="./res/TailsPFP12_1draft0_aapfp.png" />
 					</div>
 					<div class="me-right">
-						<p class="me-name">Knot126</p>
+						<p class="me-name">Knot's Homepage</p>
 						<p class="me-pronoun"><a class="me-subtle-link" href="https://en.wikipedia.org/wiki/Preferred_gender_pronoun">pronouns</a>: they/them</p>
 						<p id="me-random-quote" class="me-quote">Programmer</p>
 					</div>
 				</div>
 				<script>me_randomise_quote();</script>
-				<!--<div class="card-section">
-					<span style="cursor: pointer">
-						<h3><a onclick="openEmail('WTJSa1pYQndjSEF5TlRaQWNISnZkRzl1TG0xbA')">Email</a></h3>
-					</span>
-					<p>I do not check it daily, but you might get a response.</p>
-				</div>--><div class="card-section">
-					<script>function showChatInfo() {
+				
+				<script>function showChatInfo() {
 						showDialogue(`<div style="position: relative; top: -1em;"><h3>Chat platforms</h3>
 						<p>I am on:</p>
 						<ul>
@@ -42,23 +38,66 @@
 						</ul></div>
 						<button class="button" onclick="hideDialgoue()" style="position: absolute; bottom: 20px; left: 20px;">Close</button>`);
 					}</script>
-					<span style="cursor: pointer">
-						<h3><a onclick="showChatInfo()">Chat</a></h3>
-					</span>
-					<p>I am available on a few different chat platforms.</p>
-				</div><div class="card-section">
-					<h3><a href="https://github.com/knot126">Github</a></h3>
-					<p>Most of my programming related projects now live here since I enjoy using GitHub.</p>
-				</div><div class="card-section">
-					<h3><a href="https://codeberg.org/knot126">Codeberg</a></h3>
-					<p>A few of the projects I contribute to are on Codeberg, but I don't use it primarily.</p>
-				</div><div class="card-section">
-					<h3><a href="https://mastodon.social/@knot126">Mastodon</a></h3>
-					<p>I don't like Mastodon for various reasons, but maybe I'll post there anyway.</p>
-				</div><div class="card-section">
-					<h3><a href="https://cohost.org/knot126">Cohost (RIP)</a></h3>
-					<p>Effectively my blog before my blog existed.</p>
+				
+				<h3 style="text-align: center; padding-top: 0;">Contacts and Socials</h3>
+				<div class="me-social-bar">
+					<a class="me-social-entry" href="javascript:showChatInfo()">
+						<div>
+							<picture>
+								<source class="me-social-icon" srcset="./res/chat.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
+								<img class="me-social-icon" src="./res/chat.svg"> <!-- light -->
+							</picture>
+						</div>
+						<div>
+							<p>Chat</p>
+						</div>
+					</a>
+					<a class="me-social-entry" href="javascript:openEmail('WTJSa1pYQndjSEF5TlRaQWNISnZkRzl1TG0xbA')">
+						<div>
+							<picture>
+								<source class="me-social-icon" srcset="./res/mail.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
+								<img class="me-social-icon" src="./res/mail.svg"> <!-- light -->
+							</picture>
+						</div>
+						<div>
+							<p>Email</p>
+						</div>
+					</a>
+					<a class="me-social-entry" href="https://github.com/knot126" target="_blank">
+						<div>
+							<picture>
+								<source class="me-social-icon" srcset="./res/github.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
+								<img class="me-social-icon" src="./res/github.svg"> <!-- light -->
+							</picture>
+						</div>
+						<div>
+							<p>GitHub</p>
+						</div>
+					</a>
+					<a class="me-social-entry" href="https://codeberg.org/knot126" target="_blank">
+						<div>
+							<picture>
+								<source class="me-social-icon" srcset="./res/codeberg.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
+								<img class="me-social-icon" src="./res/codeberg.svg"> <!-- light -->
+							</picture>
+						</div>
+						<div>
+							<p>Codeberg</p>
+						</div>
+					</a>
+					<a class="me-social-entry" href="https://mastodon.social/@knot126" target="_blank">
+						<div>
+							<picture>
+								<source class="me-social-icon" srcset="./res/mastodon.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
+								<img class="me-social-icon" src="./res/mastodon.svg"> <!-- light -->
+							</picture>
+						</div>
+						<div>
+							<p>Mastodon</p>
+						</div>
+					</a>
 				</div>
+				<p style="text-align: center; opacity: 0.7;">Also formerly on <a href="https://cohost.org/knot126">Cohost</a> before it shut down. RIP.</p>
 			</div>
 			<div id="main" class="main-section disclaimer-section">
 				<p id="copyright">This website is Copyright &#169; Knot126</p>
