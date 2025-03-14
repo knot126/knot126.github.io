@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8">
+		<title>HexTest</title>
+		<style>
+			#main {
+				text-align: center;
+			}
+			* {
+				font-family: "Arial", "Liberation Sans", "Open Sans", sans-serif;
+			}
+			p { font-size: 12pt; }
+			big, .big { font-size: 24pt; }
+			huge, .huge { font-size: 36pt; }
+			#ansbox { font-size: 20pt; border: none; text-align: center; outline: none; }
+			.yay { color: #007700; }
+			#skipbtn { background: #0dd1; border: none; border-radius: 3px; padding: 8px; font-size: 12pt; }
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<p>FUMKING LOADOING...</p>
+		</div>
+		<script>
+			var currentQuestionType = "";
+			var qAnswered = 0;
+			var aWrong = 0;
+			
+			function setFocus(id) {
+				document.getElementById(id).focus();
+			}
+			
+			function getValue(id) {
+				return document.getElementById(id).value || document.getElementById(id).innerHTML;
+			}
+			
+			function getParam(name) {
+				return (new URLSearchParams(window.location.search)).get(name);
+			}
+			
+			function getStorageInt(item) {
+				let d = window.localStorage.getItem(item);
+				return d ? parseInt(d) : 0;
+			}
+			
+			function incStorageInt(item) {
+				window.localStorage.setItem(item, getStorageInt(item) + 1);
+			}
+			
+			function installEvent(id, eid, fun) {
+				document.getElementById(id).addEventListener(eid, fun);
+			}
+			
+			function check() {
+				let correct = false;
+				
+				if (currentQuestionType == "tohex") {
+					correct = parseInt(getValue("ansbox").replaceAll("0x", ""), 16) === parseInt(getValue("ans"), 10);
+				}
+				else {
+					correct = parseInt(getValue("ansbox"), 10) === parseInt(getValue("ans").replaceAll("0x", ""), 16);
+				}
+				
+				if (correct) {
+					qAnswered += 1;
+					incStorageInt("lifetimeRight");
+					document.getElementById("correctp").innerHTML = `Correct!`;
+					setTimeout(next, 800);
+				}
+				else {
+					aWrong += 1;
+					incStorageInt("lifetimeWrong");
+					let ansbox = document.getElementById("ansbox");
+					ansbox.value = "";
+					ansbox.style.background = "#f001";
+				}
+			}
+			
+			function next() {
+				let max = getParam("max") ? parseInt(getParam("max")) : 50;
+				let min = getParam("min") ? parseInt(getParam("min")) : 1;
+				createQuestion(randint(0, 1) == 0 ? "tohex" : "todec", randint(min, max));
+				setFocus("ansbox");
+			}
+			
+			function skip() {
+				next();
+				incStorageInt("lifetimeSkipUses");
+			}
+			
+			function makePage(pieces) {
+				let pg = "";
+				
+				if (pieces.title) {
+					pg += `<p><big>${pieces.title}</big></p>`;
+				}
+				
+				if (pieces.value) {
+					pg += `<p><huge id="ans">${pieces.value}</huge></p>`;
+				}
+				
+				// if (pieces.haveBox) {
+					pg += `<p><input id="ansbox" placeholder="type answer"></input></p>`;
+					
+				// }
+				
+				// if (pieces.haveSkip) {
+					pg += `<p><button id="skipbtn" onclick="skip()">Skip!</button></p>`;
+					pg += `<p id="correctp" class="yay">&nbsp;</p>`;
+					pg += `<p>Completed ${getStorageInt("lifetimeRight")} so far (${qAnswered} this session)</p><p>Created by <a href="https://knot126.github.io">Knot126</a></p>`;
+					// <p><details><summary>All stats</summary>
+					// 	<p>Seen: ${getStorageInt("lifetimeLoads") + getStorageInt("lifetimeRight") + getStorageInt("lifetimeSkipUses")}</p>
+					// 	<p>Completed: ${getStorageInt("lifetimeRight")}</p>
+					// 	<p>Skipped: ${getStorageInt("lifetimeSkipUses")}</p>
+					// </details></p>`;
+				// }
+				
+				document.getElementById("main").innerHTML = pg;
+				
+				if (pieces.haveBox) {
+					installEvent("ansbox", "keyup", function (e) {
+						if (e.keyCode == 13) {
+							check();
+						}
+					})
+					installEvent("ansbox", "input", function (e) {
+						e.target.style.background = "inherit";
+					})
+				}
+			}
+			
+			function createQuestion(dir, num) {
+				currentQuestionType = dir;
+				
+				let q = dir == "tohex" ? "What's this in hex?" : "What's this in decimal?";
+				
+				makePage({title: q, value: (dir == "tohex") ? num : `0x${num.toString(16)}`, haveBox: true, haveSkip: true});
+			}
+			
+			function randint(b, t) {
+				return b + Math.floor((t - b + 1) * Math.random());
+			}
+			
+			incStorageInt("lifetimeLoads");
+			next();
+		</script>
+	</body>
+</html>
