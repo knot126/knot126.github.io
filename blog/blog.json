@@ -58,5 +58,12 @@
 		"title": "More site updates",
 		"desc": "I really should update this site more often, since it's my \"main\" website at the moment, but alas static sites are still too much of a pain in the ass for me to justify updating often.",
 		"unlisted": false
+	},
+	{
+		"file": "theend.md",
+		"time": 1742615756,
+		"title": "The end",
+		"desc": "I've decided to abandon this website, for reasons stated in the notice you can read on non-blog pages. I will probably spin this blog into a different piece of software that's better written and able to be used like a god damn blog. Static sites suck, sorry.",
+		"unlisted": false
 	}
 ]
