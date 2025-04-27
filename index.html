@@ -3,33 +3,17 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="keywords" content="knot126, software, developer, math, maths, mathematics, graphics, physics, melon, trestle, games, modding, knowledgebase, projects, youtube, github, website"/>
-		<meta name="description" content="Unforunately, I am a person. Forunately, I do enjoy learning about things."/>
+		<meta name="description" content="Knot126's Landing Page"/>
 		<title>Knot126</title>
 		<link rel="icon" type="image/png" href="./favicon.png"/>
-		<link rel="stylesheet" href="./common/main.css"/>
+		<link rel="stylesheet" href="./common/new.css"/>
 		<script src="./common/main.js"></script>
 	</head>
 	<body>
 		<div id="container" class="page-container">
-			<nav id="navbar" class="main-section navigation-section">
-				<noscript><i>You need to enable JavaScript to load the navbar.</i></noscript>
-			</nav>
-			<script>main();</script>
-			
 			<div id="main" class="main-section content-section">
-				<div class="me-container">
-					<div class="me-left">
-						<img class="me-img" src="./res/TailsPFP12_1draft0_aapfp.png" />
-					</div>
-					<div class="me-right">
-						<p class="me-name">Knot's Homepage</p>
-						<p class="me-pronoun"><a class="me-subtle-link" href="https://en.wikipedia.org/wiki/Preferred_gender_pronoun">pronouns</a>: they/them</p>
-						<p id="me-random-quote" class="me-quote">Programmer</p>
-					</div>
-				</div>
-				<script>me_randomise_quote();</script>
-				
-				<script>function showChatInfo() {
+				<script>
+					function showChatInfo() {
 						showDialogue(`<div style="position: relative; top: -1em;"><h3>Chat platforms</h3>
 						<p>I am on:</p>
 						<ul>
@@ -37,9 +21,9 @@
 							<li><a href="https://revolt.chat/">Revolt</a> as <b>Knot126#0675</b></li>
 						</ul></div>
 						<button class="button" onclick="hideDialgoue()" style="position: absolute; bottom: 20px; left: 20px;">Close</button>`);
-					}</script>
-				
-				<h3 style="text-align: center; padding-top: 0;">Contacts and Socials</h3>
+					}
+				</script>
+				<h1 style="text-align: center">Knot126</h1>
 				<div class="me-social-bar">
 					<a class="me-social-entry" href="javascript:showChatInfo()">
 						<div>
@@ -51,8 +35,7 @@
 						<div>
 							<p>Chat</p>
 						</div>
-					</a>
-					<a class="me-social-entry" href="javascript:openEmail('WTJSa1pYQndjSEF5TlRaQWNISnZkRzl1TG0xbA')">
+					</a><a class="me-social-entry" href="javascript:openEmail('WTJSa1pYQndjSEF5TlRaQWNISnZkRzl1TG0xbA')">
 						<div>
 							<picture>
 								<source class="me-social-icon" srcset="./res/mail.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
@@ -62,8 +45,7 @@
 						<div>
 							<p>Email</p>
 						</div>
-					</a>
-					<a class="me-social-entry" href="https://github.com/knot126" target="_blank">
+					</a><a class="me-social-entry" href="https://github.com/knot126" target="_blank">
 						<div>
 							<picture>
 								<source class="me-social-icon" srcset="./res/github.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
@@ -73,8 +55,7 @@
 						<div>
 							<p>GitHub</p>
 						</div>
-					</a>
-					<a class="me-social-entry" href="https://codeberg.org/knot126" target="_blank">
+					</a><a class="me-social-entry" href="https://codeberg.org/knot126" target="_blank">
 						<div>
 							<picture>
 								<source class="me-social-icon" srcset="./res/codeberg.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
@@ -84,8 +65,7 @@
 						<div>
 							<p>Codeberg</p>
 						</div>
-					</a>
-					<a class="me-social-entry" href="https://mastodon.social/@knot126" target="_blank">
+					</a><a class="me-social-entry" href="https://mastodon.social/@knot126" target="_blank">
 						<div>
 							<picture>
 								<source class="me-social-icon" srcset="./res/mastodon.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
@@ -97,10 +77,7 @@
 						</div>
 					</a>
 				</div>
-				<p style="text-align: center; opacity: 0.7;">Also formerly on <a href="https://cohost.org/knot126">Cohost</a> before it shut down. RIP.</p>
-			</div>
-			<div id="main" class="main-section disclaimer-section">
-				<p id="copyright">This website is Copyright &#169; Knot126</p>
+				<p style="text-align: center; opacity: 0.7;" id="copyright">This website is Copyright &#169; Knot126</p>
 				<script>setup_copyright();</script>
 			</div>
 		</div>

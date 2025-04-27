@@ -1,0 +1,423 @@
+/*
+ * Main.css - Part of Knot's New Website
+ * 
+ * This is the main CSS file.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700&family=Kumbh+Sans:wght@400;500;700&display=swap');
+
+/*
+ * Making things default and variables
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	text-rendering: optimizeLegibility;
+	box-sizing: border-box;
+	
+	--base-colour: #019ab9;
+	--base-colour-transluscent: #02b0d330;
+	--base-colour-text: #000;
+	--base-colour-background: #fff;
+ 	--title-font: "Sen", "Open Sans", sans-serif;
+	--body-font: "Sen", "Open Sans", sans-serif; 
+	--mono-font: "DejaVu Sans Mono", "Menlo", "Consolas", "Monaco", "Droid Sans Mono", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+	* {
+		--base-colour: #01b9de;
+		--base-colour-text: #fff;
+		--base-colour-background: #000;
+	}
+}
+
+/*
+ * Misc. like selection
+ */
+
+::selection {
+	color: #fff;
+	background: var(--base-colour);
+}
+
+.mid-icon {
+	width: 1.5em;
+	height: 1.5em;
+	vertical-align: middle;
+	padding-left: 1.5em;
+	padding-right: 0.5em;
+}
+
+/*
+ * Headers and other text related things
+ */
+
+h1, h2, h3, summary, h4, h5, h6 {
+	font-family: var(--title-font);
+	margin-bottom: 0.5em;
+}
+
+h1 {
+	padding-bottom: 0.25em;
+}
+
+h2, h3, summary, h4, h5, h6 {
+	padding-top: 0.75em;
+}
+
+p, li, figcaption {
+	font-family: var(--body-font);
+	margin-bottom: 0.75em;
+	line-height: 1.65;
+}
+
+h1 { font-size: 32pt; font-weight: 600; }
+h2 { font-size: 26pt; font-weight: 600; }
+h3 { font-size: 20pt; font-weight: 600; }
+h4, summary { font-size: 16pt; font-weight: 600; }
+
+p, li, figcaption { font-size: 12pt; font-weight: 400; }
+li { margin-left: 2em; }
+
+a {
+	color: var(--base-colour);
+	text-decoration-line: none;
+}
+
+a:hover {
+	text-decoration-line: underline;
+}
+
+/*
+ * Code tag and blocks
+ */
+
+code {
+	background: #8881;
+	border: 1px solid #8883;
+	border-radius: 0.325em;
+	font-family: var(--mono-font);
+	font-size: 12pt;
+	padding: 0.2em;
+}
+
+pre, .code {
+	background: #8881;
+	border: 1px solid #8883;
+	border-radius: 0.325em;
+	font-family: var(--mono-font);
+	font-size: 12pt;
+	margin-bottom: 1em;
+	padding: 0.75em;
+	white-space: pre;
+	overflow: scroll;
+}
+
+code-string { color: #be0202; }
+code-number { color: #af7f00; }
+code-keyword { font-weight: bold; }
+code-function { color: #644a9b; }
+code-special { color: #ca63ca; }
+code-enum { color: #aa5500; }
+code-symbol { color: #0057ae; }
+code-comment { color: #888; }
+
+/*
+ * Elements like images
+ */
+
+figcaption {
+	color: #888;
+}
+
+/*
+ * Sections of a page, also including their dark theme parts
+ */
+
+.page-container {
+	max-width: 65em;
+	margin: auto;
+}
+
+.blog-page {
+	max-width: 57.5em;
+}
+
+.main-section {
+	color: var(--base-colour-text);
+	overflow: auto;
+	padding-top: calc(50vh - 200px);
+}
+
+.content-section {
+	background: var(--base-colour-background);
+}
+
+.navigation-section {
+	background: transparent;
+	border-radius: 0 0 0.25em 0.25em;
+	box-shadow: none;
+	padding-top: 1.5em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.disclaimer-section {
+	text-align: center;
+	background: transparent;
+	box-shadow: none;
+}
+
+.disclaimer-section p {
+	margin-bottom: 0;
+}
+
+/* Basic Card */
+
+.card-section {
+	background: var(--base-colour-panel-background);
+	border-radius: 0.25em;
+	box-shadow: 0em 0.25em 0.5em #00000035;
+	display: inline-block;
+	padding: 2.5%;
+	margin: 2.5%;
+	width: calc(45%);
+	height: 12em;
+	vertical-align: top;
+	
+	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.card-section:hover {
+	background: var(--base-colour-panel-background-hover);
+	box-shadow: 0em 0.4em 0.8em #00000044;
+	transform: translate(0, -3px);
+}
+
+.card-section h3 {
+	border: none;
+	font-weight: 700;
+	padding-top: 0;
+}
+
+.full-width {
+	width: 90%;
+}
+
+/*
+ * Classes that apply to things like navigation
+ */
+
+.nav-logotype {
+	display: inline-block;
+	color: var(--base-colour-text);
+	font-family: var(--title-font);
+	font-size: 22pt;
+	font-weight: 700;
+	margin-right: 1em;
+	vertical-align: middle;
+}
+
+.nav-link {
+	display: inline-block;
+	font-family: var(--title-font);
+	font-size: 14pt;
+	margin-right: 1em;
+	vertical-align: middle;
+}
+
+.nav-link {
+	color: var(--base-colour-text);
+}
+
+.nav-link a {
+	color: var(--base-colour-text);
+}
+
+/*
+ * A very basic box
+ */
+
+.box-section {
+	background: var(--base-colour-panel-background);
+	border-radius: 0.25em;
+	box-shadow: 0em 0.25em 0.5em #00000055;
+	padding: 1.5%;
+	margin: 1.5%;
+}
+
+.box-section p:last-of-type {
+	margin: 0;
+}
+
+.box-section.notice {
+	background: #e2551d20;
+	box-shadow: 0em 0.16em 0.32em #00000035;
+	border: 1px solid #e2551d;
+}
+
+.box-section.info {
+	background: #019ab920;
+	box-shadow: 0em 0.16em 0.32em #00000035;
+	border: 1px solid #019ab9;
+}
+
+/*
+ * The main page body
+ */
+
+body {
+	background: var(--base-colour-background);
+}
+
+/**
+ * Various interactive widgets
+ */
+
+/* Buttons */
+.button {
+	background: var(--base-colour);
+	border-radius: 0.25em;
+	color: #fff;
+	cursor: pointer;
+	font-family: var(--body-font);
+	font-size: 13pt;
+	padding: 0.4em 1.5em;
+}
+
+.button:hover {
+	filter: brightness(0.8);
+}
+
+.button.secondary {
+	background: transparent;
+	color: var(--base-colour);
+}
+
+.button.secondary:hover {
+	filter: brightness(1);
+	background: var(--base-colour-transluscent);
+}
+
+/* Text boxes */
+.textbox-outer {
+	border: 1px solid #8888;
+	border-radius: 0.25em;
+	outline: none;
+	overflow: hidden;
+}
+
+.textbox {
+	background: transparent;
+	border-bottom: 3px solid #8884;
+	color: var(--base-colour-text);
+	font-family: var(--body-font);
+	font-size: 13pt;
+	padding: 0.4em 0.7em;
+	width: 100%;
+}
+
+.textbox:focus {
+	border-bottom: 3px solid var(--base-colour);
+}
+
+.textbox-width-restrict {
+	width: 30em;
+}
+
+.me-container {
+	display: grid;
+	grid-template-columns: 192px auto;
+	margin: 1em;
+}
+
+.me-left {
+	grid-column: 1;
+}
+
+.me-right {
+	grid-column: 2;
+	margin-left: 1em;
+}
+
+.me-img {
+	width: 192px;
+	height: 192px;
+	border-radius: calc(192px / 2);
+}
+
+.me-name {
+	font-size: 36pt;
+	font-weight: bold;
+	margin: 0;
+}
+
+.me-pronoun {
+	opacity: 0.7;
+}
+
+.me-quote {
+	font-size: 16pt;
+	cursor: pointer;
+}
+
+.me-subtle-link {
+	text-decoration-line: underline;
+	color: var(--base-colour-text);
+}
+
+.dialogue-background {
+	background: #000b;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(8px);
+}
+
+.dialogue-box {
+	background: var(--base-colour-panel-background-hover);
+	margin: 0;
+	width: 50vw;
+	height: 50vh;
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+}
+
+.blog-editor-code {
+	width: 100%;
+	height: calc(100vh - 250px);
+	overflow: default;
+	font-size: 12pt;
+	resize: none;
+	outline: none;
+	background: #8882;
+	border-radius: 0.325em;
+	color: var(--base-colour-text);
+	padding: 0.5em;
+	font-family: var(--mono-font);
+}
+
+.me-social-bar {
+	text-align: center;
+	margin: 20px 0 10px 0;
+}
+
+.me-social-entry {
+	display: inline-block;
+	width: 128px;
+}
+
+.me-social-icon {
+	width: 56px;
+}
+
+a.me-social-entry {
+	color: var(--base-colour-text);
+}
