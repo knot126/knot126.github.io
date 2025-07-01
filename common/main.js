@@ -312,18 +312,18 @@ function blog_load() {
 
 function main() {
 	download_sidebar();
-	put_notice();
+	// put_notice();
 }
 
-function put_notice() {
-	document.addEventListener("DOMContentLoaded", function () {
-		let e = document.getElementById("main");
-		
-		if (e && window.localStorage.getItem("hide_notice") != "yes") {
-			e.innerHTML = `<div id="die" class="box-section notice">I've decided I don't want to update this website anymore. It has always felt very impersonal and as if I'm trying to sell myself, and updating this website has been a constant burden rather than something fun. It will remain available, but the content will now forever drift out of date with reality. I'll make a real website or blog, soon.<br/>- knot, 2025-03-22 -- <a href="javascript:die()">dismiss</a></div>` + e.innerHTML;
-		}
-	});
-}
+// function put_notice() {
+// 	document.addEventListener("DOMContentLoaded", function () {
+// 		let e = document.getElementById("main");
+// 		
+// 		if (e && window.localStorage.getItem("hide_notice") != "yes") {
+// 			e.innerHTML = `<div id="die" class="box-section notice">I've decided I don't want to update this website anymore. It has always felt very impersonal and as if I'm trying to sell myself, and updating this website has been a constant burden rather than something fun. It will remain available, but the content will now forever drift out of date with reality. I'll make a real website or blog, soon.<br/>- knot, 2025-03-22 -- <a href="javascript:die()">dismiss</a></div>` + e.innerHTML;
+// 		}
+// 	});
+// }
 
 function die() {
 	document.getElementById("die").remove();

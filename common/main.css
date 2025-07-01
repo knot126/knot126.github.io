@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700&family=Kumbh+Sans:wght@400;500;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700&family=Kumbh+Sans:wght@400;500;700&display=swap'); */
 
 /*
  * Making things default and variables
@@ -34,9 +34,12 @@
 	--background-location: url("../common/light.jpeg");
 /* 	--title-font: "Sen", "Kumbh Sans", sans-serif; */
 /* 	--body-font: "Sen", "Kumbh Sans", sans-serif; */
- 	--title-font: "Kumbh Sans", sans-serif;
-	--body-font: "Sen", "Open Sans", sans-serif; 
-	--mono-font: "DejaVu Sans Mono", "Menlo", "Consolas", "Monaco", "Droid Sans Mono", sans-serif;
+/*  	--title-font: "Kumbh Sans", sans-serif; */
+/* 	--body-font: "Sen", "Open Sans", sans-serif;  */
+/* 	--mono-font: "DejaVu Sans Mono", "Menlo", "Consolas", "Monaco", "Droid Sans Mono", sans-serif; */
+	--title-font: "Verdana", "DejaVu Sans", "Noto Sans", sans-serif;
+	--body-font: "Verdana", "DejaVu Sans", "Noto Sans", sans-serif;
+	--mono-font: "Consolas", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -180,7 +183,7 @@ figcaption {
 .content-section {
 /* 	backdrop-filter: blur(0.5em); */
 	background: var(--base-colour-background);
-	box-shadow: 0em 0.5em 2em #00000055;
+	box-shadow: 0 12px 20px #0004, 0 2px 6px #0005, inset 0 3px 12px #fff3, inset 0 3px 3px #fff8;
 }
 
 .navigation-section {

@@ -6,13 +6,17 @@
 		<meta name="description" content="Knot126's Landing Page"/>
 		<title>Knot126</title>
 		<link rel="icon" type="image/png" href="./favicon.png"/>
-		<link rel="stylesheet" href="./common/new.css"/>
+		<link rel="stylesheet" href="./common/main.css"/>
 		<script src="./common/main.js"></script>
 	</head>
 	<body>
 		<div id="container" class="page-container">
+			<nav id="navbar" class="main-section navigation-section">
+				<noscript><i>You need to enable JavaScript to load the navbar.</i></noscript>
+			</nav>
+			<script>main();</script>
 			<div id="main" class="main-section content-section">
-				<script>
+<!--				<script>
 					function showChatInfo() {
 						showDialogue(`<div style="position: relative; top: -1em;"><h3>Chat platforms</h3>
 						<p>I am on:</p>
@@ -22,18 +26,19 @@
 						</ul></div>
 						<button class="button" onclick="hideDialgoue()" style="position: absolute; bottom: 20px; left: 20px;">Close</button>`);
 					}
-				</script>
-				<h1 style="text-align: center">Knot126</h1>
+				</script>-->
+				<h1 style="text-align: center">Knot</h1>
+				<p style="text-align: center">(they/them)</p>
 				<div class="me-social-bar">
-					<a class="me-social-entry" href="javascript:showChatInfo()">
+					<a class="me-social-entry" href="./CV_2025_Draft_2.pdf">
 						<div>
 							<picture>
-								<source class="me-social-icon" srcset="./res/chat.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
-								<img class="me-social-icon" src="./res/chat.svg"> <!-- light -->
+								<source class="me-social-icon" srcset="./res/cv.dark.svg" media="(prefers-color-scheme: dark)"> <!-- dark -->
+								<img class="me-social-icon" src="./res/cv.svg"> <!-- light -->
 							</picture>
 						</div>
 						<div>
-							<p>Chat</p>
+							<p>CV</p>
 						</div>
 					</a><a class="me-social-entry" href="javascript:openEmail('WTJSa1pYQndjSEF5TlRaQWNISnZkRzl1TG0xbA')">
 						<div>
