@@ -4,7 +4,7 @@
  * This is the main CSS file.
  */
 
-/* @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700&family=Kumbh+Sans:wght@400;500;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
 
 /*
  * Making things default and variables
@@ -32,13 +32,8 @@
 	--base-colour-gradient-top: #f0f0f070;
 	--base-colour-gradient-bottom: #f2f2f2c0;
 	--background-location: url("../common/light.jpeg");
-/* 	--title-font: "Sen", "Kumbh Sans", sans-serif; */
-/* 	--body-font: "Sen", "Kumbh Sans", sans-serif; */
-/*  	--title-font: "Kumbh Sans", sans-serif; */
-/* 	--body-font: "Sen", "Open Sans", sans-serif;  */
-/* 	--mono-font: "DejaVu Sans Mono", "Menlo", "Consolas", "Monaco", "Droid Sans Mono", sans-serif; */
-	--title-font: "Verdana", "DejaVu Sans", "Noto Sans", sans-serif;
-	--body-font: "Verdana", "DejaVu Sans", "Noto Sans", sans-serif;
+	--title-font: "Figtree", "Noto Sans", sans-serif;
+	--body-font: "Figtree", "Noto Sans", sans-serif;
 	--mono-font: "Consolas", monospace;
 }
 
