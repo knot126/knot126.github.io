@@ -25,7 +25,7 @@ def convert(gist):
 			data = download(url, False)
 			html = html.replace(url, "data:image/png;base64," + base64.b64encode(data).decode('utf-8'))
 	
-	html = f'<html><head><title>{title} — Knot\'s Blog</title><link rel="stylesheet" href="./common/github-markdown.css"/><style>.markdown-body .anchor {{ display: none !important; }}</style></head><body><div class="markdown-body" style="margin: auto; max-width: 987px;">{html}</div></body></html>'
+	html = f'<html><head><title>{title} — Knot\'s Blog</title><link rel="stylesheet" href="/common/github-markdown.css"/><style>.markdown-body .anchor {{ display: none !important; }}</style></head><body><div class="markdown-body" style="margin: auto; max-width: 987px;">{html}</div></body></html>'
 	
 	return html, title
 
