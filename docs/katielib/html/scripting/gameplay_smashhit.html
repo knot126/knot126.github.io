@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Gameplay (Smash Hit) &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic Reload (Smash Hit)" href="reload.html" />
+    <link rel="prev" title="Cheats (Smash Hit)" href="cheats.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="reload.html" title="Dynamic Reload (Smash Hit)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cheats.html" title="Cheats (Smash Hit)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Gameplay (<em>Smash Hit</em>)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="gameplay-smash-hit">
+<h1>Gameplay (<em>Smash Hit</em>)<a class="headerlink" href="#gameplay-smash-hit" title="Link to this heading">¶</a></h1>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knLevelHitSomething">
+<span class="sig-name descname"><span class="pre">knLevelHitSomething</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knLevelHitSomething" title="Link to this definition">¶</a></dt>
+<dd><p>Causes the player to crash and loose balls.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knLevelStreakAbort">
+<span class="sig-name descname"><span class="pre">knLevelStreakAbort</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knLevelStreakAbort" title="Link to this definition">¶</a></dt>
+<dd><p>Aborts the player’s streak “properly”, e.g. plays the sound in addition
+to dropping the streak.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knLevelStreakInc">
+<span class="sig-name descname"><span class="pre">knLevelStreakInc</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knLevelStreakInc" title="Link to this definition">¶</a></dt>
+<dd><p>Increments the player’s streak “properly”, playing sounds and giving any
+relevant achievements.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knLevelAddScore">
+<span class="sig-name descname"><span class="pre">knLevelAddScore</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knLevelAddScore" title="Link to this definition">¶</a></dt>
+<dd><p>Adds balls to the player “properly”, playing sounds and giving any
+relevant achievements.</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Gameplay (<em>Smash Hit</em>)</a><ul>
+<li><a class="reference internal" href="#lua-knLevelHitSomething"><code class="docutils literal notranslate"><span class="pre">knLevelHitSomething()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knLevelStreakAbort"><code class="docutils literal notranslate"><span class="pre">knLevelStreakAbort()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knLevelStreakInc"><code class="docutils literal notranslate"><span class="pre">knLevelStreakInc()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knLevelAddScore"><code class="docutils literal notranslate"><span class="pre">knLevelAddScore()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cheats.html"
+                          title="previous chapter">Cheats (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="reload.html"
+                          title="next chapter">Dynamic Reload (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/gameplay_smashhit.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="reload.html" title="Dynamic Reload (Smash Hit)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cheats.html" title="Cheats (Smash Hit)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Gameplay (<em>Smash Hit</em>)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

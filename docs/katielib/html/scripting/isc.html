@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Inter-script Communication &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Changelog" href="../changelog.html" />
+    <link rel="prev" title="Byte Packing" href="pack.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../changelog.html" title="Changelog"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pack.html" title="Byte Packing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Inter-script Communication</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="inter-script-communication">
+<h1>Inter-script Communication<a class="headerlink" href="#inter-script-communication" title="Link to this heading">¶</a></h1>
+<p>Inter-script communication (ISC) allows scripts to communicate with each
+other, mainly by calling functions in the scripts themselves. It can
+also be used as a more powerful and intuitive alternative to the
+registry.</p>
+<section id="kncall-script-function">
+<h2><code class="docutils literal notranslate"><span class="pre">knCall(script,</span> <span class="pre">function,</span> <span class="pre">[...])</span></code><a class="headerlink" href="#kncall-script-function" title="Link to this heading">¶</a></h2>
+<p>Call a function in another script, returning its result. The <code class="docutils literal notranslate"><span class="pre">script</span></code>
+should either be one of <code class="docutils literal notranslate"><span class="pre">KN_MENU</span></code>, <code class="docutils literal notranslate"><span class="pre">KN_MOVIE</span></code>, <code class="docutils literal notranslate"><span class="pre">KN_HUD</span></code>, or a
+pointer to a script’s <code class="docutils literal notranslate"><span class="pre">lua_State</span></code> as a light userdata. The
+<code class="docutils literal notranslate"><span class="pre">function</span></code> should be a string naming the function to call. The
+arguments that will be passed to the function should follow.</p>
+<p>If there is an error, it will be raised as a Lua error. This includes an
+invalid script being specified, the scene containing the target script
+not being loaded, the function not being found, and the called function
+itself raising its own error.</p>
+<p>There are some notable caveats to the current implementation:</p>
+<ul class="simple">
+<li><p>Integers will be cast to floats due to Lua not exposing any way of
+telling the difference between an integer and a number.</p></li>
+<li><p>Values of the types <code class="docutils literal notranslate"><span class="pre">function</span></code>, <code class="docutils literal notranslate"><span class="pre">userdata</span></code>, and <code class="docutils literal notranslate"><span class="pre">thread</span></code> cannot
+be copied between scripts and will be replaced by <strong>``nil``</strong>.</p></li>
+</ul>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">hud/main.lua</span></code>:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kr">function</span><span class="w"> </span><span class="nf">addPoints</span><span class="p">(</span><span class="nv">pts</span><span class="p">)</span>
+<span class="linenos">2</span><span class="w">    </span><span class="nv">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">points</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">pts</span>
+<span class="linenos">3</span><span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="nv">points</span>
+<span class="linenos">4</span><span class="kr">end</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">obstacles/customtop.lua</span></code>:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kr">function</span><span class="w"> </span><span class="nf">tick</span><span class="p">()</span>
+<span class="linenos">2</span><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nf">mgIsCleared</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<span class="linenos">3</span><span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="nf">mgBodyIsBroken</span><span class="p">(</span><span class="nv">body</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="linenos">4</span><span class="w">            </span><span class="kd">local</span><span class="w"> </span><span class="nv">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;addPoints&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="linenos">5</span><span class="w">        </span><span class="kr">end</span>
+<span class="linenos">6</span><span class="w">    </span><span class="kr">end</span>
+<span class="linenos">7</span><span class="kr">end</span>
+</pre></div>
+</div>
+<p><em>Added in Release 18</em></p>
+</section>
+</section>
+<section id="knownhandle">
+<h2><code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code><a class="headerlink" href="#knownhandle" title="Link to this heading">¶</a></h2>
+<p>Returns a pointer to the script’s <code class="docutils literal notranslate"><span class="pre">lua_State</span></code> pointer as a light
+userdata. This is useful for informing “master” scripts like the menu or
+HUD of room and obstacle scripts via <code class="docutils literal notranslate"><span class="pre">knCall()</span></code>, so that they
+themselves can use knCall to call directly into your script; for
+example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">-- Assume that informCreated(script) and informDestroyed(script) tell the HUD</span>
+<span class="linenos"> 2</span><span class="c1">-- script that these obstacle/room scripts have been created and destroyed,</span>
+<span class="linenos"> 3</span><span class="c1">-- respectively.</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c1">-- In obstacle/myobstacle.lua</span>
+<span class="linenos"> 6</span><span class="kr">function</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;informCreated&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knOwnHandle</span><span class="p">())</span>
+<span class="linenos"> 8</span><span class="kr">end</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="kr">function</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">()</span>
+<span class="linenos">11</span><span class="w">    </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;informDestroyed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knOwnHandle</span><span class="p">())</span>
+<span class="linenos">12</span><span class="kr">end</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="kr">function</span><span class="w"> </span><span class="nf">isCleared</span><span class="p">()</span>
+<span class="linenos">15</span><span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="nf">mgIsCleared</span><span class="p">()</span>
+<span class="linenos">16</span><span class="kr">end</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="c1">-- In hud/main.lua</span>
+<span class="linenos">19</span><span class="kr">function</span><span class="w"> </span><span class="nf">draw</span><span class="p">()</span>
+<span class="linenos">20</span><span class="w">    </span><span class="c1">-- ... maybe in a loop ...</span>
+<span class="linenos">21</span><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">obstacle</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;isCleared&quot;</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="linenos">22</span><span class="w">        </span><span class="c1">-- ... do something interesting! ...</span>
+<span class="linenos">23</span><span class="w">    </span><span class="kr">end</span>
+<span class="linenos">24</span><span class="kr">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Inter-script Communication</a><ul>
+<li><a class="reference internal" href="#kncall-script-function"><code class="docutils literal notranslate"><span class="pre">knCall(script,</span> <span class="pre">function,</span> <span class="pre">[...])</span></code></a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knownhandle"><code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pack.html"
+                          title="previous chapter">Byte Packing</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../changelog.html"
+                          title="next chapter">Changelog</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/isc.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../changelog.html" title="Changelog"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pack.html" title="Byte Packing"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Inter-script Communication</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

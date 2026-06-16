@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Shaders (Smash Hit) &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HTTP" href="http.html" />
+    <link rel="prev" title="Raw Input" href="input.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="http.html" title="HTTP"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Raw Input"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Shaders (<em>Smash Hit</em>)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="shaders-smash-hit">
+<h1>Shaders (<em>Smash Hit</em>)<a class="headerlink" href="#shaders-smash-hit" title="Link to this heading">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The shaders subsystem was made by yorshex, go complain to them if it
+doesn’t work. :3</p>
+</div>
+<p>Example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knBeginShaders</span><span class="p">()</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knGetGameShader</span><span class="p">(</span><span class="s2">&quot;clear&quot;</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">uniform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knGetShaderUniformLocation</span><span class="p">(</span><span class="nv">shader</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;uThirdColor&quot;</span><span class="p">)</span>
+<span class="nf">knUseShader</span><span class="p">(</span><span class="nv">shader</span><span class="p">)</span>
+<span class="nf">knShaderUniform3f</span><span class="p">(</span><span class="nv">uniform</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="mf">0.65</span><span class="p">)</span>
+<span class="nf">knEndShaders</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="knbeginshaders">
+<h2><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code><a class="headerlink" href="#knbeginshaders" title="Link to this heading">¶</a></h2>
+<p>Stores Smash Hit’s current shader in internal state</p>
+</section>
+<section id="knendshaders">
+<h2><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code><a class="headerlink" href="#knendshaders" title="Link to this heading">¶</a></h2>
+<p>Restores Smash Hit’s current shader previously saved by
+<code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></p>
+</section>
+<section id="kngetgameshader-name">
+<h2><code class="docutils literal notranslate"><span class="pre">knGetGameShader(name)</span></code><a class="headerlink" href="#kngetgameshader-name" title="Link to this heading">¶</a></h2>
+<p>Returns Smash Hit’s shader program id by name</p>
+</section>
+<section id="kngetshaderuniformlocation-shader-name">
+<h2><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation(shader,</span> <span class="pre">name)</span></code><a class="headerlink" href="#kngetshaderuniformlocation-shader-name" title="Link to this heading">¶</a></h2>
+<p>Returns a shader program’s uniform location by the uniform’s name, or
+<strong>``nil``</strong> if it doesn’t exist</p>
+</section>
+<section id="knuseshader-shader">
+<h2><code class="docutils literal notranslate"><span class="pre">knUseShader(shader)</span></code><a class="headerlink" href="#knuseshader-shader" title="Link to this heading">¶</a></h2>
+<p>Sets the shader program as current</p>
+</section>
+<section id="knshaderuniform-n-t-location-v0-v1-v2-v3">
+<h2><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;(location,</span> <span class="pre">v0,</span> <span class="pre">[v1,</span> <span class="pre">[v2,</span> <span class="pre">[v3]]])</span></code><a class="headerlink" href="#knshaderuniform-n-t-location-v0-v1-v2-v3" title="Link to this heading">¶</a></h2>
+<p>See also:
+<a class="reference external" href="https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glUniform.xml">https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glUniform.xml</a></p>
+<p>Sets a float, vec2, vec3, vec4, int, vec2i, vec3i, or vec4i uniform in
+the current shader program.</p>
+</section>
+<section id="knshaderuniform-n-t-v-location-t">
+<h2><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;v(location,</span> <span class="pre">t)</span></code><a class="headerlink" href="#knshaderuniform-n-t-v-location-t" title="Link to this heading">¶</a></h2>
+<p>Sets a float, vec2, vec3, vec4, int, vec2i, vec3i, or vec4i uniform
+array in the current shader program.</p>
+<p>The elements are placed linearly inside <code class="docutils literal notranslate"><span class="pre">t</span></code>, like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">{ x0, y0, z0, x1, y1, z1, x2, y2, z2, ..., xn, yn, zn }</span></code></p>
+<p>If the last element is unfinished, it is ignored.</p>
+</section>
+<section id="knshaderuniformmatrix-n-fv-location-transpose-t">
+<h2><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix&lt;N&gt;fv(location,</span> <span class="pre">transpose,</span> <span class="pre">t)</span></code><a class="headerlink" href="#knshaderuniformmatrix-n-fv-location-transpose-t" title="Link to this heading">¶</a></h2>
+<p>Sets a mat2, mat3, or mat4 uniform array in the current shader program.</p>
+<p>The elements are placed linearly inside <code class="docutils literal notranslate"><span class="pre">t</span></code>, like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">{ x0, y0, z0, x1, y1, z1, x2, y2, z2, ..., xn, yn, zn }</span></code></p>
+<p>If the last element is unfinished, it is ignored.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">transpose</span></code> is true, the matrices will be transposed before being
+assigned to uniforms.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Shaders (<em>Smash Hit</em>)</a><ul>
+<li><a class="reference internal" href="#knbeginshaders"><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></a></li>
+<li><a class="reference internal" href="#knendshaders"><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code></a></li>
+<li><a class="reference internal" href="#kngetgameshader-name"><code class="docutils literal notranslate"><span class="pre">knGetGameShader(name)</span></code></a></li>
+<li><a class="reference internal" href="#kngetshaderuniformlocation-shader-name"><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation(shader,</span> <span class="pre">name)</span></code></a></li>
+<li><a class="reference internal" href="#knuseshader-shader"><code class="docutils literal notranslate"><span class="pre">knUseShader(shader)</span></code></a></li>
+<li><a class="reference internal" href="#knshaderuniform-n-t-location-v0-v1-v2-v3"><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;(location,</span> <span class="pre">v0,</span> <span class="pre">[v1,</span> <span class="pre">[v2,</span> <span class="pre">[v3]]])</span></code></a></li>
+<li><a class="reference internal" href="#knshaderuniform-n-t-v-location-t"><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;v(location,</span> <span class="pre">t)</span></code></a></li>
+<li><a class="reference internal" href="#knshaderuniformmatrix-n-fv-location-transpose-t"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix&lt;N&gt;fv(location,</span> <span class="pre">transpose,</span> <span class="pre">t)</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="input.html"
+                          title="previous chapter">Raw Input</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="http.html"
+                          title="next chapter">HTTP</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/shaders.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="http.html" title="HTTP"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Raw Input"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Shaders (<em>Smash Hit</em>)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

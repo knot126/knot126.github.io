@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Files &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Assets" href="assets.html" />
+    <link rel="prev" title="Logging" href="logging.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="assets.html" title="Assets"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="logging.html" title="Logging"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Files</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="files">
+<h1>Files<a class="headerlink" href="#files" title="Link to this heading">¶</a></h1>
+<p>KatieLib provides a few extra functions to make working with files
+easier.</p>
+<p>It should be noted that there are two different kinds of paths used
+throughout the shim: <em>physical file system paths</em> and <em>asset manager
+paths</em>.</p>
+<p>Physical paths refer to files on the actual filesystem of the device and
+should almost always be absolute; they cannot access the APK’s asset
+directory normally, since those files are actually kept in a stillZIP’d
+copy of the APK on the device. Generally speaking, most modules work
+with physical paths unless otherwise noted.</p>
+<p>Asset manager paths refer to paths passed to the resource manager, where
+they are typically relative to the APK’s asset directory (though can
+also access internal data via <code class="docutils literal notranslate"><span class="pre">user://</span></code> paths, or load resources over
+HTTP using <code class="docutils literal notranslate"><span class="pre">http://</span></code> paths).</p>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knWriteFile">
+<span class="sig-name descname"><span class="pre">knWriteFile</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">true</span></code><a class="headerlink" href="#lua-knWriteFile" title="Link to this definition">¶</a></dt>
+<dd><p>Write a file with the given contents, which may contain embedded zeros.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 18: </span>Raises a lua error on any failure, and for legacy reasons returns
+<code class="docutils literal notranslate"><span class="pre">true</span></code> to indicate success.</p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knReadFile">
+<span class="sig-name descname"><span class="pre">knReadFile</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">nil</span></code><a class="headerlink" href="#lua-knReadFile" title="Link to this definition">¶</a></dt>
+<dd><p>Read the contents of the given file. Returns a string with the contents
+on success, even if the file is empty, or <code class="docutils literal notranslate"><span class="pre">nil</span></code> on failure to open
+the file.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 18: </span>Other kinds of failures (like memory allocation and I/O errors) raise Lua
+errors instead of returning <code class="docutils literal notranslate"><span class="pre">nil</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRenameFile">
+<span class="sig-name descname"><span class="pre">knRenameFile</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">oldPath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">newPath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knRenameFile" title="Link to this definition">¶</a></dt>
+<dd><p>Renames the file at <code class="docutils literal notranslate"><span class="pre">oldPath</span></code> to <code class="docutils literal notranslate"><span class="pre">newPath</span></code>, moving the file if
+needed. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDeleteFile">
+<span class="sig-name descname"><span class="pre">knDeleteFile</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knDeleteFile" title="Link to this definition">¶</a></dt>
+<dd><p>Deletes the file at the given path. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and
+<code class="docutils literal notranslate"><span class="pre">false</span></code> on failure.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knIsFile">
+<span class="sig-name descname"><span class="pre">knIsFile</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knIsFile" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the file at the given path exists and can be read. Returns
+<code class="docutils literal notranslate"><span class="pre">true</span></code> if so, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if not.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knMakeDir">
+<span class="sig-name descname"><span class="pre">knMakeDir</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knMakeDir" title="Link to this definition">¶</a></dt>
+<dd><p>Creates the directory at <code class="docutils literal notranslate"><span class="pre">path</span></code> using <code class="docutils literal notranslate"><span class="pre">mkdir(path,</span> <span class="pre">0777)</span></code>. Returns
+<code class="docutils literal notranslate"><span class="pre">true</span></code> on success, <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure. Note that if the
+directory already exists, this will return <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knListDir">
+<span class="sig-name descname"><span class="pre">knListDir</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><a class="headerlink" href="#lua-knListDir" title="Link to this definition">¶</a></dt>
+<dd><p>Return a list of file names in the directory as a table, not including
+the special entries <code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">..</span></code>.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knIsDir">
+<span class="sig-name descname"><span class="pre">knIsDir</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knIsDir" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the file system node at <code class="docutils literal notranslate"><span class="pre">path</span></code> is a directory and is
+readable. Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if it is and <code class="docutils literal notranslate"><span class="pre">false</span></code> if it is not.</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Files</a><ul>
+<li><a class="reference internal" href="#lua-knWriteFile"><code class="docutils literal notranslate"><span class="pre">knWriteFile()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knReadFile"><code class="docutils literal notranslate"><span class="pre">knReadFile()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knRenameFile"><code class="docutils literal notranslate"><span class="pre">knRenameFile()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knDeleteFile"><code class="docutils literal notranslate"><span class="pre">knDeleteFile()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knIsFile"><code class="docutils literal notranslate"><span class="pre">knIsFile()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knMakeDir"><code class="docutils literal notranslate"><span class="pre">knMakeDir()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knListDir"><code class="docutils literal notranslate"><span class="pre">knListDir()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knIsDir"><code class="docutils literal notranslate"><span class="pre">knIsDir()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="logging.html"
+                          title="previous chapter">Logging</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="assets.html"
+                          title="next chapter">Assets</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/files.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="assets.html" title="Assets"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="logging.html" title="Logging"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Files</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

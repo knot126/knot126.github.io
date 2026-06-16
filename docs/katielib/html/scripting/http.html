@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>HTTP &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Overlays" href="overlays.html" />
+    <link rel="prev" title="Shaders (Smash Hit)" href="shaders.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="overlays.html" title="Overlays"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="shaders.html" title="Shaders (Smash Hit)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">HTTP</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="http">
+<h1>HTTP<a class="headerlink" href="#http" title="Link to this heading">¶</a></h1>
+<p>The HTTP extension allows making non-blocking HTTP and (as of Release
+15) HTTPS requests.</p>
+<p>The recommended way to use this library is to create two functions
+around your request: one to start it and another to process it. When you
+want to start an HTTP request you would call your custom
+<code class="docutils literal notranslate"><span class="pre">startRequest()</span></code> function, and you would call your custom
+<code class="docutils literal notranslate"><span class="pre">processRequest()</span></code> from a function that runs regularly like
+<code class="docutils literal notranslate"><span class="pre">drawWorld()</span></code> or <code class="docutils literal notranslate"><span class="pre">frame()</span></code>.</p>
+<p>Note that in order to use HTTPS, you must first set a certificate using
+<code class="docutils literal notranslate"><span class="pre">knHttpCert()</span></code> as KnShim does not ship with any sort of certificate
+store, nor can it load from Android directly at the moment.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
+<p>Here is an outline for submitting a high score to a server:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">-- ...</span>
+
+<span class="w">    </span><span class="c1">-- (HTTPS only) Load the server&#39;s TLS certificate, which is used to verify</span>
+<span class="w">    </span><span class="c1">-- that this is the highscore server and not some impostor.</span>
+<span class="w">    </span><span class="nf">knHttpsCert</span><span class="p">(</span><span class="nf">knLoadAsset</span><span class="p">(</span><span class="s2">&quot;certs/highscore-server.pem&quot;</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1">-- ...</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">handleCommand</span><span class="p">(</span><span class="nv">cmd</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">-- ...</span>
+
+<span class="w">    </span><span class="c1">-- Start the request when the &#39;submitscore&#39; command is run</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;submitscore&quot;</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nf">startHighScoreSubmission</span><span class="p">()</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="c1">-- ...</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">makeHighscoreRequestBody</span><span class="p">()</span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="s2">&quot;score=&quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nf">getHighScore</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;&amp;player=&quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nf">getPlayerName</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;&amp;time=&quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nb">os.time</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">startHighScoreSubmission</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">highScoreRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpRequest</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;https://myserver.com/highscore/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">makeHighscoreRequestBody</span><span class="p">())</span>
+
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">highScoreRequest</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="c1">-- handle failing to initialise the request</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">processHighScoreSubmission</span><span class="p">()</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">highScoreRequest</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="c1">-- update the request with recieved data and get the status</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpUpdate</span><span class="p">(</span><span class="nv">highScoreRequest</span><span class="p">)</span>
+
+<span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">KN_HTTP_PENDING</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">            </span><span class="c1">-- we can&#39;t really do anything while pending, leave everything as is</span>
+<span class="w">        </span><span class="kr">else</span>
+<span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">KN_HTTP_ERROR</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">                </span><span class="c1">-- handle the error case, maybe show a dialogue to the user</span>
+<span class="w">                </span><span class="c1">-- about the error</span>
+<span class="w">            </span><span class="kr">else</span>
+<span class="w">                </span><span class="kd">local</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpData</span><span class="p">(</span><span class="nv">highScoreRequest</span><span class="p">)</span>
+<span class="w">                </span><span class="c1">-- handle the successful case with the response data, maybe</span>
+<span class="w">                </span><span class="c1">-- show something to confirm the score was submitted. note that</span>
+<span class="w">                </span><span class="c1">-- if your server returns something like 200 OK for certian</span>
+<span class="w">                </span><span class="c1">-- types of errors this will still technically be an error and</span>
+<span class="w">                </span><span class="c1">-- you will want to handle that accordingly</span>
+<span class="w">            </span><span class="kr">end</span>
+
+<span class="w">            </span><span class="c1">-- Since the request is finished, don&#39;t hang on to the object</span>
+<span class="w">            </span><span class="c1">-- anymore and replace it with nil so we know it&#39;s no longer needed</span>
+<span class="w">            </span><span class="nv">highScoreRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+</section>
+<section id="knhttprequest-method-url-body-headers">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpRequest(method,</span> <span class="pre">url,</span> <span class="pre">[body,</span> <span class="pre">[headers]])</span></code><a class="headerlink" href="#knhttprequest-method-url-body-headers" title="Link to this heading">¶</a></h2>
+<p>Initiate an HTTP request to the given URL using the given method. The
+request may optionally contain a body (regardless of the method) by
+supplying a third parameter with the request body contents. The
+<code class="docutils literal notranslate"><span class="pre">headers</span></code> parameter can be used to send custom HTTP headers.</p>
+<p>Returns an HTTP request context (of type <code class="docutils literal notranslate"><span class="pre">userdata</span></code>) on success or
+<code class="docutils literal notranslate"><span class="pre">nil</span></code> on failure.</p>
+<p><strong>Note</strong>: <code class="docutils literal notranslate"><span class="pre">body</span></code> is allowed to contain embedded zeros.</p>
+<blockquote>
+<div><p><strong>Changed in Release 14</strong>: If you were using the old one (for GET
+requests) or two (for POST requests) argument versions of this method
+where the URL was the first argument, you should switch these to the
+following forms:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knHttpRequest</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;http://example.com/mylevel.zip&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- for GET requests</span>
+<span class="nf">knHttpRequest</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;http://example.com/highscore.php&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;score=12345&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- for POST requests</span>
+</pre></div>
+</div>
+<p>when upgrading to the new version.</p>
+</div></blockquote>
+</section>
+<section id="knhttpupdate-request">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpUpdate(request)</span></code><a class="headerlink" href="#knhttpupdate-request" title="Link to this heading">¶</a></h2>
+<p>Reads any new data and further process the request, possibly finalising
+it. Returns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KN_HTTP_PENDING</span></code> if the request is still pending;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KN_HTTP_ERROR</span></code> if the request has finished in error (network
+errors);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KN_HTTP_DONE</span></code> if the request has succeeded.</p></li>
+</ul>
+<p>This function must be called in a function like <code class="docutils literal notranslate"><span class="pre">tick()</span></code> or <code class="docutils literal notranslate"><span class="pre">draw()</span></code>
+(that is, every so often) until it no longer returns
+<code class="docutils literal notranslate"><span class="pre">KN_HTTP_PENDING</span></code>. When it does finish, it is recommended to do any
+processing, then release the request.</p>
+<p><strong>Note:</strong> Request memory is not automatically released and results in a
+memory leak if not manually freed, since I don’t want to fuck with
+metatables ATM. Hopefully this will change later as it is stupid.</p>
+<blockquote>
+<div><p><strong>Change in Release 13</strong><em>: Status codes above 299 now return
+``KN_HTTP_DONE`` instead of ``KN_HTTP_ERROR``.</em></p>
+</div></blockquote>
+</section>
+<section id="knhttpdata-request">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpData(request)</span></code><a class="headerlink" href="#knhttpdata-request" title="Link to this heading">¶</a></h2>
+<p>Returns the response data for a finished request as a string.</p>
+</section>
+<section id="knhttpdatasize-request">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpDataSize(request)</span></code><a class="headerlink" href="#knhttpdatasize-request" title="Link to this heading">¶</a></h2>
+<p>Returns the size of the response data in bytes.</p>
+</section>
+<section id="knhttpsave-request-path">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpSave(request,</span> <span class="pre">path)</span></code><a class="headerlink" href="#knhttpsave-request-path" title="Link to this heading">¶</a></h2>
+<p>Efficiently save the contents of the response to the file at <code class="docutils literal notranslate"><span class="pre">path</span></code>
+without needing to allocate any extra buffers. This function raises a
+Lua error on errors and does not return anything; use <code class="docutils literal notranslate"><span class="pre">pcall</span></code> to catch
+errors.</p>
+<p>Example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knHttpSave</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="nf">knGetInternalDataPath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/payload.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="knhttpgetheader-request-name-nth">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpGetHeader(request,</span> <span class="pre">name,</span> <span class="pre">[nth])</span></code><a class="headerlink" href="#knhttpgetheader-request-name-nth" title="Link to this heading">¶</a></h2>
+<p>Returns the value associated with the <code class="docutils literal notranslate"><span class="pre">nth</span></code> response header named
+<code class="docutils literal notranslate"><span class="pre">name</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">nil</span></code> if the header does not exist.</p>
+<section id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>As an example, the following would get the first two <code class="docutils literal notranslate"><span class="pre">Cookie</span></code> headers
+form the response:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">cookie1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpGetHeader</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">cookie2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpGetHeader</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="knhttperror-request">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpError(request)</span></code><a class="headerlink" href="#knhttperror-request" title="Link to this heading">¶</a></h2>
+<p>Return a string describing the HTTP error, or nil if there is none. Note
+that even if there is an error this may return nil, for example due to a
+lower-level network error.</p>
+</section>
+<section id="knhttperrorcode-request">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpErrorCode(request)</span></code><a class="headerlink" href="#knhttperrorcode-request" title="Link to this heading">¶</a></h2>
+<p>Return an integer which is the HTTP status code of the response, or
+<code class="docutils literal notranslate"><span class="pre">0</span></code> if there is not one. This may be <code class="docutils literal notranslate"><span class="pre">0</span></code> even if there was some kind
+of error.</p>
+</section>
+<section id="knhttprelease-request">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpRelease(request)</span></code><a class="headerlink" href="#knhttprelease-request" title="Link to this heading">¶</a></h2>
+<p>Release the memory associated with an HTTP request. This will normally
+happen automatically once an HTTP request object has been garbage
+collected, but calling this will do it immediately instead of waiting on
+the Lua GC.</p>
+<p>Any further functions called on this request may return <strong>``nil``</strong>
+regardless of their documentation.</p>
+<p><strong>Tip:</strong> A common pattern for global request objects is to the variable
+they were stored in to <code class="docutils literal notranslate"><span class="pre">nil</span></code> in order to release their resources and
+indicate that the request has finished.</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">finishRequest</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">someImportantThing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpData</span><span class="p">(</span><span class="nv">globalRequestObject</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">globalRequestObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+</section>
+<section id="knhttpscert-certificatedata">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpsCert([certificateData])</span></code><a class="headerlink" href="#knhttpscert-certificatedata" title="Link to this heading">¶</a></h2>
+<p>Set the TLS certificate(s) to verify all future HTTPS requests with. The
+<code class="docutils literal notranslate"><span class="pre">certificateData</span></code> can be either a single DER encoded certificate or
+one or more PEM encoded certificates. Any certificate(s) loaded with a
+previous call to this function are replaced.</p>
+<p>Omitting the certificate data resets to the default state of having no
+certificates loaded.</p>
+<p>It is recommended to keep the certificate data for the server you wish
+to communicate with in an asset, then load it with <code class="docutils literal notranslate"><span class="pre">knLoadAsset()</span></code> in
+something like the HUD’s <code class="docutils literal notranslate"><span class="pre">init()</span></code> function:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">knHttpsCert</span><span class="p">(</span><span class="nf">knLoadAsset</span><span class="p">(</span><span class="s2">&quot;mytlscert.pem&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="c1">-- ...</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+</section>
+<section id="knhttpsnocert-magic">
+<h2><code class="docutils literal notranslate"><span class="pre">knHttpsNoCert(magic)</span></code><a class="headerlink" href="#knhttpsnocert-magic" title="Link to this heading">¶</a></h2>
+<p>Disables verifying the server’s identity when no certificates are loaded
+instead of causing such requests to raise an error. <strong>This is insecure
+as it could enable Man-in-the-Middle attacks which nullify the security
+of HTTPS</strong>, but useful in certain cases where verifying the identify of
+the server is impractical.</p>
+<p>Because this is insecure, this function only works if a specific string
+is passed in <code class="docutils literal notranslate"><span class="pre">magic</span></code>. The string is intentionally not documented here;
+it can be found in KnShim’s source code.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">HTTP</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#knhttprequest-method-url-body-headers"><code class="docutils literal notranslate"><span class="pre">knHttpRequest(method,</span> <span class="pre">url,</span> <span class="pre">[body,</span> <span class="pre">[headers]])</span></code></a></li>
+<li><a class="reference internal" href="#knhttpupdate-request"><code class="docutils literal notranslate"><span class="pre">knHttpUpdate(request)</span></code></a></li>
+<li><a class="reference internal" href="#knhttpdata-request"><code class="docutils literal notranslate"><span class="pre">knHttpData(request)</span></code></a></li>
+<li><a class="reference internal" href="#knhttpdatasize-request"><code class="docutils literal notranslate"><span class="pre">knHttpDataSize(request)</span></code></a></li>
+<li><a class="reference internal" href="#knhttpsave-request-path"><code class="docutils literal notranslate"><span class="pre">knHttpSave(request,</span> <span class="pre">path)</span></code></a></li>
+<li><a class="reference internal" href="#knhttpgetheader-request-name-nth"><code class="docutils literal notranslate"><span class="pre">knHttpGetHeader(request,</span> <span class="pre">name,</span> <span class="pre">[nth])</span></code></a><ul>
+<li><a class="reference internal" href="#id1">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knhttperror-request"><code class="docutils literal notranslate"><span class="pre">knHttpError(request)</span></code></a></li>
+<li><a class="reference internal" href="#knhttperrorcode-request"><code class="docutils literal notranslate"><span class="pre">knHttpErrorCode(request)</span></code></a></li>
+<li><a class="reference internal" href="#knhttprelease-request"><code class="docutils literal notranslate"><span class="pre">knHttpRelease(request)</span></code></a></li>
+<li><a class="reference internal" href="#knhttpscert-certificatedata"><code class="docutils literal notranslate"><span class="pre">knHttpsCert([certificateData])</span></code></a></li>
+<li><a class="reference internal" href="#knhttpsnocert-magic"><code class="docutils literal notranslate"><span class="pre">knHttpsNoCert(magic)</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="shaders.html"
+                          title="previous chapter">Shaders (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="overlays.html"
+                          title="next chapter">Overlays</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/http.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="overlays.html" title="Overlays"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="shaders.html" title="Shaders (Smash Hit)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">HTTP</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

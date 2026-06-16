@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>System and Misc utilities &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Raw Input" href="input.html" />
+    <link rel="prev" title="Framerate Adjustment (Smash Hit)" href="framerate.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="input.html" title="Raw Input"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="framerate.html" title="Framerate Adjustment (Smash Hit)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">System and Misc utilities</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="system-and-misc-utilities">
+<h1>System and Misc utilities<a class="headerlink" href="#system-and-misc-utilities" title="Link to this heading">¶</a></h1>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knSystemAbi">
+<span class="sig-name descname"><span class="pre">knSystemAbi</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knSystemAbi" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the CPU/ABI that this system is using as a string. This is the
+same as what Android considers to be the canonical architecture name.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ABI</p></th>
+<th class="head"><p>Result value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>64-bit ARM v8</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">arm64-v8a</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>32-bit ARM v7</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">armeabi-v7a</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Intel i386</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x86</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetShimVersion">
+<span class="sig-name descname"><span class="pre">knGetShimVersion</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knGetShimVersion" title="Link to this definition">¶</a></dt>
+<dd><p><strong>As of r14</strong>: Now returns a string representing the KnShim version.</p>
+<p><strong>Formerly</strong>: Returned an integer representing the shim release. For
+r13, this was an integer related to the build date. For r12 and lower,
+this was the integer corresponding to the release number.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetAppVersion">
+<span class="sig-name descname"><span class="pre">knGetAppVersion</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knGetAppVersion" title="Link to this definition">¶</a></dt>
+<dd><p>Get the version name from your APK’s package info. Useful for displaying
+the version on the menu or where appropriate.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetAppSdk">
+<span class="sig-name descname"><span class="pre">knGetAppSdk</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetAppSdk" title="Link to this definition">¶</a></dt>
+<dd><p>Get the target SDK of the app. For 1.4.3 this is 26 by default, but may
+be set higher. If the device is running API level 23 or lower, the
+needed function is not available and this will return -1.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetDeviceSdk">
+<span class="sig-name descname"><span class="pre">knGetDeviceSdk</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetDeviceSdk" title="Link to this definition">¶</a></dt>
+<dd><p>Get the SDK level of the device the game is running on. If the device is
+running API level 23 or lower, this returns -1.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetInternalDataPath">
+<span class="sig-name descname"><span class="pre">knGetInternalDataPath</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knGetInternalDataPath" title="Link to this definition">¶</a></dt>
+<dd><p>Return the absolute path to the internal data directory (where the
+savegames and the like are stored - equivalent to <code class="docutils literal notranslate"><span class="pre">user://</span></code>) with no
+trailing slash.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetExternalDataPath">
+<span class="sig-name descname"><span class="pre">knGetExternalDataPath</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knGetExternalDataPath" title="Link to this definition">¶</a></dt>
+<dd><p>Return the absolute path to the external data directory. This isn’t used
+for anything in the game but is provided by Android so it’s included for
+completeness.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knInclude">
+<span class="sig-name descname"><span class="pre">knInclude</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">any</span></code><a class="headerlink" href="#lua-knInclude" title="Link to this definition">¶</a></dt>
+<dd><p>Similar to lua’s <code class="docutils literal notranslate"><span class="pre">dofile()</span></code> but loads from the APK’s asset directory.</p>
+<section id="using-lua-libraries">
+<h2>Using lua libraries<a class="headerlink" href="#using-lua-libraries" title="Link to this heading">¶</a></h2>
+<p>If you have a pure lua library you would like to use with Smash Hit, you
+could download the file, put it in a folder where you keep lua
+libraries, then <code class="docutils literal notranslate"><span class="pre">knInclude()</span></code> it.</p>
+<p>For example, let’s say we want to use a JSON parser library with the
+file name <code class="docutils literal notranslate"><span class="pre">json.lua</span></code>. You could copy that to a file in your assets
+directory called <code class="docutils literal notranslate"><span class="pre">lualibs/json.lua.mp3</span></code>, then load it with:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knInclude</span><span class="p">(</span><span class="s2">&quot;lualibs/json.lua&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If your library is multiple files, you might need to fix up the
+<code class="docutils literal notranslate"><span class="pre">require</span></code> calls to use <code class="docutils literal notranslate"><span class="pre">knInclude</span></code> and use <code class="docutils literal notranslate"><span class="pre">assets</span></code>-relative
+paths.</p>
+</section>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knJavaCommand">
+<span class="sig-name descname"><span class="pre">knJavaCommand</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knJavaCommand" title="Link to this definition">¶</a></dt>
+<dd><p>Run a command in the java wrapper. These types of commands are typically
+used for stuff that is hard to do in the NDK directly, like getting the
+device model or the package code path.</p>
+<p>Like commands used with <code class="docutils literal notranslate"><span class="pre">handleCommand</span></code>/<code class="docutils literal notranslate"><span class="pre">mgCommand</span></code>, they are made
+of words separated by whitespace where the first word is the command
+name and the following words are the arguments. They can also return a
+string as a result.</p>
+<p>The following commands are available with an unmodified <code class="docutils literal notranslate"><span class="pre">classes.dex</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setalwayson</span></code> - called, probably broken</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getosname</span></code> - get the android version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getmodelname</span></code> - get the model of device</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getdensity</span></code> - get display density</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visisturl</span> <span class="pre">&lt;url&gt;</span></code> - open the given url</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getlanguage</span></code> - get the name of the user’s language</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">quit</span></code> - quit game</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">istv</span></code> - return 1 if this is a tv</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">storeenabled</span></code> - is playstore enabled?</p></li>
+<li><p>(a lot of other stuff that’s mostly boring and broken now that google play is dead)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpcp</span></code> - get package code path (path to the apk on real file system)</p></li>
+</ul>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">System and Misc utilities</a><ul>
+<li><a class="reference internal" href="#lua-knSystemAbi"><code class="docutils literal notranslate"><span class="pre">knSystemAbi()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetShimVersion"><code class="docutils literal notranslate"><span class="pre">knGetShimVersion()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetAppVersion"><code class="docutils literal notranslate"><span class="pre">knGetAppVersion()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetAppSdk"><code class="docutils literal notranslate"><span class="pre">knGetAppSdk()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetDeviceSdk"><code class="docutils literal notranslate"><span class="pre">knGetDeviceSdk()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetInternalDataPath"><code class="docutils literal notranslate"><span class="pre">knGetInternalDataPath()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetExternalDataPath"><code class="docutils literal notranslate"><span class="pre">knGetExternalDataPath()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knInclude"><code class="docutils literal notranslate"><span class="pre">knInclude()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knJavaCommand"><code class="docutils literal notranslate"><span class="pre">knJavaCommand()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="framerate.html"
+                          title="previous chapter">Framerate Adjustment (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="input.html"
+                          title="next chapter">Raw Input</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/system.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="input.html" title="Raw Input"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="framerate.html" title="Framerate Adjustment (Smash Hit)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">System and Misc utilities</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

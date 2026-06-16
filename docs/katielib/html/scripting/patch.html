@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Patching &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Byte Packing" href="pack.html" />
+    <link rel="prev" title="Overlays" href="overlays.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="pack.html" title="Byte Packing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overlays.html" title="Overlays"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Patching</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="patching">
+<h1>Patching<a class="headerlink" href="#patching" title="Link to this heading">¶</a></h1>
+<p>The patching functions provide a way to apply patches to the game at
+runtime. Keep in mind that using this module meaningfully requires some
+knowledge of low level programming.</p>
+<section id="knpatch-virtualaddress-bytes">
+<h2><code class="docutils literal notranslate"><span class="pre">knPatch(virtualAddress,</span> <span class="pre">bytes)</span></code><a class="headerlink" href="#knpatch-virtualaddress-bytes" title="Link to this heading">¶</a></h2>
+<p>Patch bytes at the given virtual address (offset from the start of the
+first ELF section, and in the case of Smash Hit, the start of the file)
+at runtime. This is a simpler alternative to <code class="docutils literal notranslate"><span class="pre">knPoke()</span></code>.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure (e.g. invalid
+address, patch not in range). It may be changed to raise an error in the
+future.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
+<p>The following patch disables responding to hits by returning from
+<code class="docutils literal notranslate"><span class="pre">Level::hitSomething()</span></code> as soon as it is called on both 32 and 64 bit
+ARM.</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knSystemAbi</span><span class="p">()</span>
+
+<span class="c1">-- Note: Lua 5.1 does not support hex escapes in string literals, so we must</span>
+<span class="c1">-- specify the bytes as decimal escapes.</span>
+<span class="kr">if</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;arm64-v8a&quot;</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x71574</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\192\3\95\214</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- c0 03 5f d6   = arm64 ret instruction</span>
+<span class="kr">elseif</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;armeabi-v7a&quot;</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x5b8a0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\30\255\47\225</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- 1e ff 2f e1   = arm32 bx lr instruction</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Patching</a><ul>
+<li><a class="reference internal" href="#knpatch-virtualaddress-bytes"><code class="docutils literal notranslate"><span class="pre">knPatch(virtualAddress,</span> <span class="pre">bytes)</span></code></a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="overlays.html"
+                          title="previous chapter">Overlays</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="pack.html"
+                          title="next chapter">Byte Packing</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/patch.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="pack.html" title="Byte Packing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overlays.html" title="Overlays"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Patching</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cheats (Smash Hit) &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gameplay (Smash Hit)" href="gameplay_smashhit.html" />
+    <link rel="prev" title="Database" href="database.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gameplay_smashhit.html" title="Gameplay (Smash Hit)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="database.html" title="Database"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Cheats (<em>Smash Hit</em>)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cheats-smash-hit">
+<h1>Cheats (<em>Smash Hit</em>)<a class="headerlink" href="#cheats-smash-hit" title="Link to this heading">¶</a></h1>
+<p>Provides various cheats which are useful for debugging.</p>
+<section id="balls">
+<h2>Balls<a class="headerlink" href="#balls" title="Link to this heading">¶</a></h2>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knSetBalls">
+<span class="sig-name descname"><span class="pre">knSetBalls</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">balls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knSetBalls" title="Link to this definition">¶</a></dt>
+<dd><p>Set the player’s number of balls to <code class="docutils literal notranslate"><span class="pre">balls</span></code>.</p>
+<p>For example, to set the player’s number of balls to 100:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knSetBalls</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetBalls">
+<span class="sig-name descname"><span class="pre">knGetBalls</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetBalls" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the current number of balls. This is different from using mgGet(),
+since it is updated even if you use knSetBalls().</p>
+</dd></dl>
+
+</section>
+<section id="streak">
+<h2>Streak<a class="headerlink" href="#streak" title="Link to this heading">¶</a></h2>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knSetStreak">
+<span class="sig-name descname"><span class="pre">knSetStreak</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">streak</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knSetStreak" title="Link to this definition">¶</a></dt>
+<dd><p>Set the player’s streak.</p>
+<p>For example, to set a four-ball multiball plus halfway to a five-ball
+multiball:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knSetStreak</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetStreak">
+<span class="sig-name descname"><span class="pre">knGetStreak</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetStreak" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the current streak. This is different from using mgGet(), since it
+is updated even if you use knSetStreak().</p>
+</dd></dl>
+
+</section>
+<section id="no-clip">
+<h2>No-clip<a class="headerlink" href="#no-clip" title="Link to this heading">¶</a></h2>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knSetNoclip">
+<span class="sig-name descname"><span class="pre">knSetNoclip</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knSetNoclip" title="Link to this definition">¶</a></dt>
+<dd><p>If mode is <code class="docutils literal notranslate"><span class="pre">true</span></code>, then the noclip cheat is enabled if not already
+enabled. If mode is <code class="docutils literal notranslate"><span class="pre">false</span></code>, then noclip is disabled if not already
+disabled.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetNoclip">
+<span class="sig-name descname"><span class="pre">knGetNoclip</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knGetNoclip" title="Link to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if currently in noclip mode, or <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Cheats (<em>Smash Hit</em>)</a><ul>
+<li><a class="reference internal" href="#balls">Balls</a><ul>
+<li><a class="reference internal" href="#lua-knSetBalls"><code class="docutils literal notranslate"><span class="pre">knSetBalls()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetBalls"><code class="docutils literal notranslate"><span class="pre">knGetBalls()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#streak">Streak</a><ul>
+<li><a class="reference internal" href="#lua-knSetStreak"><code class="docutils literal notranslate"><span class="pre">knSetStreak()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetStreak"><code class="docutils literal notranslate"><span class="pre">knGetStreak()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#no-clip">No-clip</a><ul>
+<li><a class="reference internal" href="#lua-knSetNoclip"><code class="docutils literal notranslate"><span class="pre">knSetNoclip()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetNoclip"><code class="docutils literal notranslate"><span class="pre">knGetNoclip()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="database.html"
+                          title="previous chapter">Database</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="gameplay_smashhit.html"
+                          title="next chapter">Gameplay (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/cheats.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gameplay_smashhit.html" title="Gameplay (Smash Hit)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="database.html" title="Database"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Cheats (<em>Smash Hit</em>)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

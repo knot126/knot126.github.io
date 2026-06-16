@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Overlays &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Patching" href="patch.html" />
+    <link rel="prev" title="HTTP" href="http.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="patch.html" title="Patching"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="http.html" title="HTTP"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Overlays</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="overlays">
+<h1>Overlays<a class="headerlink" href="#overlays" title="Link to this heading">¶</a></h1>
+<p>Overlays allow loading asset data from ZIP files, directories, and Lua
+callbacks as if they were in the APK’s asset directory, gracefully
+falling back to the assets directory if assets cannot be found in them.
+Conceptually, we are <em>overlaying</em> the assets in the assets directory
+with assets from these other sources. It is a form of <a class="reference external" href="https://en.wikipedia.org/wiki/Union_mount">union
+mount</a>, with active
+overlays taking precedence over the packaged assets.</p>
+<p>When loading an asset with overlays active, KnShim starts by looking for
+the asset to load in the most recently created overlay, and if it does
+not find it, falls back to the next previously created overlay, then the
+next, the next and etc, before finally trying to load from the APK.</p>
+<p>This is mainly used in new versions of Shatter Client to provide a
+cleaner overall implementation (no need for actually modifying rooms and
+segments) and support certain types of assets which don’t load using the
+standard resource manager (like streamed music).</p>
+<blockquote>
+<div><p><strong>Possible planned features</strong>: Support for manipulating the APK
+assets directory as if it were an overlay itself and changing
+precedence order without being restricted by a stack.</p>
+</div></blockquote>
+<section id="example-zip-overlays">
+<h2>Example: ZIP overlays<a class="headerlink" href="#example-zip-overlays" title="Link to this heading">¶</a></h2>
+<p>For example, if you mount a zip file <code class="docutils literal notranslate"><span class="pre">forest.zip</span></code> which has a level:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">forest</span><span class="o">.</span><span class="n">zip</span>
+    <span class="n">levels</span><span class="o">/</span>
+        <span class="n">forest</span><span class="o">.</span><span class="n">xml</span>
+    <span class="n">rooms</span><span class="o">/</span>
+        <span class="n">forest</span><span class="o">.</span><span class="n">lua</span>
+    <span class="n">segments</span><span class="o">/</span>
+        <span class="n">forest</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>then playing the level <code class="docutils literal notranslate"><span class="pre">forest</span></code> will load from the ZIP file.</p>
+<p>If a segment then depends on an obstacle like <code class="docutils literal notranslate"><span class="pre">scoretop</span></code>, but it is
+not in the ZIP file, then it is loaded from the mod’s assets directory.</p>
+</section>
+<section id="knpushoverlay-type">
+<h2><code class="docutils literal notranslate"><span class="pre">knPushOverlay(type,</span> <span class="pre">...)</span></code><a class="headerlink" href="#knpushoverlay-type" title="Link to this heading">¶</a></h2>
+<p>Create a new overlay and push it to the top of the overlay stack.
+Returns <strong>``true``</strong> when the overlay is created successfully and
+<strong>``false``</strong> otherwise. The <code class="docutils literal notranslate"><span class="pre">type</span></code> determines the kind of overlay
+that will be created and the parameters given to it:</p>
+<section id="knpushoverlay-directory-path">
+<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;directory&quot;,</span> <span class="pre">path)</span></code><a class="headerlink" href="#knpushoverlay-directory-path" title="Link to this heading">¶</a></h3>
+<p>Creates an overlay from a physical file system directory, where <code class="docutils literal notranslate"><span class="pre">path</span></code>
+is the path to the directory to use. For example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;directory&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knGetInternalDataPath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/generated&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Paths will not be sanitised, so upper directories can still be accessed
+using <code class="docutils literal notranslate"><span class="pre">..</span></code>.</p>
+</section>
+<section id="knpushoverlay-zip-zipfile-options">
+<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;zip&quot;,</span> <span class="pre">zipFile,</span> <span class="pre">[options])</span></code><a class="headerlink" href="#knpushoverlay-zip-zipfile-options" title="Link to this heading">¶</a></h3>
+<p>Creates an overlay from a ZIP file on the physical file system, where
+<code class="docutils literal notranslate"><span class="pre">zipFile</span></code> is the name of the ZIP file to use.</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;zip&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knGetInternalDataPath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/mylevel.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Assets will load from the root of the ZIP. File names should not have
+the <code class="docutils literal notranslate"><span class="pre">.mp3</span></code> suffix, as it is stripped before attempting to load the
+file. File names are case sensitive.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> are expressed in a table containing any of these fields,
+all of which are optional:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prefix</span></code>: String prepended to the path before trying to load it</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffix</span></code>: String appended to the path before trying to load it</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Changed in Release 19</strong><em>: Added the ``options`` argument and the
+ability to specify a prefix and suffix</em></p>
+</div></blockquote>
+</section>
+<section id="knpushoverlay-apk-apkfile">
+<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;apk&quot;,</span> <span class="pre">apkFile)</span></code><a class="headerlink" href="#knpushoverlay-apk-apkfile" title="Link to this heading">¶</a></h3>
+<p>This is equivalent to
+<code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;zip&quot;,</span> <span class="pre">apkFile,</span> <span class="pre">{prefix=&quot;assets/&quot;,</span> <span class="pre">suffix=&quot;.mp3&quot;})</span></code> and
+is meant for using asset dirs from other Smash Hit APKs at load time.</p>
+<blockquote>
+<div><p><em>Added in Release 19</em></p>
+</div></blockquote>
+</section>
+<section id="knpushoverlay-callback-functionname">
+<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;callback&quot;,</span> <span class="pre">functionName)</span></code><a class="headerlink" href="#knpushoverlay-callback-functionname" title="Link to this heading">¶</a></h3>
+<p>Creates an overlay which uses a callback function in the main menu
+script to dynamically generate asset data. Note that <code class="docutils literal notranslate"><span class="pre">functionName</span></code>
+should be a string; the callback function cannot be passed directly.</p>
+<section id="callback-function">
+<h4>Callback Function<a class="headerlink" href="#callback-function" title="Link to this heading">¶</a></h4>
+<p><strong>``function``</strong><code class="docutils literal notranslate"><span class="pre">(path) -&gt; ``\</span> <span class="pre">**``nil``**\</span> <span class="pre">`` | string</span></code></p>
+<p>The named function should take the path to load as its only argument,
+and it should return either a string representing the asset data or
+<strong>``nil``</strong> if the asset should not be loaded from this function.</p>
+</section>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h4>
+<p><em>Example #1: Dynamically generate ``buttonN.xml`` files</em></p>
+<p>In <code class="docutils literal notranslate"><span class="pre">menu/main.lua</span></code>:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;callback&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;generateMenuButton&quot;</span><span class="p">)</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">generateMenuButton</span><span class="p">(</span><span class="nv">path</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nb">string.match</span><span class="p">(</span><span class="nv">path</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;menu/button%d+%.xml%.mp3&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">start</span><span class="p">,</span><span class="w"> </span><span class="nv">stop</span><span class="p">,</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">string.find</span><span class="p">(</span><span class="nv">path</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;(%d+)&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="kr">return</span><span class="w"> </span><span class="s">[[&lt;ui texture=&quot;button.png&quot; selected=&quot;button_select.png&quot;&gt;</span>
+<span class="s">            &lt;rect coords=&quot;0 0 294 384&quot; cmd=&quot;script:level ]]</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">n</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s">[[&quot;/&gt;</span>
+<span class="s">        &lt;/ui&gt;]]</span>
+<span class="w">    </span><span class="kr">else</span>
+<span class="w">        </span><span class="kr">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+<p><em>Example #2: Implement a cheap Data URI</em></p>
+<p>In <code class="docutils literal notranslate"><span class="pre">menu/main.lua</span></code>:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;callback&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;knockoffDataUri&quot;</span><span class="p">)</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">knockoffDataUri</span><span class="p">(</span><span class="nv">path</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nb">string.match</span><span class="p">(</span><span class="nv">path</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;^data:&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="kr">return</span><span class="w"> </span><span class="nb">string.sub</span><span class="p">(</span><span class="nv">path</span><span class="p">,</span><span class="w"> </span><span class="o">#</span><span class="s2">&quot;data:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">else</span>
+<span class="w">        </span><span class="kr">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+<p><em>Added in Release 14</em></p>
+</section>
+</section>
+</section>
+<section id="knpopoverlay">
+<h2><code class="docutils literal notranslate"><span class="pre">knPopOverlay()</span></code><a class="headerlink" href="#knpopoverlay" title="Link to this heading">¶</a></h2>
+<p>Pop the most recently mounted overlay off of the stack, unmounting it.</p>
+<p><em>Added in Release 14</em></p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Overlays</a><ul>
+<li><a class="reference internal" href="#example-zip-overlays">Example: ZIP overlays</a></li>
+<li><a class="reference internal" href="#knpushoverlay-type"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(type,</span> <span class="pre">...)</span></code></a><ul>
+<li><a class="reference internal" href="#knpushoverlay-directory-path"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;directory&quot;,</span> <span class="pre">path)</span></code></a></li>
+<li><a class="reference internal" href="#knpushoverlay-zip-zipfile-options"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;zip&quot;,</span> <span class="pre">zipFile,</span> <span class="pre">[options])</span></code></a></li>
+<li><a class="reference internal" href="#knpushoverlay-apk-apkfile"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;apk&quot;,</span> <span class="pre">apkFile)</span></code></a></li>
+<li><a class="reference internal" href="#knpushoverlay-callback-functionname"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;callback&quot;,</span> <span class="pre">functionName)</span></code></a><ul>
+<li><a class="reference internal" href="#callback-function">Callback Function</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knpopoverlay"><code class="docutils literal notranslate"><span class="pre">knPopOverlay()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="http.html"
+                          title="previous chapter">HTTP</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="patch.html"
+                          title="next chapter">Patching</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/overlays.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="patch.html" title="Patching"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="http.html" title="HTTP"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Overlays</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Logging &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Files" href="files.html" />
+    <link rel="prev" title="KatieLib Script API" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="files.html" title="Files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="KatieLib Script API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Logging</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="logging">
+<h1>Logging<a class="headerlink" href="#logging" title="Link to this heading">¶</a></h1>
+<p>The logging function provides the ability to write messages to the Android debug stream for debugging and testing purposes.</p>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knLog">
+<span class="sig-name descname"><span class="pre">knLog</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">level</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knLog" title="Link to this definition">¶</a></dt>
+<dd><p>This function logs to the Android debug stream, accessible with
+<code class="docutils literal notranslate"><span class="pre">adb</span> <span class="pre">logcat</span></code>. Level can be any one of:</p>
+<dl class="lua enum">
+<dt class="sig sig-object lua" id="lua-LOG_INFO">
+<span class="property"><span class="k"><span class="pre">enum</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">LOG_INFO</span></span><a class="headerlink" href="#lua-LOG_INFO" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua enum">
+<dt class="sig sig-object lua" id="lua-LOG_WARN">
+<span class="property"><span class="k"><span class="pre">enum</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">LOG_WARN</span></span><a class="headerlink" href="#lua-LOG_WARN" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="lua enum">
+<dt class="sig sig-object lua" id="lua-LOG_ERROR">
+<span class="property"><span class="k"><span class="pre">enum</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">LOG_ERROR</span></span><a class="headerlink" href="#lua-LOG_ERROR" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Or not included at all for a default of <code class="docutils literal notranslate"><span class="pre">LOG_INFO</span></code>, and <code class="docutils literal notranslate"><span class="pre">msg</span></code> is any
+string to log. For example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knLog</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- defaults to LOG_INFO</span>
+<span class="nf">knLog</span><span class="p">(</span><span class="nv">LOG_INFO</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;What a wonderful day to mod Smash Hit!&quot;</span><span class="p">)</span>
+<span class="nf">knLog</span><span class="p">(</span><span class="nv">LOG_ERROR</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Whoops! Something failed.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Logging</a><ul>
+<li><a class="reference internal" href="#lua-knLog"><code class="docutils literal notranslate"><span class="pre">knLog()</span></code></a><ul>
+<li><a class="reference internal" href="#lua-LOG_INFO"><code class="docutils literal notranslate"><span class="pre">LOG_INFO</span></code></a></li>
+<li><a class="reference internal" href="#lua-LOG_WARN"><code class="docutils literal notranslate"><span class="pre">LOG_WARN</span></code></a></li>
+<li><a class="reference internal" href="#lua-LOG_ERROR"><code class="docutils literal notranslate"><span class="pre">LOG_ERROR</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">KatieLib Script API</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="files.html"
+                          title="next chapter">Files</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/logging.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="files.html" title="Files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="KatieLib Script API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Logging</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

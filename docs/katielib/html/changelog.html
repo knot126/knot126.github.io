@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Changelog &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="_static/lua.css?v=492dc087" />
+    <script src="_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Inter-script Communication" href="scripting/isc.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="scripting/isc.html" title="Inter-script Communication"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KatieLib 19 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Changelog</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
+<section id="release-19-upcoming">
+<h2>Release 19 (upcoming)<a class="headerlink" href="#release-19-upcoming" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Several functions will now raise an error instead of returning
+silently when used incorrectly</p>
+<ul>
+<li><p>More notably, file functions will now raise an error instead of
+returning a failure code in most cases</p></li>
+</ul>
+</li>
+<li><p>Added a new feature for all scripts: special <code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function
+is now called when the script is being destroyed</p></li>
+<li><p>Added new DB functions: <code class="docutils literal notranslate"><span class="pre">knDbKeys()</span></code>, <code class="docutils literal notranslate"><span class="pre">knDbBeginTransaction()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">knDbCommit()</span></code></p></li>
+<li><p>Improved <code class="docutils literal notranslate"><span class="pre">knCall()</span></code> by allowing to call into arbitrary scripts, not
+just the menu/movie/hud</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">knUnpack()</span></code></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">knInclude()</span></code> now gives loaded blocks a name for debugging, and
+supports pre-compiled scripts made with <code class="docutils literal notranslate"><span class="pre">luac</span></code></p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">apk</span></code> type overlays and suffix and prefix options for <code class="docutils literal notranslate"><span class="pre">zip</span></code>
+overlays</p></li>
+</ul>
+</section>
+<section id="release-18">
+<h2>Release 18<a class="headerlink" href="#release-18" title="Link to this heading">¶</a></h2>
+<p><em>8 June 2026</em></p>
+<ul class="simple">
+<li><p>Fork-seccored as <em>KatieMod</em></p></li>
+<li><p>Use YipLoader for loading the mod</p></li>
+<li><p>Added inter-script communication via <code class="docutils literal notranslate"><span class="pre">knCall()</span></code></p></li>
+<li><p>Added byte packing (<code class="docutils literal notranslate"><span class="pre">knPack()</span></code>)</p></li>
+<li><p>This fork is for private use only for now</p></li>
+</ul>
+</section>
+<section id="release-17">
+<h2>Release 17<a class="headerlink" href="#release-17" title="Link to this heading">¶</a></h2>
+<p><em>15 December 2025</em></p>
+<ul class="simple">
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">knListAssetDir()</span></code></p></li>
+</ul>
+</section>
+<section id="release-16">
+<h2>Release 16<a class="headerlink" href="#release-16" title="Link to this heading">¶</a></h2>
+<p><em>13 November 2025</em></p>
+<ul class="simple">
+<li><p>Internal work and refactoring for an upcoming traditional mod
+loader/extensions API</p></li>
+<li><p>Internal work to support non-Mediocre games</p></li>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">knDownloadFile()</span></code>, <code class="docutils literal notranslate"><span class="pre">knHttpPost()</span></code>, <code class="docutils literal notranslate"><span class="pre">knHttpPostAsync()</span></code>:
+please use the async HTTP API or a helper library around it</p></li>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">knConnectAssetServer()</span></code>, <code class="docutils literal notranslate"><span class="pre">knDisconnectAssetServer()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">knIsConnectedToAssetServer()</span></code>: Use overlays instead of the built-in
+asset server</p></li>
+</ul>
+</section>
+<section id="release-15">
+<h2>Release 15<a class="headerlink" href="#release-15" title="Link to this heading">¶</a></h2>
+<p><em>31 October 2025</em></p>
+<ul class="simple">
+<li><p>Initial support for KnShim’s second supported game, <em>Granny Smith</em>!</p></li>
+<li><p>HTTPS is now supported in the existing HTTP API using MbedTLS</p></li>
+<li><p>Added the Raw Input module for querying touch events from scripts</p></li>
+<li><p>KnShim will now disarm the anti-tamper code so anti-tamper patching is
+no longer needed</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">knHttpSave()</span></code>: Save HTTP responses without extra memory
+overhead</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">knSetDisabled()</span></code>: Makes certain modules unavailable in newly
+loaded scripts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">knSystemAbi()</span></code> was moved from the Patching module to the System
+module</p></li>
+<li><p>NxArchive code is no longer included in KnShim</p></li>
+</ul>
+</section>
+<section id="release-14">
+<h2>Release 14<a class="headerlink" href="#release-14" title="Link to this heading">¶</a></h2>
+<p><em>5 October 2025</em></p>
+<p>Note: I decided to skip the “full” release 13 by renaming this release
+to r14 and r13 beta 1 to the final r13. Going forward there will be no
+betas and new experimental features will be put directly into new
+releases.</p>
+<ul class="simple">
+<li><p><strong>Complete revamp of overlays</strong>: Multiple overlays can now be used at
+a time, and support for directories and Lua script callbacks as
+sources was added.</p></li>
+<li><p><strong>Shader uniform module by yorshex</strong>: Allows updating custom uniforms
+from scripts.</p></li>
+<li><p>HTTP request constructor changed: now always requires `method`
+argument at the start</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">knLoadGfx()</span></code> to allow reloading shaders and textures without
+restarting the game</p></li>
+<li><p>Added new patching module with <code class="docutils literal notranslate"><span class="pre">knPatch()</span></code></p></li>
+<li><p>Removed:</p>
+<ul>
+<li><p>Old patching module (<code class="docutils literal notranslate"><span class="pre">knPeek()</span></code>/<code class="docutils literal notranslate"><span class="pre">knPoke()</span></code>/etc)</p></li>
+<li><p>MD5 Hashing: <code class="docutils literal notranslate"><span class="pre">knMd5()</span></code></p></li>
+<li><p>Hyperspace functions that no longer have relevance:
+<code class="docutils literal notranslate"><span class="pre">knPlayerZeroState()</span></code></p></li>
+</ul>
+</li>
+<li><p>Code cleanup</p></li>
+</ul>
+</section>
+<section id="release-13">
+<h2>Release 13<a class="headerlink" href="#release-13" title="Link to this heading">¶</a></h2>
+<p><em>2 July 2025</em></p>
+<p><em>Sometimes also called r13-beta1</em></p>
+<ul class="simple">
+<li><p>KnShim now uses the version of Lua from Smash Hit instead of including
+its own</p>
+<ul>
+<li><p>This fixed various bugs, including tables being used in
+`knInclude()`’d scripts leading to memory corruption</p></li>
+</ul>
+</li>
+<li><p>Added functions:</p>
+<ul>
+<li><p>`knGetAppSdk()` for getting the app’s target SDK</p></li>
+<li><p>`knGetDeviceSdk()` for getting the device’s android version (sdk
+level)</p></li>
+<li><p>`knGetAppVersion()` for getting the app’s version string</p></li>
+<li><p>`knJavaCommand()` for calling smash hit’s java commands from lua</p></li>
+<li><p>`knGetDeviceHz()` and `knSetFrameRate()` for adjusting the
+game’s framerate</p></li>
+<li><p>`knPatch()` for more easily making patches at runtime</p></li>
+</ul>
+</li>
+<li><p>Changed `knLoadAsset()` and `knInclude()` to use Smash Hit’s
+resource manager</p>
+<ul>
+<li><p>This means you can no longer explicitly specify `.mp3` at the end
+of file names</p></li>
+</ul>
+</li>
+<li><p>HTTP API now supporting headers and non-`GET`/`POST` methods</p></li>
+<li><p>Removed `knEnableReloading`; you can now just `knReload()` without
+enabling it</p></li>
+<li><p>Deprecated `knPeek()` and `knPoke()`, use `knPatch()` now</p></li>
+<li><p>Fix a bug where the game would crash if using `knHttpRelease()`
+explicitly</p></li>
+<li><p>Overlays have been made available for general use</p></li>
+<li><p>Upgrade Leaf</p></li>
+<li><p>New project logo</p></li>
+</ul>
+</section>
+<section id="release-12">
+<h2>Release 12<a class="headerlink" href="#release-12" title="Link to this heading">¶</a></h2>
+<p><em>15 February 2025</em></p>
+<ul class="simple">
+<li><p>Added `knListDir`, `knIsDir`, `knLoadAsset`, `knInclude`,
+`knHttpPostAsync`</p></li>
+<li><p>`knLog` no longer requires log level, does not crash when `msg` is
+not a string</p></li>
+<li><p>HTTP request objects will now be properly garbage collected, so
+`knHttpRelease` is not needed anymore</p></li>
+<li><p>Code cleanup</p></li>
+<li><p>Remove obfuscation related code</p></li>
+<li><p>Untested x86 support</p></li>
+</ul>
+</section>
+<section id="release-11">
+<h2>Release 11<a class="headerlink" href="#release-11" title="Link to this heading">¶</a></h2>
+<p><em>2 January 2025</em></p>
+<ul class="simple">
+<li><p>Added the database, like the registry but persistent</p></li>
+<li><p>Native HTTP function wrappers (`knDownloadFile`, `knHttpPost`)</p></li>
+<li><p>Asset server wrapper functions (`knConnectAssetServer`,
+`knDisconnectAssetServer`, `knIsConnectedToAssetServer`)</p></li>
+<li><p>Main menu reloading (`knEnableReloading`, `knReload`)</p></li>
+<li><p>Overlays (prototype, not available in mainline builds ATM)</p></li>
+<li><p>Shitposting (iykyk)</p></li>
+</ul>
+</section>
+<section id="release-10">
+<h2>Release 10<a class="headerlink" href="#release-10" title="Link to this heading">¶</a></h2>
+<p><em>18 December 2024</em></p>
+<ul class="simple">
+<li><p>Fixes for `knGetBalls`, `knGetStreak` not working</p></li>
+<li><p>Added `knSetNoclip` and `knGetNoclip`</p></li>
+<li><p>Switch to LeafHook for hooking</p></li>
+<li><p>Hook some debug logging functions by default</p></li>
+</ul>
+</section>
+<section id="release-9">
+<h2>Release 9<a class="headerlink" href="#release-9" title="Link to this heading">¶</a></h2>
+<p><em>6 December 2024</em></p>
+<ul class="simple">
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">knGetBalls</span></code> and <code class="docutils literal notranslate"><span class="pre">knGetStreak</span></code></p></li>
+</ul>
+</section>
+<section id="release-8">
+<h2>Release 8<a class="headerlink" href="#release-8" title="Link to this heading">¶</a></h2>
+<p><em>4 December 2024</em></p>
+<ul class="simple">
+<li><p>Improved registry performance by using a hash table</p></li>
+<li><p>Registry now supports values with NUL bytes in them, for both keys and
+values</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">knRegKeys()</span></code> function to list all keys in registry</p></li>
+<li><p>Remove non-Leaf build option</p></li>
+</ul>
+</section>
+<section id="release-7">
+<h2>Release 7<a class="headerlink" href="#release-7" title="Link to this heading">¶</a></h2>
+<p><em>6 November 2024</em></p>
+<ul class="simple">
+<li><p>Switch to using Leaf, a custom ELF loader, to be fully compatible with
+Android target SDK &gt;29</p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">knUnprotect</span></code> and <code class="docutils literal notranslate"><span class="pre">knSetMemoryProtection</span></code> for Leaf builds
+as Leaf makes all memory RWX by default</p></li>
+<li><p>Added Leaf build options (you can keep using dlopen/dlsym/mprotect if
+you want to)</p></li>
+</ul>
+</section>
+<section id="release-6">
+<h2>Release 6<a class="headerlink" href="#release-6" title="Link to this heading">¶</a></h2>
+<p><em>28 October 2024</em></p>
+<ul class="simple">
+<li><p>Adds new game control functionality: <code class="docutils literal notranslate"><span class="pre">knSetBalls</span></code> and
+<code class="docutils literal notranslate"><span class="pre">knSetStreak</span></code></p></li>
+<li><p>Add a way to get the shim release version: <code class="docutils literal notranslate"><span class="pre">knGetShimVersion</span></code></p></li>
+</ul>
+</section>
+<section id="release-5">
+<h2>Release 5<a class="headerlink" href="#release-5" title="Link to this heading">¶</a></h2>
+<p><em>27 October 2024</em></p>
+<p>a bit of refactoring and fixing modern android support</p>
+<p>note that <code class="docutils literal notranslate"><span class="pre">knUnprotect</span></code> is now deprecated because it won’t work if you
+set the android target sdk too high; use the new
+<code class="docutils literal notranslate"><span class="pre">knSetMemoryProtection</span></code> instead</p>
+<p><strong>EDIT: This does not fix everything (specifically trying to set
+anything to be executable will be denied), however it is enough to work
+on newer Android.</strong></p>
+</section>
+<section id="release-4-r4-post">
+<h2>Release 4 (r4-post)<a class="headerlink" href="#release-4-r4-post" title="Link to this heading">¶</a></h2>
+<p><em>26 August 2024</em></p>
+<ul class="simple">
+<li><p>Initial public release</p></li>
+</ul>
+</section>
+<section id="release-3">
+<h2>Release 3<a class="headerlink" href="#release-3" title="Link to this heading">¶</a></h2>
+<p><em>10 August 2024</em></p>
+<ul class="simple">
+<li><p>ARM32 support</p></li>
+</ul>
+</section>
+<section id="release-2">
+<h2>Release 2<a class="headerlink" href="#release-2" title="Link to this heading">¶</a></h2>
+<p><em>8 August 2024</em></p>
+<ul class="simple">
+<li><p>Added registry and HTTP api</p></li>
+<li><p>Added functions to get external and internal data path</p></li>
+</ul>
+</section>
+<section id="release-1">
+<h2>Release 1<a class="headerlink" href="#release-1" title="Link to this heading">¶</a></h2>
+<p><em>7 August 2024</em></p>
+<ul class="simple">
+<li><p>Initial private release to Smash Hit Lab discord</p></li>
+<li><p>Added logging and memory peek/poke</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#release-19-upcoming">Release 19 (upcoming)</a></li>
+<li><a class="reference internal" href="#release-18">Release 18</a></li>
+<li><a class="reference internal" href="#release-17">Release 17</a></li>
+<li><a class="reference internal" href="#release-16">Release 16</a></li>
+<li><a class="reference internal" href="#release-15">Release 15</a></li>
+<li><a class="reference internal" href="#release-14">Release 14</a></li>
+<li><a class="reference internal" href="#release-13">Release 13</a></li>
+<li><a class="reference internal" href="#release-12">Release 12</a></li>
+<li><a class="reference internal" href="#release-11">Release 11</a></li>
+<li><a class="reference internal" href="#release-10">Release 10</a></li>
+<li><a class="reference internal" href="#release-9">Release 9</a></li>
+<li><a class="reference internal" href="#release-8">Release 8</a></li>
+<li><a class="reference internal" href="#release-7">Release 7</a></li>
+<li><a class="reference internal" href="#release-6">Release 6</a></li>
+<li><a class="reference internal" href="#release-5">Release 5</a></li>
+<li><a class="reference internal" href="#release-4-r4-post">Release 4 (r4-post)</a></li>
+<li><a class="reference internal" href="#release-3">Release 3</a></li>
+<li><a class="reference internal" href="#release-2">Release 2</a></li>
+<li><a class="reference internal" href="#release-1">Release 1</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="scripting/isc.html"
+                          title="previous chapter">Inter-script Communication</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/changelog.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="scripting/isc.html" title="Inter-script Communication"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">KatieLib 19 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Changelog</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

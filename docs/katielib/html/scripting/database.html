@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Database &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cheats (Smash Hit)" href="cheats.html" />
+    <link rel="prev" title="Registry" href="registry.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cheats.html" title="Cheats (Smash Hit)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="registry.html" title="Registry"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Database</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="database">
+<h1>Database<a class="headerlink" href="#database" title="Link to this heading">¶</a></h1>
+<p>The database is essentially the same as the registry, except it is saved
+across restarts of the game. It is suitable for things like custom save
+data.</p>
+<p>The database saves all data to a file named <code class="docutils literal notranslate"><span class="pre">database.kn</span></code> in the user
+data folder.</p>
+<p>If you do not need values to persist between game restarts, use the
+registry instead.</p>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDbSet">
+<span class="sig-name descname"><span class="pre">knDbSet</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knDbSet" title="Link to this definition">¶</a></dt>
+<dd><p>Create a mapping from the <code class="docutils literal notranslate"><span class="pre">key</span></code> to the <code class="docutils literal notranslate"><span class="pre">value</span></code>, and save the
+database.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the mapping was created and the database was saved,
+or <code class="docutils literal notranslate"><span class="pre">false</span></code> if either the mapping was not created or the database was
+not saved successfully.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDbGet">
+<span class="sig-name descname"><span class="pre">knDbGet</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knDbGet" title="Link to this definition">¶</a></dt>
+<dd><p>Return the value associated with the key.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDbHas">
+<span class="sig-name descname"><span class="pre">knDbHas</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knDbHas" title="Link to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if there is a mapping of the given key in the database,
+or <code class="docutils literal notranslate"><span class="pre">false</span></code> if there is not.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDbDelete">
+<span class="sig-name descname"><span class="pre">knDbDelete</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knDbDelete" title="Link to this definition">¶</a></dt>
+<dd><p>Delete the mapping associated with the key, and save the database.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> if the database was saved successfully, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if
+it was not.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDbKeys">
+<span class="sig-name descname"><span class="pre">knDbKeys</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#lua-knDbKeys" title="Link to this definition">¶</a></dt>
+<dd><p>Returns an array like table containing a list of all keys currently in
+the database.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 19.</span></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDbBeginTransaction">
+<span class="sig-name descname"><span class="pre">knDbBeginTransaction</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knDbBeginTransaction" title="Link to this definition">¶</a></dt>
+<dd><p>Temporarily stops writing the database to disk until <code class="docutils literal notranslate"><span class="pre">knDbCommit()</span></code> is
+called. This is useful to optimise writing lots of changes to the
+database at once.</p>
+<p>For example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knDbBeginTransaction</span><span class="p">()</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.1.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.2.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.3.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.4.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.5.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
+<span class="nf">knDbCommit</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 19: </span>However, it did exist prior to this as <code class="docutils literal notranslate"><span class="pre">knDbTrans()</span></code>, albeit disabled</p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knDbCommit">
+<span class="sig-name descname"><span class="pre">knDbCommit</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knDbCommit" title="Link to this definition">¶</a></dt>
+<dd><p>Re-enable writing the database to disk and write the changes made while
+saving was disabled.</p>
+<p>This will additionally ensure that if the program crashes, either all or
+none of the changes made will be written: that is, it cannot have a
+partial state where some new values are written and others are not.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 19: </span>However, it did exist prior to this, albeit disabled</p>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Database</a><ul>
+<li><a class="reference internal" href="#lua-knDbSet"><code class="docutils literal notranslate"><span class="pre">knDbSet()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knDbGet"><code class="docutils literal notranslate"><span class="pre">knDbGet()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knDbHas"><code class="docutils literal notranslate"><span class="pre">knDbHas()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knDbDelete"><code class="docutils literal notranslate"><span class="pre">knDbDelete()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knDbKeys"><code class="docutils literal notranslate"><span class="pre">knDbKeys()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knDbBeginTransaction"><code class="docutils literal notranslate"><span class="pre">knDbBeginTransaction()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knDbCommit"><code class="docutils literal notranslate"><span class="pre">knDbCommit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="registry.html"
+                          title="previous chapter">Registry</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cheats.html"
+                          title="next chapter">Cheats (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/database.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cheats.html" title="Cheats (Smash Hit)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="registry.html" title="Registry"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Database</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>

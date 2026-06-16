@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Raw Input &#8212; KatieLib 19 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=c5ffea4a"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Shaders (Smash Hit)" href="shaders.html" />
+    <link rel="prev" title="System and Misc utilities" href="system.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="shaders.html" title="Shaders (Smash Hit)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="system.html" title="System and Misc utilities"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Raw Input</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="raw-input">
+<h1>Raw Input<a class="headerlink" href="#raw-input" title="Link to this heading">¶</a></h1>
+<p>The input module allows retrieving information about input events, like
+taps on the screen, directly from the input manager. This is especially
+useful if you want to implement your own UI elements where the game’s
+current input handling is too limiting.</p>
+<p><code class="docutils literal notranslate"><span class="pre">QiInput</span></code> can handle up to 32 touch events at once, though most
+devices cannot reach this limit. Each event is assigned an index from 0
+to 31, with new events (e.g. new touches) taking the lowest available
+index.</p>
+<p>If you want to handle more than once touch at a time, it is your job to
+check if each possible index (0 to 31) contains a valid touch event as
+there is no precise way to query which indexes have currently valid
+touch events without using <code class="docutils literal notranslate"><span class="pre">knHasTouch()</span></code>.</p>
+<p>Otherwise if just want to use the most recent touch at index zero, you
+can exclude the <code class="docutils literal notranslate"><span class="pre">index</span></code> argument for every function call and it will
+default to zero. All built-in UI elements do this.</p>
+<section id="kngettouchcount">
+<h2><code class="docutils literal notranslate"><span class="pre">knGetTouchCount()</span></code><a class="headerlink" href="#kngettouchcount" title="Link to this heading">¶</a></h2>
+<p>Get the number of touches. May not correspond with the maximum touch
+index.</p>
+</section>
+<section id="knhastouch-index">
+<h2><code class="docutils literal notranslate"><span class="pre">knHasTouch([index])</span></code><a class="headerlink" href="#knhastouch-index" title="Link to this heading">¶</a></h2>
+<p>Check if a valid touch exists at the given <code class="docutils literal notranslate"><span class="pre">index</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code>
+if so, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if not.</p>
+</section>
+<section id="kngettouchpos-index">
+<h2><code class="docutils literal notranslate"><span class="pre">knGetTouchPos([index])</span></code><a class="headerlink" href="#kngettouchpos-index" title="Link to this heading">¶</a></h2>
+<p>Returns the x and y position of the touch in screen coordinates. Note
+that these may not always line up with the virtual in-game coordinates.</p>
+<p>Example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knGetTouchPos</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="knwastouchpressed-index">
+<h2><code class="docutils literal notranslate"><span class="pre">knWasTouchPressed([index])</span></code><a class="headerlink" href="#knwastouchpressed-index" title="Link to this heading">¶</a></h2>
+<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the touch at the given index was <em>just</em> pressed and
+<code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. This will only happen once per touch at the very
+start of the touch.</p>
+</section>
+<section id="knwastouchreleased-index">
+<h2><code class="docutils literal notranslate"><span class="pre">knWasTouchReleased([index])</span></code><a class="headerlink" href="#knwastouchreleased-index" title="Link to this heading">¶</a></h2>
+<p><strong>Currently broken and always returns ``false``</strong>, but should(?) return
+<code class="docutils literal notranslate"><span class="pre">true</span></code> if the touch at the given index was just released and <code class="docutils literal notranslate"><span class="pre">false</span></code>
+otherwise. This will only happen once per touch at the very end of the
+touch.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Raw Input</a><ul>
+<li><a class="reference internal" href="#kngettouchcount"><code class="docutils literal notranslate"><span class="pre">knGetTouchCount()</span></code></a></li>
+<li><a class="reference internal" href="#knhastouch-index"><code class="docutils literal notranslate"><span class="pre">knHasTouch([index])</span></code></a></li>
+<li><a class="reference internal" href="#kngettouchpos-index"><code class="docutils literal notranslate"><span class="pre">knGetTouchPos([index])</span></code></a></li>
+<li><a class="reference internal" href="#knwastouchpressed-index"><code class="docutils literal notranslate"><span class="pre">knWasTouchPressed([index])</span></code></a></li>
+<li><a class="reference internal" href="#knwastouchreleased-index"><code class="docutils literal notranslate"><span class="pre">knWasTouchReleased([index])</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="system.html"
+                          title="previous chapter">System and Misc utilities</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="shaders.html"
+                          title="next chapter">Shaders (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/input.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="shaders.html" title="Shaders (Smash Hit)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="system.html" title="System and Misc utilities"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Raw Input</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>
