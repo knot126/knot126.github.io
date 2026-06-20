@@ -23,6 +23,8 @@ Release 19 (upcoming)
   supports pre-compiled scripts made with ``luac``
 - Added ``apk`` type overlays and suffix and prefix options for ``zip``
   overlays
+- Deprecate :func:`knHttpsCert` and :func:`knHttpsNoCert` and add
+  explicit ``certificate`` argument to :func:`knHttpRequest`
 
 Release 18
 ----------

@@ -46,9 +46,10 @@
 other, mainly by calling functions in the scripts themselves. It can
 also be used as a more powerful and intuitive alternative to the
 registry.</p>
-<section id="kncall-script-function">
-<h2><code class="docutils literal notranslate"><span class="pre">knCall(script,</span> <span class="pre">function,</span> <span class="pre">[...])</span></code><a class="headerlink" href="#kncall-script-function" title="Link to this heading">¶</a></h2>
-<p>Call a function in another script, returning its result. The <code class="docutils literal notranslate"><span class="pre">script</span></code>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knCall">
+<span class="sig-name descname"><span class="pre">knCall</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">script</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">enum</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">lightuserdata</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#lua-knCall" title="Link to this definition">¶</a></dt>
+<dd><p>Call a function in another script, returning its result. The <code class="docutils literal notranslate"><span class="pre">script</span></code>
 should either be one of <code class="docutils literal notranslate"><span class="pre">KN_MENU</span></code>, <code class="docutils literal notranslate"><span class="pre">KN_MOVIE</span></code>, <code class="docutils literal notranslate"><span class="pre">KN_HUD</span></code>, or a
 pointer to a script’s <code class="docutils literal notranslate"><span class="pre">lua_State</span></code> as a light userdata. The
 <code class="docutils literal notranslate"><span class="pre">function</span></code> should be a string naming the function to call. The
@@ -64,8 +65,21 @@ telling the difference between an integer and a number.</p></li>
 <li><p>Values of the types <code class="docutils literal notranslate"><span class="pre">function</span></code>, <code class="docutils literal notranslate"><span class="pre">userdata</span></code>, and <code class="docutils literal notranslate"><span class="pre">thread</span></code> cannot
 be copied between scripts and will be replaced by <strong>``nil``</strong>.</p></li>
 </ul>
-<section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knOwnHandle">
+<span class="sig-name descname"><span class="pre">knOwnHandle</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">lightuserdata</span></code><a class="headerlink" href="#lua-knOwnHandle" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a pointer to the script’s <code class="docutils literal notranslate"><span class="pre">lua_State</span></code> pointer as a light
+userdata. This is useful for informing “master” scripts like the menu or
+HUD of room and obstacle scripts via <code class="docutils literal notranslate"><span class="pre">knCall()</span></code>, so that they
+themselves can use knCall to call directly into your script.</p>
+</dd></dl>
+
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<section id="using-kncall">
+<h3>Using knCall()<a class="headerlink" href="#using-kncall" title="Link to this heading">¶</a></h3>
 <p>In <code class="docutils literal notranslate"><span class="pre">hud/main.lua</span></code>:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kr">function</span><span class="w"> </span><span class="nf">addPoints</span><span class="p">(</span><span class="nv">pts</span><span class="p">)</span>
 <span class="linenos">2</span><span class="w">    </span><span class="nv">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">points</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">pts</span>
@@ -83,16 +97,9 @@ be copied between scripts and will be replaced by <strong>``nil``</strong>.</p><
 <span class="linenos">7</span><span class="kr">end</span>
 </pre></div>
 </div>
-<p><em>Added in Release 18</em></p>
 </section>
-</section>
-<section id="knownhandle">
-<h2><code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code><a class="headerlink" href="#knownhandle" title="Link to this heading">¶</a></h2>
-<p>Returns a pointer to the script’s <code class="docutils literal notranslate"><span class="pre">lua_State</span></code> pointer as a light
-userdata. This is useful for informing “master” scripts like the menu or
-HUD of room and obstacle scripts via <code class="docutils literal notranslate"><span class="pre">knCall()</span></code>, so that they
-themselves can use knCall to call directly into your script; for
-example:</p>
+<section id="using-knownhandle">
+<h3>Using knOwnHandle()<a class="headerlink" href="#using-knownhandle" title="Link to this heading">¶</a></h3>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">-- Assume that informCreated(script) and informDestroyed(script) tell the HUD</span>
 <span class="linenos"> 2</span><span class="c1">-- script that these obstacle/room scripts have been created and destroyed,</span>
 <span class="linenos"> 3</span><span class="c1">-- respectively.</span>
@@ -121,6 +128,7 @@ example:</p>
 </div>
 </section>
 </section>
+</section>
 
 
             <div class="clearer"></div>
@@ -133,11 +141,13 @@ example:</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Inter-script Communication</a><ul>
-<li><a class="reference internal" href="#kncall-script-function"><code class="docutils literal notranslate"><span class="pre">knCall(script,</span> <span class="pre">function,</span> <span class="pre">[...])</span></code></a><ul>
-<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#lua-knCall"><code class="docutils literal notranslate"><span class="pre">knCall()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knOwnHandle"><code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code></a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#using-kncall">Using knCall()</a></li>
+<li><a class="reference internal" href="#using-knownhandle">Using knOwnHandle()</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#knownhandle"><code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code></a></li>
 </ul>
 </li>
 </ul>

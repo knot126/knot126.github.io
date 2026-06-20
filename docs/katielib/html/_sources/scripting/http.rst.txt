@@ -1,5 +1,6 @@
-HTTP
-====
+=============
+HTTP Requests
+=============
 
 The HTTP extension allows making non-blocking HTTP and (as of Release
 15) HTTPS requests.
@@ -11,26 +12,12 @@ want to start an HTTP request you would call your custom
 ``processRequest()`` from a function that runs regularly like
 ``drawWorld()`` or ``frame()``.
 
-Note that in order to use HTTPS, you must first set a certificate using
-``knHttpCert()`` as KnShim does not ship with any sort of certificate
-store, nor can it load from Android directly at the moment.
-
 Example
 -------
 
 Here is an outline for submitting a high score to a server:
 
 .. code:: lua
-
-   function init()
-       -- ...
-       
-       -- (HTTPS only) Load the server's TLS certificate, which is used to verify
-       -- that this is the highscore server and not some impostor.
-       knHttpsCert(knLoadAsset("certs/highscore-server.pem"))
-       
-       -- ...
-   end
 
    function handleCommand(cmd)
        -- ...
@@ -48,7 +35,11 @@ Here is an outline for submitting a high score to a server:
    end
 
    function startHighScoreSubmission()
-       highScoreRequest = knHttpRequest("POST", "https://myserver.com/highscore/", makeHighscoreRequestBody())
+       -- When using HTTPS, it's very important to get your server's certificate
+       -- so the HTTP client can verify it's talking to the right server!
+       local cert = knLoadAsset("certs/highscore-server.pem")
+       
+       highScoreRequest = knHttpRequest("POST", "https://myserver.com/highscore/", makeHighscoreRequestBody(), nil, cert)
        
        if not highScoreRequest then
            -- handle failing to initialise the request
@@ -82,162 +73,159 @@ Here is an outline for submitting a high score to a server:
        end
    end
 
-``knHttpRequest(method, url, [body, [headers]])``
--------------------------------------------------
+.. function:: knHttpRequest(method: string, url: string, [body: string, [headers: table[string: string], [certificate: string]]]): object
 
-Initiate an HTTP request to the given URL using the given method. The
-request may optionally contain a body (regardless of the method) by
-supplying a third parameter with the request body contents. The
-``headers`` parameter can be used to send custom HTTP headers.
+   Initiate an HTTP request to the given URL using the given method. The
+   request may optionally contain a body (regardless of the method) by
+   supplying a third parameter with the request body contents. The
+   ``headers`` parameter can be used to send custom HTTP headers.
+   
+   The ``certificate`` parameter ought to be specified when using HTTPS so
+   the identity of the server can be verified. The certificate can be in DER
+   or PEM format. If the certificate is not specified, then the server's
+   identity won't be verified, which may expose the request to man-in-the-middle
+   attacks.
 
-Returns an HTTP request context (of type ``userdata``) on success or
-``nil`` on failure.
+   Returns an HTTP request context (of type ``userdata``) on success or
+   ``nil`` on failure.
 
-**Note**: ``body`` is allowed to contain embedded zeros.
+   .. note:: ``body`` is allowed to contain embedded zeros.
 
-   **Changed in Release 14**: If you were using the old one (for GET
-   requests) or two (for POST requests) argument versions of this method
-   where the URL was the first argument, you should switch these to the
-   following forms:
+   .. version-changed:: 14
+      If you were using the old one (for GET
+      requests) or two (for POST requests) argument versions of this method
+      where the URL was the first argument, you should switch these to the
+      following forms:
+
+      .. code:: lua
+
+         knHttpRequest("GET", "http://example.com/mylevel.zip") -- for GET requests
+         knHttpRequest("POST", "http://example.com/highscore.php", "score=12345") -- for POST requests
+
+      when upgrading to the new version.
+
+.. function:: knHttpUpdate(request): KN_HTTP_PENDING | KN_HTTP_ERROR | KN_HTTP_DONE
+
+   Reads any new data and further process the request, possibly finalising
+   it. Returns:
+
+   - ``KN_HTTP_PENDING`` if the request is still pending;
+   - ``KN_HTTP_ERROR`` if the request has finished in error (network errors);
+   - ``KN_HTTP_DONE`` if the request has succeeded.
+
+   This function must be called in a function like ``tick()`` or ``draw()``
+   (that is, every so often) until it no longer returns
+   ``KN_HTTP_PENDING``. When it does finish, it is recommended to do any
+   processing, then release the request.
+
+   .. version-changed:: 13
+      Status codes above 299 now return ``KN_HTTP_DONE`` instead of ``KN_HTTP_ERROR``.
+
+.. function:: knHttpData(request): string
+
+   Returns the response data for a finished request as a string.
+
+.. function:: knHttpDataSize(request): integer
+
+   Returns the size of the response data in bytes.
+
+.. function:: knHttpSave(request, path: string)
+
+   Efficiently save the contents of the response to the file at ``path``
+   without needing to allocate any extra buffers. This function raises a
+   Lua error on errors and does not return anything; use ``pcall`` to catch
+   errors.
+
+   Example:
 
    .. code:: lua
 
-      knHttpRequest("GET", "http://example.com/mylevel.zip") -- for GET requests
-      knHttpRequest("POST", "http://example.com/highscore.php", "score=12345") -- for POST requests
+      knHttpSave(request, knGetInternalDataPath() .. "/payload.zip")
 
-   when upgrading to the new version.
+.. function:: knHttpGetHeader(request, name: string, [nth: integer]): string
 
-``knHttpUpdate(request)``
--------------------------
+   Returns the value associated with the ``nth`` response header named
+   ``name``. Returns ``nil`` if the header does not exist.
 
-Reads any new data and further process the request, possibly finalising
-it. Returns:
+   As an example, the following would get the first two ``Cookie`` headers
+   form the response:
 
-- ``KN_HTTP_PENDING`` if the request is still pending;
-- ``KN_HTTP_ERROR`` if the request has finished in error (network
-  errors);
-- ``KN_HTTP_DONE`` if the request has succeeded.
+   .. code:: lua
 
-This function must be called in a function like ``tick()`` or ``draw()``
-(that is, every so often) until it no longer returns
-``KN_HTTP_PENDING``. When it does finish, it is recommended to do any
-processing, then release the request.
+      local cookie1 = knHttpGetHeader(request, "Cookie", 0)
+      local cookie2 = knHttpGetHeader(request, "Cookie", 1)
 
-**Note:** Request memory is not automatically released and results in a
-memory leak if not manually freed, since I don’t want to fuck with
-metatables ATM. Hopefully this will change later as it is stupid.
+.. function:: knHttpError(request): string
 
-   **Change in Release 13**\ *: Status codes above 299 now return
-   ``KN_HTTP_DONE`` instead of ``KN_HTTP_ERROR``.*
+   Return a string describing the HTTP error, or nil if there is none. Note
+   that even if there is an error this may return nil, for example due to a
+   lower-level network error.
 
-``knHttpData(request)``
------------------------
+.. function:: knHttpErrorCode(request): integer
 
-Returns the response data for a finished request as a string.
+   Return an integer which is the HTTP status code of the response, or
+   ``0`` if there is not one. This may be ``0`` even if there was some kind
+   of error.
 
-``knHttpDataSize(request)``
----------------------------
+.. function:: knHttpRelease(request)
 
-Returns the size of the response data in bytes.
+   Release the memory associated with an HTTP request. This will normally
+   happen automatically once an HTTP request object has been garbage
+   collected, but calling this will do it immediately instead of waiting on
+   the Lua GC.
 
-``knHttpSave(request, path)``
------------------------------
+   Any further functions called on this request may return **``nil``**
+   regardless of their documentation.
 
-Efficiently save the contents of the response to the file at ``path``
-without needing to allocate any extra buffers. This function raises a
-Lua error on errors and does not return anything; use ``pcall`` to catch
-errors.
+   **Tip:** A common pattern for global request objects is to the variable
+   they were stored in to ``nil`` in order to release their resources and
+   indicate that the request has finished.
 
-Example:
+   .. code:: lua
 
-.. code:: lua
+      function finishRequest()
+         someImportantThing = knHttpData(globalRequestObject)
+         globalRequestObject = nil
+      end
 
-   knHttpSave(request, knGetInternalDataPath() .. "/payload.zip")
+.. function:: knHttpsCert([certificateData: string])
 
-``knHttpGetHeader(request, name, [nth])``
------------------------------------------
+   Set the TLS certificate(s) to verify all future HTTPS requests with. The
+   ``certificateData`` can be either a single DER encoded certificate or
+   one or more PEM encoded certificates. Any certificate(s) loaded with a
+   previous call to this function are replaced.
 
-Returns the value associated with the ``nth`` response header named
-``name``. Returns ``nil`` if the header does not exist.
+   Omitting the certificate data resets to the default state of having no
+   certificates loaded.
 
-Example
-~~~~~~~
+   It is recommended to keep the certificate data for the server you wish
+   to communicate with in an asset, then load it with ``knLoadAsset()`` in
+   something like the HUD's ``init()`` function:
 
-As an example, the following would get the first two ``Cookie`` headers
-form the response:
+   .. code:: lua
 
-.. code:: lua
+      function init()
+         knHttpsCert(knLoadAsset("mytlscert.pem"))
+         -- ...
+      end
+   
+   .. deprecated:: 19
+      Explicitly use the `certificate` parameter of :func:`knHttpRequest`
 
-   local cookie1 = knHttpGetHeader(request, "Cookie", 0)
-   local cookie2 = knHttpGetHeader(request, "Cookie", 1)
+.. function:: knHttpsNoCert(magic: string)
 
-``knHttpError(request)``
-------------------------
+   Disables verifying the server's identity when no certificates are loaded
+   instead of causing such requests to raise an error. **This is insecure
+   as it could enable Man-in-the-Middle attacks which nullify the security
+   of HTTPS**, but useful in certain cases where verifying the identify of
+   the server is impractical.
 
-Return a string describing the HTTP error, or nil if there is none. Note
-that even if there is an error this may return nil, for example due to a
-lower-level network error.
-
-``knHttpErrorCode(request)``
-----------------------------
-
-Return an integer which is the HTTP status code of the response, or
-``0`` if there is not one. This may be ``0`` even if there was some kind
-of error.
-
-``knHttpRelease(request)``
---------------------------
-
-Release the memory associated with an HTTP request. This will normally
-happen automatically once an HTTP request object has been garbage
-collected, but calling this will do it immediately instead of waiting on
-the Lua GC.
-
-Any further functions called on this request may return **``nil``**
-regardless of their documentation.
-
-**Tip:** A common pattern for global request objects is to the variable
-they were stored in to ``nil`` in order to release their resources and
-indicate that the request has finished.
-
-.. code:: lua
-
-   function finishRequest()
-       someImportantThing = knHttpData(globalRequestObject)
-       globalRequestObject = nil
-   end
-
-``knHttpsCert([certificateData])``
-----------------------------------
-
-Set the TLS certificate(s) to verify all future HTTPS requests with. The
-``certificateData`` can be either a single DER encoded certificate or
-one or more PEM encoded certificates. Any certificate(s) loaded with a
-previous call to this function are replaced.
-
-Omitting the certificate data resets to the default state of having no
-certificates loaded.
-
-It is recommended to keep the certificate data for the server you wish
-to communicate with in an asset, then load it with ``knLoadAsset()`` in
-something like the HUD's ``init()`` function:
-
-.. code:: lua
-
-   function init()
-       knHttpsCert(knLoadAsset("mytlscert.pem"))
-       -- ...
-   end
-
-``knHttpsNoCert(magic)``
-------------------------
-
-Disables verifying the server's identity when no certificates are loaded
-instead of causing such requests to raise an error. **This is insecure
-as it could enable Man-in-the-Middle attacks which nullify the security
-of HTTPS**, but useful in certain cases where verifying the identify of
-the server is impractical.
-
-Because this is insecure, this function only works if a specific string
-is passed in ``magic``. The string is intentionally not documented here;
-it can be found in KnShim's source code.
+   Because this is insecure, this function only works if a specific string
+   is passed in ``magic``. The string is intentionally not documented here;
+   it can be found in KnShim's source code.
+   
+   .. deprecated:: 19
+      KatieLib will now allow unverified hosts by default if a certificate is
+      not supplied. While this is less secure, the main purpose of HTTPS in
+      KatieLib is compatibility with the modern web and not actual security
+      anyway.

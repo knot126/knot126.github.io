@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>HTTP &#8212; KatieLib 19 documentation</title>
+    <title>HTTP Requests &#8212; KatieLib 19 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
     <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
@@ -31,7 +31,7 @@
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">HTTP</a></li> 
+        <li class="nav-item nav-item-this"><a href="">HTTP Requests</a></li> 
       </ul>
     </div>  
 
@@ -40,8 +40,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="http">
-<h1>HTTP<a class="headerlink" href="#http" title="Link to this heading">¶</a></h1>
+  <section id="http-requests">
+<h1>HTTP Requests<a class="headerlink" href="#http-requests" title="Link to this heading">¶</a></h1>
 <p>The HTTP extension allows making non-blocking HTTP and (as of Release
 15) HTTPS requests.</p>
 <p>The recommended way to use this library is to create two functions
@@ -50,23 +50,10 @@ want to start an HTTP request you would call your custom
 <code class="docutils literal notranslate"><span class="pre">startRequest()</span></code> function, and you would call your custom
 <code class="docutils literal notranslate"><span class="pre">processRequest()</span></code> from a function that runs regularly like
 <code class="docutils literal notranslate"><span class="pre">drawWorld()</span></code> or <code class="docutils literal notranslate"><span class="pre">frame()</span></code>.</p>
-<p>Note that in order to use HTTPS, you must first set a certificate using
-<code class="docutils literal notranslate"><span class="pre">knHttpCert()</span></code> as KnShim does not ship with any sort of certificate
-store, nor can it load from Android directly at the moment.</p>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
 <p>Here is an outline for submitting a high score to a server:</p>
-<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
-<span class="w">    </span><span class="c1">-- ...</span>
-
-<span class="w">    </span><span class="c1">-- (HTTPS only) Load the server&#39;s TLS certificate, which is used to verify</span>
-<span class="w">    </span><span class="c1">-- that this is the highscore server and not some impostor.</span>
-<span class="w">    </span><span class="nf">knHttpsCert</span><span class="p">(</span><span class="nf">knLoadAsset</span><span class="p">(</span><span class="s2">&quot;certs/highscore-server.pem&quot;</span><span class="p">))</span>
-
-<span class="w">    </span><span class="c1">-- ...</span>
-<span class="kr">end</span>
-
-<span class="kr">function</span><span class="w"> </span><span class="nf">handleCommand</span><span class="p">(</span><span class="nv">cmd</span><span class="p">)</span>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">handleCommand</span><span class="p">(</span><span class="nv">cmd</span><span class="p">)</span>
 <span class="w">    </span><span class="c1">-- ...</span>
 
 <span class="w">    </span><span class="c1">-- Start the request when the &#39;submitscore&#39; command is run</span>
@@ -82,7 +69,11 @@ store, nor can it load from Android directly at the moment.</p>
 <span class="kr">end</span>
 
 <span class="kr">function</span><span class="w"> </span><span class="nf">startHighScoreSubmission</span><span class="p">()</span>
-<span class="w">    </span><span class="nv">highScoreRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpRequest</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;https://myserver.com/highscore/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">makeHighscoreRequestBody</span><span class="p">())</span>
+<span class="w">    </span><span class="c1">-- When using HTTPS, it&#39;s very important to get your server&#39;s certificate</span>
+<span class="w">    </span><span class="c1">-- so the HTTP client can verify it&#39;s talking to the right server!</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">cert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knLoadAsset</span><span class="p">(</span><span class="s2">&quot;certs/highscore-server.pem&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nv">highScoreRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpRequest</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;https://myserver.com/highscore/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">makeHighscoreRequestBody</span><span class="p">(),</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nv">cert</span><span class="p">)</span>
 
 <span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">highScoreRequest</span><span class="w"> </span><span class="kr">then</span>
 <span class="w">        </span><span class="c1">-- handle failing to initialise the request</span>
@@ -117,18 +108,26 @@ store, nor can it load from Android directly at the moment.</p>
 <span class="kr">end</span>
 </pre></div>
 </div>
-</section>
-<section id="knhttprequest-method-url-body-headers">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpRequest(method,</span> <span class="pre">url,</span> <span class="pre">[body,</span> <span class="pre">[headers]])</span></code><a class="headerlink" href="#knhttprequest-method-url-body-headers" title="Link to this heading">¶</a></h2>
-<p>Initiate an HTTP request to the given URL using the given method. The
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpRequest">
+<span class="sig-name descname"><span class="pre">knHttpRequest</span></span><span class="p"><span class="pre">(</span></span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">certificate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><br /><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">object</span></code><a class="headerlink" href="#lua-knHttpRequest" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Initiate an HTTP request to the given URL using the given method. The
 request may optionally contain a body (regardless of the method) by
 supplying a third parameter with the request body contents. The
 <code class="docutils literal notranslate"><span class="pre">headers</span></code> parameter can be used to send custom HTTP headers.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">certificate</span></code> parameter ought to be specified when using HTTPS so
+the identity of the server can be verified. The certificate can be in DER
+or PEM format. If the certificate is not specified, then the server’s
+identity won’t be verified, which may expose the request to man-in-the-middle
+attacks.</p>
 <p>Returns an HTTP request context (of type <code class="docutils literal notranslate"><span class="pre">userdata</span></code>) on success or
 <code class="docutils literal notranslate"><span class="pre">nil</span></code> on failure.</p>
-<p><strong>Note</strong>: <code class="docutils literal notranslate"><span class="pre">body</span></code> is allowed to contain embedded zeros.</p>
-<blockquote>
-<div><p><strong>Changed in Release 14</strong>: If you were using the old one (for GET
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">body</span></code> is allowed to contain embedded zeros.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 14: </span>If you were using the old one (for GET
 requests) or two (for POST requests) argument versions of this method
 where the URL was the first argument, you should switch these to the
 following forms:</p>
@@ -137,41 +136,44 @@ following forms:</p>
 </pre></div>
 </div>
 <p>when upgrading to the new version.</p>
-</div></blockquote>
-</section>
-<section id="knhttpupdate-request">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpUpdate(request)</span></code><a class="headerlink" href="#knhttpupdate-request" title="Link to this heading">¶</a></h2>
-<p>Reads any new data and further process the request, possibly finalising
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpUpdate">
+<span class="sig-name descname"><span class="pre">knHttpUpdate</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">KN_HTTP_PENDING</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">KN_HTTP_ERROR</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">KN_HTTP_DONE</span></code><a class="headerlink" href="#lua-knHttpUpdate" title="Link to this definition">¶</a></dt>
+<dd><p>Reads any new data and further process the request, possibly finalising
 it. Returns:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">KN_HTTP_PENDING</span></code> if the request is still pending;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">KN_HTTP_ERROR</span></code> if the request has finished in error (network
-errors);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KN_HTTP_ERROR</span></code> if the request has finished in error (network errors);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">KN_HTTP_DONE</span></code> if the request has succeeded.</p></li>
 </ul>
 <p>This function must be called in a function like <code class="docutils literal notranslate"><span class="pre">tick()</span></code> or <code class="docutils literal notranslate"><span class="pre">draw()</span></code>
 (that is, every so often) until it no longer returns
 <code class="docutils literal notranslate"><span class="pre">KN_HTTP_PENDING</span></code>. When it does finish, it is recommended to do any
 processing, then release the request.</p>
-<p><strong>Note:</strong> Request memory is not automatically released and results in a
-memory leak if not manually freed, since I don’t want to fuck with
-metatables ATM. Hopefully this will change later as it is stupid.</p>
-<blockquote>
-<div><p><strong>Change in Release 13</strong><em>: Status codes above 299 now return
-``KN_HTTP_DONE`` instead of ``KN_HTTP_ERROR``.</em></p>
-</div></blockquote>
-</section>
-<section id="knhttpdata-request">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpData(request)</span></code><a class="headerlink" href="#knhttpdata-request" title="Link to this heading">¶</a></h2>
-<p>Returns the response data for a finished request as a string.</p>
-</section>
-<section id="knhttpdatasize-request">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpDataSize(request)</span></code><a class="headerlink" href="#knhttpdatasize-request" title="Link to this heading">¶</a></h2>
-<p>Returns the size of the response data in bytes.</p>
-</section>
-<section id="knhttpsave-request-path">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpSave(request,</span> <span class="pre">path)</span></code><a class="headerlink" href="#knhttpsave-request-path" title="Link to this heading">¶</a></h2>
-<p>Efficiently save the contents of the response to the file at <code class="docutils literal notranslate"><span class="pre">path</span></code>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 13: </span>Status codes above 299 now return <code class="docutils literal notranslate"><span class="pre">KN_HTTP_DONE</span></code> instead of <code class="docutils literal notranslate"><span class="pre">KN_HTTP_ERROR</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpData">
+<span class="sig-name descname"><span class="pre">knHttpData</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knHttpData" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the response data for a finished request as a string.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpDataSize">
+<span class="sig-name descname"><span class="pre">knHttpDataSize</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knHttpDataSize" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the size of the response data in bytes.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpSave">
+<span class="sig-name descname"><span class="pre">knHttpSave</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knHttpSave" title="Link to this definition">¶</a></dt>
+<dd><p>Efficiently save the contents of the response to the file at <code class="docutils literal notranslate"><span class="pre">path</span></code>
 without needing to allocate any extra buffers. This function raises a
 Lua error on errors and does not return anything; use <code class="docutils literal notranslate"><span class="pre">pcall</span></code> to catch
 errors.</p>
@@ -179,36 +181,41 @@ errors.</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knHttpSave</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="nf">knGetInternalDataPath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/payload.zip&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="knhttpgetheader-request-name-nth">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpGetHeader(request,</span> <span class="pre">name,</span> <span class="pre">[nth])</span></code><a class="headerlink" href="#knhttpgetheader-request-name-nth" title="Link to this heading">¶</a></h2>
-<p>Returns the value associated with the <code class="docutils literal notranslate"><span class="pre">nth</span></code> response header named
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpGetHeader">
+<span class="sig-name descname"><span class="pre">knHttpGetHeader</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">nth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knHttpGetHeader" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the value associated with the <code class="docutils literal notranslate"><span class="pre">nth</span></code> response header named
 <code class="docutils literal notranslate"><span class="pre">name</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">nil</span></code> if the header does not exist.</p>
-<section id="id1">
-<h3>Example<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p>As an example, the following would get the first two <code class="docutils literal notranslate"><span class="pre">Cookie</span></code> headers
 form the response:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">cookie1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpGetHeader</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <span class="kd">local</span><span class="w"> </span><span class="nv">cookie2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpGetHeader</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="knhttperror-request">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpError(request)</span></code><a class="headerlink" href="#knhttperror-request" title="Link to this heading">¶</a></h2>
-<p>Return a string describing the HTTP error, or nil if there is none. Note
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpError">
+<span class="sig-name descname"><span class="pre">knHttpError</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knHttpError" title="Link to this definition">¶</a></dt>
+<dd><p>Return a string describing the HTTP error, or nil if there is none. Note
 that even if there is an error this may return nil, for example due to a
 lower-level network error.</p>
-</section>
-<section id="knhttperrorcode-request">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpErrorCode(request)</span></code><a class="headerlink" href="#knhttperrorcode-request" title="Link to this heading">¶</a></h2>
-<p>Return an integer which is the HTTP status code of the response, or
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpErrorCode">
+<span class="sig-name descname"><span class="pre">knHttpErrorCode</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knHttpErrorCode" title="Link to this definition">¶</a></dt>
+<dd><p>Return an integer which is the HTTP status code of the response, or
 <code class="docutils literal notranslate"><span class="pre">0</span></code> if there is not one. This may be <code class="docutils literal notranslate"><span class="pre">0</span></code> even if there was some kind
 of error.</p>
-</section>
-<section id="knhttprelease-request">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpRelease(request)</span></code><a class="headerlink" href="#knhttprelease-request" title="Link to this heading">¶</a></h2>
-<p>Release the memory associated with an HTTP request. This will normally
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpRelease">
+<span class="sig-name descname"><span class="pre">knHttpRelease</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knHttpRelease" title="Link to this definition">¶</a></dt>
+<dd><p>Release the memory associated with an HTTP request. This will normally
 happen automatically once an HTTP request object has been garbage
 collected, but calling this will do it immediately instead of waiting on
 the Lua GC.</p>
@@ -218,15 +225,17 @@ regardless of their documentation.</p>
 they were stored in to <code class="docutils literal notranslate"><span class="pre">nil</span></code> in order to release their resources and
 indicate that the request has finished.</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">finishRequest</span><span class="p">()</span>
-<span class="w">    </span><span class="nv">someImportantThing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpData</span><span class="p">(</span><span class="nv">globalRequestObject</span><span class="p">)</span>
-<span class="w">    </span><span class="nv">globalRequestObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">   </span><span class="nv">someImportantThing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHttpData</span><span class="p">(</span><span class="nv">globalRequestObject</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">globalRequestObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span>
 <span class="kr">end</span>
 </pre></div>
 </div>
-</section>
-<section id="knhttpscert-certificatedata">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpsCert([certificateData])</span></code><a class="headerlink" href="#knhttpscert-certificatedata" title="Link to this heading">¶</a></h2>
-<p>Set the TLS certificate(s) to verify all future HTTPS requests with. The
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpsCert">
+<span class="sig-name descname"><span class="pre">knHttpsCert</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">certificateData</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knHttpsCert" title="Link to this definition">¶</a></dt>
+<dd><p>Set the TLS certificate(s) to verify all future HTTPS requests with. The
 <code class="docutils literal notranslate"><span class="pre">certificateData</span></code> can be either a single DER encoded certificate or
 one or more PEM encoded certificates. Any certificate(s) loaded with a
 previous call to this function are replaced.</p>
@@ -236,15 +245,20 @@ certificates loaded.</p>
 to communicate with in an asset, then load it with <code class="docutils literal notranslate"><span class="pre">knLoadAsset()</span></code> in
 something like the HUD’s <code class="docutils literal notranslate"><span class="pre">init()</span></code> function:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
-<span class="w">    </span><span class="nf">knHttpsCert</span><span class="p">(</span><span class="nf">knLoadAsset</span><span class="p">(</span><span class="s2">&quot;mytlscert.pem&quot;</span><span class="p">))</span>
-<span class="w">    </span><span class="c1">-- ...</span>
+<span class="w">   </span><span class="nf">knHttpsCert</span><span class="p">(</span><span class="nf">knLoadAsset</span><span class="p">(</span><span class="s2">&quot;mytlscert.pem&quot;</span><span class="p">))</span>
+<span class="w">   </span><span class="c1">-- ...</span>
 <span class="kr">end</span>
 </pre></div>
 </div>
-</section>
-<section id="knhttpsnocert-magic">
-<h2><code class="docutils literal notranslate"><span class="pre">knHttpsNoCert(magic)</span></code><a class="headerlink" href="#knhttpsnocert-magic" title="Link to this heading">¶</a></h2>
-<p>Disables verifying the server’s identity when no certificates are loaded
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 19: </span>Explicitly use the <cite>certificate</cite> parameter of <a class="reference internal" href="#lua-knHttpRequest" title="knHttpRequest"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knHttpRequest()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHttpsNoCert">
+<span class="sig-name descname"><span class="pre">knHttpsNoCert</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">magic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knHttpsNoCert" title="Link to this definition">¶</a></dt>
+<dd><p>Disables verifying the server’s identity when no certificates are loaded
 instead of causing such requests to raise an error. <strong>This is insecure
 as it could enable Man-in-the-Middle attacks which nullify the security
 of HTTPS</strong>, but useful in certain cases where verifying the identify of
@@ -252,6 +266,14 @@ the server is impractical.</p>
 <p>Because this is insecure, this function only works if a specific string
 is passed in <code class="docutils literal notranslate"><span class="pre">magic</span></code>. The string is intentionally not documented here;
 it can be found in KnShim’s source code.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 19: </span>KatieLib will now allow unverified hosts by default if a certificate is
+not supplied. While this is less secure, the main purpose of HTTPS in
+KatieLib is compatibility with the modern web and not actual security
+anyway.</p>
+</div>
+</dd></dl>
+
 </section>
 </section>
 
@@ -265,22 +287,21 @@ it can be found in KnShim’s source code.</p>
   <div>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">HTTP</a><ul>
-<li><a class="reference internal" href="#example">Example</a></li>
-<li><a class="reference internal" href="#knhttprequest-method-url-body-headers"><code class="docutils literal notranslate"><span class="pre">knHttpRequest(method,</span> <span class="pre">url,</span> <span class="pre">[body,</span> <span class="pre">[headers]])</span></code></a></li>
-<li><a class="reference internal" href="#knhttpupdate-request"><code class="docutils literal notranslate"><span class="pre">knHttpUpdate(request)</span></code></a></li>
-<li><a class="reference internal" href="#knhttpdata-request"><code class="docutils literal notranslate"><span class="pre">knHttpData(request)</span></code></a></li>
-<li><a class="reference internal" href="#knhttpdatasize-request"><code class="docutils literal notranslate"><span class="pre">knHttpDataSize(request)</span></code></a></li>
-<li><a class="reference internal" href="#knhttpsave-request-path"><code class="docutils literal notranslate"><span class="pre">knHttpSave(request,</span> <span class="pre">path)</span></code></a></li>
-<li><a class="reference internal" href="#knhttpgetheader-request-name-nth"><code class="docutils literal notranslate"><span class="pre">knHttpGetHeader(request,</span> <span class="pre">name,</span> <span class="pre">[nth])</span></code></a><ul>
-<li><a class="reference internal" href="#id1">Example</a></li>
+<li><a class="reference internal" href="#">HTTP Requests</a><ul>
+<li><a class="reference internal" href="#example">Example</a><ul>
+<li><a class="reference internal" href="#lua-knHttpRequest"><code class="docutils literal notranslate"><span class="pre">knHttpRequest()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpUpdate"><code class="docutils literal notranslate"><span class="pre">knHttpUpdate()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpData"><code class="docutils literal notranslate"><span class="pre">knHttpData()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpDataSize"><code class="docutils literal notranslate"><span class="pre">knHttpDataSize()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpSave"><code class="docutils literal notranslate"><span class="pre">knHttpSave()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpGetHeader"><code class="docutils literal notranslate"><span class="pre">knHttpGetHeader()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpError"><code class="docutils literal notranslate"><span class="pre">knHttpError()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpErrorCode"><code class="docutils literal notranslate"><span class="pre">knHttpErrorCode()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpRelease"><code class="docutils literal notranslate"><span class="pre">knHttpRelease()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpsCert"><code class="docutils literal notranslate"><span class="pre">knHttpsCert()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHttpsNoCert"><code class="docutils literal notranslate"><span class="pre">knHttpsNoCert()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#knhttperror-request"><code class="docutils literal notranslate"><span class="pre">knHttpError(request)</span></code></a></li>
-<li><a class="reference internal" href="#knhttperrorcode-request"><code class="docutils literal notranslate"><span class="pre">knHttpErrorCode(request)</span></code></a></li>
-<li><a class="reference internal" href="#knhttprelease-request"><code class="docutils literal notranslate"><span class="pre">knHttpRelease(request)</span></code></a></li>
-<li><a class="reference internal" href="#knhttpscert-certificatedata"><code class="docutils literal notranslate"><span class="pre">knHttpsCert([certificateData])</span></code></a></li>
-<li><a class="reference internal" href="#knhttpsnocert-magic"><code class="docutils literal notranslate"><span class="pre">knHttpsNoCert(magic)</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -331,7 +352,7 @@ it can be found in KnShim’s source code.</p>
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 19 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">HTTP</a></li> 
+        <li class="nav-item nav-item-this"><a href="">HTTP Requests</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -15,3 +15,4 @@ KatieLib Documentation
       
    scripting/index
    changelog
+   terms

@@ -86,6 +86,12 @@ will be generated.</p>
 <p class="admonition-title">Note</p>
 <p>If <a class="reference internal" href="#c.YipBuffer.data" title="data"><code class="xref c c-member docutils literal notranslate"><span class="pre">data</span></code></a> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, then <a class="reference internal" href="#c.YipBuffer.size" title="size"><code class="xref c c-member docutils literal notranslate"><span class="pre">size</span></code></a> must be zero.</p>
 </div>
+<dl class="c macro">
+<dt class="sig sig-object c" id="c.YipBuffer.YipDestroyBuffer">
+<span class="sig-name descname"><span class="n"><span class="pre">YipDestroyBuffer</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BUFFER</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.YipBuffer.YipDestroyBuffer" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Calls <code class="docutils literal notranslate"><span class="pre">free(BUFFER.data)</span></code>, destroying a dynamically allocated buffer.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="c struct">
@@ -240,6 +246,27 @@ will be generated.</p>
 <p class="admonition-title">Tip</p>
 <p>If what you are doing is possible using hooks, please use them instead as they tend to be more version-agnostic and don’t break as much between upgrades.</p>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#c.YipPatchv2" title="YipPatchv2"><code class="xref c c-func docutils literal notranslate"><span class="pre">YipPatchv2()</span></code></a></dt><dd><p>Which optionally allows retrieving the original data</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.YipPatchv2">
+<span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">YipPatchv2</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">vaddr</span></span>, <a class="reference internal" href="#c.YipBuffer" title="YipBuffer"><span class="n"><span class="pre">YipBuffer</span></span></a><span class="w"> </span><span class="n"><span class="pre">buffer</span></span>, <a class="reference internal" href="#c.YipBuffer" title="YipBuffer"><span class="n"><span class="pre">YipBuffer</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">original</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.YipPatchv2" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Patch a specific chunk of memory, given the buffer to replace it with and the virtual address of that chunk, and optionally copy the original data of that chunk of memory into a buffer. The chunk of memory must be within the game binary and is given relative to the ELF virtual base address.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If what you are doing is possible using hooks, please use them instead as they tend to be more version-agnostic and don’t break as much between upgrades.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">original</span></code> points to a buffer, it should be freed using <code class="xref c c-macro docutils literal notranslate"><span class="pre">YipDestroyBuffer</span></code>.</p>
+</div>
 </dd></dl>
 
 <dl class="c function">
@@ -288,6 +315,7 @@ documentation for details.</p>
 <li><a class="reference internal" href="#c.YipBuffer"><code class="docutils literal notranslate"><span class="pre">YipBuffer</span></code></a><ul>
 <li><a class="reference internal" href="#c.YipBuffer.size"><code class="docutils literal notranslate"><span class="pre">size</span></code></a></li>
 <li><a class="reference internal" href="#c.YipBuffer.data"><code class="docutils literal notranslate"><span class="pre">data</span></code></a></li>
+<li><a class="reference internal" href="#c.YipBuffer.YipDestroyBuffer"><code class="docutils literal notranslate"><span class="pre">YipDestroyBuffer()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#c.YipModInfo"><code class="docutils literal notranslate"><span class="pre">YipModInfo</span></code></a><ul>
@@ -309,6 +337,7 @@ documentation for details.</p>
 <li><a class="reference internal" href="#c.YipHookFunction"><code class="docutils literal notranslate"><span class="pre">YipHookFunction()</span></code></a></li>
 <li><a class="reference internal" href="#c.YipHookFunctionAt"><code class="docutils literal notranslate"><span class="pre">YipHookFunctionAt()</span></code></a></li>
 <li><a class="reference internal" href="#c.YipPatch"><code class="docutils literal notranslate"><span class="pre">YipPatch()</span></code></a></li>
+<li><a class="reference internal" href="#c.YipPatchv2"><code class="docutils literal notranslate"><span class="pre">YipPatchv2()</span></code></a></li>
 <li><a class="reference internal" href="#c.YipGetGameName"><code class="docutils literal notranslate"><span class="pre">YipGetGameName()</span></code></a></li>
 <li><a class="reference internal" href="#c.YipGetAndroidAppStruct"><code class="docutils literal notranslate"><span class="pre">YipGetAndroidAppStruct()</span></code></a></li>
 <li><a class="reference internal" href="#c.YipGetLeafInstance"><code class="docutils literal notranslate"><span class="pre">YipGetLeafInstance()</span></code></a></li>

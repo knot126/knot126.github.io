@@ -45,32 +45,32 @@
 <p>The patching functions provide a way to apply patches to the game at
 runtime. Keep in mind that using this module meaningfully requires some
 knowledge of low level programming.</p>
-<section id="knpatch-virtualaddress-bytes">
-<h2><code class="docutils literal notranslate"><span class="pre">knPatch(virtualAddress,</span> <span class="pre">bytes)</span></code><a class="headerlink" href="#knpatch-virtualaddress-bytes" title="Link to this heading">¶</a></h2>
-<p>Patch bytes at the given virtual address (offset from the start of the
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knPatch">
+<span class="sig-name descname"><span class="pre">knPatch</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">virtualAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knPatch" title="Link to this definition">¶</a></dt>
+<dd><p>Patch bytes at the given virtual address (offset from the start of the
 first ELF section, and in the case of Smash Hit, the start of the file)
-at runtime. This is a simpler alternative to <code class="docutils literal notranslate"><span class="pre">knPoke()</span></code>.</p>
-<p>Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success and <code class="docutils literal notranslate"><span class="pre">false</span></code> on failure (e.g. invalid
-address, patch not in range). It may be changed to raise an error in the
-future.</p>
-<section id="example">
-<h3>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
-<p>The following patch disables responding to hits by returning from
-<code class="docutils literal notranslate"><span class="pre">Level::hitSomething()</span></code> as soon as it is called on both 32 and 64 bit
+at runtime.</p>
+<p>This function returns a string representing the original bytes before
+patching. They can be passed back to another knPatch call to revert the
+patch.</p>
+<p>This function may raise errors.</p>
+<p>As an example, the following patch disables responding to hits by returning
+from <code class="docutils literal notranslate"><span class="pre">Level::hitSomething()</span></code> as soon as it is called on both 32 and 64 bit
 ARM.</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knSystemAbi</span><span class="p">()</span>
 
 <span class="c1">-- Note: Lua 5.1 does not support hex escapes in string literals, so we must</span>
 <span class="c1">-- specify the bytes as decimal escapes.</span>
 <span class="kr">if</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;arm64-v8a&quot;</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x71574</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\192\3\95\214</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- c0 03 5f d6   = arm64 ret instruction</span>
+<span class="w">   </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x71574</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\192\3\95\214</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- c0 03 5f d6   = arm64 ret instruction</span>
 <span class="kr">elseif</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;armeabi-v7a&quot;</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x5b8a0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\30\255\47\225</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- 1e ff 2f e1   = arm32 bx lr instruction</span>
+<span class="w">   </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x5b8a0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\30\255\47\225</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- 1e ff 2f e1   = arm32 bx lr instruction</span>
 <span class="kr">end</span>
 </pre></div>
 </div>
-</section>
-</section>
+</dd></dl>
+
 </section>
 
 
@@ -84,10 +84,7 @@ ARM.</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Patching</a><ul>
-<li><a class="reference internal" href="#knpatch-virtualaddress-bytes"><code class="docutils literal notranslate"><span class="pre">knPatch(virtualAddress,</span> <span class="pre">bytes)</span></code></a><ul>
-<li><a class="reference internal" href="#example">Example</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#lua-knPatch"><code class="docutils literal notranslate"><span class="pre">knPatch()</span></code></a></li>
 </ul>
 </li>
 </ul>

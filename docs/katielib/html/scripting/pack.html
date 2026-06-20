@@ -42,12 +42,13 @@
             
   <section id="byte-packing">
 <h1>Byte Packing<a class="headerlink" href="#byte-packing" title="Link to this heading">¶</a></h1>
-<section id="knpack-type-value">
-<h2><code class="docutils literal notranslate"><span class="pre">knPack(type,</span> <span class="pre">value)</span></code><a class="headerlink" href="#knpack-type-value" title="Link to this heading">¶</a></h2>
-<p>Convert the given <code class="docutils literal notranslate"><span class="pre">value</span></code> into the given <code class="docutils literal notranslate"><span class="pre">type</span></code>, then return its
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knPack">
+<span class="sig-name descname"><span class="pre">knPack</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knPack" title="Link to this definition">¶</a></dt>
+<dd><p>Convert the given <code class="docutils literal notranslate"><span class="pre">value</span></code> into the given <code class="docutils literal notranslate"><span class="pre">type</span></code>, then return its
 representation as bytes. The endianness is always that of the host
 processor, which is always little endian for all of KnShim’s supported
-architectures. This is most useful with <code class="docutils literal notranslate"><span class="pre">knPatch()</span></code>.</p>
+architectures. This is most useful with <code class="xref lua lua-func docutils literal notranslate"><span class="pre">knPatch()</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">type</span></code> is one of the following strings:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">float</span></code>: single precision (32 bit) floating point number</p></li>
@@ -59,12 +60,15 @@ architectures. This is most useful with <code class="docutils literal notranslat
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">value</span></code> may be any Lua value, though only some will convert in a
 sensible manner.</p>
-</section>
-<section id="knunpack-type-data">
-<h2><code class="docutils literal notranslate"><span class="pre">knUnpack(type,</span> <span class="pre">data)</span></code><a class="headerlink" href="#knunpack-type-data" title="Link to this heading">¶</a></h2>
-<p>Essentially the reverse of <code class="docutils literal notranslate"><span class="pre">knPack()</span></code>, taking data bytes and
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knUnpack">
+<span class="sig-name descname"><span class="pre">knUnpack</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><a class="headerlink" href="#lua-knUnpack" title="Link to this definition">¶</a></dt>
+<dd><p>Essentially the reverse of <a class="reference internal" href="#lua-knPack" title="knPack"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knPack()</span></code></a>, taking data bytes and
 converting it to a number or integer value.</p>
-</section>
+</dd></dl>
+
 </section>
 
 
@@ -78,8 +82,8 @@ converting it to a number or integer value.</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Byte Packing</a><ul>
-<li><a class="reference internal" href="#knpack-type-value"><code class="docutils literal notranslate"><span class="pre">knPack(type,</span> <span class="pre">value)</span></code></a></li>
-<li><a class="reference internal" href="#knunpack-type-data"><code class="docutils literal notranslate"><span class="pre">knUnpack(type,</span> <span class="pre">data)</span></code></a></li>
+<li><a class="reference internal" href="#lua-knPack"><code class="docutils literal notranslate"><span class="pre">knPack()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knUnpack"><code class="docutils literal notranslate"><span class="pre">knUnpack()</span></code></a></li>
 </ul>
 </li>
 </ul>
