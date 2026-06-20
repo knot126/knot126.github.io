@@ -20,41 +20,36 @@ Otherwise if just want to use the most recent touch at index zero, you
 can exclude the ``index`` argument for every function call and it will
 default to zero. All built-in UI elements do this.
 
-``knGetTouchCount()``
----------------------
+.. function:: knGetTouchCount()
 
-Get the number of touches. May not correspond with the maximum touch
-index.
+   Get the number of touches. May not correspond with the maximum touch
+   index.
 
-``knHasTouch([index])``
------------------------
+.. function:: knHasTouch([index])
 
-Check if a valid touch exists at the given ``index``. Returns ``true``
-if so, or ``false`` if not.
+   Check if a valid touch exists at the given ``index``. Returns ``true``
+   if so, or ``false`` if not.
 
-``knGetTouchPos([index])``
---------------------------
+.. function:: knGetTouchPos([index])
 
-Returns the x and y position of the touch in screen coordinates. Note
-that these may not always line up with the virtual in-game coordinates.
+   Returns the x and y position of the touch in screen coordinates. Note
+   that these may not always line up with the virtual in-game coordinates.
 
-Example:
+   Example:
 
-.. code:: lua
+   .. code:: lua
 
-   local x, y = knGetTouchPos(0)
+      local x, y = knGetTouchPos(0)
 
-``knWasTouchPressed([index])``
-------------------------------
+.. function:: knWasTouchPressed([index])
 
-Return ``true`` if the touch at the given index was *just* pressed and
-``false`` otherwise. This will only happen once per touch at the very
-start of the touch.
+   Return ``true`` if the touch at the given index was *just* pressed and
+   ``false`` otherwise. This will only happen once per touch at the very
+   start of the touch.
 
-``knWasTouchReleased([index])``
--------------------------------
+.. function:: knWasTouchReleased([index])
 
-**Currently broken and always returns ``false``**, but should(?) return
-``true`` if the touch at the given index was just released and ``false``
-otherwise. This will only happen once per touch at the very end of the
-touch.
+   **Currently broken and always returns ``false``**, but should(?) return
+   ``true`` if the touch at the given index was just released and ``false``
+   otherwise. This will only happen once per touch at the very end of the
+   touch.

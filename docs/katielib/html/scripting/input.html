@@ -57,38 +57,48 @@ touch events without using <code class="docutils literal notranslate"><span clas
 <p>Otherwise if just want to use the most recent touch at index zero, you
 can exclude the <code class="docutils literal notranslate"><span class="pre">index</span></code> argument for every function call and it will
 default to zero. All built-in UI elements do this.</p>
-<section id="kngettouchcount">
-<h2><code class="docutils literal notranslate"><span class="pre">knGetTouchCount()</span></code><a class="headerlink" href="#kngettouchcount" title="Link to this heading">¶</a></h2>
-<p>Get the number of touches. May not correspond with the maximum touch
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetTouchCount">
+<span class="sig-name descname"><span class="pre">knGetTouchCount</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knGetTouchCount" title="Link to this definition">¶</a></dt>
+<dd><p>Get the number of touches. May not correspond with the maximum touch
 index.</p>
-</section>
-<section id="knhastouch-index">
-<h2><code class="docutils literal notranslate"><span class="pre">knHasTouch([index])</span></code><a class="headerlink" href="#knhastouch-index" title="Link to this heading">¶</a></h2>
-<p>Check if a valid touch exists at the given <code class="docutils literal notranslate"><span class="pre">index</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHasTouch">
+<span class="sig-name descname"><span class="pre">knHasTouch</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knHasTouch" title="Link to this definition">¶</a></dt>
+<dd><p>Check if a valid touch exists at the given <code class="docutils literal notranslate"><span class="pre">index</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code>
 if so, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if not.</p>
-</section>
-<section id="kngettouchpos-index">
-<h2><code class="docutils literal notranslate"><span class="pre">knGetTouchPos([index])</span></code><a class="headerlink" href="#kngettouchpos-index" title="Link to this heading">¶</a></h2>
-<p>Returns the x and y position of the touch in screen coordinates. Note
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetTouchPos">
+<span class="sig-name descname"><span class="pre">knGetTouchPos</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knGetTouchPos" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the x and y position of the touch in screen coordinates. Note
 that these may not always line up with the virtual in-game coordinates.</p>
 <p>Example:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knGetTouchPos</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="knwastouchpressed-index">
-<h2><code class="docutils literal notranslate"><span class="pre">knWasTouchPressed([index])</span></code><a class="headerlink" href="#knwastouchpressed-index" title="Link to this heading">¶</a></h2>
-<p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the touch at the given index was <em>just</em> pressed and
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knWasTouchPressed">
+<span class="sig-name descname"><span class="pre">knWasTouchPressed</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knWasTouchPressed" title="Link to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the touch at the given index was <em>just</em> pressed and
 <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. This will only happen once per touch at the very
 start of the touch.</p>
-</section>
-<section id="knwastouchreleased-index">
-<h2><code class="docutils literal notranslate"><span class="pre">knWasTouchReleased([index])</span></code><a class="headerlink" href="#knwastouchreleased-index" title="Link to this heading">¶</a></h2>
-<p><strong>Currently broken and always returns ``false``</strong>, but should(?) return
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knWasTouchReleased">
+<span class="sig-name descname"><span class="pre">knWasTouchReleased</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knWasTouchReleased" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Currently broken and always returns ``false``</strong>, but should(?) return
 <code class="docutils literal notranslate"><span class="pre">true</span></code> if the touch at the given index was just released and <code class="docutils literal notranslate"><span class="pre">false</span></code>
 otherwise. This will only happen once per touch at the very end of the
 touch.</p>
-</section>
+</dd></dl>
+
 </section>
 
 
@@ -102,11 +112,11 @@ touch.</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Raw Input</a><ul>
-<li><a class="reference internal" href="#kngettouchcount"><code class="docutils literal notranslate"><span class="pre">knGetTouchCount()</span></code></a></li>
-<li><a class="reference internal" href="#knhastouch-index"><code class="docutils literal notranslate"><span class="pre">knHasTouch([index])</span></code></a></li>
-<li><a class="reference internal" href="#kngettouchpos-index"><code class="docutils literal notranslate"><span class="pre">knGetTouchPos([index])</span></code></a></li>
-<li><a class="reference internal" href="#knwastouchpressed-index"><code class="docutils literal notranslate"><span class="pre">knWasTouchPressed([index])</span></code></a></li>
-<li><a class="reference internal" href="#knwastouchreleased-index"><code class="docutils literal notranslate"><span class="pre">knWasTouchReleased([index])</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetTouchCount"><code class="docutils literal notranslate"><span class="pre">knGetTouchCount()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHasTouch"><code class="docutils literal notranslate"><span class="pre">knHasTouch()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetTouchPos"><code class="docutils literal notranslate"><span class="pre">knGetTouchPos()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knWasTouchPressed"><code class="docutils literal notranslate"><span class="pre">knWasTouchPressed()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knWasTouchReleased"><code class="docutils literal notranslate"><span class="pre">knWasTouchReleased()</span></code></a></li>
 </ul>
 </li>
 </ul>
