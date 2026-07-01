@@ -7,7 +7,7 @@ knowledge of low level programming.
 
 .. seealso::
    
-   `Athemyst Patcher <https://sites.google.com/view/smashhitlab/documentation/tools/amethyst-patcher>`_
+   `Amethyst Patcher <https://sites.google.com/view/smashhitlab/documentation/tools/amethyst-patcher>`_
       Provides several useful patches that can be enabled at runtime
 
 .. function:: knPatch(virtualAddress: integer, bytes: string): string
