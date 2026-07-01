@@ -5,6 +5,11 @@ The patching functions provide a way to apply patches to the game at
 runtime. Keep in mind that using this module meaningfully requires some
 knowledge of low level programming.
 
+.. seealso::
+   
+   `Athemyst Patcher <https://sites.google.com/view/smashhitlab/documentation/tools/amethyst-patcher>`_
+      Provides several useful patches that can be enabled at runtime
+
 .. function:: knPatch(virtualAddress: integer, bytes: string): string
 
    Patch bytes at the given virtual address (offset from the start of the
