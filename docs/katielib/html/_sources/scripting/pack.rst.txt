@@ -15,12 +15,20 @@ Byte Packing
    - ``char`` or ``bool``: a single 8-bit byte
    - ``short``: a 16-bit signed integer
    - ``int``: a 32-bit signed integer
-   - ``long``: eight 64-bit signed integer
+   - ``long``: a 64-bit signed integer
+   - ``pointer``: a pointer, size depending on platform
 
    The ``value`` may be any Lua value, though only some will convert in a
-   sensible manner.
+   sensible manner. One notable example is pointers, which take only a light
+   userdata as their input.
+   
+   .. version-added:: 19
+      
+      Pointers
 
 .. function:: knUnpack(type: string, data: string): number
 
    Essentially the reverse of :func:`knPack`, taking data bytes and
    converting it to a number or integer value.
+   
+   .. version-added:: 19

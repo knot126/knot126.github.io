@@ -25,6 +25,10 @@ Release 19 (upcoming)
   overlays
 - Deprecate :func:`knHttpsCert` and :func:`knHttpsNoCert` and add
   explicit ``certificate`` argument to :func:`knHttpRequest`
+- Updated ``knPatch()`` so it now returns the original data before it
+  was patched
+- Added ``knPeek()`` which should now work more reliably than the older
+  version of the function that was removed long ago
 
 Release 18
 ----------

@@ -37,3 +37,19 @@ knowledge of low level programming.
       elseif architecture == "armeabi-v7a" then
          knPatch(0x5b8a0, "\30\255\47\225") -- 1e ff 2f e1   = arm32 bx lr instruction
       end
+   
+   .. version-changed:: 19
+      
+      knPatch() now returns the bytes before patching; previously it had no return value
+   
+   .. version-added:: 14
+
+.. function:: knPeek(location: string | integer | lightuserdata, size: integer): string
+   
+   Peek the bytes at the given location, which can be a symbol name (when it's
+   a string), a virtual address (when it's an integer), or a raw address
+   (when it's a light userdata, likely attained from :func:`knUnpack()`).
+   
+   Returns the data as a string.
+   
+   .. version-added:: 19

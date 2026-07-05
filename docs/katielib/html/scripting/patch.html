@@ -76,6 +76,24 @@ ARM.</p>
 <span class="kr">end</span>
 </pre></div>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 19: </span>knPatch() now returns the bytes before patching; previously it had no return value</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 14.</span></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knPeek">
+<span class="sig-name descname"><span class="pre">knPeek</span></span><span class="p"><span class="pre">(</span></span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">lightuserdata</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><br /><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knPeek" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Peek the bytes at the given location, which can be a symbol name (when it’s
+a string), a virtual address (when it’s an integer), or a raw address
+(when it’s a light userdata, likely attained from <a class="reference internal" href="pack.html#lua-knUnpack" title="knUnpack"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knUnpack()</span></code></a>).</p>
+<p>Returns the data as a string.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 19.</span></p>
+</div>
 </dd></dl>
 
 </section>
@@ -92,6 +110,7 @@ ARM.</p>
     <ul>
 <li><a class="reference internal" href="#">Patching</a><ul>
 <li><a class="reference internal" href="#lua-knPatch"><code class="docutils literal notranslate"><span class="pre">knPatch()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knPeek"><code class="docutils literal notranslate"><span class="pre">knPeek()</span></code></a></li>
 </ul>
 </li>
 </ul>
