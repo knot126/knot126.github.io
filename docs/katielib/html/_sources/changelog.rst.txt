@@ -2,8 +2,15 @@
 Changelog
 =========
 
-Release 19 (upcoming)
----------------------
+Release 20
+----------
+
+Nothing yet!
+
+Release 19
+----------
+
+*6 July 2026*
 
 - Several functions will now raise an error instead of returning
   silently when used incorrectly
