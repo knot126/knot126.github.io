@@ -77,6 +77,43 @@ converting it to a number or integer value.</p>
 </div>
 </dd></dl>
 
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knHexToBin">
+<span class="sig-name descname"><span class="pre">knHexToBin</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">hexdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knHexToBin" title="Link to this definition">¶</a></dt>
+<dd><p>Convert a string of hexidecimal digits representing bytes to a string of
+those bytes. Non-hexdigit characters in the string (e.g. anything that is
+not <code class="docutils literal notranslate"><span class="pre">0</span></code>-<code class="docutils literal notranslate"><span class="pre">9</span></code>, <code class="docutils literal notranslate"><span class="pre">a</span></code>-<code class="docutils literal notranslate"><span class="pre">f</span></code> or <code class="docutils literal notranslate"><span class="pre">A</span></code>-<code class="docutils literal notranslate"><span class="pre">F</span></code>) are ignored.</p>
+<p>As an example, this converts a string representing the AArch64 ret
+instruction into the raw bytes and returns it:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHexToBin</span><span class="p">(</span><span class="s2">&quot;c0 03 5f d6&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can create an alias of this function and use Lua’s special single-string-argument
+call syntax to create an elegant way of writing hex data:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nv">hex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">knHexToBin</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hex</span><span class="w"> </span><span class="s2">&quot;c0 03 5f d6&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 20.</span></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knBinToHex">
+<span class="sig-name descname"><span class="pre">knBinToHex</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knBinToHex" title="Link to this definition">¶</a></dt>
+<dd><p>Converts binary data into a string of hexdigits. This string does not contain
+any extranious characters for formatting, like spaces or tabs.</p>
+<p>The result of this function is suitable to be passed back into
+<a class="reference internal" href="#lua-knHexToBin" title="knHexToBin"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knHexToBin()</span></code></a> to retrieve the same data again.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 20.</span></p>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -92,6 +129,8 @@ converting it to a number or integer value.</p>
 <li><a class="reference internal" href="#">Byte Packing</a><ul>
 <li><a class="reference internal" href="#lua-knPack"><code class="docutils literal notranslate"><span class="pre">knPack()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knUnpack"><code class="docutils literal notranslate"><span class="pre">knUnpack()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knHexToBin"><code class="docutils literal notranslate"><span class="pre">knHexToBin()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knBinToHex"><code class="docutils literal notranslate"><span class="pre">knBinToHex()</span></code></a></li>
 </ul>
 </li>
 </ul>

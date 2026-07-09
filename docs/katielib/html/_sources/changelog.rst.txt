@@ -5,7 +5,10 @@ Changelog
 Release 20
 ----------
 
-Nothing yet!
+*Upcoming*
+
+- Added :func:`knHexToBin` and :func:`knBinToHex` for converting strings of data
+  to and from strings of hexidecimal digits
 
 Release 19
 ----------
