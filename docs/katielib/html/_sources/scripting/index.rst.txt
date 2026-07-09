@@ -13,6 +13,7 @@ KatieLib provides numerous extra functions to *Smash Hit*'s scripts.
    assets
    registry
    database
+   string
    cheats
    gameplay_smashhit
    reload

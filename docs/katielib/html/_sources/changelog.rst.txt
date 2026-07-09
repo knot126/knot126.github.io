@@ -9,6 +9,7 @@ Release 20
 
 - Added :func:`knHexToBin` and :func:`knBinToHex` for converting strings of data
   to and from strings of hexidecimal digits
+- Added string utilities: :func:`knRemoveSuffix`, :func:`knRemovePrefix` and :func:`knSplit`
 
 Release 19
 ----------

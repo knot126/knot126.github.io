@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>String Utilities &#8212; KatieLib 20 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=ef442d90"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cheats (Smash Hit)" href="cheats.html" />
+    <link rel="prev" title="Database" href="database.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cheats.html" title="Cheats (Smash Hit)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="database.html" title="Database"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 20 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">String Utilities</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="string-utilities">
+<h1>String Utilities<a class="headerlink" href="#string-utilities" title="Link to this heading">¶</a></h1>
+<p>Since Lua’s string utilities can be a little over-complicated for some tasks,
+KatieLib provides helper functions which make simpler string operations easy.</p>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRemoveSuffix">
+<span class="sig-name descname"><span class="pre">knRemoveSuffix</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knRemoveSuffix" title="Link to this definition">¶</a></dt>
+<dd><p>If the given suffix occurs at the end of the string, return a string without
+the suffix. Otherwise, return the string as-is.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRemovePrefix">
+<span class="sig-name descname"><span class="pre">knRemovePrefix</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knRemovePrefix" title="Link to this definition">¶</a></dt>
+<dd><p>If the given prefix occurs at the start of the string, return a string
+without the prefix. Otherwise, return the string as-is.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knSplit">
+<span class="sig-name descname"><span class="pre">knSplit</span></span><span class="p"><span class="pre">(</span></span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">separator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">removeEmpty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">maxSplit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">]</span></span><br /><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#lua-knSplit" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Split a string by the given separator, returning the pieces in a table.</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">removeEmpty</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> will remove the empty strings that occur
+e.g. when the separator appears multiple times in a row or at the start and
+end of a string.</p>
+<p>The maximum number of times to split the string before leaving the remaining
+part in the final element can also be set with <code class="docutils literal notranslate"><span class="pre">maxSplit</span></code>. This is useful
+when you only want to split by the first few instances of a separator and
+leave the rest of the string intact, such as with <code class="docutils literal notranslate"><span class="pre">key=value</span></code> pairs that
+allow <code class="docutils literal notranslate"><span class="pre">=</span></code> to appear in the value.</p>
+<p>When using both <code class="docutils literal notranslate"><span class="pre">maxSplit</span></code> and <code class="docutils literal notranslate"><span class="pre">removeEmpty</span></code>, the empty strings are
+considered <strong>not</strong> to count towards the split total.</p>
+<p>Here are some examples that demonstrate various behaviours:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot;This will split by every space!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;This&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;will&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;split&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;by&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;every&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;space!&quot;</span><span class="p">}</span>
+
+<span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot;property=value=thisIsAlsoPartOfTheValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;property&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;thisIsAlsoPartOfTheValue&quot;</span><span class="p">}</span>
+
+<span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot;property=value=thisIsAlsoPartOfTheValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;property&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;value=thisIsAlsoPartOfTheValue&quot;</span><span class="p">}</span>
+
+<span class="c1">-- notice that there are two spaces between the first and second value</span>
+<span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot; 0x1234  0x5678 0x9abc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x1234&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x5678&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x9abc&quot;</span><span class="p">}</span>
+
+<span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot; 0x1234  0x5678 0x9abc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0x1234&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x5678&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x9abc&quot;</span><span class="p">}</span>
+
+<span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot; 0x1234  0x5678 0x9abc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0x1234&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; 0x5678 0x9abc&quot;</span><span class="p">}</span>
+
+<span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot;Player::hitSomething&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;::&quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Player&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hitSomething&quot;</span><span class="p">}</span>
+
+<span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot; = = = = &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; = &quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;= &quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Example for parsing and applying a line of a patch:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knSplit</span><span class="p">(</span><span class="s2">&quot;0x71574  c0 03 5f d6&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHexToBin</span><span class="p">(</span><span class="nv">data</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nf">knPatch</span><span class="p">(</span><span class="nv">address</span><span class="p">,</span><span class="w"> </span><span class="nv">bytes</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">String Utilities</a><ul>
+<li><a class="reference internal" href="#lua-knRemoveSuffix"><code class="docutils literal notranslate"><span class="pre">knRemoveSuffix()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knRemovePrefix"><code class="docutils literal notranslate"><span class="pre">knRemovePrefix()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knSplit"><code class="docutils literal notranslate"><span class="pre">knSplit()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="database.html"
+                          title="previous chapter">Database</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cheats.html"
+                          title="next chapter">Cheats (<em>Smash Hit</em>)</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/string.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cheats.html" title="Cheats (Smash Hit)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="database.html" title="Database"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 20 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">String Utilities</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>
