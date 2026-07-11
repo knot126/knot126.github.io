@@ -54,10 +54,8 @@ knowledge of low level programming.</p>
 </div>
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knPatch">
-<span class="sig-name descname"><span class="pre">knPatch</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">virtualAddress</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knPatch" title="Link to this definition">¶</a></dt>
-<dd><p>Patch bytes at the given virtual address (offset from the start of the
-first ELF section, and in the case of Smash Hit, the start of the file)
-at runtime.</p>
+<span class="sig-name descname"><span class="pre">knPatch</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">address</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knPatch" title="Link to this definition">¶</a></dt>
+<dd><p>Patch bytes at the given address at runtime.</p>
 <p>This function returns a string representing the original bytes before
 patching. They can be passed back to another knPatch call to revert the
 patch.</p>
@@ -86,7 +84,7 @@ ARM.</p>
 
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knPeek">
-<span class="sig-name descname"><span class="pre">knPeek</span></span><span class="p"><span class="pre">(</span></span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">lightuserdata</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><br /><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knPeek" title="Link to this definition">¶</a><br /></dt>
+<span class="sig-name descname"><span class="pre">knPeek</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">address</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knPeek" title="Link to this definition">¶</a></dt>
 <dd><p>Peek the bytes at the given location, which can be a symbol name (when it’s
 a string), a virtual address (when it’s an integer), or a raw address
 (when it’s a light userdata, likely attained from <a class="reference internal" href="pack.html#lua-knUnpack" title="knUnpack"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knUnpack()</span></code></a>).</p>
@@ -96,6 +94,44 @@ a string), a virtual address (when it’s an integer), or a raw address
 </div>
 </dd></dl>
 
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knAddress">
+<span class="sig-name descname"><span class="pre">knAddress</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">address</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="n"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">lightuserdata</span></code><a class="headerlink" href="#lua-knAddress" title="Link to this definition">¶</a></dt>
+<dd><p>Return a lightuserdata for a (mostly) arbitrary address. The base
+address may be either a number (interpreted as an offset from the start
+of the binary) or a string (interpreted as a symbol name). This is the
+initial address that any offsets will work with.</p>
+<p>For each offset (an integer), the current base address is dereferenced as a
+pointer, which is used as the new base address, then the offset is added to
+the new base address. This happens in the order the offsets were passed to
+the function.</p>
+<p>For example, this:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knAddress</span><span class="p">(</span><span class="s2">&quot;gGame&quot;</span><span class="p">,</span><span class="w"> </span><span class="mh">0x60</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8bc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>is similar to writing:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="o">*</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)(</span><span class="o">*</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="n">YipLookupSymbol</span><span class="p">(</span><span class="s">&quot;gGame&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x60</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x8bc</span><span class="p">)</span>
+<span class="c1">// Can imagine as: &amp;gGame-&gt;0x60-&gt;0x8bc</span>
+</pre></div>
+</div>
+<p>in C.</p>
+<p>Note that if no offsets are given, this returns the value associated with the
+base address.</p>
+</dd></dl>
+
+<section id="about-the-address-type">
+<h2>About the Address Type<a class="headerlink" href="#about-the-address-type" title="Link to this heading">¶</a></h2>
+<p>Parameters of the <code class="docutils literal notranslate"><span class="pre">address</span></code> type can actually be an integer, string, or
+lightuserdata and are interpreted in the following way, depending on the actual
+type passed to the function:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">integer</span></code>: Interprets this as an offset relative to the base address at
+which the game was loaded. For Smash Hit, you can think of this as the offset
+relative to the start of the main game binary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">string</span></code>: Uses the address of the given symbol.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lightuserdata</span></code>: Uses the value of the lightuserdata itself.</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -111,6 +147,8 @@ a string), a virtual address (when it’s an integer), or a raw address
 <li><a class="reference internal" href="#">Patching</a><ul>
 <li><a class="reference internal" href="#lua-knPatch"><code class="docutils literal notranslate"><span class="pre">knPatch()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knPeek"><code class="docutils literal notranslate"><span class="pre">knPeek()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knAddress"><code class="docutils literal notranslate"><span class="pre">knAddress()</span></code></a></li>
+<li><a class="reference internal" href="#about-the-address-type">About the Address Type</a></li>
 </ul>
 </li>
 </ul>

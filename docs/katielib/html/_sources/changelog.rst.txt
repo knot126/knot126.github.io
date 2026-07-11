@@ -10,6 +10,8 @@ Release 20
 - Added :func:`knHexToBin` and :func:`knBinToHex` for converting strings of data
   to and from strings of hexidecimal digits
 - Added string utilities: :func:`knRemoveSuffix`, :func:`knRemovePrefix` and :func:`knSplit`
+- KatieLib now installs a custom Lua panic handler which prints a FATAL-level
+  log line describing what caused the panic
 
 Release 19
 ----------
