@@ -36,6 +36,10 @@ knowledge of low level programming.
          knPatch(0x5b8a0, "\30\255\47\225") -- 1e ff 2f e1   = arm32 bx lr instruction
       end
    
+   .. version-changed:: 20
+      
+      knPatch() now supports symbol names (via strings) and raw addresses (via lightuserdata) in addition to the base address offsets; previously it only supported the latter
+   
    .. version-changed:: 19
       
       knPatch() now returns the bytes before patching; previously it always returned ``true``
