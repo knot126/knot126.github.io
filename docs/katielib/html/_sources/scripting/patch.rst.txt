@@ -38,7 +38,7 @@ knowledge of low level programming.
    
    .. version-changed:: 19
       
-      knPatch() now returns the bytes before patching; previously it had no return value
+      knPatch() now returns the bytes before patching; previously it always returned ``true``
    
    .. version-added:: 14
 
@@ -81,6 +81,8 @@ knowledge of low level programming.
    
    Note that if no offsets are given, this returns the value associated with the
    base address.
+   
+   .. version-added:: 20
 
 About the Address Type
 ----------------------

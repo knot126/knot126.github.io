@@ -75,7 +75,7 @@ ARM.</p>
 </pre></div>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 19: </span>knPatch() now returns the bytes before patching; previously it had no return value</p>
+<p><span class="versionmodified changed">Changed in version 19: </span>knPatch() now returns the bytes before patching; previously it always returned <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 14.</span></p>
@@ -117,6 +117,9 @@ the function.</p>
 <p>in C.</p>
 <p>Note that if no offsets are given, this returns the value associated with the
 base address.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 20.</span></p>
+</div>
 </dd></dl>
 
 <section id="about-the-address-type">
