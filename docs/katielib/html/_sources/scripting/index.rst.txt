@@ -8,6 +8,7 @@ KatieLib provides numerous extra functions to *Smash Hit*'s scripts.
    :maxdepth: 2
    :caption: Contents:
    
+   general
    logging
    files
    assets

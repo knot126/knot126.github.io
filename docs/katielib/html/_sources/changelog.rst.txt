@@ -7,6 +7,9 @@ Release 20
 
 *Upcoming*
 
+- KatieLib now upgrades Smash Hit's built-in Lua install to
+  `version 5.2 <https://www.lua.org/manual/5.2/readme.html#changes>`__! We plan
+  to further upgrade this to 5.3 in the future.
 - Added :func:`knAddress` for finding memory addresses
 - Updated :func:`knPatch` to support symbol names and lightuserdata address
 - Added :func:`knHexToBin` and :func:`knBinToHex` for converting strings of data

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>General Changes and Additions &#8212; KatieLib 20 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <script src="../_static/documentation_options.js?v=ef442d90"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="KatieLib Script API" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="logging.html" title="Logging"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="KatieLib Script API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 20 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">General Changes and Additions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="general-changes-and-additions">
+<h1>General Changes and Additions<a class="headerlink" href="#general-changes-and-additions" title="Link to this heading">¶</a></h1>
+<p>KatieLib makes some (largely non-breaking) changes to the game’s scripting API,
+mostly to make it easier to work with.</p>
+<section id="upgrade-to-lua-5-2">
+<h2>Upgrade to Lua 5.2<a class="headerlink" href="#upgrade-to-lua-5-2" title="Link to this heading">¶</a></h2>
+<p>KatieLib upgrades the version of Lua used in Smash Hit to version 5.2.4. This
+brings many great quality of life updates for script writers. While it is a
+little rough around the edges technically speaking, almost any script that was
+working with the built-in version 5.1.4 will continue work in the new version.</p>
+<p>If you want, you can still keep using the built-in version of Lua by not
+including <code class="docutils literal notranslate"><span class="pre">liblua.so</span></code> in your APK.</p>
+</section>
+<section id="shutdown-function">
+<h2><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function<a class="headerlink" href="#shutdown-function" title="Link to this heading">¶</a></h2>
+<p>KatieLib automatically calls the <code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function on script destruction,
+allowing you to easily detect when scripts are being deallocated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span> <span class="n">In</span> <span class="n">an</span> <span class="n">obstacle</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span>
+<span class="n">function</span> <span class="n">shutdown</span><span class="p">()</span>
+   <span class="n">knLog</span><span class="p">(</span><span class="s2">&quot;The obstacle is being destroyed!&quot;</span><span class="p">)</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">General Changes and Additions</a><ul>
+<li><a class="reference internal" href="#upgrade-to-lua-5-2">Upgrade to Lua 5.2</a></li>
+<li><a class="reference internal" href="#shutdown-function"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">KatieLib Script API</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="logging.html"
+                          title="next chapter">Logging</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scripting/general.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="logging.html" title="Logging"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="KatieLib Script API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">KatieLib 20 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >KatieLib Script API</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">General Changes and Additions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, knot126.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    </div>
+  </body>
+</html>
