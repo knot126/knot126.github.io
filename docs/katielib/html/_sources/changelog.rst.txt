@@ -2,10 +2,15 @@
 Changelog
 =========
 
-Release 20
+Release 21
 ----------
 
 *Upcoming*
+
+Release 20
+----------
+
+*13 July 2026*
 
 - KatieLib now upgrades Smash Hit's built-in Lua install to
   `version 5.3.6 <https://www.lua.org/manual/5.3/readme.html#changes>`__! This
