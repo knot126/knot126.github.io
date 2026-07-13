@@ -44,14 +44,15 @@
 <h1>General Changes and Additions<a class="headerlink" href="#general-changes-and-additions" title="Link to this heading">¶</a></h1>
 <p>KatieLib makes some (largely non-breaking) changes to the game’s scripting API,
 mostly to make it easier to work with.</p>
-<section id="upgrade-to-lua-5-2">
-<h2>Upgrade to Lua 5.2<a class="headerlink" href="#upgrade-to-lua-5-2" title="Link to this heading">¶</a></h2>
-<p>KatieLib upgrades the version of Lua used in Smash Hit to version 5.2.4. This
-brings many great quality of life updates for script writers. While it is a
-little rough around the edges technically speaking, almost any script that was
-working with the built-in version 5.1.4 will continue work in the new version.</p>
-<p>If you want, you can still keep using the built-in version of Lua by not
-including <code class="docutils literal notranslate"><span class="pre">liblua.so</span></code> in your APK.</p>
+<section id="upgrade-to-lua-5-3">
+<h2>Upgrade to Lua 5.3<a class="headerlink" href="#upgrade-to-lua-5-3" title="Link to this heading">¶</a></h2>
+<p>KatieLib upgrades the version of Lua used in Smash Hit to version 5.3.6. This
+brings several great quality of life updates for script writers, like bitwise
+operators and real integers. While it is a little rough around the edges
+technically speaking, almost any script that was working with the built-in
+version 5.1.4 will continue work in the new version.</p>
+<p>If you need to, you can still keep using the built-in version of Lua by deleting
+<code class="docutils literal notranslate"><span class="pre">liblua.so</span></code> from your APK.</p>
 </section>
 <section id="shutdown-function">
 <h2><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function<a class="headerlink" href="#shutdown-function" title="Link to this heading">¶</a></h2>
@@ -77,7 +78,7 @@ allowing you to easily detect when scripts are being deallocated:</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">General Changes and Additions</a><ul>
-<li><a class="reference internal" href="#upgrade-to-lua-5-2">Upgrade to Lua 5.2</a></li>
+<li><a class="reference internal" href="#upgrade-to-lua-5-3">Upgrade to Lua 5.3</a></li>
 <li><a class="reference internal" href="#shutdown-function"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function</a></li>
 </ul>
 </li>
