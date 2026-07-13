@@ -57,10 +57,10 @@ including <code class="docutils literal notranslate"><span class="pre">liblua.so
 <h2><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function<a class="headerlink" href="#shutdown-function" title="Link to this heading">¶</a></h2>
 <p>KatieLib automatically calls the <code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function on script destruction,
 allowing you to easily detect when scripts are being deallocated:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span> <span class="n">In</span> <span class="n">an</span> <span class="n">obstacle</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span>
-<span class="n">function</span> <span class="n">shutdown</span><span class="p">()</span>
-   <span class="n">knLog</span><span class="p">(</span><span class="s2">&quot;The obstacle is being destroyed!&quot;</span><span class="p">)</span>
-<span class="n">end</span>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="c1">-- In an obstacle, for example</span>
+<span class="kr">function</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">()</span>
+<span class="w">   </span><span class="nf">knLog</span><span class="p">(</span><span class="s2">&quot;The obstacle is being destroyed!&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
 </pre></div>
 </div>
 </section>

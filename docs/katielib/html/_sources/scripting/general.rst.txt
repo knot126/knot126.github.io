@@ -22,7 +22,7 @@ including ``liblua.so`` in your APK.
 KatieLib automatically calls the ``shutdown()`` function on script destruction,
 allowing you to easily detect when scripts are being deallocated:
 
-.. code::
+.. code:: lua
    
    -- In an obstacle, for example
    function shutdown()
