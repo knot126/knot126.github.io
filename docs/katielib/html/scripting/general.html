@@ -50,9 +50,24 @@ mostly to make it easier to work with.</p>
 brings several great quality of life updates for script writers, like bitwise
 operators and real integers. While it is a little rough around the edges
 technically speaking, almost any script that was working with the built-in
-version 5.1.4 will continue work in the new version.</p>
+version 5.1.4 will continue work in the new version. (However, tweaks may be
+needed.)</p>
 <p>If you need to, you can still keep using the built-in version of Lua by deleting
 <code class="docutils literal notranslate"><span class="pre">liblua.so</span></code> from your APK.</p>
+<section id="known-issues">
+<h3>Known Issues<a class="headerlink" href="#known-issues" title="Link to this heading">¶</a></h3>
+<p>The upgrade to Lua 5.3 may break some custom scripts:</p>
+<ul class="simple">
+<li><p>The separation of floating point numbers from integers can cause issues. For
+example, putting a number in the registry (which converts it to a string)
+then converting it using <code class="docutils literal notranslate"><span class="pre">tonumber()</span></code> can now result in a number that, when
+converted back to a string, has an extra <code class="docutils literal notranslate"><span class="pre">.0</span></code> appended to it. This
+could, for example, manifest by displaying an extra <code class="docutils literal notranslate"><span class="pre">0</span></code> at the end of
+number when output to a text object (since Smash Hit is not able to display
+the <code class="docutils literal notranslate"><span class="pre">.</span></code> with 4x4 fonts). The solution is to replace all uses of
+<code class="docutils literal notranslate"><span class="pre">tonumber()</span></code> with <code class="docutils literal notranslate"><span class="pre">math.tointeger()</span></code> when working with integers.</p></li>
+</ul>
+</section>
 </section>
 <section id="shutdown-function">
 <h2><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function<a class="headerlink" href="#shutdown-function" title="Link to this heading">¶</a></h2>
@@ -78,7 +93,10 @@ allowing you to easily detect when scripts are being deallocated:</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">General Changes and Additions</a><ul>
-<li><a class="reference internal" href="#upgrade-to-lua-5-3">Upgrade to Lua 5.3</a></li>
+<li><a class="reference internal" href="#upgrade-to-lua-5-3">Upgrade to Lua 5.3</a><ul>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#shutdown-function"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function</a></li>
 </ul>
 </li>
