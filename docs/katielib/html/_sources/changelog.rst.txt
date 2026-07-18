@@ -2,10 +2,17 @@
 Changelog
 =========
 
-Release 21
+Release 22
 ----------
 
 *Upcoming*
+
+Release 21
+----------
+
+*18 July 2026*
+
+- Fixed Lua 5.3 on AArch32
 
 Release 20
 ----------
