@@ -19,6 +19,17 @@
 				<h1>what doin</h1>
 				<p>I'm doing dates in the old Minecraft snapshot format, because I want to. :3</p>
 				<p><em>Usually published late every Sunday or early Monday</em></p>
+				<h2>26w29a</h2>
+				<ul>
+					<li>The furry device SMP got griefed. Thankfully I was able to stop it fast, and we have a very good backup strategy so we didn't loose everything. Funny enough this happened only four days after mule removed the auth plugin because it was having an issue that I could have solved in like 5 minutes if he had LET ME. But oh well, we have one now, and it works perfectly.</li>
+					<li>Over the weekend I have edited both Episodes 12 and 13! Episode 12 will be coming out later today (actually it was out, but contained a spoiler so I need to reupload, ugh). Episode 13 will come out sometime later, probably in about a week. I'm planning to do one episode a month from now on, so Episode 14 will be for July and will contain various interesting things that happened here including more details on the grief.</li>
+					<li>Blender 5.2.0 is awesome! I just got it here on Arch Linux and it fixes the memory leak bug I had AND ADDS PROPER MULTI-LINE TEXTBOX SUPPORT! YIP!! I updated my TTS plugin to use that, and also to support just pressing T so I can more easily create TTSes. :3</li>
+					<li>On the technical side of things I've been pretty busy too. I created Leaf Detours as an alternative to Leaf Hook that I plan to use in the future. It is capable of hooking smaller functions and is much better suited to our use cases in Smash Hit/KatieLib. I also updated Leaf to support creating an extra pre-/post-ELF contents segment so its easier to inject your own code at runtime. This is also used in Leaf Detours where it is able to hook small functions if set up properly.</li>
+					<li>KatieLib will now upgrade Lua to 5.3.6! Also I fixed a bug in KatieLib's Lua 5.3 upgrader on 32-bit ARM where integers would get corrupt and that took forever. Pro tip: Lua 5.3 changed integers so they are always 64-bit even on 32-bit platforms by default. You can imagine how this went wrong.</li>
+					<li>I hope to set up some kind of bigger docs site for Leaf this week, which will contain information on the exact differences between various function hooking techinques and libraries.</li>
+					<li>I have a trip I'm suppposed to go on. Not looking forward to it.</li>
+					<li>The doggy came to our house this week, but he didnt stay long. Still some family drama that prevents me from going to see him. Hope it will be resolved soon :/</li>
+				</ul>
 				<h2>26w28a</h2>
 				<ul>
 					<li>I have been able to get Smash Hit upgraded to Lua 5.2 using KatieLib and a lot of function replacement! I wrote a thin layer that translates the 5.1 API calls to 5.2 calls and it seems to work well, especially for Smash Hit's very primitive use of the Lua C API. The biggest problem left seems to be that a few (unused) functions are too small to be hooked, but I'm hoping to fix that using New and Innovative ways of hooking functions. I hope to get it working with 5.3 because it has the bitwise operator which are quite yip indeed.</li>
