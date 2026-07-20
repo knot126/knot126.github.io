@@ -1,0 +1,486 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="API Reference" href="../reference/index.html"><link rel="prev" title="Program Loading" href="program_loading.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
+        <title>Function Hooking - Leaf documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Leaf  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <span class="sidebar-brand-text">Leaf  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Concepts</a><input aria-label="Toggle navigation of Concepts" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="program_loading.html">Program Loading</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Function Hooking</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/elf.html">Leaf ELF Loader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/hook.html">Leaf Hook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/detours.html">Leaf Detours</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/concepts/function_hooking.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="function-hooking">
+<h1>Function Hooking<a class="headerlink" href="#function-hooking" title="Link to this heading">¶</a></h1>
+<p>Conceptually, function hooking is about intercepting function calls and
+using this interception to modify the behaviour of functions, and thus of
+programs overall.</p>
+<p>Usually, this takes the form of a special function called a <em>hook</em> which has
+the same <em>interface</em> (e.g. same arguments and return values) as the original
+function, but with different behaviour.</p>
+<p>Preferably, hooks should also be able to call the original function (or one
+behaviourially equivlent to it) to make simple modifications easier, although
+for many use cases simply replacing the function is sufficent.</p>
+<section id="replacment-by-jumping">
+<h2>Replacment by Jumping<a class="headerlink" href="#replacment-by-jumping" title="Link to this heading">¶</a></h2>
+<p>Most functions you want to hook won’t be simple: they will be “thightly linked”
+with the rest of the code, so your only real option is to modify the code
+of the function itself to invoke your hook.</p>
+<p>The fundemental unit of operation here is the <em>trampoline</em>. By replacing
+the start of a function with a jump instruction to your hook, all calls of the
+original function will instead land in your hook. It “trampolines” out of the
+original and directly into the hook.</p>
+<p>For example, take the start of <code class="docutils literal notranslate"><span class="pre">Debug::log()</span></code> from Smash Hit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="n">c3</span> <span class="mi">03</span> <span class="n">d1</span>      <span class="n">sub</span>     <span class="n">sp</span><span class="p">,</span><span class="n">sp</span><span class="p">,</span><span class="c1">#0xf0</span>
+<span class="n">f3</span> <span class="mi">53</span> <span class="mi">00</span> <span class="n">a9</span>      <span class="n">stp</span>     <span class="n">x19</span><span class="p">,</span><span class="n">x20</span><span class="p">,[</span><span class="n">sp</span><span class="p">]</span><span class="o">=&gt;</span><span class="n">local_f0</span>
+<span class="mi">93</span> <span class="mi">04</span> <span class="mi">00</span> <span class="n">f0</span>      <span class="n">adrp</span>    <span class="n">x19</span><span class="p">,</span><span class="mh">0x360000</span>
+<span class="n">fe</span> <span class="mi">23</span> <span class="mi">00</span> <span class="n">f9</span>      <span class="nb">str</span>     <span class="n">x30</span><span class="p">,[</span><span class="n">sp</span><span class="p">,</span> <span class="c1">#local_b0]</span>
+<span class="n">f7</span> <span class="mi">63</span> <span class="mi">02</span> <span class="n">a9</span>      <span class="n">stp</span>     <span class="n">x23</span><span class="p">,</span><span class="n">x24</span><span class="p">,[</span><span class="n">sp</span><span class="p">,</span> <span class="c1">#local_d0]</span>
+</pre></div>
+</div>
+<p>We can just put a special jump here (assuming our hook is at <code class="docutils literal notranslate"><span class="pre">0xCCCCCCCCCCCCCCCC</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">50</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">58</span>      <span class="n">ldr</span>     <span class="n">x16</span><span class="p">,</span><span class="c1">#0x8  ; Load address into x16</span>
+<span class="mi">00</span> <span class="mi">02</span> <span class="mi">1</span><span class="n">f</span> <span class="n">d6</span>      <span class="n">br</span>      <span class="n">x16</span>       <span class="p">;</span> <span class="n">Branch</span> <span class="n">to</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">x16</span>
+<span class="n">cc</span> <span class="n">cc</span> <span class="n">cc</span> <span class="n">cc</span>      <span class="p">;</span> <span class="n">Not</span> <span class="n">valid</span> <span class="n">instructions</span><span class="p">,</span> <span class="n">instead</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">address</span> <span class="n">of</span> <span class="n">the</span>
+<span class="n">cc</span> <span class="n">cc</span> <span class="n">cc</span> <span class="n">cc</span>      <span class="p">;</span> <span class="n">hook</span><span class="o">.</span>
+<span class="n">f7</span> <span class="mi">63</span> <span class="mi">02</span> <span class="n">a9</span>      <span class="n">stp</span>     <span class="n">x23</span><span class="p">,</span><span class="n">x24</span><span class="p">,[</span><span class="n">sp</span><span class="p">,</span> <span class="c1">#local_d0]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You might immediately be asking: “What if the x16 register is used to pass an
+argument? Won’t that corrupt it?”</p>
+<p>The simple answer: it just won’t! The standard AArch64 calling
+convention defines <code class="docutils literal notranslate"><span class="pre">x16</span></code> and <code class="docutils literal notranslate"><span class="pre">x17</span></code> as registers that can be “corrupted”
+between invoking a function and control actually transfering to it. Functions
+simply don’t use that register by convention unless the calling convention is
+really, really weird and non-standard.</p>
+</div>
+<p>Of course, this will only replace the function. We can’t call the original
+function again using this approach by itself.</p>
+<p>This also doesn’t properly work for smaller functions. For example, you can’t
+really hook a function that just returns zero since that function simpily isn’t
+big enough to fit the jump without corrupting the start of the next function
+after it.</p>
+<p>Both <em>Leaf Hook</em> and <em>Leaf Detours</em> support this method of hooking functions:</p>
+<ul class="simple">
+<li><p>In Deotours, this is implicit by just releasing the Detour data while the hook
+is installed.</p></li>
+<li><p>In Leaf Hook, there is an explicit option not to make the original
+callable and avoid the work needed to do that.</p></li>
+</ul>
+<section id="calling-the-original-by-swapping-instructions">
+<h3>Calling the Original by Swapping Instructions<a class="headerlink" href="#calling-the-original-by-swapping-instructions" title="Link to this heading">¶</a></h3>
+<p>The easiest way to call the original function is just to restore the original
+instruction bytes when the call is needed, and to restore the hook bytes when
+the original is done being called.</p>
+<p>This is usually done by double buffering: the address of the original function
+holds the front buffer with either the original bytes or trampoline, and an
+internal “hook context” structure holds the back buffer.</p>
+<p>This is a mostly clean way of doing things that doesn’t require complex hacks.
+It does, however, have pitfalls:</p>
+<ul class="simple">
+<li><p>When hooking a recursive function, the hook is only called for the first call
+because the hook will be uninstalled when the function calls itself again.</p></li>
+<li><p>It does not work well with multithreaded code, since the function instructions
+are global state that you (probably) cannot and do not want to write locks
+or atomics for.</p></li>
+</ul>
+<p>This is the method of hooking used by <em>Leaf Detours</em>.</p>
+</section>
+<section id="calling-the-original-with-a-reassembled-function">
+<h3>Calling the Original with a Reassembled Function<a class="headerlink" href="#calling-the-original-with-a-reassembled-function" title="Link to this heading">¶</a></h3>
+<p>It is also possible to reassemble the first few bytes of a function into a
+separate block so that it behaves like the original, and insert a jump back to
+the rest of the instruction at the end.</p>
+<p>This approach is more amenable to multithreaded programs and recursive functions
+since no global state has to be changed after the initial hook. It’s also nicer
+for users, since they don’t need to remember to uninstall and then reinstall
+the hook when they want to call the original function.</p>
+<p>It is, however, more complicated in nature:</p>
+<ul class="simple">
+<li><p>First, you need to disassemble the first few bytes of the original function.
+This on its own is not trivial.</p>
+<ul>
+<li><p>Actually, you <em>should</em> disassemble the whole function, because a function
+could well contain jumps back those first few instructions, and those
+would need to be fixed up. It’s not terribly common, but a hypothetical
+possiblity, that most hooking libraries bother to handle (AFAICT).</p></li>
+</ul>
+</li>
+<li><p>Then you will need to handle any PC-relative loads, stores, and jumps, the
+first two of which are often used in position independent code. You should
+be careful not to load stale values or assume that something is constant when
+it might not be.</p></li>
+<li><p>Next you need to create the jump back to the original function, which might
+require finding which registers are used and which aren’t if your arch doesn’t
+support full range jump instructions.</p></li>
+</ul>
+<p>A very limited version of this approach is implemented by <em>Leaf Hook</em> when
+replacement mode isn’t enabled.</p>
+<p>It should be noted that <em>Leaf Hook</em> doesn’t actually bother to fully
+disassemble the function, instead only checking for PC-relative load/store
+instructions and fixing those up if required, since they are most common for
+it’s single use case. This means it will break in a <em>lot</em> of edge cases, but for
+Smash Hit it has worked fine. This also means that x86 support would be
+complicated due to the instruction set not being as easy to decode or test for
+relevant instructions.</p>
+</section>
+<section id="hooking-small-functions-with-double-trampolines">
+<h3>Hooking Small Functions with Double Trampolines<a class="headerlink" href="#hooking-small-functions-with-double-trampolines" title="Link to this heading">¶</a></h3>
+<p>While small functions (usually a few instructions or less) are generally hard to
+hook because they just aren’t big enough to fit a full jump instruction, this
+can be mitigated on some architectures when using smaller binaries and a custom
+dynamic loader.</p>
+<p>Essentially, when the loader loads the program, it should allocate some extra RWX
+space before and after the binary so that large trampolines can be inserted
+there. The hooking library can then create small trampolines (e.g. one short
+range jump which will fit in the small functions) to the big trampolines,
+forming a double trampoline which will call the function in the end.</p>
+<p><em>Leaf Detours</em> is able to integrate with the <em>Leaf ELF Loader</em> to make hooking
+small functions possible in this manner. It does require the application to
+write its own allocator to manage Leaf’s block of memory.</p>
+</section>
+</section>
+<section id="hooking-with-software-breakpoints">
+<h2>Hooking with Software Breakpoints<a class="headerlink" href="#hooking-with-software-breakpoints" title="Link to this heading">¶</a></h2>
+<p>Software breakpoints, while usually used for debugging purposes, can be used to
+hook functions. On most architectures a software breakpoint could hook even
+very small functions because they are small instructions. However, they’re pretty
+slow, and should be avoided if possible.</p>
+</section>
+<section id="hooking-external-functions">
+<h2>Hooking External Functions<a class="headerlink" href="#hooking-external-functions" title="Link to this heading">¶</a></h2>
+<p>If there is a function you want to hook that is from a library external to the
+program you want to modify, it is usually simplest to replace the address of the
+original function with your hook function in the symbol table.</p>
+<p>For example, if you wish to hook <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> using your function
+<code class="xref c c-func docutils literal notranslate"><span class="pre">malloc_hook()</span></code>, then it would be easist to just tell the program that the
+address of <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> is <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc_hook()</span></code>, instead of the regular system
+<code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code>.</p>
+<p>Leaf doesn’t provide a mechanism to do this at the moment, but it can be done
+by manually updating the address of the function in the function table and then
+preforming the relevant relocations again.</p>
+</section>
+<section id="further-reading">
+<h2>Further Reading<a class="headerlink" href="#further-reading" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Hooking">https://en.wikipedia.org/wiki/Hooking</a></p></li>
+<li><p><a class="reference external" href="https://www.codereversing.com/archives/592">https://www.codereversing.com/archives/592</a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../reference/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API Reference</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="program_loading.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Program Loading</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, Knot126
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Function Hooking</a><ul>
+<li><a class="reference internal" href="#replacment-by-jumping">Replacment by Jumping</a><ul>
+<li><a class="reference internal" href="#calling-the-original-by-swapping-instructions">Calling the Original by Swapping Instructions</a></li>
+<li><a class="reference internal" href="#calling-the-original-with-a-reassembled-function">Calling the Original with a Reassembled Function</a></li>
+<li><a class="reference internal" href="#hooking-small-functions-with-double-trampolines">Hooking Small Functions with Double Trampolines</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#hooking-with-software-breakpoints">Hooking with Software Breakpoints</a></li>
+<li><a class="reference internal" href="#hooking-external-functions">Hooking External Functions</a></li>
+<li><a class="reference internal" href="#further-reading">Further Reading</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>
