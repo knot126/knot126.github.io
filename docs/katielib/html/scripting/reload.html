@@ -266,17 +266,68 @@ main menu script will continue to run as normal until then.</p>
 </dd></dl>
 
 <dl class="lua function">
-<dt class="sig sig-object lua" id="lua-knLoadTemplates">
-<span class="sig-name descname"><span class="pre">knLoadTemplates</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knLoadTemplates" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knReloadTemplates">
+<span class="sig-name descname"><span class="pre">knReloadTemplates</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knReloadTemplates" title="Link to this definition">¶</a></dt>
 <dd><p>Reloads <code class="docutils literal notranslate"><span class="pre">templates.xml</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code> on success.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 22: </span>Renamed from <code class="docutils literal notranslate"><span class="pre">knLoadTemplates</span></code></p>
+</div>
 </dd></dl>
 
 <dl class="lua function">
-<dt class="sig sig-object lua" id="lua-knLoadGfx">
-<span class="sig-name descname"><span class="pre">knLoadGfx</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knLoadGfx" title="Link to this definition">¶</a></dt>
-<dd><p>Reloads most static textures and shaders. It should be noted that this
-will cause a short freeze on most devices as textures and shaders are
-reloaded (may be long on older or weaker devices).</p>
+<dt class="sig sig-object lua" id="lua-knReloadGfx">
+<span class="sig-name descname"><span class="pre">knReloadGfx</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knReloadGfx" title="Link to this definition">¶</a></dt>
+<dd><p>Reloads most static textures and shaders by calling <code class="docutils literal notranslate"><span class="pre">Gfx::load1()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Gfx::load2()</span></code>. It should be noted that this will cause a short freeze on
+most devices as textures and shaders are reloaded (which may be very long on
+older or weaker devices).</p>
+<p><code class="docutils literal notranslate"><span class="pre">Gfx::load1()</span></code> loads the following:</p>
+<ul class="simple">
+<li><p>All shaders</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">effects/default.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/tiles.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/ball.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/bestdistance.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/menu_distance.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/best_menu_distance.png</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Gfx::load2()</span></code> loads the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/sprites.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/doors.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/metalnormal.jpg</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/glassnormal.jpg</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/credits.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/menu_linestart.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/menu_lineend.png</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gfx/menu_lineglow.png</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The game splits loading into steps, and between each step the game will
+draw exactly 10 frames of the loading screen (enough to display a “loading
+dot”).</p>
+<p>This has two purposes: one is to let the user know the game is loading,
+and the other is to let Android know that the game has not stopped
+responding (since otherwise Android would notice the game hasn’t drawn to
+the screen for a while and tell the user the app has stopped responding).</p>
+<p>Loading the graphics gets two steps “as a treat” because it often takes
+the most time to load. (For what it’s worth, the Audio subsystem also has
+two loading steps, though they take much less time.)</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 22: </span>Renamed from <code class="docutils literal notranslate"><span class="pre">knLoadGfx</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knReloadPlayer">
+<span class="sig-name descname"><span class="pre">knReloadPlayer</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knReloadPlayer" title="Link to this definition">¶</a></dt>
+<dd><p>Reloads <code class="docutils literal notranslate"><span class="pre">progress.xml</span></code> from the save directory. This is very useful for
+resetting player stats.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 22.</span></p>
+</div>
 </dd></dl>
 
 </section>
@@ -338,8 +389,9 @@ reloaded (may be long on older or weaker devices).</p>
             <ul>
 <li><a class="reference internal" href="#">Dynamic Reload (<em>Smash Hit</em>)</a><ul>
 <li><a class="reference internal" href="#lua-knReload"><code class="docutils literal notranslate"><span class="pre">knReload()</span></code></a></li>
-<li><a class="reference internal" href="#lua-knLoadTemplates"><code class="docutils literal notranslate"><span class="pre">knLoadTemplates()</span></code></a></li>
-<li><a class="reference internal" href="#lua-knLoadGfx"><code class="docutils literal notranslate"><span class="pre">knLoadGfx()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knReloadTemplates"><code class="docutils literal notranslate"><span class="pre">knReloadTemplates()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knReloadGfx"><code class="docutils literal notranslate"><span class="pre">knReloadGfx()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knReloadPlayer"><code class="docutils literal notranslate"><span class="pre">knReloadPlayer()</span></code></a></li>
 </ul>
 </li>
 </ul>
