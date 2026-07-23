@@ -265,6 +265,8 @@ knowledge of low level programming.</p>
 <dl class="simple">
 <dt><a class="reference external" href="https://sites.google.com/view/smashhitlab/documentation/tools/amethyst-patcher">Amethyst Patcher</a></dt><dd><p>Provides several useful patches that can be enabled at runtime</p>
 </dd>
+<dt><a class="reference external" href="https://ret.futo.tech/arm64/">FUTO Ret</a></dt><dd><p>Provides an in-browser assembler and disassembler for ARM32 and ARM64</p>
+</dd>
 </dl>
 </div>
 <dl class="lua function">
@@ -340,6 +342,51 @@ base address.</p>
 </div>
 </dd></dl>
 
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knInsertCode">
+<span class="sig-name descname"><span class="pre">knInsertCode</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">address</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knInsertCode" title="Link to this definition">¶</a></dt>
+<dd><p>Inserts the given blob of machine code before the instruction that is being
+pointed to by the address. You can think of this as being similar to
+<a class="reference internal" href="#lua-knPatch" title="knPatch"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knPatch()</span></code></a>, but it is able to insert instructions instead of overwriting
+them.</p>
+<p>Note that you cannot insert instructions that depend on the value of the
+program counter, nor can you insert at an instruction that is affected by
+the program counter. These instructions most notably include <code class="docutils literal notranslate"><span class="pre">adr</span></code>,
+<code class="docutils literal notranslate"><span class="pre">adrp</span></code>, <code class="docutils literal notranslate"><span class="pre">ldr</span></code> (only some forms), <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">bl</span></code>. This restriction may
+be partially or fully lifted in the future, but right now KatieLib makes no
+attempt to make them work like you may expect.</p>
+<p>As an example, the following would insert an additional <code class="docutils literal notranslate"><span class="pre">mov</span> <span class="pre">w1,</span> <span class="pre">#0x2</span></code>
+instruction into <code class="docutils literal notranslate"><span class="pre">Player::setMode()</span></code>, just before the game mode variable is
+actually set <a class="footnote-reference brackets" href="#lua53" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knInsertCode</span><span class="p">(</span><span class="mh">0x5ace4</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\x41\x00\x80\x52</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That would always force the player into mayhem mode whenever the player
+switches game modes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Internally, this function does not actually insert instructions right at
+the given point. Instead, it replaces the instruction at the insertion
+point with a branch to a new block of code. This block of code contains,
+in order:</p>
+<ul class="simple">
+<li><p>Your block of machine code</p></li>
+<li><p>The original instruction that was replaced</p></li>
+<li><p>A branch to the instruction <em>after</em> the instruction that was replaced</p></li>
+</ul>
+<p>This is very similar to exploiting an unused piece of code to insert
+instructions by putting them there and jumping to them. However, this
+function allocates a new code block in a new piece of memory, so it is
+not actually overwriting any existing code.</p>
+<p>Since no code is overwritten, there is no need to worry about two patches
+from different sources potentially conflicting. As a nice touch, the branch
+instructions are also automatically generated.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 22.</span></p>
+</div>
+</dd></dl>
+
 <section id="about-the-address-type">
 <h2>About the Address Type<a class="headerlink" href="#about-the-address-type" title="Link to this heading">¶</a></h2>
 <p>Parameters of the <code class="docutils literal notranslate"><span class="pre">address</span></code> type can actually be an integer, string, or
@@ -352,6 +399,14 @@ relative to the start of the main game binary.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">string</span></code>: Uses the address of the given symbol.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lightuserdata</span></code>: Uses the value of the lightuserdata itself.</p></li>
 </ul>
+<p class="rubric">Footnotes</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="lua53" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>This example uses Lua 5.3 features. If you have disabled the upgrade
+to Lua 5.3, you may need to adapt it to Lua 5.1 to get it working.</p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -414,6 +469,7 @@ relative to the start of the main game binary.</p></li>
 <li><a class="reference internal" href="#lua-knPatch"><code class="docutils literal notranslate"><span class="pre">knPatch()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knPeek"><code class="docutils literal notranslate"><span class="pre">knPeek()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knAddress"><code class="docutils literal notranslate"><span class="pre">knAddress()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knInsertCode"><code class="docutils literal notranslate"><span class="pre">knInsertCode()</span></code></a></li>
 <li><a class="reference internal" href="#about-the-address-type">About the Address Type</a></li>
 </ul>
 </li>

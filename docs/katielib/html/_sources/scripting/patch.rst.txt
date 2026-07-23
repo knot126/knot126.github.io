@@ -7,8 +7,11 @@ knowledge of low level programming.
 
 .. seealso::
    
-   `Amethyst Patcher <https://sites.google.com/view/smashhitlab/documentation/tools/amethyst-patcher>`_
+   `Amethyst Patcher <https://sites.google.com/view/smashhitlab/documentation/tools/amethyst-patcher>`__
       Provides several useful patches that can be enabled at runtime
+   
+   `FUTO Ret <https://ret.futo.tech/arm64/>`__
+      Provides an in-browser assembler and disassembler for ARM32 and ARM64
 
 .. function:: knPatch(address: address, bytes: string): string
 
@@ -88,6 +91,53 @@ knowledge of low level programming.
    
    .. version-added:: 20
 
+.. function:: knInsertCode(address: address, code: string): string
+   
+   Inserts the given blob of machine code before the instruction that is being
+   pointed to by the address. You can think of this as being similar to
+   :func:`knPatch`, but it is able to insert instructions instead of overwriting
+   them.
+   
+   Note that you cannot insert instructions that depend on the value of the
+   program counter, nor can you insert at an instruction that is affected by
+   the program counter. These instructions most notably include ``adr``,
+   ``adrp``, ``ldr`` (only some forms), ``b``, and ``bl``. This restriction may
+   be partially or fully lifted in the future, but right now KatieLib makes no
+   attempt to make them work like you may expect.
+   
+   As an example, the following would insert an additional ``mov w1, #0x2``
+   instruction into ``Player::setMode()``, just before the game mode variable is
+   actually set [#lua53]_:
+   
+   .. code:: lua
+      
+      knInsertCode(0x5ace4, "\x41\x00\x80\x52")
+   
+   That would always force the player into mayhem mode whenever the player
+   switches game modes.
+   
+   .. note::
+      
+      Internally, this function does not actually insert instructions right at
+      the given point. Instead, it replaces the instruction at the insertion
+      point with a branch to a new block of code. This block of code contains,
+      in order:
+      
+      - Your block of machine code
+      - The original instruction that was replaced
+      - A branch to the instruction *after* the instruction that was replaced
+      
+      This is very similar to exploiting an unused piece of code to insert
+      instructions by putting them there and jumping to them. However, this
+      function allocates a new code block in a new piece of memory, so it is
+      not actually overwriting any existing code.
+      
+      Since no code is overwritten, there is no need to worry about two patches
+      from different sources potentially conflicting. As a nice touch, the branch
+      instructions are also automatically generated.
+   
+   .. version-added:: 22
+
 About the Address Type
 ----------------------
 
@@ -100,3 +150,8 @@ type passed to the function:
   relative to the start of the main game binary.
 - ``string``: Uses the address of the given symbol.
 - ``lightuserdata``: Uses the value of the lightuserdata itself.
+
+.. rubric:: Footnotes
+
+.. [#lua53] This example uses Lua 5.3 features. If you have disabled the upgrade
+   to Lua 5.3, you may need to adapt it to Lua 5.1 to get it working.

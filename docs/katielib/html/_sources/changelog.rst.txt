@@ -7,6 +7,9 @@ Release 22
 
 *Upcoming*
 
+- Update YipLoader version to 0.1.1
+- Added :func:`knInsertCode` for "inserting" assembly code
+
 Release 21
 ----------
 
