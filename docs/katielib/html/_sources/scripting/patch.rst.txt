@@ -105,7 +105,7 @@ knowledge of low level programming.
    be partially or fully lifted in the future, but right now KatieLib makes no
    attempt to make them work like you may expect.
    
-   As an example, the following would insert an additional ``mov w1, #0x2``
+   As an example, the following will insert an additional ``mov w1, #0x2``
    instruction into ``Player::setMode()``, just before the game mode variable is
    actually set [#lua53]_:
    
@@ -113,8 +113,14 @@ knowledge of low level programming.
       
       knInsertCode(0x5ace4, "\x41\x00\x80\x52")
    
-   That would always force the player into mayhem mode whenever the player
+   This would always force the player into mayhem mode whenever the player
    switches game modes.
+   
+   This function returns a string that, when passed to :func:`knPatch` with the
+   same address at which the code was inserted, reverts the code insertion.
+   Further reinsertions and uninsertions can be done with :func:`knPatch` as
+   well. This makes insertions undoable in exactly the same ways as regular
+   patches.
    
    .. note::
       
@@ -128,9 +134,9 @@ knowledge of low level programming.
       - A branch to the instruction *after* the instruction that was replaced
       
       This is very similar to exploiting an unused piece of code to insert
-      instructions by putting them there and jumping to them. However, this
-      function allocates a new code block in a new piece of memory, so it is
-      not actually overwriting any existing code.
+      instructions by putting the instructions there and jumping to them.
+      However, this function allocates a new code block in a new piece of
+      memory, so it is not actually overwriting any existing code.
       
       Since no code is overwritten, there is no need to worry about two patches
       from different sources potentially conflicting. As a nice touch, the branch

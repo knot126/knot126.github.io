@@ -355,14 +355,19 @@ the program counter. These instructions most notably include <code class="docuti
 <code class="docutils literal notranslate"><span class="pre">adrp</span></code>, <code class="docutils literal notranslate"><span class="pre">ldr</span></code> (only some forms), <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">bl</span></code>. This restriction may
 be partially or fully lifted in the future, but right now KatieLib makes no
 attempt to make them work like you may expect.</p>
-<p>As an example, the following would insert an additional <code class="docutils literal notranslate"><span class="pre">mov</span> <span class="pre">w1,</span> <span class="pre">#0x2</span></code>
+<p>As an example, the following will insert an additional <code class="docutils literal notranslate"><span class="pre">mov</span> <span class="pre">w1,</span> <span class="pre">#0x2</span></code>
 instruction into <code class="docutils literal notranslate"><span class="pre">Player::setMode()</span></code>, just before the game mode variable is
 actually set <a class="footnote-reference brackets" href="#lua53" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knInsertCode</span><span class="p">(</span><span class="mh">0x5ace4</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\x41\x00\x80\x52</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>That would always force the player into mayhem mode whenever the player
+<p>This would always force the player into mayhem mode whenever the player
 switches game modes.</p>
+<p>This function returns a string that, when passed to <a class="reference internal" href="#lua-knPatch" title="knPatch"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knPatch()</span></code></a> with the
+same address at which the code was inserted, reverts the code insertion.
+Further reinsertions and uninsertions can be done with <a class="reference internal" href="#lua-knPatch" title="knPatch"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knPatch()</span></code></a> as
+well. This makes insertions undoable in exactly the same ways as regular
+patches.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Internally, this function does not actually insert instructions right at
@@ -375,9 +380,9 @@ in order:</p>
 <li><p>A branch to the instruction <em>after</em> the instruction that was replaced</p></li>
 </ul>
 <p>This is very similar to exploiting an unused piece of code to insert
-instructions by putting them there and jumping to them. However, this
-function allocates a new code block in a new piece of memory, so it is
-not actually overwriting any existing code.</p>
+instructions by putting the instructions there and jumping to them.
+However, this function allocates a new code block in a new piece of
+memory, so it is not actually overwriting any existing code.</p>
 <p>Since no code is overwritten, there is no need to worry about two patches
 from different sources potentially conflicting. As a nice touch, the branch
 instructions are also automatically generated.</p>
