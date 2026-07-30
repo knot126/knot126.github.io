@@ -12,6 +12,7 @@ Release 22
 - Renamed ``knLoadGfx()`` to :func:`knReloadGfx`
 - Renamed ``knLoadTemplates()`` to :func:`knReloadTemplates`
 - Added :func:`knReloadPlayer()`
+- Deprecated Shaders module, will be removed in r23
 
 Release 21
 ----------

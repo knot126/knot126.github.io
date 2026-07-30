@@ -262,6 +262,12 @@
 <p>The shaders subsystem was made by yorshex, go complain to them if it
 doesn’t work. :3</p>
 </div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 22: </span>This API isn’t easy to use and isn’t well documented. I doubt yorshex is
+really commited to maintaining it, and no one is using it. I’ll keep it in
+the source tree but after r22 it will be removed from the build and the docs
+will be <strong>no longer</strong>.</p>
+</div>
 <p>Example:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knBeginShaders</span><span class="p">()</span>
 <span class="kd">local</span><span class="w"> </span><span class="nv">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knGetGameShader</span><span class="p">(</span><span class="s2">&quot;clear&quot;</span><span class="p">)</span>
@@ -271,52 +277,103 @@ doesn’t work. :3</p>
 <span class="nf">knEndShaders</span><span class="p">()</span>
 </pre></div>
 </div>
-<section id="knbeginshaders">
-<h2><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code><a class="headerlink" href="#knbeginshaders" title="Link to this heading">¶</a></h2>
-<p>Stores Smash Hit’s current shader in internal state</p>
-</section>
-<section id="knendshaders">
-<h2><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code><a class="headerlink" href="#knendshaders" title="Link to this heading">¶</a></h2>
-<p>Restores Smash Hit’s current shader previously saved by
-<code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></p>
-</section>
-<section id="kngetgameshader-name">
-<h2><code class="docutils literal notranslate"><span class="pre">knGetGameShader(name)</span></code><a class="headerlink" href="#kngetgameshader-name" title="Link to this heading">¶</a></h2>
-<p>Returns Smash Hit’s shader program id by name</p>
-</section>
-<section id="kngetshaderuniformlocation-shader-name">
-<h2><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation(shader,</span> <span class="pre">name)</span></code><a class="headerlink" href="#kngetshaderuniformlocation-shader-name" title="Link to this heading">¶</a></h2>
-<p>Returns a shader program’s uniform location by the uniform’s name, or
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knBeginShaders">
+<span class="sig-name descname"><span class="pre">knBeginShaders</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knBeginShaders" title="Link to this definition">¶</a></dt>
+<dd><p>Stores Smash Hit’s current shader in internal state</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knEndShaders">
+<span class="sig-name descname"><span class="pre">knEndShaders</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knEndShaders" title="Link to this definition">¶</a></dt>
+<dd><p>Restores Smash Hit’s current shader previously saved by <a class="reference internal" href="#lua-knBeginShaders" title="knBeginShaders"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></a></p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetGameShader">
+<span class="sig-name descname"><span class="pre">knGetGameShader</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knGetGameShader" title="Link to this definition">¶</a></dt>
+<dd><p>Returns Smash Hit’s shader program id by name</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetShaderUniformLocation">
+<span class="sig-name descname"><span class="pre">knGetShaderUniformLocation</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">shader</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knGetShaderUniformLocation" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a shader program’s uniform location by the uniform’s name, or
 <strong>``nil``</strong> if it doesn’t exist</p>
-</section>
-<section id="knuseshader-shader">
-<h2><code class="docutils literal notranslate"><span class="pre">knUseShader(shader)</span></code><a class="headerlink" href="#knuseshader-shader" title="Link to this heading">¶</a></h2>
-<p>Sets the shader program as current</p>
-</section>
-<section id="knshaderuniform-n-t-location-v0-v1-v2-v3">
-<h2><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;(location,</span> <span class="pre">v0,</span> <span class="pre">[v1,</span> <span class="pre">[v2,</span> <span class="pre">[v3]]])</span></code><a class="headerlink" href="#knshaderuniform-n-t-location-v0-v1-v2-v3" title="Link to this heading">¶</a></h2>
-<p>See also:
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knUseShader">
+<span class="sig-name descname"><span class="pre">knUseShader</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">shader</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knUseShader" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the shader program as current</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knShaderUniform1f">
+<span class="sig-name descname"><span class="pre">knShaderUniform1f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform1f" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform2f">
+<span class="sig-name descname"><span class="pre">knShaderUniform2f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v1</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform2f" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform3f">
+<span class="sig-name descname"><span class="pre">knShaderUniform3f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v2</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform3f" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform4f">
+<span class="sig-name descname"><span class="pre">knShaderUniform4f</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v3</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform4f" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform1i">
+<span class="sig-name descname"><span class="pre">knShaderUniform1i</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform1i" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform2i">
+<span class="sig-name descname"><span class="pre">knShaderUniform2i</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v1</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform2i" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform3i">
+<span class="sig-name descname"><span class="pre">knShaderUniform3i</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v2</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform3i" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform4i">
+<span class="sig-name descname"><span class="pre">knShaderUniform4i</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v0</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v1</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v2</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">v3</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform4i" title="Link to this definition">¶</a></dt>
+<dd><p>See also:
 <a class="reference external" href="https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glUniform.xml">https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glUniform.xml</a></p>
 <p>Sets a float, vec2, vec3, vec4, int, vec2i, vec3i, or vec4i uniform in
 the current shader program.</p>
-</section>
-<section id="knshaderuniform-n-t-v-location-t">
-<h2><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;v(location,</span> <span class="pre">t)</span></code><a class="headerlink" href="#knshaderuniform-n-t-v-location-t" title="Link to this heading">¶</a></h2>
-<p>Sets a float, vec2, vec3, vec4, int, vec2i, vec3i, or vec4i uniform
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knShaderUniform1fv">
+<span class="sig-name descname"><span class="pre">knShaderUniform1fv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLfloat</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform1fv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform2fv">
+<span class="sig-name descname"><span class="pre">knShaderUniform2fv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLfloat</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform2fv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform3fv">
+<span class="sig-name descname"><span class="pre">knShaderUniform3fv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLfloat</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform3fv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform4fv">
+<span class="sig-name descname"><span class="pre">knShaderUniform4fv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLfloat</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform4fv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform1iv">
+<span class="sig-name descname"><span class="pre">knShaderUniform1iv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform1iv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform2iv">
+<span class="sig-name descname"><span class="pre">knShaderUniform2iv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform2iv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform3iv">
+<span class="sig-name descname"><span class="pre">knShaderUniform3iv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform3iv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniform4iv">
+<span class="sig-name descname"><span class="pre">knShaderUniform4iv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniform4iv" title="Link to this definition">¶</a></dt>
+<dd><p>Sets a float, vec2, vec3, vec4, int, vec2i, vec3i, or vec4i uniform
 array in the current shader program.</p>
 <p>The elements are placed linearly inside <code class="docutils literal notranslate"><span class="pre">t</span></code>, like this:</p>
-<p><code class="docutils literal notranslate"><span class="pre">{ x0, y0, z0, x1, y1, z1, x2, y2, z2, ..., xn, yn, zn }</span></code></p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nv">x0</span><span class="p">,</span><span class="w"> </span><span class="nv">y0</span><span class="p">,</span><span class="w"> </span><span class="nv">z0</span><span class="p">,</span><span class="w"> </span><span class="nv">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">z1</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">,</span><span class="w"> </span><span class="nv">z2</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="nv">xn</span><span class="p">,</span><span class="w"> </span><span class="nv">yn</span><span class="p">,</span><span class="w"> </span><span class="nv">zn</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
 <p>If the last element is unfinished, it is ignored.</p>
-</section>
-<section id="knshaderuniformmatrix-n-fv-location-transpose-t">
-<h2><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix&lt;N&gt;fv(location,</span> <span class="pre">transpose,</span> <span class="pre">t)</span></code><a class="headerlink" href="#knshaderuniformmatrix-n-fv-location-transpose-t" title="Link to this heading">¶</a></h2>
-<p>Sets a mat2, mat3, or mat4 uniform array in the current shader program.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knShaderUniformMatrix2fv">
+<span class="sig-name descname"><span class="pre">knShaderUniformMatrix2fv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">transpose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLfloat</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniformMatrix2fv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniformMatrix3fv">
+<span class="sig-name descname"><span class="pre">knShaderUniformMatrix3fv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">transpose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLfloat</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniformMatrix3fv" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-knShaderUniformMatrix4fv">
+<span class="sig-name descname"><span class="pre">knShaderUniformMatrix4fv</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLint</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">transpose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">GLfloat</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShaderUniformMatrix4fv" title="Link to this definition">¶</a></dt>
+<dd><p>Sets a mat2, mat3, or mat4 uniform array in the current shader program.</p>
 <p>The elements are placed linearly inside <code class="docutils literal notranslate"><span class="pre">t</span></code>, like this:</p>
-<p><code class="docutils literal notranslate"><span class="pre">{ x0, y0, z0, x1, y1, z1, x2, y2, z2, ..., xn, yn, zn }</span></code></p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nv">x0</span><span class="p">,</span><span class="w"> </span><span class="nv">y0</span><span class="p">,</span><span class="w"> </span><span class="nv">z0</span><span class="p">,</span><span class="w"> </span><span class="nv">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">z1</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">,</span><span class="w"> </span><span class="nv">z2</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="nv">xn</span><span class="p">,</span><span class="w"> </span><span class="nv">yn</span><span class="p">,</span><span class="w"> </span><span class="nv">zn</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
 <p>If the last element is unfinished, it is ignored.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">transpose</span></code> is true, the matrices will be transposed before being
 assigned to uniforms.</p>
-</section>
+</dd></dl>
+
 </section>
 
         </article>
@@ -375,14 +432,30 @@ assigned to uniforms.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Shaders (<em>Smash Hit</em>)</a><ul>
-<li><a class="reference internal" href="#knbeginshaders"><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></a></li>
-<li><a class="reference internal" href="#knendshaders"><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code></a></li>
-<li><a class="reference internal" href="#kngetgameshader-name"><code class="docutils literal notranslate"><span class="pre">knGetGameShader(name)</span></code></a></li>
-<li><a class="reference internal" href="#kngetshaderuniformlocation-shader-name"><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation(shader,</span> <span class="pre">name)</span></code></a></li>
-<li><a class="reference internal" href="#knuseshader-shader"><code class="docutils literal notranslate"><span class="pre">knUseShader(shader)</span></code></a></li>
-<li><a class="reference internal" href="#knshaderuniform-n-t-location-v0-v1-v2-v3"><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;(location,</span> <span class="pre">v0,</span> <span class="pre">[v1,</span> <span class="pre">[v2,</span> <span class="pre">[v3]]])</span></code></a></li>
-<li><a class="reference internal" href="#knshaderuniform-n-t-v-location-t"><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;v(location,</span> <span class="pre">t)</span></code></a></li>
-<li><a class="reference internal" href="#knshaderuniformmatrix-n-fv-location-transpose-t"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix&lt;N&gt;fv(location,</span> <span class="pre">transpose,</span> <span class="pre">t)</span></code></a></li>
+<li><a class="reference internal" href="#lua-knBeginShaders"><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knEndShaders"><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetGameShader"><code class="docutils literal notranslate"><span class="pre">knGetGameShader()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetShaderUniformLocation"><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knUseShader"><code class="docutils literal notranslate"><span class="pre">knUseShader()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform1f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1f()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform2f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2f()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform3f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3f()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform4f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4f()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform1i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1i()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform2i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2i()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform3i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3i()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform4i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4i()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform1fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1fv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform2fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2fv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform3fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3fv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform4fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4fv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform1iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1iv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform2iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2iv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform3iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3iv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniform4iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4iv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniformMatrix2fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix2fv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniformMatrix3fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix3fv()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShaderUniformMatrix4fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix4fv()</span></code></a></li>
 </ul>
 </li>
 </ul>

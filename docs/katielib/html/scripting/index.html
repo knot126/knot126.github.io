@@ -357,24 +357,49 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="shaders.html">Shaders (<em>Smash Hit</em>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#knbeginshaders"><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#knendshaders"><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#kngetgameshader-name"><code class="docutils literal notranslate"><span class="pre">knGetGameShader(name)</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#kngetshaderuniformlocation-shader-name"><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation(shader,</span> <span class="pre">name)</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#knuseshader-shader"><code class="docutils literal notranslate"><span class="pre">knUseShader(shader)</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#knshaderuniform-n-t-location-v0-v1-v2-v3"><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;(location,</span> <span class="pre">v0,</span> <span class="pre">[v1,</span> <span class="pre">[v2,</span> <span class="pre">[v3]]])</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#knshaderuniform-n-t-v-location-t"><code class="docutils literal notranslate"><span class="pre">knShaderUniform&lt;N&gt;&lt;t&gt;v(location,</span> <span class="pre">t)</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#knshaderuniformmatrix-n-fv-location-transpose-t"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix&lt;N&gt;fv(location,</span> <span class="pre">transpose,</span> <span class="pre">t)</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knBeginShaders"><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knEndShaders"><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knGetGameShader"><code class="docutils literal notranslate"><span class="pre">knGetGameShader()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knGetShaderUniformLocation"><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knUseShader"><code class="docutils literal notranslate"><span class="pre">knUseShader()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1f()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2f()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3f()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4f()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1i()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2i()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3i()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4i()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1fv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2fv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3fv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4fv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1iv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2iv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3iv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4iv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniformMatrix2fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix2fv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniformMatrix3fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix3fv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniformMatrix4fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix4fv()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="http.html">HTTP Requests</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="http.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpRequest"><code class="docutils literal notranslate"><span class="pre">knHttpRequest()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpUpdate"><code class="docutils literal notranslate"><span class="pre">knHttpUpdate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpData"><code class="docutils literal notranslate"><span class="pre">knHttpData()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpDataSize"><code class="docutils literal notranslate"><span class="pre">knHttpDataSize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpSave"><code class="docutils literal notranslate"><span class="pre">knHttpSave()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpGetHeader"><code class="docutils literal notranslate"><span class="pre">knHttpGetHeader()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpError"><code class="docutils literal notranslate"><span class="pre">knHttpError()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpErrorCode"><code class="docutils literal notranslate"><span class="pre">knHttpErrorCode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpRelease"><code class="docutils literal notranslate"><span class="pre">knHttpRelease()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpsCert"><code class="docutils literal notranslate"><span class="pre">knHttpsCert()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpsNoCert"><code class="docutils literal notranslate"><span class="pre">knHttpsNoCert()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="overlays.html">Overlays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overlays.html#how-overlays-work">How Overlays Work</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overlays.html#example-zip-overlays">Example: ZIP overlays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overlays.html#knpushoverlay-type"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(type,</span> <span class="pre">...)</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="overlays.html#knpopoverlay"><code class="docutils literal notranslate"><span class="pre">knPopOverlay()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="patch.html">Patching</a><ul>

@@ -257,26 +257,29 @@
         <article role="main" id="furo-main-content">
           <section id="overlays">
 <h1>Overlays<a class="headerlink" href="#overlays" title="Link to this heading">¶</a></h1>
-<p>Overlays allow loading asset data from ZIP files, directories, and Lua
-callbacks as if they were in the APK’s asset directory, gracefully
-falling back to the assets directory if assets cannot be found in them.
-Conceptually, we are <em>overlaying</em> the assets in the assets directory
+<p>Overlays allow loading asset files from ZIP archives, folders, and Lua
+callbacks. Conceptually, it is overlaying the assets in the assets directory
 with assets from these other sources. It is a form of <a class="reference external" href="https://en.wikipedia.org/wiki/Union_mount">union
-mount</a>, with active
-overlays taking precedence over the packaged assets.</p>
-<p>When loading an asset with overlays active, KnShim starts by looking for
-the asset to load in the most recently created overlay, and if it does
-not find it, falls back to the next previously created overlay, then the
-next, the next and etc, before finally trying to load from the APK.</p>
+mount</a>.</p>
 <p>This is mainly used in new versions of Shatter Client to provide a
 cleaner overall implementation (no need for actually modifying rooms and
 segments) and support certain types of assets which don’t load using the
-standard resource manager (like streamed music).</p>
+standard resource manager (like streamed music), although it is useful in
+various scenarios.</p>
 <blockquote>
 <div><p><strong>Possible planned features</strong>: Support for manipulating the APK
 assets directory as if it were an overlay itself and changing
 precedence order without being restricted by a stack.</p>
 </div></blockquote>
+<section id="how-overlays-work">
+<h2>How Overlays Work<a class="headerlink" href="#how-overlays-work" title="Link to this heading">¶</a></h2>
+<p>When the game tries to load an asset with overlays active, the overlay subsystem
+starts by trying to load the asset in each mounted overlay, starting with the
+most recently added overlay and proceeding to the last. It does this until
+it finds an overlay that can load the asset, in which case the data that the
+overlay returns for that asset is used as the asset’s data.</p>
+<p>If no overlays can load and asset, it will be loaded normally from the APK.</p>
+</section>
 <section id="example-zip-overlays">
 <h2>Example: ZIP overlays<a class="headerlink" href="#example-zip-overlays" title="Link to this heading">¶</a></h2>
 <p>For example, if you mount a zip file <code class="docutils literal notranslate"><span class="pre">forest.zip</span></code> which has a level:</p>
@@ -292,26 +295,29 @@ precedence order without being restricted by a stack.</p>
 <p>then playing the level <code class="docutils literal notranslate"><span class="pre">forest</span></code> will load from the ZIP file.</p>
 <p>If a segment then depends on an obstacle like <code class="docutils literal notranslate"><span class="pre">scoretop</span></code>, but it is
 not in the ZIP file, then it is loaded from the mod’s assets directory.</p>
-</section>
-<section id="knpushoverlay-type">
-<h2><code class="docutils literal notranslate"><span class="pre">knPushOverlay(type,</span> <span class="pre">...)</span></code><a class="headerlink" href="#knpushoverlay-type" title="Link to this heading">¶</a></h2>
-<p>Create a new overlay and push it to the top of the overlay stack.
-Returns <strong>``true``</strong> when the overlay is created successfully and
-<strong>``false``</strong> otherwise. The <code class="docutils literal notranslate"><span class="pre">type</span></code> determines the kind of overlay
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knPushOverlay">
+<span class="sig-name descname"><span class="pre">knPushOverlay</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">...</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knPushOverlay" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new overlay and push it to the top of the overlay stack.
+Returns <strong>true</strong> when the overlay is created successfully and
+<strong>false</strong> otherwise. The <code class="docutils literal notranslate"><span class="pre">type</span></code> determines the kind of overlay
 that will be created and the parameters given to it:</p>
-<section id="knpushoverlay-directory-path">
-<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;directory&quot;,</span> <span class="pre">path)</span></code><a class="headerlink" href="#knpushoverlay-directory-path" title="Link to this heading">¶</a></h3>
-<p>Creates an overlay from a physical file system directory, where <code class="docutils literal notranslate"><span class="pre">path</span></code>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-0">
+<span class="sig-name descname"><span class="pre">knPushOverlay</span></span><span class="p"><span class="pre">(</span></span><span class="s"><span class="pre">&quot;directory&quot;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-0" title="Link to this definition">¶</a></dt>
+<dd><p>Creates an overlay from a physical file system directory, where <code class="docutils literal notranslate"><span class="pre">path</span></code>
 is the path to the directory to use. For example:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;directory&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knGetInternalDataPath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/generated&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Paths will not be sanitised, so upper directories can still be accessed
 using <code class="docutils literal notranslate"><span class="pre">..</span></code>.</p>
-</section>
-<section id="knpushoverlay-zip-zipfile-options">
-<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;zip&quot;,</span> <span class="pre">zipFile,</span> <span class="pre">[options])</span></code><a class="headerlink" href="#knpushoverlay-zip-zipfile-options" title="Link to this heading">¶</a></h3>
-<p>Creates an overlay from a ZIP file on the physical file system, where
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-1">
+<span class="sig-name descname"><span class="pre">knPushOverlay</span></span><span class="p"><span class="pre">(</span></span><span class="s"><span class="pre">&quot;zip&quot;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">zipFile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">table</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-1" title="Link to this definition">¶</a></dt>
+<dd><p>Creates an overlay from a ZIP file on the physical file system, where
 <code class="docutils literal notranslate"><span class="pre">zipFile</span></code> is the name of the ZIP file to use.</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;zip&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knGetInternalDataPath</span><span class="p">()</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/mylevel.zip&quot;</span><span class="p">)</span>
 </pre></div>
@@ -325,35 +331,36 @@ all of which are optional:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">prefix</span></code>: String prepended to the path before trying to load it</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">suffix</span></code>: String appended to the path before trying to load it</p></li>
 </ul>
-<blockquote>
-<div><p><strong>Changed in Release 19</strong><em>: Added the ``options`` argument and the
-ability to specify a prefix and suffix</em></p>
-</div></blockquote>
-</section>
-<section id="knpushoverlay-apk-apkfile">
-<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;apk&quot;,</span> <span class="pre">apkFile)</span></code><a class="headerlink" href="#knpushoverlay-apk-apkfile" title="Link to this heading">¶</a></h3>
-<p>This is equivalent to
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 19: </span>Added the <code class="docutils literal notranslate"><span class="pre">options</span></code> argument and the ability to specify a prefix and suffix</p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-2">
+<span class="sig-name descname"><span class="pre">knPushOverlay</span></span><span class="p"><span class="pre">(</span></span><span class="s"><span class="pre">&quot;apk&quot;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">apkFile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-2" title="Link to this definition">¶</a></dt>
+<dd><p>This is equivalent to
 <code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;zip&quot;,</span> <span class="pre">apkFile,</span> <span class="pre">{prefix=&quot;assets/&quot;,</span> <span class="pre">suffix=&quot;.mp3&quot;})</span></code> and
 is meant for using asset dirs from other Smash Hit APKs at load time.</p>
-<blockquote>
-<div><p><em>Added in Release 19</em></p>
-</div></blockquote>
-</section>
-<section id="knpushoverlay-callback-functionname">
-<h3><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;callback&quot;,</span> <span class="pre">functionName)</span></code><a class="headerlink" href="#knpushoverlay-callback-functionname" title="Link to this heading">¶</a></h3>
-<p>Creates an overlay which uses a callback function in the main menu
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 19.</span></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-3">
+<span class="sig-name descname"><span class="pre">knPushOverlay</span></span><span class="p"><span class="pre">(</span></span><span class="s"><span class="pre">&quot;callback&quot;</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">functionName</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-3" title="Link to this definition">¶</a></dt>
+<dd><p>Creates an overlay which uses a callback function in the main menu
 script to dynamically generate asset data. Note that <code class="docutils literal notranslate"><span class="pre">functionName</span></code>
 should be a string; the callback function cannot be passed directly.</p>
-<section id="callback-function">
-<h4>Callback Function<a class="headerlink" href="#callback-function" title="Link to this heading">¶</a></h4>
-<p><strong>``function``</strong><code class="docutils literal notranslate"><span class="pre">(path) -&gt; ``\</span> <span class="pre">**``nil``**\</span> <span class="pre">`` | string</span></code></p>
 <p>The named function should take the path to load as its only argument,
 and it should return either a string representing the asset data or
-<strong>``nil``</strong> if the asset should not be loaded from this function.</p>
-</section>
+<code class="docutils literal notranslate"><span class="pre">nil</span></code> if the asset should not be loaded from this function.
+Stated more compactly, its type is
+<code class="docutils literal notranslate"><span class="pre">function(path:</span> <span class="pre">string):</span> <span class="pre">string</span> <span class="pre">|</span> <span class="pre">nil</span></code>.</p>
 <section id="examples">
-<h4>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h4>
-<p><em>Example #1: Dynamically generate ``buttonN.xml`` files</em></p>
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<p>Example #1: Dynamically generate <code class="docutils literal notranslate"><span class="pre">buttonN.xml</span></code> files</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">menu/main.lua</span></code>:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;callback&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;generateMenuButton&quot;</span><span class="p">)</span>
 
@@ -370,7 +377,7 @@ and it should return either a string representing the asset data or
 <span class="kr">end</span>
 </pre></div>
 </div>
-<p><em>Example #2: Implement a cheap Data URI</em></p>
+<p>Example #2: Implement a cheap Data URI</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">menu/main.lua</span></code>:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knPushOverlay</span><span class="p">(</span><span class="s2">&quot;callback&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;knockoffDataUri&quot;</span><span class="p">)</span>
 
@@ -383,14 +390,23 @@ and it should return either a string representing the asset data or
 <span class="kr">end</span>
 </pre></div>
 </div>
-<p><em>Added in Release 14</em></p>
 </section>
-</section>
-</section>
-<section id="knpopoverlay">
-<h2><code class="docutils literal notranslate"><span class="pre">knPopOverlay()</span></code><a class="headerlink" href="#knpopoverlay" title="Link to this heading">¶</a></h2>
-<p>Pop the most recently mounted overlay off of the stack, unmounting it.</p>
-<p><em>Added in Release 14</em></p>
+</dd></dl>
+
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 14.</span></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knPopOverlay">
+<span class="sig-name descname"><span class="pre">knPopOverlay</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knPopOverlay" title="Link to this definition">¶</a></dt>
+<dd><p>Pop the most recently mounted overlay off of the stack, unmounting it.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 14.</span></p>
+</div>
+</dd></dl>
+
 </section>
 </section>
 
@@ -450,19 +466,18 @@ and it should return either a string representing the asset data or
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Overlays</a><ul>
-<li><a class="reference internal" href="#example-zip-overlays">Example: ZIP overlays</a></li>
-<li><a class="reference internal" href="#knpushoverlay-type"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(type,</span> <span class="pre">...)</span></code></a><ul>
-<li><a class="reference internal" href="#knpushoverlay-directory-path"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;directory&quot;,</span> <span class="pre">path)</span></code></a></li>
-<li><a class="reference internal" href="#knpushoverlay-zip-zipfile-options"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;zip&quot;,</span> <span class="pre">zipFile,</span> <span class="pre">[options])</span></code></a></li>
-<li><a class="reference internal" href="#knpushoverlay-apk-apkfile"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;apk&quot;,</span> <span class="pre">apkFile)</span></code></a></li>
-<li><a class="reference internal" href="#knpushoverlay-callback-functionname"><code class="docutils literal notranslate"><span class="pre">knPushOverlay(&quot;callback&quot;,</span> <span class="pre">functionName)</span></code></a><ul>
-<li><a class="reference internal" href="#callback-function">Callback Function</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#how-overlays-work">How Overlays Work</a></li>
+<li><a class="reference internal" href="#example-zip-overlays">Example: ZIP overlays</a><ul>
+<li><a class="reference internal" href="#lua-knPushOverlay"><code class="docutils literal notranslate"><span class="pre">knPushOverlay()</span></code></a><ul>
+<li><a class="reference internal" href="#lua-0"><code class="docutils literal notranslate"><span class="pre">knPushOverlay()</span></code></a></li>
+<li><a class="reference internal" href="#lua-1"><code class="docutils literal notranslate"><span class="pre">knPushOverlay()</span></code></a></li>
+<li><a class="reference internal" href="#lua-2"><code class="docutils literal notranslate"><span class="pre">knPushOverlay()</span></code></a></li>
+<li><a class="reference internal" href="#lua-3"><code class="docutils literal notranslate"><span class="pre">knPushOverlay()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#lua-knPopOverlay"><code class="docutils literal notranslate"><span class="pre">knPopOverlay()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#knpopoverlay"><code class="docutils literal notranslate"><span class="pre">knPopOverlay()</span></code></a></li>
 </ul>
 </li>
 </ul>

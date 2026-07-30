@@ -12,9 +12,6 @@ want to start an HTTP request you would call your custom
 ``processRequest()`` from a function that runs regularly like
 ``drawWorld()`` or ``frame()``.
 
-Example
--------
-
 Here is an outline for submitting a high score to a server:
 
 .. code:: lua
