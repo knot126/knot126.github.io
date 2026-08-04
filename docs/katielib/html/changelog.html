@@ -209,6 +209,7 @@
 <li class="toctree-l2"><a class="reference internal" href="scripting/input.html">Raw Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/shaders.html">Shaders (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/http.html">HTTP Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/udp.html">UDP Sockets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/overlays.html">Overlays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/patch.html">Patching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/pack.html">Byte Packing</a></li>
@@ -263,9 +264,11 @@
 <ul class="simple">
 <li><p>Update YipLoader version to 0.1.1</p></li>
 <li><p>Added <a class="reference internal" href="scripting/patch.html#lua-knInsertCode" title="knInsertCode"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knInsertCode()</span></code></a> for “inserting” assembly code</p></li>
+<li><p>Added <a class="reference internal" href="scripting/udp.html#lua-KnUdpSocket" title="KnUdpSocket"><code class="xref lua lua-class docutils literal notranslate"><span class="pre">KnUdpSocket</span></code></a></p></li>
+<li><p>Added <a class="reference internal" href="scripting/reload.html#lua-knReloadPlayer" title="knReloadPlayer"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knReloadPlayer()</span></code></a></p></li>
 <li><p>Renamed <code class="docutils literal notranslate"><span class="pre">knLoadGfx()</span></code> to <a class="reference internal" href="scripting/reload.html#lua-knReloadGfx" title="knReloadGfx"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knReloadGfx()</span></code></a></p></li>
 <li><p>Renamed <code class="docutils literal notranslate"><span class="pre">knLoadTemplates()</span></code> to <a class="reference internal" href="scripting/reload.html#lua-knReloadTemplates" title="knReloadTemplates"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knReloadTemplates()</span></code></a></p></li>
-<li><p>Added <a class="reference internal" href="scripting/reload.html#lua-knReloadPlayer" title="knReloadPlayer"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knReloadPlayer()</span></code></a></p></li>
+<li><p>Fixed a bug where databases containing empty strings would not be saved</p></li>
 <li><p>Deprecated Shaders module, will be removed in r23</p></li>
 </ul>
 </section>

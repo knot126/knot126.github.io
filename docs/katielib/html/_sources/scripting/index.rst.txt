@@ -23,6 +23,7 @@ KatieLib provides numerous extra functions to *Smash Hit*'s scripts.
    input
    shaders
    http
+   udp
    overlays
    patch
    pack

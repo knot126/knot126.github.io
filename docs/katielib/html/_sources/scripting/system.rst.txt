@@ -7,20 +7,26 @@ System and Misc utilities
    same as what Android considers to be the canonical architecture name.
 
    ============= ===============
-   ABI           Result value
+   Archicture    Result value
    ============= ===============
    64-bit ARM v8 ``arm64-v8a``
    32-bit ARM v7 ``armeabi-v7a``
-   Intel i386    ``x86``
+   Intel i386*   ``x86``
+   AMD64*        ``x86_64``
    ============= ===============
+   
+   \* Not currently supported
 
 .. function:: knGetShimVersion(): string
 
-   **As of r14**: Now returns a string representing the KnShim version.
-
-   **Formerly**: Returned an integer representing the shim release. For
-   r13, this was an integer related to the build date. For r12 and lower,
-   this was the integer corresponding to the release number.
+   Returns a string representing the KatieLib version.
+   
+   .. version-changed:: 14
+      
+      - In version 13, this function returned an integer date code.
+      - In versions 7 to 12, this function returned release number as an integer.
+   
+   .. version-added:: 7
 
 .. function:: knGetAppVersion(): string
 
@@ -49,6 +55,13 @@ System and Misc utilities
    Return the absolute path to the external data directory. This isn’t used
    for anything in the game but is provided by Android so it’s included for
    completeness.
+
+.. function:: knAccquireMulticastLock(): boolean
+   
+   Accquire a multicast lock for the rest of the duration that the game is open.
+   This is required for sending and reciving broadcast packets (e.g. using UDP).
+   
+   .. version-added:: 22
 
 .. function:: knInclude(path: string): any
 
