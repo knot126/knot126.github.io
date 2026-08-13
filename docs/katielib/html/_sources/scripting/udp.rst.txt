@@ -7,7 +7,7 @@ operations which don't need to be completely reliable, like syncing scores or
 automatically detecting servers, and is a lot simpler than TCP.
 
 .. note:: The UDP socket API is object oriented, unlike most of the other APIs
-   provided by KatieLib. This means you create a :func:`KnUdpSocket` *object*
+   provided by KatieLib. This means you create a :class:`KnUdpSocket` *object*
    and then call methods on it, like :func:`KnUdpSocket.recieve`.
 
 .. class:: KnUdpSocket([address: string, port: integer]): KnUdpSocket

@@ -14,7 +14,7 @@ Release 22
 - Renamed ``knLoadGfx()`` to :func:`knReloadGfx`
 - Renamed ``knLoadTemplates()`` to :func:`knReloadTemplates`
 - Fixed a bug where databases containing empty strings would not be saved
-- Deprecated Shaders module, will be removed in r23
+- Removed Shaders module as its not maintained and is poorly documented
 
 Release 21
 ----------
