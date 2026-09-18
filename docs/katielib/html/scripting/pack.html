@@ -193,8 +193,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="general.html">General Changes and Additions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
@@ -301,7 +301,7 @@ those bytes. Non-hexdigit characters in the string (e.g. anything that is
 not <code class="docutils literal notranslate"><span class="pre">0</span></code>-<code class="docutils literal notranslate"><span class="pre">9</span></code>, <code class="docutils literal notranslate"><span class="pre">a</span></code>-<code class="docutils literal notranslate"><span class="pre">f</span></code> or <code class="docutils literal notranslate"><span class="pre">A</span></code>-<code class="docutils literal notranslate"><span class="pre">F</span></code>) are ignored.</p>
 <p>As an example, this converts a string representing the AArch64 ret
 instruction into the raw bytes and returns it:</p>
-<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHexToBin</span><span class="p">(</span><span class="s2">&quot;c0 03 5f d6&quot;</span><span class="p">)</span>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knHexToBin</span><span class="p">(</span><span class="s2">"c0 03 5f d6"</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -309,7 +309,7 @@ instruction into the raw bytes and returns it:</p>
 <p>You can create an alias of this function and use Lua’s special single-string-argument
 call syntax to create an elegant way of writing hex data:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nv">hex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">knHexToBin</span>
-<span class="kd">local</span><span class="w"> </span><span class="nv">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hex</span><span class="w"> </span><span class="s2">&quot;c0 03 5f d6&quot;</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hex</span><span class="w"> </span><span class="s2">"c0 03 5f d6"</span>
 </pre></div>
 </div>
 </div>

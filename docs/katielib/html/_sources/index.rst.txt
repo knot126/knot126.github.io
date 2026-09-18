@@ -12,7 +12,8 @@ KatieLib Documentation
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-      
+   
+   general
    scripting/index
    changelog
    terms

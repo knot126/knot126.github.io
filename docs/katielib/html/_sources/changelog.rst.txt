@@ -8,6 +8,7 @@ Release 22
 *Upcoming*
 
 - Update YipLoader version to 0.1.1
+- Switch game to using AAudio instead of OpenSL ES on supported devices
 - Added :func:`knInsertCode` for "inserting" assembly code
 - Added :class:`KnUdpSocket`
 - Added :func:`knReloadPlayer`

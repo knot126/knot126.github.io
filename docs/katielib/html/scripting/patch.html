@@ -193,8 +193,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="general.html">General Changes and Additions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
@@ -285,10 +285,10 @@ ARM.</p>
 
 <span class="c1">-- Note: Lua 5.1 does not support hex escapes in string literals, so we must</span>
 <span class="c1">-- specify the bytes as decimal escapes.</span>
-<span class="kr">if</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;arm64-v8a&quot;</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">   </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x71574</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\192\3\95\214</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- c0 03 5f d6   = arm64 ret instruction</span>
-<span class="kr">elseif</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;armeabi-v7a&quot;</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">   </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x5b8a0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\30\255\47\225</span><span class="s2">&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- 1e ff 2f e1   = arm32 bx lr instruction</span>
+<span class="kr">if</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"arm64-v8a"</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">   </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x71574</span><span class="p">,</span><span class="w"> </span><span class="s2">"</span><span class="se">\192\3\95\214</span><span class="s2">"</span><span class="p">)</span><span class="w"> </span><span class="c1">-- c0 03 5f d6   = arm64 ret instruction</span>
+<span class="kr">elseif</span><span class="w"> </span><span class="nv">architecture</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"armeabi-v7a"</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">   </span><span class="nf">knPatch</span><span class="p">(</span><span class="mh">0x5b8a0</span><span class="p">,</span><span class="w"> </span><span class="s2">"</span><span class="se">\30\255\47\225</span><span class="s2">"</span><span class="p">)</span><span class="w"> </span><span class="c1">-- 1e ff 2f e1   = arm32 bx lr instruction</span>
 <span class="kr">end</span>
 </pre></div>
 </div>
@@ -327,11 +327,11 @@ pointer, which is used as the new base address, then the offset is added to
 the new base address. This happens in the order the offsets were passed to
 the function.</p>
 <p>For example, this:</p>
-<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knAddress</span><span class="p">(</span><span class="s2">&quot;gGame&quot;</span><span class="p">,</span><span class="w"> </span><span class="mh">0x60</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8bc</span><span class="p">)</span>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knAddress</span><span class="p">(</span><span class="s2">"gGame"</span><span class="p">,</span><span class="w"> </span><span class="mh">0x60</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8bc</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>is similar to writing:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="o">*</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)(</span><span class="o">*</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="n">YipLookupSymbol</span><span class="p">(</span><span class="s">&quot;gGame&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x60</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x8bc</span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="o">*</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)(</span><span class="o">*</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="n">YipLookupSymbol</span><span class="p">(</span><span class="s">"gGame"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x60</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x8bc</span><span class="p">)</span>
 <span class="c1">// Can imagine as: &amp;gGame-&gt;0x60-&gt;0x8bc</span>
 </pre></div>
 </div>
@@ -359,7 +359,7 @@ attempt to make them work like you may expect.</p>
 <p>As an example, the following will insert an additional <code class="docutils literal notranslate"><span class="pre">mov</span> <span class="pre">w1,</span> <span class="pre">#0x2</span></code>
 instruction into <code class="docutils literal notranslate"><span class="pre">Player::setMode()</span></code>, just before the game mode variable is
 actually set <a class="footnote-reference brackets" href="#lua53" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>:</p>
-<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knInsertCode</span><span class="p">(</span><span class="mh">0x5ace4</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;</span><span class="se">\x41\x00\x80\x52</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knInsertCode</span><span class="p">(</span><span class="mh">0x5ace4</span><span class="p">,</span><span class="w"> </span><span class="s2">"</span><span class="se">\x41\x00\x80\x52</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This would always force the player into mayhem mode whenever the player

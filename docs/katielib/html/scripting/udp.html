@@ -9,7 +9,7 @@
         <title>UDP Sockets - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -193,8 +193,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="general.html">General Changes and Additions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
@@ -312,15 +312,15 @@ nil values.</p>
 servers and automatically enter the right IP address.</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="c1">-- This is called once when the client boots.</span>
 <span class="kr">function</span><span class="w"> </span><span class="nf">initServerHello</span><span class="p">()</span>
-<span class="w">    </span><span class="c1">-- Disable Android&#39;s filtering of broadcast packets. Most mods probably</span>
-<span class="w">    </span><span class="c1">-- don&#39;t need this.</span>
+<span class="w">    </span><span class="c1">-- Disable Android's filtering of broadcast packets. Most mods probably</span>
+<span class="w">    </span><span class="c1">-- don't need this.</span>
 <span class="w">    </span><span class="nf">knAccquireMulticastLock</span><span class="p">()</span>
 
 <span class="w">    </span><span class="c1">-- Create a UDP socket which will listen for packets from any address</span>
 <span class="w">    </span><span class="c1">-- on port 8000. Servers that support server discovery will broadcast</span>
-<span class="w">    </span><span class="c1">-- a small packet containing the server&#39;s info on a regular interval,</span>
+<span class="w">    </span><span class="c1">-- a small packet containing the server's info on a regular interval,</span>
 <span class="w">    </span><span class="c1">-- and we use this to tune into that.</span>
-<span class="w">    </span><span class="nv">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">KnUdpSocket</span><span class="p">(</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">8000</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">KnUdpSocket</span><span class="p">(</span><span class="s1">'0.0.0.0'</span><span class="p">,</span><span class="w"> </span><span class="mi">8000</span><span class="p">)</span>
 <span class="kr">end</span>
 
 <span class="c1">-- This is called every frame.</span>
@@ -329,26 +329,26 @@ servers and automatically enter the right IP address.</p>
 <span class="w">      </span><span class="c1">-- Get the next datagram</span>
 <span class="w">      </span><span class="kd">local</span><span class="w"> </span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">address</span><span class="p">,</span><span class="w"> </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hello</span><span class="p">:</span><span class="nf">recieve</span><span class="p">()</span>
 
-<span class="w">      </span><span class="c1">-- If there are none, stop for now. We&#39;ll try again next frame when we</span>
+<span class="w">      </span><span class="c1">-- If there are none, stop for now. We'll try again next frame when we</span>
 <span class="w">      </span><span class="c1">-- might actually have more.</span>
 <span class="w">      </span><span class="kr">if</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="kr">then</span>
 <span class="w">            </span><span class="kr">break</span>
 <span class="w">      </span><span class="kr">end</span>
 
-<span class="w">      </span><span class="c1">-- If we do have a datagram, let&#39;s make sure it&#39;s the right one for our</span>
+<span class="w">      </span><span class="c1">-- If we do have a datagram, let's make sure it's the right one for our</span>
 <span class="w">      </span><span class="c1">-- purpose.</span>
-<span class="w">      </span><span class="kr">if</span><span class="w"> </span><span class="nb">string.match</span><span class="p">(</span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;^ShatterClientHello&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">         </span><span class="c1">-- Seems right! Let&#39;s parse out the port, if one is specified.</span>
-<span class="w">         </span><span class="kd">local</span><span class="w"> </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">string.match</span><span class="p">(</span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;port:(%d+)&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="kr">if</span><span class="w"> </span><span class="nb">string.match</span><span class="p">(</span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="s2">"^ShatterClientHello"</span><span class="p">)</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">         </span><span class="c1">-- Seems right! Let's parse out the port, if one is specified.</span>
+<span class="w">         </span><span class="kd">local</span><span class="w"> </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">string.match</span><span class="p">(</span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="s2">"port:(%d+)"</span><span class="p">)</span>
 
 <span class="w">         </span><span class="kr">if</span><span class="w"> </span><span class="nv">port</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">            </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;:&quot;</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">port</span>
+<span class="w">            </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">":"</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">port</span>
 <span class="w">         </span><span class="kr">else</span>
-<span class="w">            </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">            </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">         </span><span class="kr">end</span>
 
 <span class="w">         </span><span class="c1">-- Set the automatically found server name</span>
-<span class="w">         </span><span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;shatter.client.autoname&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">address</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">port</span><span class="p">)</span>
+<span class="w">         </span><span class="nf">knDbSet</span><span class="p">(</span><span class="s2">"shatter.client.autoname"</span><span class="p">,</span><span class="w"> </span><span class="nv">address</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="nv">port</span><span class="p">)</span>
 <span class="w">      </span><span class="kr">end</span>
 <span class="w">   </span><span class="kr">end</span>
 <span class="kr">end</span>

@@ -193,8 +193,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="general.html">General Changes and Additions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
@@ -307,7 +307,7 @@ themselves can use knCall to call directly into your script.</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kr">function</span><span class="w"> </span><span class="nf">tick</span><span class="p">()</span>
 <span class="linenos">2</span><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nf">mgIsCleared</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
 <span class="linenos">3</span><span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="nf">mgBodyIsBroken</span><span class="p">(</span><span class="nv">body</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
-<span class="linenos">4</span><span class="w">            </span><span class="kd">local</span><span class="w"> </span><span class="nv">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;addPoints&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="linenos">4</span><span class="w">            </span><span class="kd">local</span><span class="w"> </span><span class="nv">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">"addPoints"</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 <span class="linenos">5</span><span class="w">        </span><span class="kr">end</span>
 <span class="linenos">6</span><span class="w">    </span><span class="kr">end</span>
 <span class="linenos">7</span><span class="kr">end</span>
@@ -322,11 +322,11 @@ themselves can use knCall to call directly into your script.</p>
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="c1">-- In obstacle/myobstacle.lua</span>
 <span class="linenos"> 6</span><span class="kr">function</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
-<span class="linenos"> 7</span><span class="w">    </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;informCreated&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knOwnHandle</span><span class="p">())</span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">"informCreated"</span><span class="p">,</span><span class="w"> </span><span class="nf">knOwnHandle</span><span class="p">())</span>
 <span class="linenos"> 8</span><span class="kr">end</span>
 <span class="linenos"> 9</span>
 <span class="linenos">10</span><span class="kr">function</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">()</span>
-<span class="linenos">11</span><span class="w">    </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;informDestroyed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">knOwnHandle</span><span class="p">())</span>
+<span class="linenos">11</span><span class="w">    </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">KN_HUD</span><span class="p">,</span><span class="w"> </span><span class="s2">"informDestroyed"</span><span class="p">,</span><span class="w"> </span><span class="nf">knOwnHandle</span><span class="p">())</span>
 <span class="linenos">12</span><span class="kr">end</span>
 <span class="linenos">13</span>
 <span class="linenos">14</span><span class="kr">function</span><span class="w"> </span><span class="nf">isCleared</span><span class="p">()</span>
@@ -336,7 +336,7 @@ themselves can use knCall to call directly into your script.</p>
 <span class="linenos">18</span><span class="c1">-- In hud/main.lua</span>
 <span class="linenos">19</span><span class="kr">function</span><span class="w"> </span><span class="nf">draw</span><span class="p">()</span>
 <span class="linenos">20</span><span class="w">    </span><span class="c1">-- ... maybe in a loop ...</span>
-<span class="linenos">21</span><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">obstacle</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;isCleared&quot;</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="linenos">21</span><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nf">knCall</span><span class="p">(</span><span class="nv">obstacle</span><span class="p">,</span><span class="w"> </span><span class="s2">"isCleared"</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
 <span class="linenos">22</span><span class="w">        </span><span class="c1">-- ... do something interesting! ...</span>
 <span class="linenos">23</span><span class="w">    </span><span class="kr">end</span>
 <span class="linenos">24</span><span class="kr">end</span>

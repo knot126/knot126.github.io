@@ -193,8 +193,8 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="general.html">General Changes and Additions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
@@ -314,11 +314,11 @@ called. This is useful to optimise writing lots of changes to the
 database at once.</p>
 <p>For example:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knDbBeginTransaction</span><span class="p">()</span>
-<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.1.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.2.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
-<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.3.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
-<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.4.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
-<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">&quot;level.5.progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">"level.1.progress"</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">"level.2.progress"</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">"level.3.progress"</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">"level.4.progress"</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
+<span class="nf">knDbSet</span><span class="p">(</span><span class="s2">"level.5.progress"</span><span class="p">,</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nv">level_progress</span><span class="p">[</span><span class="mi">5</span><span class="p">]))</span>
 <span class="nf">knDbCommit</span><span class="p">()</span>
 </pre></div>
 </div>
