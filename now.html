@@ -19,6 +19,15 @@
 				<h1>what doin</h1>
 				<p>I'm doing dates in the old Minecraft snapshot format, because I want to. :3</p>
 				<p><em>Usually published late every Sunday or early Monday</em></p>
+				<h2>26w38a</h2>
+				<ul>
+					<li>Me and KD having been working on a secret document, and as part of that, we got keyboard and mouse input working on Smash Hit so you can use the debug keybinds and interact with the dev menu (albeit not a very useful one since most functionality is missing).</li>
+					<li>I also have made a rough port from OpenSL to AAudio for Smash Hit on versions where AAudio is present (API level 26 and later).</li>
+					<li>I have updated our customised Furry Device mods to be compatible with 26.3!</li>
+					<li>We're also going back to Pebble Host! It started working again for some reason.</li>
+					<li>Also I screwed around with the Bedrock launcher for Linux, and it works pretty good, however I hate that Xodus keeps the encrypted binary on disk instead of just decrypting it at extraction time so I wrote a two line patch to make it decrypt the binary.</li>
+					<li>I'm really thinking about code transformations again. Not only do I want to decompile Smash Hit, but I also want to be able to apply more advanced patches at runtime and inject code, not just to SH but any binary. Maybe I will actually write something this time.</li>
+				</ul>
 				<h2>26w37a</h2>
 				<ul>
 					<li>Furry Device is back on a new host! However the proccessor is <em>really</em> slow for some reason, and it was often running at half-speed or sometimes even worse (an in-game day would last 40 minutes!). To make playing on the server barable, I made <a href="https://codeberg.org/knot126/Dynamic-Simulation-Distance">a mod that dynamically changes the simulation distance based on how long ticks take</a>, so the game can avoid lagging most of the time but still have a large simulation distance when capacity is available. It actually works a lot better than I expected for a very rough first draft.</li>
