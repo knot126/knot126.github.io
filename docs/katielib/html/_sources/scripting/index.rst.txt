@@ -20,7 +20,6 @@ KatieLib provides numerous extra functions to *Smash Hit*'s scripts.
    framerate
    system
    input
-   shaders
    http
    udp
    overlays

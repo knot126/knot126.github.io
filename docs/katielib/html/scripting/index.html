@@ -9,7 +9,7 @@
         <title>KatieLib Script API - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -207,7 +207,6 @@
 <li class="toctree-l2"><a class="reference internal" href="framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system.html">System and Misc utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="input.html">Raw Input</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html">Shaders (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="http.html">HTTP Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="udp.html">UDP Sockets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
@@ -346,38 +345,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="input.html">Raw Input</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="input.html#lua-knGetTouchCount"><code class="docutils literal notranslate"><span class="pre">knGetTouchCount()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html#lua-knHasTouch"><code class="docutils literal notranslate"><span class="pre">knHasTouch()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html#lua-knGetTouchPos"><code class="docutils literal notranslate"><span class="pre">knGetTouchPos()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html#lua-knWasTouchPressed"><code class="docutils literal notranslate"><span class="pre">knWasTouchPressed()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html#lua-knWasTouchReleased"><code class="docutils literal notranslate"><span class="pre">knWasTouchReleased()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="shaders.html">Shaders (<em>Smash Hit</em>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knBeginShaders"><code class="docutils literal notranslate"><span class="pre">knBeginShaders()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knEndShaders"><code class="docutils literal notranslate"><span class="pre">knEndShaders()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knGetGameShader"><code class="docutils literal notranslate"><span class="pre">knGetGameShader()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knGetShaderUniformLocation"><code class="docutils literal notranslate"><span class="pre">knGetShaderUniformLocation()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knUseShader"><code class="docutils literal notranslate"><span class="pre">knUseShader()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1f()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2f()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3f()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4f"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4f()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1i()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2i()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3i()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4i"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4i()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1fv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2fv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3fv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4fv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform1iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform1iv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform2iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform2iv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform3iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform3iv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniform4iv"><code class="docutils literal notranslate"><span class="pre">knShaderUniform4iv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniformMatrix2fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix2fv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniformMatrix3fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix3fv()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html#lua-knShaderUniformMatrix4fv"><code class="docutils literal notranslate"><span class="pre">knShaderUniformMatrix4fv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#touch">Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#keyboard">Keyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#mouse">Mouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#buttons">Buttons</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="http.html">HTTP Requests</a><ul>

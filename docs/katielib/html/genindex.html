@@ -7,7 +7,7 @@
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 --><title>Index - KatieLib 22 documentation</title>
 <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -205,7 +205,6 @@
 <li class="toctree-l2"><a class="reference internal" href="scripting/framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/system.html">System and Misc utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/input.html">Raw Input</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/shaders.html">Shaders (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/http.html">HTTP Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/udp.html">UDP Sockets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/overlays.html">Overlays</a></li>
@@ -281,11 +280,11 @@
 </li>
         <li><a href="scripting/patch.html#lua-knAddress">knAddress (function)</a>
 </li>
-        <li><a href="scripting/shaders.html#lua-knBeginShaders">knBeginShaders (function)</a>
-</li>
         <li><a href="scripting/pack.html#lua-knBinToHex">knBinToHex (function)</a>
 </li>
         <li><a href="scripting/isc.html#lua-knCall">knCall (function)</a>
+</li>
+        <li><a href="scripting/input.html#lua-knCaptureMouse">knCaptureMouse (function)</a>
 </li>
         <li><a href="scripting/database.html#lua-knDbBeginTransaction">knDbBeginTransaction (function)</a>
 </li>
@@ -303,8 +302,6 @@
 </li>
         <li><a href="scripting/files.html#lua-knDeleteFile">knDeleteFile (function)</a>
 </li>
-        <li><a href="scripting/shaders.html#lua-knEndShaders">knEndShaders (function)</a>
-</li>
         <li><a href="scripting/system.html#lua-knGetAppSdk">knGetAppSdk (function)</a>
 </li>
         <li><a href="scripting/system.html#lua-knGetAppVersion">knGetAppVersion (function)</a>
@@ -317,13 +314,13 @@
 </li>
         <li><a href="scripting/system.html#lua-knGetExternalDataPath">knGetExternalDataPath (function)</a>
 </li>
-        <li><a href="scripting/shaders.html#lua-knGetGameShader">knGetGameShader (function)</a>
-</li>
         <li><a href="scripting/system.html#lua-knGetInternalDataPath">knGetInternalDataPath (function)</a>
 </li>
-        <li><a href="scripting/cheats.html#lua-knGetNoclip">knGetNoclip (function)</a>
+        <li><a href="scripting/input.html#lua-knGetMouseDelta">knGetMouseDelta (function)</a>
 </li>
-        <li><a href="scripting/shaders.html#lua-knGetShaderUniformLocation">knGetShaderUniformLocation (function)</a>
+        <li><a href="scripting/input.html#lua-knGetMousePos">knGetMousePos (function)</a>
+</li>
+        <li><a href="scripting/cheats.html#lua-knGetNoclip">knGetNoclip (function)</a>
 </li>
         <li><a href="scripting/system.html#lua-knGetShimVersion">knGetShimVersion (function)</a>
 </li>
@@ -365,7 +362,11 @@
 </li>
         <li><a href="scripting/files.html#lua-knIsDir">knIsDir (function)</a>
 </li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="scripting/files.html#lua-knIsFile">knIsFile (function)</a>
+</li>
+        <li><a href="scripting/input.html#lua-knIsKeyDown">knIsKeyDown (function)</a>
 </li>
         <li><a href="scripting/system.html#lua-knJavaCommand">knJavaCommand (function)</a>
 </li>
@@ -381,8 +382,6 @@
 </li>
         <li><a href="scripting/files.html#lua-knListDir">knListDir (function)</a>
 </li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li><a href="scripting/assets.html#lua-knLoadAsset">knLoadAsset (function)</a>
 </li>
         <li><a href="scripting/logging.html#lua-knLog">knLog (function)</a>
@@ -435,44 +434,6 @@
 </li>
         <li><a href="scripting/cheats.html#lua-knSetStreak">knSetStreak (function)</a>
 </li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform1f">knShaderUniform1f (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform1fv">knShaderUniform1fv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform1i">knShaderUniform1i (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform1iv">knShaderUniform1iv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform2f">knShaderUniform2f (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform2fv">knShaderUniform2fv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform2i">knShaderUniform2i (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform2iv">knShaderUniform2iv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform3f">knShaderUniform3f (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform3fv">knShaderUniform3fv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform3i">knShaderUniform3i (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform3iv">knShaderUniform3iv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform4f">knShaderUniform4f (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform4fv">knShaderUniform4fv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform4i">knShaderUniform4i (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniform4iv">knShaderUniform4iv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniformMatrix2fv">knShaderUniformMatrix2fv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniformMatrix3fv">knShaderUniformMatrix3fv (function)</a>
-</li>
-        <li><a href="scripting/shaders.html#lua-knShaderUniformMatrix4fv">knShaderUniformMatrix4fv (function)</a>
-</li>
         <li><a href="scripting/string.html#lua-knSplit">knSplit (function)</a>
 </li>
         <li><a href="scripting/system.html#lua-knSystemAbi">knSystemAbi (function)</a>
@@ -481,7 +442,9 @@
 </li>
         <li><a href="scripting/pack.html#lua-knUnpack">knUnpack (function)</a>
 </li>
-        <li><a href="scripting/shaders.html#lua-knUseShader">knUseShader (function)</a>
+        <li><a href="scripting/input.html#lua-knWasKeyPressed">knWasKeyPressed (function)</a>
+</li>
+        <li><a href="scripting/input.html#lua-knWasKeyReleased">knWasKeyReleased (function)</a>
 </li>
         <li><a href="scripting/input.html#lua-knWasTouchPressed">knWasTouchPressed (function)</a>
 </li>

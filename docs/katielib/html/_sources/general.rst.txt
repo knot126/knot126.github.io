@@ -53,3 +53,12 @@ On newer versions of Android, KatieLib will load and use the AAudio API
 instead of the legacy OpenSL ES. While not formally tested, this should reduce
 audio latency by quite a lot, assuming Android's OpenSL implementation is still
 as bad as it was when Dennis `wrote about it on his blog <https://blog.voxagon.se/2013/06/26/low-level-audio.html>`__.
+
+Keyboard and Mouse Implementation
+=================================
+
+While Mediocre games do have support for keyboard and mouse - and even check for
+some keyboard shortcuts for debugging - neither are properly "wired up" on
+Android. KatieLib changes this by properly implementing keyboard and mouse
+support, allowing you to implement custom behaviour with them, in addition to
+making the existing debug functionality available.

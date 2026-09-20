@@ -9,7 +9,7 @@
         <title>General Changes and Additions - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -207,7 +207,6 @@
 <li class="toctree-l2"><a class="reference internal" href="scripting/framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/system.html">System and Misc utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/input.html">Raw Input</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/shaders.html">Shaders (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/http.html">HTTP Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/udp.html">UDP Sockets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/overlays.html">Overlays</a></li>
@@ -303,6 +302,14 @@ instead of the legacy OpenSL ES. While not formally tested, this should reduce
 audio latency by quite a lot, assuming Android’s OpenSL implementation is still
 as bad as it was when Dennis <a class="reference external" href="https://blog.voxagon.se/2013/06/26/low-level-audio.html">wrote about it on his blog</a>.</p>
 </section>
+<section id="keyboard-and-mouse-implementation">
+<h2>Keyboard and Mouse Implementation<a class="headerlink" href="#keyboard-and-mouse-implementation" title="Link to this heading">¶</a></h2>
+<p>While Mediocre games do have support for keyboard and mouse - and even check for
+some keyboard shortcuts for debugging - neither are properly “wired up” on
+Android. KatieLib changes this by properly implementing keyboard and mouse
+support, allowing you to implement custom behaviour with them, in addition to
+making the existing debug functionality available.</p>
+</section>
 </section>
 
         </article>
@@ -367,6 +374,7 @@ as bad as it was when Dennis <a class="reference external" href="https://blog.vo
 </li>
 <li><a class="reference internal" href="#shutdown-function"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function</a></li>
 <li><a class="reference internal" href="#switch-to-aaudio">Switch to AAudio</a></li>
+<li><a class="reference internal" href="#keyboard-and-mouse-implementation">Keyboard and Mouse Implementation</a></li>
 </ul>
 </li>
 </ul>

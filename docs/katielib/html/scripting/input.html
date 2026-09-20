@@ -3,13 +3,13 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Shaders (Smash Hit)" href="shaders.html"><link rel="prev" title="System and Misc utilities" href="system.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="HTTP Requests" href="http.html"><link rel="prev" title="System and Misc utilities" href="system.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>Raw Input - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -207,7 +207,6 @@
 <li class="toctree-l2"><a class="reference internal" href="framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system.html">System and Misc utilities</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Raw Input</a></li>
-<li class="toctree-l2"><a class="reference internal" href="shaders.html">Shaders (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="http.html">HTTP Requests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="udp.html">UDP Sockets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
@@ -262,6 +261,8 @@
 taps on the screen, directly from the input manager. This is especially
 useful if you want to implement your own UI elements where the game’s
 current input handling is too limiting.</p>
+<section id="touch">
+<h2>Touch<a class="headerlink" href="#touch" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">QiInput</span></code> can handle up to 32 touch events at once, though most
 devices cannot reach this limit. Each event is assigned an index from 0
 to 31, with new events (e.g. new touches) taking the lowest available
@@ -275,21 +276,21 @@ can exclude the <code class="docutils literal notranslate"><span class="pre">ind
 default to zero. All built-in UI elements do this.</p>
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knGetTouchCount">
-<span class="sig-name descname"><span class="pre">knGetTouchCount</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knGetTouchCount" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knGetTouchCount</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetTouchCount" title="Link to this definition">¶</a></dt>
 <dd><p>Get the number of touches. May not correspond with the maximum touch
 index.</p>
 </dd></dl>
 
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knHasTouch">
-<span class="sig-name descname"><span class="pre">knHasTouch</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knHasTouch" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knHasTouch</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knHasTouch" title="Link to this definition">¶</a></dt>
 <dd><p>Check if a valid touch exists at the given <code class="docutils literal notranslate"><span class="pre">index</span></code>. Returns <code class="docutils literal notranslate"><span class="pre">true</span></code>
 if so, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if not.</p>
 </dd></dl>
 
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knGetTouchPos">
-<span class="sig-name descname"><span class="pre">knGetTouchPos</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knGetTouchPos" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knGetTouchPos</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetTouchPos" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the x and y position of the touch in screen coordinates. Note
 that these may not always line up with the virtual in-game coordinates.</p>
 <p>Example:</p>
@@ -300,7 +301,7 @@ that these may not always line up with the virtual in-game coordinates.</p>
 
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knWasTouchPressed">
-<span class="sig-name descname"><span class="pre">knWasTouchPressed</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knWasTouchPressed" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knWasTouchPressed</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knWasTouchPressed" title="Link to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the touch at the given index was <em>just</em> pressed and
 <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise. This will only happen once per touch at the very
 start of the touch.</p>
@@ -308,7 +309,7 @@ start of the touch.</p>
 
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knWasTouchReleased">
-<span class="sig-name descname"><span class="pre">knWasTouchReleased</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knWasTouchReleased" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knWasTouchReleased</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">index</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knWasTouchReleased" title="Link to this definition">¶</a></dt>
 <dd><p><strong>Currently broken and always returns ``false``</strong>, but should(?) return
 <code class="docutils literal notranslate"><span class="pre">true</span></code> if the touch at the given index was just released and <code class="docutils literal notranslate"><span class="pre">false</span></code>
 otherwise. This will only happen once per touch at the very end of the
@@ -316,18 +317,180 @@ touch.</p>
 </dd></dl>
 
 </section>
+<section id="keyboard">
+<h2>Keyboard<a class="headerlink" href="#keyboard" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">QiInput</span></code>’s keyboard support is rather limited. It can detect key up and key
+down events, as well as use them to check if a key was pressed once, but doesn’t
+do much more, and has virtually no support for keyboard layouts outside of those
+based on QWERTY.</p>
+<p>Key codes are given as the ASCII characters those keys represent, with a few
+extra codes for various command and modifier keys. The currently implemented
+extra key codes are:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key Code</p></th>
+<th class="head"><p>Key</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x100</p></td>
+<td><p>Escape</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x101</p></td>
+<td><p>Backspace</p></td>
+</tr>
+<tr class="row-even"><td><p>0x102</p></td>
+<td><p>Delete</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x103</p></td>
+<td><p>Tab</p></td>
+</tr>
+<tr class="row-even"><td><p>0x107</p></td>
+<td><p>Up Arrow</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x108</p></td>
+<td><p>Down Arrow</p></td>
+</tr>
+<tr class="row-even"><td><p>0x109</p></td>
+<td><p>Left Arrow</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10a</p></td>
+<td><p>Right Arrow</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10b</p></td>
+<td><p>Control (either)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10c</p></td>
+<td><p>Home</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10d</p></td>
+<td><p>End</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Many of the alphanumeric keys are implemented but they assume a QWERTY keyboard
+layout so may not behave as expected, especially when <kbd class="kbd docutils literal notranslate">Shift</kbd> is involved.</p>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knIsKeyDown">
+<span class="sig-name descname"><span class="pre">knIsKeyDown</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knIsKeyDown" title="Link to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the given key is currently down, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if it isn’t. For example:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kr">if</span><span class="w"> </span><span class="nf">knIsKeyDown</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nf">mgSetText</span><span class="p">(</span><span class="nv">someText</span><span class="p">,</span><span class="w"> </span><span class="s2">"Key is being held!"</span><span class="p">)</span>
+<span class="kr">else</span>
+<span class="w">    </span><span class="nf">mgSetText</span><span class="p">(</span><span class="nv">someText</span><span class="p">,</span><span class="w"> </span><span class="s2">"Key is up."</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knWasKeyPressed">
+<span class="sig-name descname"><span class="pre">knWasKeyPressed</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knWasKeyPressed" title="Link to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the given key has been initally pressed, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if it has’t.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knWasKeyReleased">
+<span class="sig-name descname"><span class="pre">knWasKeyReleased</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knWasKeyReleased" title="Link to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the given key was just released, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if it was’t.</p>
+</dd></dl>
+
+</section>
+<section id="mouse">
+<h2>Mouse<a class="headerlink" href="#mouse" title="Link to this heading">¶</a></h2>
+<p>Mouse support only includes checking the position of the mouse.</p>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetMousePos">
+<span class="sig-name descname"><span class="pre">knGetMousePos</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetMousePos" title="Link to this definition">¶</a></dt>
+<dd><p>Return the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> position of a physical mouse.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When the mouse is in relative mode, this function will continue to return the delta from the last mouse input event, which is never completely zero even if the mouse isn’t moving. Using <a class="reference internal" href="#lua-knGetMouseDelta" title="knGetMouseDelta"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knGetMouseDelta()</span></code></a> gives the result you probably expect.</p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knGetMouseDelta">
+<span class="sig-name descname"><span class="pre">knGetMouseDelta</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetMouseDelta" title="Link to this definition">¶</a></dt>
+<dd><p>When the mouse is in relative mode, this gets the total movement of the mouse
+in the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> directions since this function was last called.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>This function only produces sane results when in relative mode - that
+is, after a successful call to <a class="reference internal" href="#lua-knCaptureMouse" title="knCaptureMouse"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">knCaptureMouse()</span></code></a>.</p></li>
+<li><p>This function can usually only be called once per frame. After that, it
+will return 0, 0 until more mouse movements occur.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knCaptureMouse">
+<span class="sig-name descname"><span class="pre">knCaptureMouse</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">capture</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knCaptureMouse" title="Link to this definition">¶</a></dt>
+<dd><p>If possible, “capture” the mouse and turn it to relative mode. This is useful
+for implementing free looking, first person cameras that can be moved around
+with the mouse.</p>
+<p>It is recommended to call this every frame with <code class="docutils literal notranslate"><span class="pre">true</span></code> when you want the
+mouse locked and <code class="docutils literal notranslate"><span class="pre">false</span></code> when you wish for it to be unlocked:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="c1">-- In the HUD</span>
+<span class="kr">function</span><span class="w"> </span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">knCaptureMouse</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">-- ...</span>
+<span class="kr">end</span>
+
+<span class="c1">-- In the menu</span>
+<span class="kr">function</span><span class="w"> </span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="nf">knCaptureMouse</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">-- ...</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="buttons">
+<h2>Buttons<a class="headerlink" href="#buttons" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">QiInput</span></code> has support for the generic concept of buttons, which are either
+mouse buttons or buttons on a game controller.</p>
+<p>The following button IDs are most notable:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Primary Mouse Button</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Buttons are currently not implemented but should be easy to provide an
+API for.</p>
+</div>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="shaders.html">
+          <a class="next-page" href="http.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Shaders (<em>Smash Hit</em>)</div>
+                <div class="title">HTTP Requests</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -373,11 +536,27 @@ touch.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Raw Input</a><ul>
+<li><a class="reference internal" href="#touch">Touch</a><ul>
 <li><a class="reference internal" href="#lua-knGetTouchCount"><code class="docutils literal notranslate"><span class="pre">knGetTouchCount()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knHasTouch"><code class="docutils literal notranslate"><span class="pre">knHasTouch()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knGetTouchPos"><code class="docutils literal notranslate"><span class="pre">knGetTouchPos()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knWasTouchPressed"><code class="docutils literal notranslate"><span class="pre">knWasTouchPressed()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knWasTouchReleased"><code class="docutils literal notranslate"><span class="pre">knWasTouchReleased()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#keyboard">Keyboard</a><ul>
+<li><a class="reference internal" href="#lua-knIsKeyDown"><code class="docutils literal notranslate"><span class="pre">knIsKeyDown()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knWasKeyPressed"><code class="docutils literal notranslate"><span class="pre">knWasKeyPressed()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knWasKeyReleased"><code class="docutils literal notranslate"><span class="pre">knWasKeyReleased()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mouse">Mouse</a><ul>
+<li><a class="reference internal" href="#lua-knGetMousePos"><code class="docutils literal notranslate"><span class="pre">knGetMousePos()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knGetMouseDelta"><code class="docutils literal notranslate"><span class="pre">knGetMouseDelta()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knCaptureMouse"><code class="docutils literal notranslate"><span class="pre">knCaptureMouse()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#buttons">Buttons</a></li>
 </ul>
 </li>
 </ul>

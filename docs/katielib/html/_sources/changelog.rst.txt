@@ -9,6 +9,8 @@ Release 22
 
 - Update YipLoader version to 0.1.1
 - Switch game to using AAudio instead of OpenSL ES on supported devices
+- Implement basic keyboard and mouse input support
+- Added several new input functions
 - Added :func:`knInsertCode` for "inserting" assembly code
 - Added :class:`KnUdpSocket`
 - Added :func:`knReloadPlayer`
