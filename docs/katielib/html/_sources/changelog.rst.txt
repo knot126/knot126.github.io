@@ -7,13 +7,15 @@ Release 22
 
 *Upcoming*
 
-- Update YipLoader version to 0.1.1
+- Update YipLoader version to 0.1.3
 - Switch game to using AAudio instead of OpenSL ES on supported devices
 - Implement basic keyboard and mouse input support
+- Introduced an :doc:`scripting/events` system
 - Added several new input functions
-- Added :func:`knInsertCode` for "inserting" assembly code
 - Added :class:`KnUdpSocket`
+- Added :func:`knInsertCode` for "inserting" assembly code
 - Added :func:`knReloadPlayer`
+- Added :func:`knShoot`
 - Renamed ``knLoadGfx()`` to :func:`knReloadGfx`
 - Renamed ``knLoadTemplates()`` to :func:`knReloadTemplates`
 - Fixed a bug where databases containing empty strings would not be saved
