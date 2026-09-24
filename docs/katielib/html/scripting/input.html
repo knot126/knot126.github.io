@@ -200,6 +200,7 @@
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="registry.html">Registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="database.html">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Events</a></li>
 <li class="toctree-l2"><a class="reference internal" href="string.html">String Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html">Gameplay (<em>Smash Hit</em>)</a></li>
@@ -261,6 +262,15 @@
 taps on the screen, directly from the input manager. This is especially
 useful if you want to implement your own UI elements where the game’s
 current input handling is too limiting.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 22: </span>Added input simulation, keyboard, mouse, and button support</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Input simulation functions should be called from <a class="reference internal" href="events.html#lua-onFrameStart" title="onFrameStart"><code class="xref lua lua-func docutils literal notranslate"><span class="pre">onFrameStart()</span></code></a> so that
+the input is present for the full frame. Calling from the normal <code class="docutils literal notranslate"><span class="pre">draw()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">frame()</span></code> functions is unlikely to give good results.</p>
+</div>
 <section id="touch">
 <h2>Touch<a class="headerlink" href="#touch" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">QiInput</span></code> can handle up to 32 touch events at once, though most
@@ -329,43 +339,55 @@ extra key codes are:</p>
 <div class="table-wrapper docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Key Code</p></th>
-<th class="head"><p>Key</p></th>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>ID</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0x100</p></td>
-<td><p>Escape</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_ESCAPE</span></code></p></td>
+<td><p>0x100</p></td>
 </tr>
-<tr class="row-odd"><td><p>0x101</p></td>
-<td><p>Backspace</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_BACKSPACE</span></code></p></td>
+<td><p>0x101</p></td>
 </tr>
-<tr class="row-even"><td><p>0x102</p></td>
-<td><p>Delete</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_DELETE</span></code></p></td>
+<td><p>0x102</p></td>
 </tr>
-<tr class="row-odd"><td><p>0x103</p></td>
-<td><p>Tab</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_TAB</span></code></p></td>
+<td><p>0x103</p></td>
 </tr>
-<tr class="row-even"><td><p>0x107</p></td>
-<td><p>Up Arrow</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_ALT</span></code></p></td>
+<td><p>0x104</p></td>
 </tr>
-<tr class="row-odd"><td><p>0x108</p></td>
-<td><p>Down Arrow</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_SHIFT</span></code></p></td>
+<td><p>0x105</p></td>
 </tr>
-<tr class="row-even"><td><p>0x109</p></td>
-<td><p>Left Arrow</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_META</span></code></p></td>
+<td><p>0x106</p></td>
 </tr>
-<tr class="row-odd"><td><p>0x10a</p></td>
-<td><p>Right Arrow</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_UP_ARROW</span></code></p></td>
+<td><p>0x107</p></td>
 </tr>
-<tr class="row-even"><td><p>0x10b</p></td>
-<td><p>Control (either)</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_DOWN_ARROW</span></code></p></td>
+<td><p>0x108</p></td>
 </tr>
-<tr class="row-odd"><td><p>0x10c</p></td>
-<td><p>Home</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_LEFT_ARROW</span></code></p></td>
+<td><p>0x109</p></td>
 </tr>
-<tr class="row-even"><td><p>0x10d</p></td>
-<td><p>End</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_RIGHT_ARROW</span></code></p></td>
+<td><p>0x10a</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_CONTROL</span></code></p></td>
+<td><p>0x10b</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_HOME</span></code></p></td>
+<td><p>0x10c</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_END</span></code></p></td>
+<td><p>0x10d</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">KN_KEY_MENU</span></code></p></td>
+<td><p>0x10e</p></td>
 </tr>
 </tbody>
 </table>
@@ -395,6 +417,18 @@ layout so may not behave as expected, especially when <kbd class="kbd docutils l
 <dt class="sig sig-object lua" id="lua-knWasKeyReleased">
 <span class="sig-name descname"><span class="pre">knWasKeyReleased</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knWasKeyReleased" title="Link to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal notranslate"><span class="pre">true</span></code> if the given key was just released, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if it was’t.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRegisterKeyDown">
+<span class="sig-name descname"><span class="pre">knRegisterKeyDown</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knRegisterKeyDown" title="Link to this definition">¶</a></dt>
+<dd><p>Simulate the start of a key press.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRegisterKeyUp">
+<span class="sig-name descname"><span class="pre">knRegisterKeyUp</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knRegisterKeyUp" title="Link to this definition">¶</a></dt>
+<dd><p>Simulate the end of a key press.</p>
 </dd></dl>
 
 </section>
@@ -462,21 +496,48 @@ mouse buttons or buttons on a game controller.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>Enum</p></th>
 <th class="head"><p>Name</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">KN_BUTTON_PRIMARY</span></code></p></td>
 <td><p>Primary Mouse Button</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Buttons are currently not implemented but should be easy to provide an
-API for.</p>
-</div>
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knIsButtonDown">
+<span class="sig-name descname"><span class="pre">knIsButtonDown</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knIsButtonDown" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the given button is currently being held.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knWasButtonPressed">
+<span class="sig-name descname"><span class="pre">knWasButtonPressed</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knWasButtonPressed" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the button was just pressed.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knWasButtonReleased">
+<span class="sig-name descname"><span class="pre">knWasButtonReleased</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-knWasButtonReleased" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the button was just released.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRegisterButtonDown">
+<span class="sig-name descname"><span class="pre">knRegisterButtonDown</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knRegisterButtonDown" title="Link to this definition">¶</a></dt>
+<dd><p>Simulate the start of a button press.</p>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRegisterButtonUp">
+<span class="sig-name descname"><span class="pre">knRegisterButtonUp</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knRegisterButtonUp" title="Link to this definition">¶</a></dt>
+<dd><p>Simulate the end of a button press.</p>
+</dd></dl>
+
 </section>
 </section>
 
@@ -548,6 +609,8 @@ API for.</p>
 <li><a class="reference internal" href="#lua-knIsKeyDown"><code class="docutils literal notranslate"><span class="pre">knIsKeyDown()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knWasKeyPressed"><code class="docutils literal notranslate"><span class="pre">knWasKeyPressed()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knWasKeyReleased"><code class="docutils literal notranslate"><span class="pre">knWasKeyReleased()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knRegisterKeyDown"><code class="docutils literal notranslate"><span class="pre">knRegisterKeyDown()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knRegisterKeyUp"><code class="docutils literal notranslate"><span class="pre">knRegisterKeyUp()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#mouse">Mouse</a><ul>
@@ -556,7 +619,14 @@ API for.</p>
 <li><a class="reference internal" href="#lua-knCaptureMouse"><code class="docutils literal notranslate"><span class="pre">knCaptureMouse()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#buttons">Buttons</a></li>
+<li><a class="reference internal" href="#buttons">Buttons</a><ul>
+<li><a class="reference internal" href="#lua-knIsButtonDown"><code class="docutils literal notranslate"><span class="pre">knIsButtonDown()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knWasButtonPressed"><code class="docutils literal notranslate"><span class="pre">knWasButtonPressed()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knWasButtonReleased"><code class="docutils literal notranslate"><span class="pre">knWasButtonReleased()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knRegisterButtonDown"><code class="docutils literal notranslate"><span class="pre">knRegisterButtonDown()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knRegisterButtonUp"><code class="docutils literal notranslate"><span class="pre">knRegisterButtonUp()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -6,6 +6,16 @@ taps on the screen, directly from the input manager. This is especially
 useful if you want to implement your own UI elements where the game's
 current input handling is too limiting.
 
+.. version-changed:: 22
+   
+   Added input simulation, keyboard, mouse, and button support
+
+.. note::
+   
+   Input simulation functions should be called from :func:`onFrameStart` so that
+   the input is present for the full frame. Calling from the normal ``draw()`` or
+   ``frame()`` functions is unlikely to give good results.
+
 Touch
 =====
 
@@ -69,21 +79,25 @@ Key codes are given as the ASCII characters those keys represent, with a few
 extra codes for various command and modifier keys. The currently implemented
 extra key codes are:
 
-======== ================
-Key Code Key
-======== ================
-0x100    Escape
-0x101    Backspace
-0x102    Delete
-0x103    Tab
-0x107    Up Arrow
-0x108    Down Arrow
-0x109    Left Arrow
-0x10a    Right Arrow
-0x10b    Control (either)
-0x10c    Home
-0x10d    End
-======== ================
+========================= =====
+Key                       ID
+========================= =====
+``KN_KEY_ESCAPE``         0x100
+``KN_KEY_BACKSPACE``      0x101
+``KN_KEY_DELETE``         0x102
+``KN_KEY_TAB``            0x103
+``KN_KEY_ALT``            0x104
+``KN_KEY_SHIFT``          0x105
+``KN_KEY_META``           0x106
+``KN_KEY_UP_ARROW``       0x107
+``KN_KEY_DOWN_ARROW``     0x108
+``KN_KEY_LEFT_ARROW``     0x109
+``KN_KEY_RIGHT_ARROW``    0x10a
+``KN_KEY_CONTROL``        0x10b
+``KN_KEY_HOME``           0x10c
+``KN_KEY_END``            0x10d
+``KN_KEY_MENU``           0x10e
+========================= =====
 
 Many of the alphanumeric keys are implemented but they assume a QWERTY keyboard
 layout so may not behave as expected, especially when :kbd:`Shift` is involved.
@@ -107,6 +121,15 @@ layout so may not behave as expected, especially when :kbd:`Shift` is involved.
 .. function:: knWasKeyReleased(key: string | integer): boolean
 
    Return ``true`` if the given key was just released, or ``false`` if it was't.
+
+.. function:: knRegisterKeyDown(key: string | integer)
+
+   Simulate the start of a key press.
+   
+.. function:: knRegisterKeyUp(key: string | integer)
+   
+   Simulate the end of a key press.
+
 
 Mouse
 =====
@@ -164,11 +187,29 @@ mouse buttons or buttons on a game controller.
 
 The following button IDs are most notable:
 
-==== ====================
- ID   Name 
-==== ====================
-1    Primary Mouse Button
-==== ====================
+==== ===================== ====================
+ ID   Enum                 Name 
+==== ===================== ====================
+1    ``KN_BUTTON_PRIMARY`` Primary Mouse Button
+==== ===================== ====================
 
-.. note:: Buttons are currently not implemented but should be easy to provide an
-   API for.
+.. function:: knIsButtonDown(button: integer): boolean
+   
+   Check if the given button is currently being held.
+
+.. function:: knWasButtonPressed(button: integer): boolean
+   
+   Check if the button was just pressed.
+
+.. function:: knWasButtonReleased(button: integer): boolean
+   
+   Check if the button was just released.
+
+.. function:: knRegisterButtonDown(button: integer)
+
+   Simulate the start of a button press.
+
+.. function:: knRegisterButtonUp(button: integer)
+
+   Simulate the end of a button press.
+   

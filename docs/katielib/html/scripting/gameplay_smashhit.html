@@ -200,6 +200,7 @@
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="registry.html">Registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="database.html">Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Events</a></li>
 <li class="toctree-l2"><a class="reference internal" href="string.html">String Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Gameplay (<em>Smash Hit</em>)</a></li>
@@ -284,6 +285,27 @@ relevant achievements.</p>
 relevant achievements.</p>
 </dd></dl>
 
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knShoot">
+<span class="sig-name descname"><span class="pre">knShoot</span></span><span class="p"><span class="pre">(</span></span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="n"><span class="pre">_unk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><br /><span class="w">&#160;&#160;&#160; </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">]</span></span><br /><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knShoot" title="Link to this definition">¶</a><br /></dt>
+<dd><p>Shoot a ball from the given x and y coordinates on the screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – X pixel coordinate on the screen to shoot from</p></li>
+<li><p><strong>y</strong> – Y pixel coordinate on the screen to shoot from</p></li>
+<li><p><strong>force</strong> – The force with which to shoot the ball. This is always <code class="code docutils literal notranslate"><span class="pre">20.0</span></code> in the base game.</p></li>
+<li><p><strong>_unk</strong> – Boolean with unknown function. This is seemingly always <code class="code docutils literal notranslate"><span class="pre">true</span></code> in the base game.</p></li>
+<li><p><strong>player</strong> – Player ID</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s a good idea to look at <code class="docutils literal notranslate"><span class="pre">Level::handleInput()</span></code> to see how the vanilla game uses this function.</p>
+</div>
+</dd></dl>
+
 <section id="player-parameter">
 <h2>Player Parameter<a class="headerlink" href="#player-parameter" title="Link to this heading">¶</a></h2>
 <p>When functions take a player parameter, it can be one of the following values:</p>
@@ -292,6 +314,10 @@ relevant achievements.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: Player on the left</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: Player on the right</p></li>
 </ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 22: </span>The player parameter now defaults to <code class="code docutils literal notranslate"><span class="pre">-1</span></code>. Before it was undefined and
+defaulted to <code class="code docutils literal notranslate"><span class="pre">0</span></code> as a result.</p>
+</div>
 </section>
 </section>
 
@@ -355,6 +381,7 @@ relevant achievements.</p>
 <li><a class="reference internal" href="#lua-knLevelStreakAbort"><code class="docutils literal notranslate"><span class="pre">knLevelStreakAbort()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knLevelStreakInc"><code class="docutils literal notranslate"><span class="pre">knLevelStreakInc()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knLevelAddScore"><code class="docutils literal notranslate"><span class="pre">knLevelAddScore()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knShoot"><code class="docutils literal notranslate"><span class="pre">knShoot()</span></code></a></li>
 <li><a class="reference internal" href="#player-parameter">Player Parameter</a></li>
 </ul>
 </li>
