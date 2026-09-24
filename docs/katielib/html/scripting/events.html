@@ -9,7 +9,7 @@
         <title>Events - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -264,8 +264,10 @@ corresponding events happen in game, such as a frame starting or ending.</p>
 <p>If the player is playing a level, then the HUD script will recieve all events.
 Otherwise, the main menu script is used, since that will usually always be loaded.</p>
 <p>Many functions can return a boolean indicating if the normal call to the
-function should be cancelled so that it is no longer called. This makes it
-possible to bypass normally hard-coded behaviour.</p>
+function should be cancelled so that it is no longer called. For example, when
+returning <code class="docutils literal notranslate"><span class="pre">true</span></code> (or any truthy value) from <code class="docutils literal notranslate"><span class="pre">onHitSomething</span></code>, the call to
+<code class="docutils literal notranslate"><span class="pre">Level::hitSomething()</span></code> that would normally be done after your event handler
+is not made.</p>
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-onFrameStart">
 <span class="sig-name descname"><span class="pre">onFrameStart</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-onFrameStart" title="Link to this definition">¶</a></dt>
@@ -281,13 +283,71 @@ possible to bypass normally hard-coded behaviour.</p>
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-onHandleInput">
 <span class="sig-name descname"><span class="pre">onHandleInput</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-onHandleInput" title="Link to this definition">¶</a></dt>
-<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Level::handleInput()</span></code>. When this function
-returns <code class="docutils literal notranslate"><span class="pre">true</span></code> (or any truthy value), the call to <code class="docutils literal notranslate"><span class="pre">Level::handleInput()</span></code>
-is cancelled and only the behaviour in your custom function is run.</p>
+<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Level::handleInput()</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A boolean indicating if the call to <code class="docutils literal notranslate"><span class="pre">Level::handleInput()</span></code>
 should be cancelled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-onHitSomething">
+<span class="sig-name descname"><span class="pre">onHitSomething</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">playerId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-onHitSomething" title="Link to this definition">¶</a></dt>
+<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Level::hitSomething()</span></code>, which is called on
+every frame the player intersects with an obstacle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>playerId</strong> – Relevant player ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A boolean indicating if the call to <code class="docutils literal notranslate"><span class="pre">Level::hitSomething()</span></code>
+should be cancelled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-onStreakInc">
+<span class="sig-name descname"><span class="pre">onStreakInc</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">playerId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-onStreakInc" title="Link to this definition">¶</a></dt>
+<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Level::streakInc()</span></code>, which is called whenever
+the player hits a crystal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>playerId</strong> – Relevant player ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A boolean indicating if the call to <code class="docutils literal notranslate"><span class="pre">Level::streakInc()</span></code>
+should be cancelled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-onStreakAbort">
+<span class="sig-name descname"><span class="pre">onStreakAbort</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">playerId</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-onStreakAbort" title="Link to this definition">¶</a></dt>
+<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Level::streakAbort()</span></code>, which is called any
+time the current streak needs to be reset to zero (such as on crashing).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>playerId</strong> – Relevant player ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A boolean indicating if the call to <code class="docutils literal notranslate"><span class="pre">Level::streakAbort()</span></code>
+should be cancelled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-onEnterRoom">
+<span class="sig-name descname"><span class="pre">onEnterRoom</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-onEnterRoom" title="Link to this definition">¶</a></dt>
+<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Level::enterRoom()</span></code>, which is called when
+entering a room.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>type</strong> – Type of the room (e.g. <code class="docutils literal notranslate"><span class="pre">cave/narrow</span></code>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -353,6 +413,10 @@ should be cancelled</p>
 <li><a class="reference internal" href="#lua-onFrameStart"><code class="docutils literal notranslate"><span class="pre">onFrameStart()</span></code></a></li>
 <li><a class="reference internal" href="#lua-onFrameEnd"><code class="docutils literal notranslate"><span class="pre">onFrameEnd()</span></code></a></li>
 <li><a class="reference internal" href="#lua-onHandleInput"><code class="docutils literal notranslate"><span class="pre">onHandleInput()</span></code></a></li>
+<li><a class="reference internal" href="#lua-onHitSomething"><code class="docutils literal notranslate"><span class="pre">onHitSomething()</span></code></a></li>
+<li><a class="reference internal" href="#lua-onStreakInc"><code class="docutils literal notranslate"><span class="pre">onStreakInc()</span></code></a></li>
+<li><a class="reference internal" href="#lua-onStreakAbort"><code class="docutils literal notranslate"><span class="pre">onStreakAbort()</span></code></a></li>
+<li><a class="reference internal" href="#lua-onEnterRoom"><code class="docutils literal notranslate"><span class="pre">onEnterRoom()</span></code></a></li>
 </ul>
 </li>
 </ul>

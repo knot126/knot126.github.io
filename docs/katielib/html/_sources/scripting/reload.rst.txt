@@ -69,3 +69,21 @@ Dynamic Reload (*Smash Hit*)
    resetting player stats.
    
    .. version-added:: 22
+
+.. function:: knQuickSave()
+   
+   Do a quick save.
+   
+   .. version-added:: 22
+
+.. function:: knQuickLoad(): boolean
+
+   Do a quick load. Returns a boolean indicating success.
+   
+   .. version-added:: 22
+
+.. function:: knQuickClear()
+
+   Clear player's quick save.
+   
+   .. version-added:: 22
