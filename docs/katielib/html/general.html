@@ -9,7 +9,7 @@
         <title>General Changes and Additions - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -216,8 +216,12 @@
 <li class="toctree-l2"><a class="reference internal" href="scripting/isc.html">Inter-script Communication</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="developer/index.html">Developer Documentation</a><input aria-label="Toggle navigation of Developer Documentation" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer/lua.html">Writing Lua Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer/aaudio.html">Switch to AAudio</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="terms.html">Terms of Use</a></li>
 </ul>
 
 </div>
@@ -296,13 +300,6 @@ allowing you to easily detect when scripts are being deallocated:</p>
 </pre></div>
 </div>
 </section>
-<section id="switch-to-aaudio">
-<h2>Switch to AAudio<a class="headerlink" href="#switch-to-aaudio" title="Link to this heading">¶</a></h2>
-<p>On newer versions of Android, KatieLib will load and use the AAudio API
-instead of the legacy OpenSL ES. While not formally tested, this should reduce
-audio latency by quite a lot, assuming Android’s OpenSL implementation is still
-as bad as it was when Dennis <a class="reference external" href="https://blog.voxagon.se/2013/06/26/low-level-audio.html">wrote about it on his blog</a>.</p>
-</section>
 <section id="keyboard-and-mouse-implementation">
 <h2>Keyboard and Mouse Implementation<a class="headerlink" href="#keyboard-and-mouse-implementation" title="Link to this heading">¶</a></h2>
 <p>While Mediocre games do have support for keyboard and mouse - and even check for
@@ -374,7 +371,6 @@ making the existing debug functionality available.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#shutdown-function"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code> function</a></li>
-<li><a class="reference internal" href="#switch-to-aaudio">Switch to AAudio</a></li>
 <li><a class="reference internal" href="#keyboard-and-mouse-implementation">Keyboard and Mouse Implementation</a></li>
 </ul>
 </li>

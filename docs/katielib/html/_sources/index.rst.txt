@@ -15,5 +15,5 @@ KatieLib Documentation
    
    general
    scripting/index
+   developer/index
    changelog
-   terms

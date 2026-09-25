@@ -46,14 +46,6 @@ allowing you to easily detect when scripts are being deallocated:
       knLog("The obstacle is being destroyed!")
    end
 
-Switch to AAudio
-================
-
-On newer versions of Android, KatieLib will load and use the AAudio API
-instead of the legacy OpenSL ES. While not formally tested, this should reduce
-audio latency by quite a lot, assuming Android's OpenSL implementation is still
-as bad as it was when Dennis `wrote about it on his blog <https://blog.voxagon.se/2013/06/26/low-level-audio.html>`__.
-
 Keyboard and Mouse Implementation
 =================================
 
