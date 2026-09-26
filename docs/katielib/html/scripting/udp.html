@@ -270,7 +270,7 @@ automatically detecting servers, and is a lot simpler than TCP.</p>
 <p class="admonition-title">Note</p>
 <p>The UDP socket API is object oriented, unlike most of the other APIs
 provided by KatieLib. This means you create a <a class="reference internal" href="#lua-KnUdpSocket" title="KnUdpSocket"><code class="xref lua lua-class docutils literal notranslate"><span class="pre">KnUdpSocket</span></code></a> <em>object</em>
-and then call methods on it, like <code class="code docutils literal notranslate"><span class="pre">KnUdpSocket:recieve()</span></code>.</p>
+and then call methods on it, like <code class="code docutils literal notranslate"><span class="pre">KnUdpSocket:receive()</span></code>.</p>
 </div>
 <dl class="lua class">
 <dt class="sig sig-object lua" id="lua-KnUdpSocket">
@@ -336,7 +336,7 @@ servers and automatically enter the right IP address.</p>
 <span class="kr">function</span><span class="w"> </span><span class="nf">processServerHello</span><span class="p">()</span>
 <span class="w">   </span><span class="kr">while</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="kr">do</span>
 <span class="w">      </span><span class="c1">-- Get the next datagram</span>
-<span class="w">      </span><span class="kd">local</span><span class="w"> </span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">address</span><span class="p">,</span><span class="w"> </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hello</span><span class="p">:</span><span class="nf">recieve</span><span class="p">()</span>
+<span class="w">      </span><span class="kd">local</span><span class="w"> </span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">address</span><span class="p">,</span><span class="w"> </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hello</span><span class="p">:</span><span class="nf">receive</span><span class="p">()</span>
 
 <span class="w">      </span><span class="c1">-- If there are none, stop for now. We'll try again next frame when we</span>
 <span class="w">      </span><span class="c1">-- might actually have more.</span>

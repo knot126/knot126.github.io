@@ -8,7 +8,7 @@ automatically detecting servers, and is a lot simpler than TCP.
 
 .. note:: The UDP socket API is object oriented, unlike most of the other APIs
    provided by KatieLib. This means you create a :class:`KnUdpSocket` *object*
-   and then call methods on it, like :code:`KnUdpSocket:recieve()`.
+   and then call methods on it, like :code:`KnUdpSocket:receive()`.
 
 .. class:: KnUdpSocket([address: string, port: integer]): KnUdpSocket
       
@@ -73,7 +73,7 @@ servers and automatically enter the right IP address.
    function processServerHello()
       while true do
          -- Get the next datagram
-         local data, address, port = hello:recieve()
+         local data, address, port = hello:receive()
          
          -- If there are none, stop for now. We'll try again next frame when we
          -- might actually have more.
