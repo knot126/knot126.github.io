@@ -193,25 +193,26 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="scripting/index.html">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripting/logging.html">Logging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/assets.html">Assets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/registry.html">Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/camera.html">Camera (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/database.html">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/events.html">Events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/string.html">String Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/gameplay_smashhit.html">Gameplay (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/reload.html">Dynamic Reload (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/system.html">System and Misc utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/input.html">Raw Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/http.html">HTTP Requests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/udp.html">UDP Sockets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/overlays.html">Overlays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/patch.html">Patching</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scripting/pack.html">Byte Packing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/input.html">Raw Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scripting/isc.html">Inter-script Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/level.html">Level (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/pack.html">Byte Packing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/patch.html">Patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/registry.html">Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/reload.html">Dynamic Reload (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/string.html">String Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/system.html">System and Misc utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripting/udp.html">UDP Sockets</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="developer/index.html">Developer Documentation</a><input aria-label="Toggle navigation of Developer Documentation" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -288,6 +289,12 @@
         <li><a href="scripting/pack.html#lua-knBinToHex">knBinToHex (function)</a>
 </li>
         <li><a href="scripting/isc.html#lua-knCall">knCall (function)</a>
+</li>
+        <li><a href="scripting/camera.html#lua-knCameraFov">knCameraFov (function)</a>
+</li>
+        <li><a href="scripting/camera.html#lua-knCameraPosOffset">knCameraPosOffset (function)</a>
+</li>
+        <li><a href="scripting/camera.html#lua-knCameraRotOffset">knCameraRotOffset (function)</a>
 </li>
         <li><a href="scripting/input.html#lua-knCaptureMouse">knCaptureMouse (function)</a>
 </li>
@@ -375,15 +382,15 @@
 </li>
         <li><a href="scripting/system.html#lua-knJavaCommand">knJavaCommand (function)</a>
 </li>
-        <li><a href="scripting/gameplay_smashhit.html#lua-knLevelAddScore">knLevelAddScore (function)</a>
-</li>
-        <li><a href="scripting/gameplay_smashhit.html#lua-knLevelHitSomething">knLevelHitSomething (function)</a>
-</li>
-        <li><a href="scripting/gameplay_smashhit.html#lua-knLevelStreakAbort">knLevelStreakAbort (function)</a>
+        <li><a href="scripting/level.html#lua-knLevelAddScore">knLevelAddScore (function)</a>
 </li>
     </ul></td>
     <td style="width: 33%; vertical-align: top;"><ul>
-        <li><a href="scripting/gameplay_smashhit.html#lua-knLevelStreakInc">knLevelStreakInc (function)</a>
+        <li><a href="scripting/level.html#lua-knLevelHitSomething">knLevelHitSomething (function)</a>
+</li>
+        <li><a href="scripting/level.html#lua-knLevelStreakAbort">knLevelStreakAbort (function)</a>
+</li>
+        <li><a href="scripting/level.html#lua-knLevelStreakInc">knLevelStreakInc (function)</a>
 </li>
         <li><a href="scripting/assets.html#lua-knListAssetDir">knListAssetDir (function)</a>
 </li>
@@ -459,7 +466,7 @@
 </li>
         <li><a href="scripting/cheats.html#lua-knSetStreak">knSetStreak (function)</a>
 </li>
-        <li><a href="scripting/gameplay_smashhit.html#lua-knShoot">knShoot (function)</a>
+        <li><a href="scripting/level.html#lua-knShoot">knShoot (function)</a>
 </li>
         <li><a href="scripting/string.html#lua-knSplit">knSplit (function)</a>
 </li>

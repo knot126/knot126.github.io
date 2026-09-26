@@ -8,22 +8,23 @@ KatieLib provides numerous extra functions to *Smash Hit*'s scripts.
    :maxdepth: 2
    :caption: Contents:
    
-   logging
-   files
    assets
-   registry
+   camera
+   cheats
    database
    events
-   string
-   cheats
-   gameplay_smashhit
-   reload
+   files
    framerate
-   system
-   input
    http
-   udp
-   overlays
-   patch
-   pack
+   input
    isc
+   level
+   logging
+   overlays
+   pack
+   patch
+   registry
+   reload
+   string
+   system
+   udp

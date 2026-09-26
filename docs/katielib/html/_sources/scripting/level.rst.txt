@@ -1,24 +1,33 @@
-Gameplay (*Smash Hit*)
-======================
+Level (*Smash Hit*)
+===================
 
 .. function:: knLevelHitSomething([player: integer])
 
    Causes the player to crash and loose balls.
+   
+   :param player: Player ID
 
 .. function:: knLevelStreakAbort([player: integer])
 
    Aborts the player’s streak "properly", e.g. plays the sound in addition
    to dropping the streak.
+   
+   :param player: Player ID
 
 .. function:: knLevelStreakInc([player: integer])
 
    Increments the player’s streak "properly", playing sounds and giving any
    relevant achievements.
+   
+   :param player: Player ID
 
 .. function:: knLevelAddScore(score: integer, [player: integer])
 
    Adds balls to the player "properly", playing sounds and giving any
    relevant achievements.
+   
+   :param score: Amount of score (balls) to add
+   :param player: Player ID
 
 .. function:: knShoot(x: number, y: number, force: number, _unk: boolean, [player: integer])
    
@@ -30,7 +39,8 @@ Gameplay (*Smash Hit*)
    :param _unk: Boolean with unknown function. This is seemingly always :code:`true` in the base game.
    :param player: Player ID
    
-   .. note:: It's a good idea to look at ``Level::handleInput()`` to see how the vanilla game uses this function.
+   .. note:: It's a good idea to look at ``Level::handleInput()`` to see how the
+             vanilla game uses this function.
 
 Player Parameter
 ----------------

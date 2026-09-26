@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Logging" href="logging.html"><link rel="prev" title="General Changes and Additions" href="../general.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Assets" href="assets.html"><link rel="prev" title="General Changes and Additions" href="../general.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>KatieLib Script API - KatieLib 22 documentation</title>
@@ -195,29 +195,34 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="registry.html">Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="camera.html">Camera (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="database.html">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events.html">Events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="string.html">String Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html">Gameplay (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html">Dynamic Reload (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html">System and Misc utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html">Raw Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="http.html">HTTP Requests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="udp.html">UDP Sockets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="patch.html">Patching</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pack.html">Byte Packing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Raw Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="isc.html">Inter-script Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html">Level (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pack.html">Byte Packing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="patch.html">Patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="registry.html">Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html">Dynamic Reload (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">String Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html">System and Misc utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="udp.html">UDP Sockets</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index.html">Developer Documentation</a><input aria-label="Toggle navigation of Developer Documentation" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer/lua.html">Writing Lua Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/aaudio.html">Switch to AAudio</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../terms.html">Terms of Use</a></li>
 </ul>
 
 </div>
@@ -262,32 +267,21 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="logging.html#lua-knLog"><code class="docutils literal notranslate"><span class="pre">knLog()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="files.html">Files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knWriteFile"><code class="docutils literal notranslate"><span class="pre">knWriteFile()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knReadFile"><code class="docutils literal notranslate"><span class="pre">knReadFile()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knRenameFile"><code class="docutils literal notranslate"><span class="pre">knRenameFile()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knDeleteFile"><code class="docutils literal notranslate"><span class="pre">knDeleteFile()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knIsFile"><code class="docutils literal notranslate"><span class="pre">knIsFile()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knMakeDir"><code class="docutils literal notranslate"><span class="pre">knMakeDir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knListDir"><code class="docutils literal notranslate"><span class="pre">knListDir()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knIsDir"><code class="docutils literal notranslate"><span class="pre">knIsDir()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="assets.html">Assets</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="assets.html#lua-knLoadAsset"><code class="docutils literal notranslate"><span class="pre">knLoadAsset()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html#lua-knListAssetDir"><code class="docutils literal notranslate"><span class="pre">knListAssetDir()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="registry.html">Registry</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegSet"><code class="docutils literal notranslate"><span class="pre">knRegSet()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegGet"><code class="docutils literal notranslate"><span class="pre">knRegGet()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegHas"><code class="docutils literal notranslate"><span class="pre">knRegHas()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegDelete"><code class="docutils literal notranslate"><span class="pre">knRegDelete()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegKeys"><code class="docutils literal notranslate"><span class="pre">knRegKeys()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="camera.html">Camera (<em>Smash Hit</em>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="camera.html#lua-knCameraPosOffset"><code class="docutils literal notranslate"><span class="pre">knCameraPosOffset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="camera.html#lua-knCameraRotOffset"><code class="docutils literal notranslate"><span class="pre">knCameraRotOffset()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="camera.html#lua-knCameraFov"><code class="docutils literal notranslate"><span class="pre">knCameraFov()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cheats.html#balls">Balls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheats.html#streak">Streak</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheats.html#no-clip">No-clip</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="database.html">Database</a><ul>
@@ -310,60 +304,20 @@
 <li class="toctree-l2"><a class="reference internal" href="events.html#lua-onEnterRoom"><code class="docutils literal notranslate"><span class="pre">onEnterRoom()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="string.html">String Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="string.html#lua-knRemoveSuffix"><code class="docutils literal notranslate"><span class="pre">knRemoveSuffix()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="string.html#lua-knRemovePrefix"><code class="docutils literal notranslate"><span class="pre">knRemovePrefix()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="string.html#lua-knSplit"><code class="docutils literal notranslate"><span class="pre">knSplit()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cheats.html#balls">Balls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cheats.html#streak">Streak</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cheats.html#no-clip">No-clip</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="gameplay_smashhit.html">Gameplay (<em>Smash Hit</em>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html#lua-knLevelHitSomething"><code class="docutils literal notranslate"><span class="pre">knLevelHitSomething()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html#lua-knLevelStreakAbort"><code class="docutils literal notranslate"><span class="pre">knLevelStreakAbort()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html#lua-knLevelStreakInc"><code class="docutils literal notranslate"><span class="pre">knLevelStreakInc()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html#lua-knLevelAddScore"><code class="docutils literal notranslate"><span class="pre">knLevelAddScore()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html#lua-knShoot"><code class="docutils literal notranslate"><span class="pre">knShoot()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html#player-parameter">Player Parameter</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reload.html">Dynamic Reload (<em>Smash Hit</em>)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReload"><code class="docutils literal notranslate"><span class="pre">knReload()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReloadTemplates"><code class="docutils literal notranslate"><span class="pre">knReloadTemplates()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReloadGfx"><code class="docutils literal notranslate"><span class="pre">knReloadGfx()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReloadPlayer"><code class="docutils literal notranslate"><span class="pre">knReloadPlayer()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knQuickSave"><code class="docutils literal notranslate"><span class="pre">knQuickSave()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knQuickLoad"><code class="docutils literal notranslate"><span class="pre">knQuickLoad()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knQuickClear"><code class="docutils literal notranslate"><span class="pre">knQuickClear()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="files.html">Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knWriteFile"><code class="docutils literal notranslate"><span class="pre">knWriteFile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knReadFile"><code class="docutils literal notranslate"><span class="pre">knReadFile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knRenameFile"><code class="docutils literal notranslate"><span class="pre">knRenameFile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knDeleteFile"><code class="docutils literal notranslate"><span class="pre">knDeleteFile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knIsFile"><code class="docutils literal notranslate"><span class="pre">knIsFile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knMakeDir"><code class="docutils literal notranslate"><span class="pre">knMakeDir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knListDir"><code class="docutils literal notranslate"><span class="pre">knListDir()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html#lua-knIsDir"><code class="docutils literal notranslate"><span class="pre">knIsDir()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="framerate.html#lua-knGetDeviceHz"><code class="docutils literal notranslate"><span class="pre">knGetDeviceHz()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="framerate.html#lua-knSetFrameRate"><code class="docutils literal notranslate"><span class="pre">knSetFrameRate()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="system.html">System and Misc utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knSystemAbi"><code class="docutils literal notranslate"><span class="pre">knSystemAbi()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetShimVersion"><code class="docutils literal notranslate"><span class="pre">knGetShimVersion()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetAppVersion"><code class="docutils literal notranslate"><span class="pre">knGetAppVersion()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetAppSdk"><code class="docutils literal notranslate"><span class="pre">knGetAppSdk()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetDeviceSdk"><code class="docutils literal notranslate"><span class="pre">knGetDeviceSdk()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetInternalDataPath"><code class="docutils literal notranslate"><span class="pre">knGetInternalDataPath()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetExternalDataPath"><code class="docutils literal notranslate"><span class="pre">knGetExternalDataPath()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knAccquireMulticastLock"><code class="docutils literal notranslate"><span class="pre">knAccquireMulticastLock()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knInclude"><code class="docutils literal notranslate"><span class="pre">knInclude()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knJavaCommand"><code class="docutils literal notranslate"><span class="pre">knJavaCommand()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="input.html">Raw Input</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="input.html#touch">Touch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html#keyboard">Keyboard</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html#mouse">Mouse</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html#buttons">Buttons</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="http.html">HTTP Requests</a><ul>
@@ -380,14 +334,42 @@
 <li class="toctree-l2"><a class="reference internal" href="http.html#lua-knHttpsNoCert"><code class="docutils literal notranslate"><span class="pre">knHttpsNoCert()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="udp.html">UDP Sockets</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="udp.html#lua-KnUdpSocket"><code class="docutils literal notranslate"><span class="pre">KnUdpSocket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="udp.html#example">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input.html">Raw Input</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="input.html#touch">Touch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#keyboard">Keyboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#mouse">Mouse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html#buttons">Buttons</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="isc.html">Inter-script Communication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="isc.html#lua-knCall"><code class="docutils literal notranslate"><span class="pre">knCall()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isc.html#lua-knOwnHandle"><code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="isc.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="level.html">Level (<em>Smash Hit</em>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="level.html#lua-knLevelHitSomething"><code class="docutils literal notranslate"><span class="pre">knLevelHitSomething()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html#lua-knLevelStreakAbort"><code class="docutils literal notranslate"><span class="pre">knLevelStreakAbort()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html#lua-knLevelStreakInc"><code class="docutils literal notranslate"><span class="pre">knLevelStreakInc()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html#lua-knLevelAddScore"><code class="docutils literal notranslate"><span class="pre">knLevelAddScore()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html#lua-knShoot"><code class="docutils literal notranslate"><span class="pre">knShoot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html#player-parameter">Player Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#lua-knLog"><code class="docutils literal notranslate"><span class="pre">knLog()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="overlays.html">Overlays</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="overlays.html#how-overlays-work">How Overlays Work</a></li>
 <li class="toctree-l2"><a class="reference internal" href="overlays.html#example-zip-overlays">Example: ZIP overlays</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pack.html">Byte Packing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knPack"><code class="docutils literal notranslate"><span class="pre">knPack()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knUnpack"><code class="docutils literal notranslate"><span class="pre">knUnpack()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knHexToBin"><code class="docutils literal notranslate"><span class="pre">knHexToBin()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knBinToHex"><code class="docutils literal notranslate"><span class="pre">knBinToHex()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="patch.html">Patching</a><ul>
@@ -398,17 +380,46 @@
 <li class="toctree-l2"><a class="reference internal" href="patch.html#about-the-address-type">About the Address Type</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pack.html">Byte Packing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knPack"><code class="docutils literal notranslate"><span class="pre">knPack()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knUnpack"><code class="docutils literal notranslate"><span class="pre">knUnpack()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knHexToBin"><code class="docutils literal notranslate"><span class="pre">knHexToBin()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="pack.html#lua-knBinToHex"><code class="docutils literal notranslate"><span class="pre">knBinToHex()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="registry.html">Registry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegSet"><code class="docutils literal notranslate"><span class="pre">knRegSet()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegGet"><code class="docutils literal notranslate"><span class="pre">knRegGet()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegHas"><code class="docutils literal notranslate"><span class="pre">knRegHas()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegDelete"><code class="docutils literal notranslate"><span class="pre">knRegDelete()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="registry.html#lua-knRegKeys"><code class="docutils literal notranslate"><span class="pre">knRegKeys()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="isc.html">Inter-script Communication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="isc.html#lua-knCall"><code class="docutils literal notranslate"><span class="pre">knCall()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="isc.html#lua-knOwnHandle"><code class="docutils literal notranslate"><span class="pre">knOwnHandle()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="isc.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reload.html">Dynamic Reload (<em>Smash Hit</em>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReload"><code class="docutils literal notranslate"><span class="pre">knReload()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReloadTemplates"><code class="docutils literal notranslate"><span class="pre">knReloadTemplates()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReloadGfx"><code class="docutils literal notranslate"><span class="pre">knReloadGfx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knReloadPlayer"><code class="docutils literal notranslate"><span class="pre">knReloadPlayer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knQuickSave"><code class="docutils literal notranslate"><span class="pre">knQuickSave()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knQuickLoad"><code class="docutils literal notranslate"><span class="pre">knQuickLoad()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html#lua-knQuickClear"><code class="docutils literal notranslate"><span class="pre">knQuickClear()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="string.html#lua-knRemoveSuffix"><code class="docutils literal notranslate"><span class="pre">knRemoveSuffix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html#lua-knRemovePrefix"><code class="docutils literal notranslate"><span class="pre">knRemovePrefix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html#lua-knSplit"><code class="docutils literal notranslate"><span class="pre">knSplit()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system.html">System and Misc utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knSystemAbi"><code class="docutils literal notranslate"><span class="pre">knSystemAbi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetShimVersion"><code class="docutils literal notranslate"><span class="pre">knGetShimVersion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetAppVersion"><code class="docutils literal notranslate"><span class="pre">knGetAppVersion()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetAppSdk"><code class="docutils literal notranslate"><span class="pre">knGetAppSdk()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetDeviceSdk"><code class="docutils literal notranslate"><span class="pre">knGetDeviceSdk()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetInternalDataPath"><code class="docutils literal notranslate"><span class="pre">knGetInternalDataPath()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knGetExternalDataPath"><code class="docutils literal notranslate"><span class="pre">knGetExternalDataPath()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knAccquireMulticastLock"><code class="docutils literal notranslate"><span class="pre">knAccquireMulticastLock()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knInclude"><code class="docutils literal notranslate"><span class="pre">knInclude()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html#lua-knJavaCommand"><code class="docutils literal notranslate"><span class="pre">knJavaCommand()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="udp.html">UDP Sockets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="udp.html#lua-KnUdpSocket"><code class="docutils literal notranslate"><span class="pre">KnUdpSocket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="udp.html#example">Example</a></li>
 </ul>
 </li>
 </ul>
@@ -420,12 +431,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="logging.html">
+          <a class="next-page" href="assets.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Logging</div>
+                <div class="title">Assets</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

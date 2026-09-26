@@ -3,13 +3,13 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Overlays" href="overlays.html"><link rel="prev" title="HTTP Requests" href="http.html">
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="Developer Documentation" href="../developer/index.html"><link rel="prev" title="System and Misc utilities" href="system.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>UDP Sockets - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -195,29 +195,34 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../general.html">General Changes and Additions</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">KatieLib Script API</a><input aria-label="Toggle navigation of KatieLib Script API" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assets.html">Assets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="registry.html">Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="camera.html">Camera (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="database.html">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="events.html">Events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="string.html">String Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cheats.html">Cheats (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gameplay_smashhit.html">Gameplay (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reload.html">Dynamic Reload (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="files.html">Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="framerate.html">Framerate Adjustment (<em>Smash Hit</em>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system.html">System and Misc utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="input.html">Raw Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="http.html">HTTP Requests</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">UDP Sockets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="patch.html">Patching</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pack.html">Byte Packing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Raw Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="isc.html">Inter-script Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="level.html">Level (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pack.html">Byte Packing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="patch.html">Patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="registry.html">Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reload.html">Dynamic Reload (<em>Smash Hit</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">String Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html">System and Misc utilities</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">UDP Sockets</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index.html">Developer Documentation</a><input aria-label="Toggle navigation of Developer Documentation" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer/lua.html">Writing Lua Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer/aaudio.html">Switch to AAudio</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../terms.html">Terms of Use</a></li>
 </ul>
 
 </div>
@@ -362,23 +367,23 @@ servers and automatically enter the right IP address.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="overlays.html">
+          <a class="next-page" href="../developer/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Overlays</div>
+                <div class="title">Developer Documentation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="http.html">
+          <a class="prev-page" href="system.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">HTTP Requests</div>
+                <div class="title">System and Misc utilities</div>
                 
               </div>
             </a>

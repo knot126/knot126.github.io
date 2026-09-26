@@ -151,8 +151,8 @@ Mouse support only includes checking the position of the mouse.
          
        - This function only produces sane results when in relative mode - that
          is, after a successful call to :func:`knCaptureMouse`.
-       - This function can usually only be called once per frame. After that, it
-         will return 0, 0 until more mouse movements occur.
+       - This function can only be called once per frame. After that, it will
+         return 0, 0 until more mouse movements occur.
 
 .. function:: knCaptureMouse(capture: boolean)
    

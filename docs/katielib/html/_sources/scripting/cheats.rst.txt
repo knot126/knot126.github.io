@@ -44,6 +44,10 @@ Streak
 No-clip
 =======
 
+.. version-deprecated:: 22
+   
+   Return :code:`true` from :func:`onHitSomething` to achieve the same result.
+
 .. function:: knSetNoclip(mode: boolean)
 
    If mode is ``true``, then the noclip cheat is enabled if not already
