@@ -23,7 +23,7 @@ automatically detecting servers, and is a lot simpler than TCP.
       Send a datagram with the given data to the address and port. Returns a
       boolean indicating success.
    
-   .. method:: recieve(): string, string, integer | nil, nil, nil
+   .. method:: receive(): string, string, integer | nil, nil, nil
       
       Get the next datagram in the queue, if there is one.
       
@@ -33,6 +33,11 @@ automatically detecting servers, and is a lot simpler than TCP.
       
       If there are no more datagrams or there is an error, this returns three
       nil values.
+      
+      .. version-changed:: 22
+         
+         The spelling of this function name has been corrected. Using the
+         misspelling ``recieve()`` will still work for backwards compatibility.
    
    .. method:: close()
       

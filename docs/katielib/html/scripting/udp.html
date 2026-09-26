@@ -9,7 +9,7 @@
         <title>UDP Sockets - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -287,14 +287,18 @@ boolean indicating success.</p>
 </dd></dl>
 
 <dl class="lua method">
-<dt class="sig sig-object lua" id="lua-KnUdpSocket.recieve">
-<span class="sig-name descname"><span class="pre">recieve</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">nil</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">nil</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">nil</span></code><a class="headerlink" href="#lua-KnUdpSocket.recieve" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object lua" id="lua-KnUdpSocket.receive">
+<span class="sig-name descname"><span class="pre">receive</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">nil</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">nil</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">nil</span></code><a class="headerlink" href="#lua-KnUdpSocket.receive" title="Link to this definition">¶</a></dt>
 <dd><p>Get the next datagram in the queue, if there is one.</p>
 <p>If a datagram is available, this returns three values: the data of the
 datagram itself, the address that sent the datagram, and the port it came
 from.</p>
 <p>If there are no more datagrams or there is an error, this returns three
 nil values.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 22: </span>The spelling of this function name has been corrected. Using the
+misspelling <code class="docutils literal notranslate"><span class="pre">recieve()</span></code> will still work for backwards compatibility.</p>
+</div>
 </dd></dl>
 
 <dl class="lua method">
@@ -420,7 +424,7 @@ servers and automatically enter the right IP address.</p>
 <li><a class="reference internal" href="#">UDP Sockets</a><ul>
 <li><a class="reference internal" href="#lua-KnUdpSocket"><code class="docutils literal notranslate"><span class="pre">KnUdpSocket</span></code></a><ul>
 <li><a class="reference internal" href="#lua-KnUdpSocket.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
-<li><a class="reference internal" href="#lua-KnUdpSocket.recieve"><code class="docutils literal notranslate"><span class="pre">recieve()</span></code></a></li>
+<li><a class="reference internal" href="#lua-KnUdpSocket.receive"><code class="docutils literal notranslate"><span class="pre">receive()</span></code></a></li>
 <li><a class="reference internal" href="#lua-KnUdpSocket.close"><code class="docutils literal notranslate"><span class="pre">close()</span></code></a></li>
 <li><a class="reference internal" href="#lua-KnUdpSocket.fd"><code class="docutils literal notranslate"><span class="pre">fd</span></code></a></li>
 </ul>
