@@ -268,7 +268,7 @@
 <h2>Balls<a class="headerlink" href="#balls" title="Link to this heading">¶</a></h2>
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knSetBalls">
-<span class="sig-name descname"><span class="pre">knSetBalls</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">balls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knSetBalls" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knSetBalls</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">balls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">player_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knSetBalls" title="Link to this definition">¶</a></dt>
 <dd><p>Set the player’s number of balls to <code class="docutils literal notranslate"><span class="pre">balls</span></code>.</p>
 <p>For example, to set the player’s number of balls to 100:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nf">knSetBalls</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -278,7 +278,7 @@
 
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knGetBalls">
-<span class="sig-name descname"><span class="pre">knGetBalls</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetBalls" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knGetBalls</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">player_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetBalls" title="Link to this definition">¶</a></dt>
 <dd><p>Gets the current number of balls. This is different from using mgGet(),
 since it is updated even if you use knSetBalls().</p>
 </dd></dl>
@@ -288,7 +288,7 @@ since it is updated even if you use knSetBalls().</p>
 <h2>Streak<a class="headerlink" href="#streak" title="Link to this heading">¶</a></h2>
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knSetStreak">
-<span class="sig-name descname"><span class="pre">knSetStreak</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">streak</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knSetStreak" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knSetStreak</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">streak</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">player_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knSetStreak" title="Link to this definition">¶</a></dt>
 <dd><p>Set the player’s streak.</p>
 <p>For example, to set a four-ball multiball plus halfway to a five-ball
 multiball:</p>
@@ -299,7 +299,7 @@ multiball:</p>
 
 <dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knGetStreak">
-<span class="sig-name descname"><span class="pre">knGetStreak</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetStreak" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">knGetStreak</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">player_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><a class="headerlink" href="#lua-knGetStreak" title="Link to this definition">¶</a></dt>
 <dd><p>Gets the current streak. This is different from using mgGet(), since it
 is updated even if you use knSetStreak().</p>
 </dd></dl>

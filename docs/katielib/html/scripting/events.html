@@ -9,7 +9,7 @@
         <title>Events - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -357,6 +357,38 @@ entering a room.</p>
 </dl>
 </dd></dl>
 
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-onLoadCheckpoint">
+<span class="sig-name descname"><span class="pre">onLoadCheckpoint</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-onLoadCheckpoint" title="Link to this definition">¶</a></dt>
+<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Player::loadCheckpoint()</span></code>, which is called
+to load checkpoint balls and streak data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – Checkpoint index</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A boolean indicating if the call to <code class="docutils literal notranslate"><span class="pre">Player::loadCheckpoint()</span></code>
+should be cancelled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-onReportCheckpoint">
+<span class="sig-name descname"><span class="pre">onReportCheckpoint</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">integer</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><a class="headerlink" href="#lua-onReportCheckpoint" title="Link to this definition">¶</a></dt>
+<dd><p>Called <em>before</em> any call to <code class="docutils literal notranslate"><span class="pre">Player::reportCheckpoint()</span></code>, which is called
+to save checkpoint balls and streak data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>index</strong> – Checkpoint index</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A boolean indicating if the call to <code class="docutils literal notranslate"><span class="pre">Player::reportCheckpoint()</span></code>
+should be cancelled</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>
@@ -422,6 +454,8 @@ entering a room.</p>
 <li><a class="reference internal" href="#lua-onStreakInc"><code class="docutils literal notranslate"><span class="pre">onStreakInc()</span></code></a></li>
 <li><a class="reference internal" href="#lua-onStreakAbort"><code class="docutils literal notranslate"><span class="pre">onStreakAbort()</span></code></a></li>
 <li><a class="reference internal" href="#lua-onEnterRoom"><code class="docutils literal notranslate"><span class="pre">onEnterRoom()</span></code></a></li>
+<li><a class="reference internal" href="#lua-onLoadCheckpoint"><code class="docutils literal notranslate"><span class="pre">onLoadCheckpoint()</span></code></a></li>
+<li><a class="reference internal" href="#lua-onReportCheckpoint"><code class="docutils literal notranslate"><span class="pre">onReportCheckpoint()</span></code></a></li>
 </ul>
 </li>
 </ul>

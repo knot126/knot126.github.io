@@ -7,7 +7,7 @@ Provides various cheats which are useful for debugging.
 Balls
 =====
 
-.. function:: knSetBalls(balls: integer)
+.. function:: knSetBalls(balls: integer, [player_id: integer])
 
    Set the player’s number of balls to ``balls``.
 
@@ -17,7 +17,7 @@ Balls
 
       knSetBalls(100)
 
-.. function:: knGetBalls(): integer
+.. function:: knGetBalls([player_id: integer]): integer
 
    Gets the current number of balls. This is different from using mgGet(),
    since it is updated even if you use knSetBalls().
@@ -25,7 +25,7 @@ Balls
 Streak
 ======
 
-.. function:: knSetStreak(streak: integer)
+.. function:: knSetStreak(streak: integer, [player_id: integer])
 
    Set the player’s streak.
 
@@ -36,7 +36,7 @@ Streak
 
       knSetStreak(35)
 
-.. function:: knGetStreak(): integer
+.. function:: knGetStreak([player_id: integer]): integer
 
    Gets the current streak. This is different from using mgGet(), since it
    is updated even if you use knSetStreak().

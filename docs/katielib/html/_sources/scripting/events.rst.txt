@@ -62,3 +62,21 @@ is not made.
    entering a room.
    
    :param type: Type of the room (e.g. ``cave/narrow``)
+
+.. function:: onLoadCheckpoint(index: integer): boolean
+   
+   Called *before* any call to ``Player::loadCheckpoint()``, which is called
+   to load checkpoint balls and streak data.
+   
+   :param index: Checkpoint index
+   :returns: A boolean indicating if the call to ``Player::loadCheckpoint()``
+             should be cancelled
+
+.. function:: onReportCheckpoint(index: integer): boolean
+
+   Called *before* any call to ``Player::reportCheckpoint()``, which is called
+   to save checkpoint balls and streak data.
+   
+   :param index: Checkpoint index
+   :returns: A boolean indicating if the call to ``Player::reportCheckpoint()``
+             should be cancelled

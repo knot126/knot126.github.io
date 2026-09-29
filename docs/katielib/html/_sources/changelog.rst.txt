@@ -8,7 +8,6 @@ Release 22
 *Upcoming*
 
 - Update YipLoader version to 0.1.3
-- Switch game to using AAudio instead of OpenSL ES on supported devices
 - Implement basic keyboard and mouse input support
 - Introduced an :doc:`scripting/events` system
 - Added several new input functions
@@ -18,7 +17,10 @@ Release 22
 - Added :func:`knShoot`
 - Renamed ``knLoadGfx()`` to :func:`knReloadGfx`
 - Renamed ``knLoadTemplates()`` to :func:`knReloadTemplates`
+- :func:`knSetBalls`, :func:`knGetBalls`, :func:`knSetStreak`, and :func:`knGetStreak` now accept player ID arguments
+- :func:`knSetNoclip` and :func:`knGetNoclip` have been deprecated
 - Fixed a bug where databases containing empty strings would not be saved
+- Fixed a bug in the (undocumented) drawing module
 - Removed Shaders module as its not maintained and is poorly documented
 
 Release 21
