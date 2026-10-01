@@ -9,7 +9,7 @@
         <title>Camera (Smash Hit) - KatieLib 22 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -270,15 +270,18 @@ also allows adjusting the field of view.</p>
 <p><span class="versionmodified added">Added in version 22: </span>The purple has forced my paw.</p>
 </div>
 <dl class="lua function">
-<dt class="sig sig-object lua" id="lua-knCameraPosOffset">
-<span class="sig-name descname"><span class="pre">knCameraPosOffset</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knCameraPosOffset" title="Link to this definition">¶</a></dt>
-<dd><p>Set the camera position offset.</p>
+<dt class="sig sig-object lua" id="lua-knCameraPos">
+<span class="sig-name descname"><span class="pre">knCameraPos</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">absolute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knCameraPos" title="Link to this definition">¶</a></dt>
+<dd><p>Set the camera position, either as an offset or absolutely.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> – Left and right offset (right is positive)</p></li>
-<li><p><strong>y</strong> – Up and down offset (up is positive)</p></li>
-<li><p><strong>z</strong> – Back and forward offset (forward is negative)</p></li>
+<li><p><strong>x</strong> – Left and right (right is positive)</p></li>
+<li><p><strong>y</strong> – Up and down (up is positive)</p></li>
+<li><p><strong>z</strong> – Back and forward (forward is negative)</p></li>
+<li><p><strong>absolute</strong> – Makes this the exact camera position, and not just an
+offset from the current position the game wants. Default
+<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -291,15 +294,19 @@ Amethyst Patcher.</p>
 </dd></dl>
 
 <dl class="lua function">
-<dt class="sig sig-object lua" id="lua-knCameraRotOffset">
-<span class="sig-name descname"><span class="pre">knCameraRotOffset</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knCameraRotOffset" title="Link to this definition">¶</a></dt>
-<dd><p>Adjust the camera rotation offset. All angles are in radians.</p>
+<dt class="sig sig-object lua" id="lua-knCameraRot">
+<span class="sig-name descname"><span class="pre">knCameraRot</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">number</span></code><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">absolute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">boolean</span></code><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knCameraRot" title="Link to this definition">¶</a></dt>
+<dd><p>Adjust the camera rotation, either as an offset or absolutely. All angles are
+in radians.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> – Rotation as if looking left or right</p></li>
 <li><p><strong>y</strong> – Rotation as if looking up or down</p></li>
 <li><p><strong>z</strong> – Roll</p></li>
+<li><p><strong>absolute</strong> – Makes this the exact camera rotation, and not just an
+offset from the current rotation the game wants. Default
+<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -374,8 +381,8 @@ shot, it is a bit buggy according to KD.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Camera (<em>Smash Hit</em>)</a><ul>
-<li><a class="reference internal" href="#lua-knCameraPosOffset"><code class="docutils literal notranslate"><span class="pre">knCameraPosOffset()</span></code></a></li>
-<li><a class="reference internal" href="#lua-knCameraRotOffset"><code class="docutils literal notranslate"><span class="pre">knCameraRotOffset()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knCameraPos"><code class="docutils literal notranslate"><span class="pre">knCameraPos()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knCameraRot"><code class="docutils literal notranslate"><span class="pre">knCameraRot()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knCameraFov"><code class="docutils literal notranslate"><span class="pre">knCameraFov()</span></code></a></li>
 </ul>
 </li>

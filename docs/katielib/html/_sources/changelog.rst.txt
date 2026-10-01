@@ -2,23 +2,31 @@
 Changelog
 =========
 
-Release 22
+Release 23
 ----------
 
 *Upcoming*
 
-- Update YipLoader version to 0.1.3
+- Blueprint system (not implemented yet)
+
+Release 22
+----------
+
+*1 October 2026*
+
 - Implement basic keyboard and mouse input support
 - Introduced an :doc:`scripting/events` system
 - Added several new input functions
+- Added new set of functions for manipulating camera position
 - Added :class:`KnUdpSocket`
-- Added :func:`knInsertCode` for "inserting" assembly code
+- Added :func:`knInsertCode`
 - Added :func:`knReloadPlayer`
 - Added :func:`knShoot`
+- :func:`knSetBalls`, :func:`knGetBalls`, :func:`knSetStreak`, and :func:`knGetStreak` now accept player ID arguments
 - Renamed ``knLoadGfx()`` to :func:`knReloadGfx`
 - Renamed ``knLoadTemplates()`` to :func:`knReloadTemplates`
-- :func:`knSetBalls`, :func:`knGetBalls`, :func:`knSetStreak`, and :func:`knGetStreak` now accept player ID arguments
 - :func:`knSetNoclip` and :func:`knGetNoclip` have been deprecated
+- Update YipLoader version to 0.1.3
 - Fixed a bug where databases containing empty strings would not be saved
 - Fixed a bug in the (undocumented) drawing module
 - Removed Shaders module as its not maintained and is poorly documented

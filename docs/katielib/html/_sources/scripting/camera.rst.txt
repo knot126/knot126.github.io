@@ -9,25 +9,32 @@ also allows adjusting the field of view.
    
    The purple has forced my paw.
 
-.. function:: knCameraPosOffset(x: number, y: number, z: number)
+.. function:: knCameraPos(x: number, y: number, z: number, [absolute: boolean])
    
-   Set the camera position offset.
+   Set the camera position, either as an offset or absolutely.
    
-   :param x: Left and right offset (right is positive)
-   :param y: Up and down offset (up is positive)
-   :param z: Back and forward offset (forward is negative)
+   :param x: Left and right (right is positive)
+   :param y: Up and down (up is positive)
+   :param z: Back and forward (forward is negative)
+   :param absolute: Makes this the exact camera position, and not just an
+                    offset from the current position the game wants. Default
+                    ``false``.
    
    .. note:: This function does not adjust the position at which the balls are
              thrown and collision is checked. For that, consider using
              Amethyst Patcher.
 
-.. function:: knCameraRotOffset(x: number, y: number, z: number)
+.. function:: knCameraRot(x: number, y: number, z: number, [absolute: boolean])
    
-   Adjust the camera rotation offset. All angles are in radians.
+   Adjust the camera rotation, either as an offset or absolutely. All angles are
+   in radians.
    
    :param x: Rotation as if looking left or right
    :param y: Rotation as if looking up or down
    :param z: Roll
+   :param absolute: Makes this the exact camera rotation, and not just an
+                    offset from the current rotation the game wants. Default
+                    ``false``.
    
    .. warning:: While this function does change the angle at which balls are
                 shot, it is a bit buggy according to KD.
