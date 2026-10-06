@@ -5,9 +5,11 @@ Changelog
 Release 23
 ----------
 
-*Upcoming*
+*6 October 2026*
 
-- Blueprint system (not implemented yet)
+- Exprimental support for having multiple event handlers
+- This also extends to the built-in functions like ``draw`` and ``frame``
+- Added :func:`knInstall` and :func:`knRequire`
 
 Release 22
 ----------

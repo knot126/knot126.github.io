@@ -6,10 +6,10 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="UDP Sockets" href="udp.html"><link rel="prev" title="String Utilities" href="string.html">
 
     <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>System and Misc utilities - KatieLib 22 documentation</title>
+        <title>System and Misc utilities - KatieLib 23 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/lua.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/lua.css?v=492dc087" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -162,7 +162,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">KatieLib 22 documentation</div></a>
+      <a href="../index.html"><div class="brand">KatieLib 23 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -183,7 +183,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">KatieLib 22 documentation</span>
+  <span class="sidebar-brand-text">KatieLib 23 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -380,6 +380,52 @@ paths.</p>
 </dd></dl>
 
 <dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knInstall">
+<span class="sig-name descname"><span class="pre">knInstall</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knInstall" title="Link to this definition">¶</a></dt>
+<dd><p>Load a Lua library from <code class="docutils literal notranslate"><span class="pre">assets/libraries/&lt;module&gt;.lua.mp3</span></code>. This must be
+called from <code class="docutils literal notranslate"><span class="pre">init()</span></code> so libraries are able to properly hook into the script
+if they need to.</p>
+<p>For example, here is how to install Amethyst Patcher using the install
+system:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Copy Amethyst Patcher to assets/libraries/amethystPatcher.lua.mp3</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">-- Install the script</span>
+<span class="w">    </span><span class="nf">knInstall</span><span class="p">(</span><span class="s2">"amethystPatcher"</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">-- Some libraries may still require you to call their own init</span>
+<span class="w">    </span><span class="c1">-- functions</span>
+<span class="w">    </span><span class="nf">apInitPatches</span><span class="p">()</span>
+<span class="kr">end</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module</strong> – Name of the module</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 23.</span></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
+<dt class="sig sig-object lua" id="lua-knRequire">
+<span class="sig-name descname"><span class="pre">knRequire</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#lua-knRequire" title="Link to this definition">¶</a></dt>
+<dd><p>Require that a library with a specific name has been loaded or otherwise
+throw an error. This is useful for libraries to use when they depend on other
+libraries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>module</strong> – Name of the module</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 23.</span></p>
+</div>
+</dd></dl>
+
+<dl class="lua function">
 <dt class="sig sig-object lua" id="lua-knJavaCommand">
 <span class="sig-name descname"><span class="pre">knJavaCommand</span></span><span class="p"><span class="pre">(</span></span><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref lua lua-_auto docutils literal notranslate"><span class="pre">string</span></code><a class="headerlink" href="#lua-knJavaCommand" title="Link to this definition">¶</a></dt>
 <dd><p>Run a command in the java wrapper. These types of commands are typically
@@ -472,6 +518,8 @@ string as a result.</p>
 <li><a class="reference internal" href="#lua-knGetExternalDataPath"><code class="docutils literal notranslate"><span class="pre">knGetExternalDataPath()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knAccquireMulticastLock"><code class="docutils literal notranslate"><span class="pre">knAccquireMulticastLock()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knInclude"><code class="docutils literal notranslate"><span class="pre">knInclude()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knInstall"><code class="docutils literal notranslate"><span class="pre">knInstall()</span></code></a></li>
+<li><a class="reference internal" href="#lua-knRequire"><code class="docutils literal notranslate"><span class="pre">knRequire()</span></code></a></li>
 <li><a class="reference internal" href="#lua-knJavaCommand"><code class="docutils literal notranslate"><span class="pre">knJavaCommand()</span></code></a></li>
 </ul>
 </li>
@@ -484,7 +532,7 @@ string as a result.</p>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=7cc423e3"></script>
+</div><script src="../_static/documentation_options.js?v=d8bca7fa"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

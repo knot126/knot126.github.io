@@ -86,6 +86,42 @@ System and Misc utilities
    ``require`` calls to use ``knInclude`` and use ``assets``-relative
    paths.
 
+.. function:: knInstall(module: string)
+   
+   Load a Lua library from ``assets/libraries/<module>.lua.mp3``. This must be
+   called from ``init()`` so libraries are able to properly hook into the script
+   if they need to.
+   
+   For example, here is how to install Amethyst Patcher using the install
+   system:
+   
+   .. code:: lua
+      
+      -- Copy Amethyst Patcher to assets/libraries/amethystPatcher.lua.mp3
+      
+      function init()
+          -- Install the script
+          knInstall("amethystPatcher")
+          
+          -- Some libraries may still require you to call their own init
+          -- functions
+          apInitPatches()
+      end
+   
+   :param module: Name of the module
+   
+   .. version-added:: 23
+
+.. function:: knRequire(module: string)
+   
+   Require that a library with a specific name has been loaded or otherwise
+   throw an error. This is useful for libraries to use when they depend on other
+   libraries.
+   
+   :param module: Name of the module
+   
+   .. version-added:: 23
+
 .. function:: knJavaCommand(command: string): string
 
    Run a command in the java wrapper. These types of commands are typically

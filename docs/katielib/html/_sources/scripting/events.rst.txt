@@ -14,6 +14,20 @@ returning ``true`` (or any truthy value) from ``onHitSomething``, the call to
 ``Level::hitSomething()`` that would normally be done after your event handler
 is not made.
 
+.. tip::
+   
+   Since release 23, there is **exprimental** support for specifying event
+   handlers as tables of functions, thus allowing you to have more than one
+   event handler per type of event. This is most useful for libraries that want
+   to hook into events without overriding the user's own event handlers.
+   
+   This is also supported for the built-in functions, like ``draw``, ``frame``,
+   and ``handleCommand``, though you may need to fix parts of the script where
+   those functions are called directly.
+   
+   Be aware, however, that an event being cancelled in one function will cause
+   the rest of the event handlers not to run.
+
 .. function:: onFrameStart()
    
    Called *before* any call to ``Game::frame()``.
