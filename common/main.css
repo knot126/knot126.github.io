@@ -4,8 +4,6 @@
  * This is the main CSS file.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
-
 /*
  * Making things default and variables
  */
@@ -14,7 +12,6 @@
 	margin: 0;
 	padding: 0;
 	border: none;
-	text-rendering: optimizeLegibility;
 	box-sizing: border-box;
 	
 	--base-colour: #019ab9;
@@ -23,7 +20,7 @@
 	--base-colour-red-transluscent: #e2551d30;
 	--base-colour-green: #34b58a;
 	--base-colour-green-transluscent: #34b58a30;
-	--base-colour-text: #000;
+	--base-colour-text: #161616;
 	--base-colour-background: #e2f1ec;
 	--base-colour-panel-background: #fff4;
 	--base-colour-panel-background-hover: #fff;
@@ -32,8 +29,8 @@
 	--base-colour-gradient-top: #f0f0f070;
 	--base-colour-gradient-bottom: #f2f2f2c0;
 	--background-location: url("../common/light.jpeg");
-	--title-font: "Figtree", "Noto Sans", sans-serif;
-	--body-font: "Figtree", "Noto Sans", sans-serif;
+	--title-font: "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	--body-font: "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	--mono-font: "Consolas", monospace;
 }
 
@@ -56,11 +53,6 @@
  * Misc. like selection
  */
 
-::selection {
-	color: #fff;
-	background: var(--base-colour);
-}
-
 .mid-icon {
 	width: 1.5em;
 	height: 1.5em;
@@ -78,23 +70,15 @@ h1, h2, h3, summary, h4, h5, h6 {
 	margin-bottom: 0.5em;
 }
 
-h1 {
-	padding-bottom: 0.25em;
-}
-
-h2, h3, summary, h4, h5, h6 {
-	padding-top: 0.75em;
-}
-
 p, li, figcaption {
 	font-family: var(--body-font);
 	margin-bottom: 0.75em;
-	line-height: 1.65;
+	line-height: 1.5;
 }
 
-h1 { font-size: 32pt; font-weight: 600; }
-h2 { font-size: 26pt; font-weight: 600; }
-h3 { font-size: 20pt; font-weight: 600; }
+h1 { font-size: 28pt; font-weight: 600; }
+h2 { font-size: 24pt; font-weight: 600; }
+h3 { font-size: 18pt; font-weight: 600; }
 h4, summary { font-size: 16pt; font-weight: 600; }
 
 p, li, figcaption { font-size: 12pt; font-weight: 400; }
@@ -156,41 +140,38 @@ figcaption {
  */
 
 .page-container {
-	max-width: 65em;
+	max-width: 984px;
 	margin: auto;
 }
 
-.blog-page {
-	max-width: 57.5em;
-}
-
 .main-section {
-/* 	border-radius: 0.25em; */
-	border-radius: 0.5em;
 	color: var(--base-colour-text);
 	overflow: auto;
-	padding: 1.25em;
-	margin: 1.75em;
-	margin-top: 0.5em;
-	margin-bottom: 2.5em;
-}
-
-.content-section {
-	background: var(--base-colour-background);
-/* 	box-shadow: 0 12px 20px #0004, 0 2px 6px #0005, inset 0 3px 12px #fff3, inset 0 3px 3px #fff8; */
-	box-shadow: 0 12px 20px #0003, 0 2px 6px #0003;
 }
 
 .navigation-section {
 	background: transparent;
-	border-radius: 0 0 0.25em 0.25em;
 	box-shadow: none;
-	padding-top: 1.5em;
+	padding: 12px 16px 8px 16px;
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
+.content-section {
+	padding: 1.25em;
+	background: var(--base-colour-background);
+	box-shadow: 0 12px 16px #0003, 0 0 4px #0003;
+	transition: border-radius 0.2s;
+}
+
+@media (min-width: 985px) {
+	.content-section {
+		border-radius: 12px;
+	}
+}
+
 .disclaimer-section {
+	padding: 24px;
 	text-align: center;
 	background: transparent;
 	box-shadow: none;
