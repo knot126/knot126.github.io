@@ -47,7 +47,7 @@ function renderMarkdown(md) {
 
 /** Navbar **/
 function occurances(string, char) {
-	return (string.split("/")).length;
+	return (string.split("/")).length - 1;
 }
 
 function download_sidebar() {
@@ -61,10 +61,22 @@ function fixupNavbar(data) {
 	return data.replaceAll(`href="`, replacement);
 }
 
+function boldNavbar() {
+	let path = window.location.pathname == '/' ? '/index.html' : window.location.pathname;
+	
+	for (let e of document.getElementsByClassName("nav-link-a")) {
+		if (e.href.endsWith(path)) {
+			e.style.fontWeight = 'bold';
+			e.removeAttribute('href');
+		}
+	}
+}
+
 function setup_sidebar() {
 	if (this.readyState == 4 && this.status == 200) {
 		let navbar = document.getElementById("navbar");
 		navbar.innerHTML = fixupNavbar(this.responseText);
+		boldNavbar();
 	}
 	else if (this.readyState == 4) {
 		let navbar = document.getElementById("navbar");
