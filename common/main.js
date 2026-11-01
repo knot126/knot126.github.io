@@ -138,9 +138,11 @@ function setup_blog_page() {
 			format_codes();
 		}
 		else if (this.readyState == 4 && this.status == 404) {
+			setTitle("Blog page not found!");
 			sect.innerHTML = "<h1>Not found!</h1><p><i>This blog page does not exist.</i></p>";
 		}
 		else if (this.readyState == 4) {
+			setTitle("Whoops!");
 			sect.innerHTML = "<p><i>Failed to load blog page.</i></p>";
 		}
 		
@@ -155,6 +157,10 @@ function setup_blog_page() {
 			setupEditor(sect, "");
 		}
 	}
+}
+
+function setTitle(title) {
+	document.title = title + " ‒ Knot126's Website";
 }
 
 /** Editor **/
@@ -525,7 +531,7 @@ function format_codes() {
 }
 
 function setup_copyright() {
-	document.getElementById("copyright").innerHTML = `This website is Copyright © 2020 — ${new Date().getUTCFullYear()} Knot126`;
+	document.getElementById("copyright").innerHTML = `This website is Copyright © 2020 ‒ ${new Date().getUTCFullYear()} Knot126`;
 }
 
 var gQuotes = [
